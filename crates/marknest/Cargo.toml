@@ -1,0 +1,19 @@
+[package]
+name = "marknest"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+marknest-core = { path = "../marknest-core" }
+serde.workspace = true
+serde_json.workspace = true
+tempfile.workspace = true
+toml.workspace = true
+ureq = "2.12"
+zip.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+tempfile.workspace = true
+zip.workspace = true

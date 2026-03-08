@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base data-trunk-public-url />
+    <title>MarkNest Fallback Lab</title>
+    <meta
+      name="description"
+      content="Upload a Markdown ZIP, inspect entry candidates, tune output controls, download debug bundles, and switch between browser and local server PDF export."
+    />
+    <link data-trunk rel="rust" href="crates/marknest-wasm/Cargo.toml" data-bindgen-target="web" />
+    <link data-trunk rel="css" href="web/app.css" />
+    <link data-trunk rel="copy-file" href="web/app.js" />
+    <link data-trunk rel="copy-file" href="web/export_policy.mjs" />
+    <link data-trunk rel="copy-file" href="web/output_options.mjs" />
+    <link data-trunk rel="copy-file" href="web/runtime_sync.mjs" />
+    <link data-trunk rel="copy-dir" href="runtime-assets" />
+    <script src="./runtime-assets/html2pdf/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Phase 8 · Output Controls</p>
+          <h1>Preview in the browser, shape the output, and keep a reproducible debug bundle beside every export.</h1>
+          <p class="hero-summary">
+            MarkNest analyzes ZIP structure in WASM, keeps diagnostics visible, lets you adjust themes, CSS,
+            metadata, and print settings, then reuses the same option model for browser export, debug bundles,
+            and the local Chromium fallback service.
+          </p>
+        </div>
+        <div class="hero-meta">
+          <p>Shared output options</p>
+          <p>Debug bundle download</p>
+          <p>Local fallback service</p>
+        </div>
+      </header>
+
+      <section class="workspace-grid">
+        <aside class="sidebar">
+          <section class="panel upload-panel">
+            <div class="panel-heading">
+              <p class="panel-kicker">Input</p>
+              <h2>ZIP Upload</h2>
+            </div>
+            <label class="dropzone" for="zip-input">
+              <span class="dropzone-title">Choose a `.zip` workspace</span>
+              <span class="dropzone-body">The browser keeps the archive local, analyzes entries, and builds preview HTML in WASM.</span>
+            </label>
+            <input id="zip-input" class="visually-hidden" type="file" accept=".zip,application/zip" />
+            <p id="file-name" class="panel-note">No archive loaded yet.</p>
+          </section>
+
+          <section class="panel status-panel">
+            <div class="panel-heading">
+              <p class="panel-kicker">Session</p>
+              <h2>Status</h2>
+            </div>
+            <div id="status-chip" class="status-chip status-waiting">Booting</div>
+            <p id="status-message" class="status-message">Waiting for the WASM runtime to initialize.</p>
+            <dl class="summary-grid">
+              <div>
+                <dt>Entries</dt>
+                <dd id="entry-count">0</dd>
+              </div>
+              <div>
+                <dt>Missing Assets</dt>
+                <dd id="missing-count">0</dd>
+              </div>
+              <div>
+                <dt>Warnings</dt>
+                <dd id="warning-count">0</dd>
+              </div>
+              <div>
+                <dt>Selected</dt>
+                <dd id="selected-entry-label">None</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="panel export-panel">
+            <div class="panel-heading">
+              <p class="panel-kicker">Export</p>
+              <h2>PDF Modes</h2>
+            </div>
+            <div class="control-stack">
+              <label class="control-field" for="quality-mode">
+                <span class="control-label">Quality Mode</span>
+                <select id="quality-mode" class="control-input">
+                  <option value="browser">Browser Fast</option>
+                  <option value="high-quality">High Quality Fallback</option>
+                </select>
+              </label>
+              <label class="control-field" for="fallback-url">
+                <span class="control-label">Fallback Server</span>
+                <input
+                  id="fallback-url"
+                  class="control-input"
+                  type="url"
+                  value="http://127.0.0.1:3476"
+                  spellcheck="false"
+                />
+              </label>
+            </div>
+            <div class="action-stack">
+              <button id="download-selected" class="action-button" type="button" disabled>
+                Download Selected PDF
+              </button>
+              <button id="download-batch" class="action-button action-button-secondary" type="button" disabled>
+                Download All PDFs as ZIP
+              </button>
+              <button id="download-debug" class="action-button action-button-muted" type="button" disabled>
+                Download Debug Bundle
+              </button>
+            </div>
+            <p class="panel-note">
+              Browser mode stays local to the tab. High Quality mode sends the same ZIP plus output controls to a
+              local fallback service and returns binary PDF or ZIP responses directly.
+            </p>
+            <p id="scale-note" class="panel-note">Archive size guidance will appear after upload.</p>
+          </section>
+
+          <section class="panel output-panel">
+            <div class="panel-heading">
+              <p class="panel-kicker">Output</p>
+              <h2>Controls</h2>
+            </div>
+            <div class="control-stack control-grid">
+              <label class="control-field" for="theme-input">
+                <span class="control-label">Theme</span>
+                <select id="theme-input" class="control-input">
+                  <option value="github">GitHub</option>
+                  <option value="default">Default</option>
+                  <option value="docs">Docs</option>
+                  <option value="plain">Plain</option>
+                </select>
+              </label>
+              <label class="control-field" for="page-size-input">
+                <span class="control-label">Page Size</span>
+                <select id="page-size-input" class="control-input">
+                  <option value="a4">A4</option>
+                  <option value="letter">Letter</option>
+                </select>
+              </label>
+              <label class="control-field" for="margin-top-input">
+                <span class="control-label">Top Margin (mm)</span>
+                <input id="margin-top-input" class="control-input" type="number" min="0" step="1" value="16" />
+              </label>
+              <label class="control-field" for="margin-right-input">
+                <span class="control-label">Right Margin (mm)</span>
+                <input id="margin-right-input" class="control-input" type="number" min="0" step="1" value="16" />
+              </label>
+              <label class="control-field" for="margin-bottom-input">
+                <span class="control-label">Bottom Margin (mm)</span>
+                <input id="margin-bottom-input" class="control-input" type="number" min="0" step="1" value="16" />
+              </label>
+              <label class="control-field" for="margin-left-input">
+                <span class="control-label">Left Margin (mm)</span>
+                <input id="margin-left-input" class="control-input" type="number" min="0" step="1" value="16" />
+              </label>
+              <label class="control-field toggle-field" for="landscape-input">
+                <span class="control-label">Orientation</span>
+                <span class="toggle-row">
+                  <input id="landscape-input" type="checkbox" />
+                  <span>Landscape PDF</span>
+                </span>
+              </label>
+              <label class="control-field" for="mermaid-mode-input">
+                <span class="control-label">Mermaid</span>
+                <select id="mermaid-mode-input" class="control-input">
+                  <option value="off">Off</option>
+                  <option value="auto">Auto</option>
+                  <option value="on">On</option>
+                </select>
+              </label>
+              <label class="control-field" for="math-mode-input">
+                <span class="control-label">Math</span>
+                <select id="math-mode-input" class="control-input">
+                  <option value="off">Off</option>
+                  <option value="auto">Auto</option>
+                  <option value="on">On</option>
+                </select>
+              </label>
+            </div>
+            <label class="control-field" for="css-input">
+              <span class="control-label">Custom CSS</span>
+              <textarea
+                id="css-input"
+                class="control-input control-textarea"
+                rows="5"
+                placeholder="body { color: #102a43; }"
+              ></textarea>
+            </label>
+            <div class="control-stack control-grid metadata-grid">
+              <label class="control-field" for="title-input">
+                <span class="control-label">Metadata Title</span>
+                <input id="title-input" class="control-input" type="text" placeholder="Guide Pack" />
+              </label>
+              <label class="control-field" for="author-input">
+                <span class="control-label">Author</span>
+                <input id="author-input" class="control-input" type="text" placeholder="Docs Team" />
+              </label>
+              <label class="control-field" for="subject-input">
+                <span class="control-label">Subject</span>
+                <input id="subject-input" class="control-input" type="text" placeholder="Architecture" />
+              </label>
+            </div>
+            <label class="control-field" for="header-template-input">
+              <span class="control-label">Header Template</span>
+              <textarea
+                id="header-template-input"
+                class="control-input control-textarea"
+                rows="4"
+                placeholder="<div>{{title}} · {{entryPath}}</div>"
+              ></textarea>
+            </label>
+            <iframe
+              id="header-preview-frame"
+              class="template-preview-frame"
+              title="Header template preview"
+              sandbox=""
+            ></iframe>
+            <label class="control-field" for="footer-template-input">
+              <span class="control-label">Footer Template</span>
+              <textarea
+                id="footer-template-input"
+                class="control-input control-textarea"
+                rows="4"
+                placeholder="<div>{{pageNumber}} / {{totalPages}} · {{date}}</div>"
+              ></textarea>
+            </label>
+            <iframe
+              id="footer-preview-frame"
+              class="template-preview-frame"
+              title="Footer template preview"
+              sandbox=""
+            ></iframe>
+            <p class="panel-note">
+              Template previews use sample token values in a sandboxed frame. Browser Fast export applies theme,
+              CSS, metadata, page size, per-side margins, and orientation locally, while header and footer templates require
+              High Quality Fallback to affect the PDF.
+            </p>
+          </section>
+
+          <section class="panel entries-panel">
+            <div class="panel-heading">
+              <p class="panel-kicker">Entries</p>
+              <h2>Markdown Candidates</h2>
+            </div>
+            <div id="entry-list" class="entry-list empty-state">
+              Load a ZIP archive to inspect its Markdown entry candidates.
+            </div>
+          </section>
+
+          <section class="panel diagnostics-panel">
+            <div class="panel-heading">
+              <p class="panel-kicker">Diagnostics</p>
+              <h2>Warnings and Errors</h2>
+            </div>
+            <div class="diagnostic-columns">
+              <div>
+                <h3>Warnings</h3>
+                <ul id="warning-list" class="diagnostic-list">
+                  <li>Warnings will appear after analysis.</li>
+                </ul>
+              </div>
+              <div>
+                <h3>Errors</h3>
+                <ul id="error-list" class="diagnostic-list">
+                  <li>Errors will appear after analysis.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <main class="preview-column">
+          <section class="panel preview-panel">
+            <div class="preview-header">
+              <div>
+                <p class="panel-kicker">Preview</p>
+                <h2 id="preview-title">No entry selected</h2>
+              </div>
+              <p id="preview-caption" class="preview-caption">Upload a ZIP to render the selected Markdown entry as HTML.</p>
+            </div>
+            <iframe
+              id="preview-frame"
+              class="preview-frame"
+              title="Rendered Markdown preview"
+              srcdoc="<!doctype html><html><body style='font-family: Georgia, serif; background: #fbf7ef; color: #47362b; display: grid; place-items: center; min-height: 100vh; margin: 0;'><div style='padding: 2rem; text-align: center; max-width: 32rem;'><h1 style='margin: 0 0 1rem;'>MarkNest Preview Lab</h1><p style='margin: 0;'>Choose a ZIP archive to inspect entry candidates and preview the rendered document here.</p></div></body></html>"
+            ></iframe>
+          </section>
+        </main>
+      </section>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+[package]
+name = "marknest-core"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+emojis.workspace = true
+pulldown-cmark.workspace = true
+serde.workspace = true
+zip.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+tempfile.workspace = true

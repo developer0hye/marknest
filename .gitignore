@@ -1,0 +1,7 @@
+/target/
+**/node_modules/
+dist/
+
+.DS_Store
+.codex-browser-probe
+.claude/

@@ -1,0 +1,22 @@
+[workspace]
+members = [
+    "crates/marknest",
+    "crates/marknest-core",
+    "crates/marknest-server",
+    "crates/marknest-wasm",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+version = "0.1.0"
+
+[workspace.dependencies]
+emojis = "0.6.4"
+pulldown-cmark = "0.13"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tempfile = "3.17"
+toml = "0.8"
+zip = { version = "2.2", default-features = false }

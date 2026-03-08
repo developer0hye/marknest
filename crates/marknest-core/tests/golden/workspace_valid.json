@@ -1,0 +1,34 @@
+{
+  "source_kind": "workspace",
+  "selected_entry": "README.md",
+  "entry_selection_reason": "readme",
+  "entry_candidates": [
+    {
+      "path": "README.md"
+    }
+  ],
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "./images/architecture.svg",
+      "resolved_path": "images/architecture.svg",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "./images/raw-diagram.svg",
+      "resolved_path": "images/raw-diagram.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "diagnostic": {
+    "missing_assets": [],
+    "ignored_files": [
+      "notes.txt"
+    ],
+    "warnings": [],
+    "path_errors": []
+  }
+}
