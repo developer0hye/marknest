@@ -114,6 +114,33 @@ fn renders_explicit_runtime_timeout_overrides() {
 }
 
 #[test]
+fn runtime_status_uses_dom_content_loaded_instead_of_window_load() {
+    let rendered = render_workspace_entry_with_options(
+        &fixture_path("workspace_render_features"),
+        "guide.md",
+        &RenderOptions {
+            mermaid_mode: MermaidMode::Auto,
+            math_mode: MathMode::Auto,
+            ..RenderOptions::default()
+        },
+    )
+    .expect("workspace entry should render");
+
+    assert!(
+        rendered
+            .html
+            .contains("document.readyState === \"loading\"")
+    );
+    assert!(
+        rendered
+            .html
+            .contains("document.addEventListener(\"DOMContentLoaded\"")
+    );
+    assert!(rendered.html.contains("void finalizeRendering();"));
+    assert!(!rendered.html.contains("window.addEventListener(\"load\""));
+}
+
+#[test]
 fn does_not_inject_phase_3_runtime_scripts_when_mermaid_and_math_are_off() {
     let rendered = render_workspace_entry_with_options(
         &fixture_path("workspace_render_features"),

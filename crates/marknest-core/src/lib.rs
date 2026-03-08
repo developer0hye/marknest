@@ -1805,14 +1805,21 @@ const renderMath = async () => {{
     handleFailure(config.mathMode, `Math renderer could not be loaded: ${{error.message}}`);
   }}
 }};
-window.addEventListener("load", async () => {{
+const finalizeRendering = async () => {{
   try {{
     await renderMermaid();
     await renderMath();
   }} finally {{
     status.ready = true;
   }}
-}}, {{ once: true }});
+}};
+if (document.readyState === "loading") {{
+  document.addEventListener("DOMContentLoaded", () => {{
+    void finalizeRendering();
+  }}, {{ once: true }});
+}} else {{
+  void finalizeRendering();
+}}
 }})();</script>"#,
         mermaid_mode_name(options.mermaid_mode),
         math_mode_name(options.math_mode),

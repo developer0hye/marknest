@@ -51,6 +51,11 @@ jobs:
           path=$(node -e 'const { chromium } = require("./crates/marknest/playwright-runtime/node_modules/playwright"); process.stdout.write(chromium.executablePath());')
           echo "path=$path" >> "$GITHUB_OUTPUT"
 
+      - name: Run Playwright print timeout guard
+        run: node --test crates/marknest/src/playwright_print.test.mjs
+        env:
+          MARKNEST_BROWSER_PATH: ${{ steps.playwright-browser.outputs.path }}
+
       - name: Run full README corpus validation
         run: node validation/readme_corpus.mjs run --tier all --force
         env:

@@ -31,9 +31,13 @@ async function main() {
 
   try {
     const page = await browser.newPage();
-    await page.goto(pathToFileURL(inputHtmlPath).href, { waitUntil: "load" });
+    await page.goto(pathToFileURL(inputHtmlPath).href, {
+      waitUntil: "domcontentloaded",
+      timeout: 30000,
+    });
 
     const renderStatus = await waitForRenderStatus(page, 15000);
+    await waitForPageAssets(page, 5000);
     if (renderStatus.errors.length > 0) {
       console.log(
         JSON.stringify({
@@ -100,6 +104,38 @@ async function waitForRenderStatus(page, timeoutMs) {
   }
 
   throw new Error("Timed out while waiting for Mermaid and Math rendering to finish.");
+}
+
+async function waitForPageAssets(page, timeoutMs) {
+  await page.evaluate(async (assetTimeoutMs) => {
+    const waitForFonts = typeof document.fonts?.ready?.then === "function"
+      ? document.fonts.ready.catch(() => undefined)
+      : Promise.resolve();
+
+    const waitForImages = Promise.all(
+      Array.from(document.images, (image) => {
+        if (image.complete) {
+          return Promise.resolve();
+        }
+
+        return new Promise((resolve) => {
+          const finish = () => {
+            image.removeEventListener("load", finish);
+            image.removeEventListener("error", finish);
+            resolve();
+          };
+
+          image.addEventListener("load", finish, { once: true });
+          image.addEventListener("error", finish, { once: true });
+        });
+      }),
+    );
+
+    await Promise.race([
+      Promise.all([waitForFonts, waitForImages]),
+      new Promise((resolve) => setTimeout(resolve, assetTimeoutMs)),
+    ]);
+  }, timeoutMs);
 }
 
 main();
