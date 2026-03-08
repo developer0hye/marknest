@@ -1,0 +1,27 @@
+{
+  "id": "vercel--next.js",
+  "repo": "vercel/next.js",
+  "url": "https://github.com/vercel/next.js",
+  "pinned_sha": "34d0bcb94234db1615662cc77a5204f3a6d22cb5",
+  "elapsed_sec": 8,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 119888,
+  "page_count": 2,
+  "token_coverage": 1,
+  "missing_tokens": [],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

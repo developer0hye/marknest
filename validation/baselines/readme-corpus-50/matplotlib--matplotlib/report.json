@@ -1,0 +1,121 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/pypi/v/matplotlib",
+      "fetch_url": "https://img.shields.io/pypi/v/matplotlib",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/conda/vn/conda-forge/matplotlib",
+      "fetch_url": "https://img.shields.io/conda/vn/conda-forge/matplotlib",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/dm/matplotlib",
+      "fetch_url": "https://img.shields.io/pypi/dm/matplotlib",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A",
+      "fetch_url": "https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://insights.linuxfoundation.org/api/badge/health-score?project=matplotlib",
+      "fetch_url": "https://insights.linuxfoundation.org/api/badge/health-score?project=matplotlib",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/help_forum-discourse-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/help_forum-discourse-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://badges.gitter.im/matplotlib/matplotlib.svg",
+      "fetch_url": "https://badges.gitter.im/matplotlib/matplotlib.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/issue_tracking-github-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/issue_tracking-github-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?",
+      "fetch_url": "https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/matplotlib/matplotlib/workflows/Tests/badge.svg",
+      "fetch_url": "https://github.com/matplotlib/matplotlib/workflows/Tests/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://dev.azure.com/matplotlib/matplotlib/_apis/build/status/matplotlib.matplotlib?branchName=main",
+      "fetch_url": "https://dev.azure.com/matplotlib/matplotlib/_apis/build/status/matplotlib.matplotlib?branchName=main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://ci.appveyor.com/api/projects/status/github/matplotlib/matplotlib?branch=main&svg=true",
+      "fetch_url": "https://ci.appveyor.com/api/projects/status/github/matplotlib/matplotlib?branch=main&svg=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/github/matplotlib/matplotlib/badge.svg?branch=main&service=github",
+      "fetch_url": "https://codecov.io/github/matplotlib/matplotlib/badge.svg?branch=main&service=github",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/version_scheme-EffVer-0097a7",
+      "fetch_url": "https://img.shields.io/badge/version_scheme-EffVer-0097a7",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://matplotlib.org/stable/_static/logo2.svg",
+      "fetch_url": "https://matplotlib.org/stable/_static/logo2.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://matplotlib.org/stable/_static/readme_preview.png",
+      "fetch_url": "https://matplotlib.org/stable/_static/readme_preview.png",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

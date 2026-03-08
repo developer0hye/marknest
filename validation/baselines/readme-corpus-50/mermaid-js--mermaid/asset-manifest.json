@@ -1,0 +1,238 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/v/mermaid",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/v/mermaid",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/mermaid-js/mermaid/actions/workflows/build.yml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/mermaid-js/mermaid/actions/workflows/build.yml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/bundlephobia/minzip/mermaid",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/bundlephobia/minzip/mermaid",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://codecov.io/github/mermaid-js/mermaid/branch/develop/graph/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://codecov.io/github/mermaid-js/mermaid/branch/develop/graph/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/jsdelivr/npm/hm/mermaid",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/jsdelivr/npm/hm/mermaid",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/dm/mermaid",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/dm/mermaid",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/static/v1?message=join%20chat&color=9cf&logo=discord&label=discord",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/static/v1?message=join%20chat&color=9cf&logo=discord&label=discord",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Social-mermaidjs__-blue?style=social&logo=X",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Social-mermaidjs__-blue?style=social&logo=X",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://argos-ci.com/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://argos-ci.com/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/mermaid-js/mermaid/badge",
+      "resolved_path": null,
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/mermaid-js/mermaid/badge",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://argos-ci.com/badge-large.svg",
+      "resolved_path": null,
+      "fetch_url": "https://argos-ci.com/badge-large.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/labels/mermaid-js/mermaid/Good%20first%20issue%21",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/labels/mermaid-js/mermaid/Good%20first%20issue%21",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/contributors/mermaid-js/mermaid",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/contributors/mermaid-js/mermaid",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/commit-activity/m/mermaid-js/mermaid",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/commit-activity/m/mermaid-js/mermaid",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/mermaid-js/mermaid/develop/docs/public/favicon.svg",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/mermaid-js/mermaid/develop/docs/public/favicon.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/v/mermaid?color=ff3670&label=",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/v/mermaid?color=ff3670&label=",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "./img/header.png",
+      "resolved_path": "img/header.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/mermaid-js/mermaid/blob/master/docs/intro/img/book-banner-post-release.jpg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/mermaid-js/mermaid/raw/master/docs/intro/img/book-banner-post-release.jpg",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/npm/v/mermaid",
+      "fetch_url": "https://img.shields.io/npm/v/mermaid",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/mermaid-js/mermaid/actions/workflows/build.yml/badge.svg",
+      "fetch_url": "https://github.com/mermaid-js/mermaid/actions/workflows/build.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/bundlephobia/minzip/mermaid",
+      "fetch_url": "https://img.shields.io/bundlephobia/minzip/mermaid",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/github/mermaid-js/mermaid/branch/develop/graph/badge.svg",
+      "fetch_url": "https://codecov.io/github/mermaid-js/mermaid/branch/develop/graph/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/jsdelivr/npm/hm/mermaid",
+      "fetch_url": "https://img.shields.io/jsdelivr/npm/hm/mermaid",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/mermaid",
+      "fetch_url": "https://img.shields.io/npm/dm/mermaid",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?message=join%20chat&color=9cf&logo=discord&label=discord",
+      "fetch_url": "https://img.shields.io/static/v1?message=join%20chat&color=9cf&logo=discord&label=discord",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Social-mermaidjs__-blue?style=social&logo=X",
+      "fetch_url": "https://img.shields.io/badge/Social-mermaidjs__-blue?style=social&logo=X",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://argos-ci.com/badge.svg",
+      "fetch_url": "https://argos-ci.com/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/mermaid-js/mermaid/badge",
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/mermaid-js/mermaid/badge",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://argos-ci.com/badge-large.svg",
+      "fetch_url": "https://argos-ci.com/badge-large.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/labels/mermaid-js/mermaid/Good%20first%20issue%21",
+      "fetch_url": "https://img.shields.io/github/labels/mermaid-js/mermaid/Good%20first%20issue%21",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/contributors/mermaid-js/mermaid",
+      "fetch_url": "https://img.shields.io/github/contributors/mermaid-js/mermaid",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/commit-activity/m/mermaid-js/mermaid",
+      "fetch_url": "https://img.shields.io/github/commit-activity/m/mermaid-js/mermaid",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/mermaid-js/mermaid/develop/docs/public/favicon.svg",
+      "fetch_url": "https://raw.githubusercontent.com/mermaid-js/mermaid/develop/docs/public/favicon.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/mermaid?color=ff3670&label=",
+      "fetch_url": "https://img.shields.io/npm/v/mermaid?color=ff3670&label=",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/mermaid-js/mermaid/blob/master/docs/intro/img/book-banner-post-release.jpg",
+      "fetch_url": "https://github.com/mermaid-js/mermaid/raw/master/docs/intro/img/book-banner-post-release.jpg",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

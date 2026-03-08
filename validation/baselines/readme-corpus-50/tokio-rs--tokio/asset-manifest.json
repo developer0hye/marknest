@@ -1,0 +1,23 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://tokio.rs",
+      "resolved_path": null,
+      "fetch_url": "https://tokio.rs",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://tokio.rs",
+      "fetch_url": "https://tokio.rs",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

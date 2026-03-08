@@ -1,0 +1,66 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "readme.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png",
+      "fetch_url": "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/MADE%20BY%20Vercel-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000",
+      "fetch_url": "https://img.shields.io/badge/MADE%20BY%20Vercel-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/next.svg?style=for-the-badge&labelColor=000000",
+      "fetch_url": "https://img.shields.io/npm/v/next.svg?style=for-the-badge&labelColor=000000",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000",
+      "fetch_url": "https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20",
+      "fetch_url": "https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

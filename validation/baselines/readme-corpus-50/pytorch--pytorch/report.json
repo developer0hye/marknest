@@ -1,0 +1,101 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://github.com/pytorch/pytorch/raw/main/docs/source/_static/img/pytorch-logo-dark.png",
+      "fetch_url": "https://github.com/pytorch/pytorch/raw/main/docs/source/_static/img/pytorch-logo-dark.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/pytorch/pytorch/raw/main/docs/source/_static/img/tensor_illustration.png",
+      "fetch_url": "https://github.com/pytorch/pytorch/raw/main/docs/source/_static/img/tensor_illustration.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/pytorch/pytorch/raw/main/docs/source/_static/img/dynamic_graph.gif",
+      "fetch_url": "https://github.com/pytorch/pytorch/raw/main/docs/source/_static/img/dynamic_graph.gif",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/49a3dfe7-81c2-4246-852b-bc3f807e95af",
+      "fetch_url": "https://github.com/user-attachments/assets/49a3dfe7-81c2-4246-852b-bc3f807e95af",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/117df543-8356-4323-8e1c-ef02a95554ba",
+      "fetch_url": "https://github.com/user-attachments/assets/117df543-8356-4323-8e1c-ef02a95554ba",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/5d7c196b-2d40-49ad-87e3-f57de6e14a5b",
+      "fetch_url": "https://github.com/user-attachments/assets/5d7c196b-2d40-49ad-87e3-f57de6e14a5b",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/27e0120a-ba33-4b1c-b4a5-bf3064520586",
+      "fetch_url": "https://github.com/user-attachments/assets/27e0120a-ba33-4b1c-b4a5-bf3064520586",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/ab5b862f-8026-489c-b95e-a6cd4257e4b7",
+      "fetch_url": "https://github.com/user-attachments/assets/ab5b862f-8026-489c-b95e-a6cd4257e4b7",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/0a275921-736d-43a7-ab0f-3e8854d43280",
+      "fetch_url": "https://github.com/user-attachments/assets/0a275921-736d-43a7-ab0f-3e8854d43280",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/eef18f2b-7134-4e2e-bd90-bcdc12800132",
+      "fetch_url": "https://github.com/user-attachments/assets/eef18f2b-7134-4e2e-bd90-bcdc12800132",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/f62812ca-caee-421b-863c-54f38fd28d46",
+      "fetch_url": "https://github.com/user-attachments/assets/f62812ca-caee-421b-863c-54f38fd28d46",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/8fadb935-5314-4c4b-a1b5-133781754f03",
+      "fetch_url": "https://github.com/user-attachments/assets/8fadb935-5314-4c4b-a1b5-133781754f03",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

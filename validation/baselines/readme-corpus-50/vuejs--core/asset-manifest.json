@@ -1,0 +1,88 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/v/vue.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/v/vue.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/vuejs/core/actions/workflows/ci.yml/badge.svg?branch=main",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/vuejs/core/actions/workflows/ci.yml/badge.svg?branch=main",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/dm/vue",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/dm/vue",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://automation.vuejs.org/images/better_stack.png",
+      "resolved_path": null,
+      "fetch_url": "https://automation.vuejs.org/images/better_stack.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://sponsors.vuejs.org/sponsors.svg?v3",
+      "resolved_path": null,
+      "fetch_url": "https://sponsors.vuejs.org/sponsors.svg?v3",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://opencollective.com/vuejs/contributors.svg?width=890&limit=500",
+      "resolved_path": null,
+      "fetch_url": "https://opencollective.com/vuejs/contributors.svg?width=890&limit=500",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/npm/v/vue.svg",
+      "fetch_url": "https://img.shields.io/npm/v/vue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/vuejs/core/actions/workflows/ci.yml/badge.svg?branch=main",
+      "fetch_url": "https://github.com/vuejs/core/actions/workflows/ci.yml/badge.svg?branch=main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/vue",
+      "fetch_url": "https://img.shields.io/npm/dm/vue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://automation.vuejs.org/images/better_stack.png",
+      "fetch_url": "https://automation.vuejs.org/images/better_stack.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://sponsors.vuejs.org/sponsors.svg?v3",
+      "fetch_url": "https://sponsors.vuejs.org/sponsors.svg?v3",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/vuejs/contributors.svg?width=890&limit=500",
+      "fetch_url": "https://opencollective.com/vuejs/contributors.svg?width=890&limit=500",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

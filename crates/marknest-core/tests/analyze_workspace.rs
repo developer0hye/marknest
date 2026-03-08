@@ -81,6 +81,22 @@ fn resolves_local_assets_even_when_the_reference_has_a_query_suffix() {
 }
 
 #[test]
+fn resolves_repo_root_relative_assets_with_leading_slashes() {
+    let index = analyze_workspace(&fixture_path("workspace_root_relative_asset"))
+        .expect("workspace with repo-root-relative assets should analyze");
+
+    assert_eq!(index.diagnostic.missing_assets, Vec::<String>::new());
+    assert!(index.assets.iter().any(|asset| {
+        asset.original_reference == "/docs/images/root-relative.svg"
+            && asset.resolved_path.as_deref() == Some("docs/images/root-relative.svg")
+    }));
+    assert!(index.assets.iter().any(|asset| {
+        asset.original_reference == "/docs/images/raw-root-relative.svg"
+            && asset.resolved_path.as_deref() == Some("docs/images/raw-root-relative.svg")
+    }));
+}
+
+#[test]
 fn normalizes_remote_http_assets_into_fetch_urls() {
     let index = analyze_workspace(&fixture_path("workspace_remote_http_assets"))
         .expect("workspace with remote assets should analyze");

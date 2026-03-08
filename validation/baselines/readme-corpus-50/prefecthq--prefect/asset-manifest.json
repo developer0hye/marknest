@@ -1,0 +1,101 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/PrefectHQ/prefect/assets/3407835/c654cbc6-63e8-4ada-a92a-efd2f8f24b85",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/PrefectHQ/prefect/assets/3407835/c654cbc6-63e8-4ada-a92a-efd2f8f24b85",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/v/prefect?color=0052FF&labelColor=090422",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/v/prefect?color=0052FF&labelColor=090422",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/dm/prefect?color=0052FF&labelColor=090422",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/dm/prefect?color=0052FF&labelColor=090422",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/stars/prefecthq/prefect?color=0052FF&labelColor=090422",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/stars/prefecthq/prefect?color=0052FF&labelColor=090422",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/commit-activity/m/prefecthq/prefect?color=0052FF&labelColor=090422",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/commit-activity/m/prefecthq/prefect?color=0052FF&labelColor=090422",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/slack-join_community-red.svg?color=0052FF&labelColor=090422&logo=slack",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/slack-join_community-red.svg?color=0052FF&labelColor=090422&logo=slack",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/youtube-watch_videos-red.svg?color=0052FF&labelColor=090422&logo=youtube",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/youtube-watch_videos-red.svg?color=0052FF&labelColor=090422&logo=youtube",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://github.com/PrefectHQ/prefect/assets/3407835/c654cbc6-63e8-4ada-a92a-efd2f8f24b85",
+      "fetch_url": "https://github.com/PrefectHQ/prefect/assets/3407835/c654cbc6-63e8-4ada-a92a-efd2f8f24b85",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/v/prefect?color=0052FF&labelColor=090422",
+      "fetch_url": "https://img.shields.io/pypi/v/prefect?color=0052FF&labelColor=090422",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/dm/prefect?color=0052FF&labelColor=090422",
+      "fetch_url": "https://img.shields.io/pypi/dm/prefect?color=0052FF&labelColor=090422",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/stars/prefecthq/prefect?color=0052FF&labelColor=090422",
+      "fetch_url": "https://img.shields.io/github/stars/prefecthq/prefect?color=0052FF&labelColor=090422",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/commit-activity/m/prefecthq/prefect?color=0052FF&labelColor=090422",
+      "fetch_url": "https://img.shields.io/github/commit-activity/m/prefecthq/prefect?color=0052FF&labelColor=090422",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/slack-join_community-red.svg?color=0052FF&labelColor=090422&logo=slack",
+      "fetch_url": "https://img.shields.io/badge/slack-join_community-red.svg?color=0052FF&labelColor=090422&logo=slack",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/youtube-watch_videos-red.svg?color=0052FF&labelColor=090422&logo=youtube",
+      "fetch_url": "https://img.shields.io/badge/youtube-watch_videos-red.svg?color=0052FF&labelColor=090422&logo=youtube",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

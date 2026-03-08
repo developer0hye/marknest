@@ -1,0 +1,91 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/github/stars/open-webui/open-webui?style=social",
+      "fetch_url": "https://img.shields.io/github/stars/open-webui/open-webui?style=social",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/forks/open-webui/open-webui?style=social",
+      "fetch_url": "https://img.shields.io/github/forks/open-webui/open-webui?style=social",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/watchers/open-webui/open-webui?style=social",
+      "fetch_url": "https://img.shields.io/github/watchers/open-webui/open-webui?style=social",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/repo-size/open-webui/open-webui",
+      "fetch_url": "https://img.shields.io/github/repo-size/open-webui/open-webui",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/languages/count/open-webui/open-webui",
+      "fetch_url": "https://img.shields.io/github/languages/count/open-webui/open-webui",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/languages/top/open-webui/open-webui",
+      "fetch_url": "https://img.shields.io/github/languages/top/open-webui/open-webui",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/last-commit/open-webui/open-webui?color=red",
+      "fetch_url": "https://img.shields.io/github/last-commit/open-webui/open-webui?color=red",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86",
+      "fetch_url": "https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.star-history.com/svg?repos=open-webui/open-webui&type=Date",
+      "fetch_url": "https://api.star-history.com/svg?repos=open-webui/open-webui&type=Date",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

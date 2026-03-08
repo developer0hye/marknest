@@ -1,0 +1,211 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/gradio-app/gradio/actions/workflows/test-python.yml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/gradio-app/gradio/actions/workflows/test-python.yml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/gradio-app/gradio/actions/workflows/tests-js.yml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/gradio-app/gradio/actions/workflows/tests-js.yml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/v/gradio",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/v/gradio",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/dm/gradio",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/dm/gradio",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/python-3.10+-important",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/python-3.10+-important",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/twitter/follow/gradio?style=social&label=follow",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/twitter/follow/gradio?style=social&label=follow",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "demo/hello_world_4/screenshot.gif",
+      "resolved_path": "demo/hello_world_4/screenshot.gif",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/gradio.svg",
+      "resolved_path": "readme_files/gradio.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=501906&theme=light",
+      "resolved_path": null,
+      "fetch_url": "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=501906&theme=light",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://trendshift.io/api/badge/repositories/2145",
+      "resolved_path": null,
+      "fetch_url": "https://trendshift.io/api/badge/repositories/2145",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/gif-version.gif",
+      "resolved_path": null,
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/gif-version.gif",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/huggingface_mini.svg",
+      "resolved_path": "readme_files/huggingface_mini.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/python.svg",
+      "resolved_path": "readme_files/python.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/fastapi.svg",
+      "resolved_path": "readme_files/fastapi.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/encode.svg",
+      "resolved_path": "readme_files/encode.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/svelte.svg",
+      "resolved_path": "readme_files/svelte.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/vite.svg",
+      "resolved_path": "readme_files/vite.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/pnpm.svg",
+      "resolved_path": "readme_files/pnpm.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/tailwind.svg",
+      "resolved_path": "readme_files/tailwind.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/storybook.svg",
+      "resolved_path": "readme_files/storybook.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "readme_files/chromatic.svg",
+      "resolved_path": "readme_files/chromatic.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://github.com/gradio-app/gradio/actions/workflows/test-python.yml/badge.svg",
+      "fetch_url": "https://github.com/gradio-app/gradio/actions/workflows/test-python.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/gradio-app/gradio/actions/workflows/tests-js.yml/badge.svg",
+      "fetch_url": "https://github.com/gradio-app/gradio/actions/workflows/tests-js.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/v/gradio",
+      "fetch_url": "https://img.shields.io/pypi/v/gradio",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/dm/gradio",
+      "fetch_url": "https://img.shields.io/pypi/dm/gradio",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/python-3.10+-important",
+      "fetch_url": "https://img.shields.io/badge/python-3.10+-important",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/twitter/follow/gradio?style=social&label=follow",
+      "fetch_url": "https://img.shields.io/twitter/follow/gradio?style=social&label=follow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=501906&theme=light",
+      "fetch_url": "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=501906&theme=light",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://trendshift.io/api/badge/repositories/2145",
+      "fetch_url": "https://trendshift.io/api/badge/repositories/2145",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/gif-version.gif",
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/gif-version.gif",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

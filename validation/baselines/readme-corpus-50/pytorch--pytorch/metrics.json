@@ -1,0 +1,38 @@
+{
+  "id": "pytorch--pytorch",
+  "repo": "pytorch/pytorch",
+  "url": "https://github.com/pytorch/pytorch",
+  "pinned_sha": "c884c15bcef857229f213580b73247ac8908cd8c",
+  "elapsed_sec": 20,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 1033000,
+  "page_count": 22,
+  "token_coverage": 0.9871630295250321,
+  "missing_tokens": [
+    "numpy-based",
+    "usecuda",
+    "rocmpath",
+    "pytorchrocmarch",
+    "userocm",
+    "usexpu",
+    "cmakeincludepath",
+    "buildpytorch",
+    "pythonversion",
+    "cmakevars"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

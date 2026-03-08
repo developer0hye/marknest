@@ -18,7 +18,7 @@ fn renders_a_workspace_entry_as_self_contained_html() {
         .expect("workspace entry should render");
 
     assert_eq!(rendered.title, "README");
-    assert!(rendered.html.contains("<h1>MarkNest</h1>"));
+    assert!(rendered.html.contains("<h1 id=\"marknest\">MarkNest</h1>"));
     assert!(rendered.html.contains("data:image/svg+xml;base64,"));
     assert!(rendered.html.contains("alt=\"Architecture\""));
     assert!(rendered.html.contains("alt=\"Raw Diagram\""));
@@ -52,8 +52,12 @@ fn renders_phase_3_runtime_markup_for_theme_mermaid_and_math() {
                 subject: Some("Rendering".to_string()),
             },
             custom_css: None,
+            enable_toc: false,
+            sanitize_html: true,
             mermaid_mode: MermaidMode::Auto,
             math_mode: MathMode::Auto,
+            mermaid_timeout_ms: 5_000,
+            math_timeout_ms: 3_000,
         },
     )
     .expect("workspace entry should render");
@@ -85,7 +89,55 @@ fn renders_phase_3_runtime_markup_for_theme_mermaid_and_math() {
     assert!(rendered.html.contains("\"mermaidMode\":\"auto\""));
     assert!(rendered.html.contains("\"mathMode\":\"auto\""));
     assert!(rendered.html.contains("\"mermaidTheme\":\"default\""));
+    assert!(rendered.html.contains("\"mermaidTimeoutMs\":5000"));
+    assert!(rendered.html.contains("\"mathTimeoutMs\":3000"));
     assert!(!rendered.html.contains("theme: \"neutral\""));
+}
+
+#[test]
+fn renders_explicit_runtime_timeout_overrides() {
+    let rendered = render_workspace_entry_with_options(
+        &fixture_path("workspace_render_features"),
+        "guide.md",
+        &RenderOptions {
+            mermaid_mode: MermaidMode::Auto,
+            math_mode: MathMode::Auto,
+            mermaid_timeout_ms: 1200,
+            math_timeout_ms: 800,
+            ..RenderOptions::default()
+        },
+    )
+    .expect("workspace entry should render");
+
+    assert!(rendered.html.contains("\"mermaidTimeoutMs\":1200"));
+    assert!(rendered.html.contains("\"mathTimeoutMs\":800"));
+}
+
+#[test]
+fn runtime_status_uses_dom_content_loaded_instead_of_window_load() {
+    let rendered = render_workspace_entry_with_options(
+        &fixture_path("workspace_render_features"),
+        "guide.md",
+        &RenderOptions {
+            mermaid_mode: MermaidMode::Auto,
+            math_mode: MathMode::Auto,
+            ..RenderOptions::default()
+        },
+    )
+    .expect("workspace entry should render");
+
+    assert!(
+        rendered
+            .html
+            .contains("document.readyState === \"loading\"")
+    );
+    assert!(
+        rendered
+            .html
+            .contains("document.addEventListener(\"DOMContentLoaded\"")
+    );
+    assert!(rendered.html.contains("void finalizeRendering();"));
+    assert!(!rendered.html.contains("window.addEventListener(\"load\""));
 }
 
 #[test]
@@ -148,6 +200,19 @@ fn renders_query_suffixed_local_assets_as_inlined_data_uris() {
 }
 
 #[test]
+fn renders_repo_root_relative_assets_as_inlined_data_uris() {
+    let rendered =
+        render_workspace_entry(&fixture_path("workspace_root_relative_asset"), "README.md")
+            .expect("workspace entry should render");
+
+    assert!(rendered.html.contains("alt=\"Root Relative\""));
+    assert!(rendered.html.contains("alt=\"Raw Root Relative\""));
+    assert!(rendered.html.contains("data:image/svg+xml;base64,"));
+    assert!(!rendered.html.contains("/docs/images/root-relative.svg"));
+    assert!(!rendered.html.contains("/docs/images/raw-root-relative.svg"));
+}
+
+#[test]
 fn renders_long_code_lines_with_print_safe_wrapping_styles() {
     let rendered = render_workspace_entry(&fixture_path("workspace_long_code_line"), "README.md")
         .expect("workspace entry should render");
@@ -186,6 +251,59 @@ fn preserves_inline_badges_and_explicit_image_dimensions() {
 }
 
 #[test]
+fn adds_print_layout_guards_for_sections_and_unsplittable_blocks() {
+    let rendered = render_workspace_entry_with_options(
+        &fixture_path("workspace_render_features"),
+        "guide.md",
+        &RenderOptions {
+            mermaid_mode: MermaidMode::Auto,
+            ..RenderOptions::default()
+        },
+    )
+    .expect("workspace entry should render");
+
+    assert!(rendered.html.contains("@media print"));
+    assert!(
+        rendered
+            .html
+            .contains("h1 { break-before: page; page-break-before: always; }")
+    );
+    assert!(
+        rendered
+            .html
+            .contains("h1:first-of-type { break-before: auto; page-break-before: auto; }")
+    );
+    assert!(rendered.html.contains(
+        "pre, table, blockquote, figure, img, tr, .marknest-toc { break-inside: avoid; page-break-inside: avoid; }"
+    ));
+    assert!(
+        rendered
+            .html
+            .contains("thead { display: table-header-group; }")
+    );
+}
+
+#[test]
+fn keeps_collapsed_details_content_visible_in_print_output() {
+    let rendered =
+        render_workspace_entry(&fixture_path("workspace_collapsed_details"), "README.md")
+            .expect("workspace entry should render");
+
+    assert!(rendered.html.contains("<details open>"));
+    assert!(rendered.html.contains("<summary>Model Families</summary>"));
+    assert!(
+        rendered
+            .html
+            .contains("segmentation, classification, pose, and OBB")
+    );
+    assert!(
+        rendered
+            .html
+            .contains("details:not([open]) > :not(summary) { display: block; }")
+    );
+}
+
+#[test]
 fn renders_github_emoji_shortcodes_in_prose_but_not_in_code() {
     let rendered = render_workspace_entry(&fixture_path("workspace_emoji_shortcodes"), "README.md")
         .expect("workspace entry should render");
@@ -193,4 +311,77 @@ fn renders_github_emoji_shortcodes_in_prose_but_not_in_code() {
     assert!(rendered.html.contains("Winner 🏆 in prose."));
     assert!(rendered.html.contains("<code>:trophy:</code>"));
     assert!(rendered.html.contains("<pre><code>:trophy:"));
+}
+
+#[test]
+fn sanitizes_raw_html_by_default_while_preserving_safe_readme_markup() {
+    let rendered =
+        render_workspace_entry(&fixture_path("workspace_raw_html_sanitize"), "README.md")
+            .expect("workspace entry should render");
+
+    assert!(!rendered.html.contains("<script"));
+    assert!(!rendered.html.contains("onclick="));
+    assert!(!rendered.html.contains("onerror="));
+    assert!(!rendered.html.contains("<iframe"));
+    assert!(rendered.html.contains("<details"));
+    assert!(rendered.html.contains("<summary>More</summary>"));
+    assert!(rendered.html.contains("type=\"checkbox\""));
+    assert!(rendered.html.contains("checked=\"\""));
+    assert!(rendered.html.contains("disabled=\"\""));
+    assert!(rendered.html.contains("width=\"120\""));
+    assert!(rendered.html.contains("height=\"80\""));
+    assert!(rendered.html.contains("data:image/svg+xml;base64,"));
+}
+
+#[test]
+fn can_disable_html_sanitization_for_trusted_documents() {
+    let rendered = render_workspace_entry_with_options(
+        &fixture_path("workspace_raw_html_sanitize"),
+        "README.md",
+        &RenderOptions {
+            sanitize_html: false,
+            ..RenderOptions::default()
+        },
+    )
+    .expect("workspace entry should render");
+
+    assert!(rendered.html.contains("<script>alert(\"x\")</script>"));
+    assert!(rendered.html.contains("onclick=\"alert('x')\""));
+    assert!(rendered.html.contains("onerror=\"alert('img')\""));
+    assert!(
+        rendered
+            .html
+            .contains("<iframe src=\"https://example.com/embed\"></iframe>")
+    );
+}
+
+#[test]
+fn builds_an_optional_table_of_contents_with_stable_heading_ids() {
+    let rendered = render_workspace_entry_with_options(
+        &fixture_path("workspace_toc"),
+        "README.md",
+        &RenderOptions {
+            enable_toc: true,
+            ..RenderOptions::default()
+        },
+    )
+    .expect("workspace entry should render");
+
+    assert!(rendered.html.contains("marknest-toc"));
+    assert!(rendered.html.contains("href=\"#guide\""));
+    assert!(rendered.html.contains("href=\"#overview\""));
+    assert!(rendered.html.contains("href=\"#overview-2\""));
+    assert!(rendered.html.contains("href=\"#api-surface\""));
+    assert!(rendered.html.contains("<h1 id=\"guide\">Guide</h1>"));
+    assert!(rendered.html.contains("<h2 id=\"overview\">Overview</h2>"));
+    assert!(
+        rendered
+            .html
+            .contains("<h2 id=\"overview-2\">Overview</h2>")
+    );
+    assert!(
+        rendered
+            .html
+            .contains("<h3 id=\"api-surface\">API Surface</h3>")
+    );
 }

@@ -1,0 +1,43 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/l/svelte.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/l/svelte.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/discord/457912077277855764?label=chat&logo=discord",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/discord/457912077277855764?label=chat&logo=discord",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "assets/banner.png",
+      "resolved_path": "assets/banner.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/npm/l/svelte.svg",
+      "fetch_url": "https://img.shields.io/npm/l/svelte.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/discord/457912077277855764?label=chat&logo=discord",
+      "fetch_url": "https://img.shields.io/discord/457912077277855764?label=chat&logo=discord",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

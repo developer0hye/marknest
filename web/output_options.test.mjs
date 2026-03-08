@@ -11,6 +11,8 @@ test("buildOutputOptions normalizes empty fields and preserves explicit output c
   const options = buildOutputOptions({
     theme: "docs",
     customCss: "body { color: rgb(5, 4, 3); }",
+    enableToc: true,
+    sanitizeHtml: false,
     headerTemplate: "  ",
     footerTemplate: "<div>{{pageNumber}}</div>",
     title: "Guide Pack",
@@ -24,11 +26,15 @@ test("buildOutputOptions normalizes empty fields and preserves explicit output c
     landscape: true,
     mermaidMode: "auto",
     mathMode: "on",
+    mermaidTimeoutMs: "4200",
+    mathTimeoutMs: "2400",
   });
 
   assert.deepEqual(options, {
     theme: "docs",
     custom_css: "body { color: rgb(5, 4, 3); }",
+    enable_toc: true,
+    sanitize_html: false,
     header_template: null,
     footer_template: "<div>{{pageNumber}}</div>",
     title: "Guide Pack",
@@ -42,6 +48,8 @@ test("buildOutputOptions normalizes empty fields and preserves explicit output c
     landscape: true,
     mermaid_mode: "auto",
     math_mode: "on",
+    mermaid_timeout_ms: 4200,
+    math_timeout_ms: 2400,
   });
 });
 
@@ -54,6 +62,10 @@ test("buildOutputOptions fans out a uniform margin when side-specific values are
   assert.equal(options.margin_right_mm, 16);
   assert.equal(options.margin_bottom_mm, 16);
   assert.equal(options.margin_left_mm, 16);
+  assert.equal(options.enable_toc, false);
+  assert.equal(options.sanitize_html, true);
+  assert.equal(options.mermaid_timeout_ms, 5000);
+  assert.equal(options.math_timeout_ms, 3000);
 });
 
 test("buildFallbackFormData stores the archive as a blob field and JSON options as text", async () => {
@@ -87,6 +99,8 @@ test("buildFallbackFormData stores the archive as a blob field and JSON options 
   assert.equal(options.margin_right_mm, 12);
   assert.equal(options.margin_bottom_mm, 20);
   assert.equal(options.margin_left_mm, 10);
+  assert.equal(options.enable_toc, false);
+  assert.equal(options.sanitize_html, true);
 });
 
 test("debugBundleFileName derives a stable archive name from the uploaded zip and entry path", () => {

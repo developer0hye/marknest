@@ -1,0 +1,36 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zed-industries/zed/main/assets/badge/v0.json",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zed-industries/zed/main/assets/badge/v0.json",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/zed-industries/zed/actions/workflows/run_tests.yml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/zed-industries/zed/actions/workflows/run_tests.yml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zed-industries/zed/main/assets/badge/v0.json",
+      "fetch_url": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zed-industries/zed/main/assets/badge/v0.json",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/zed-industries/zed/actions/workflows/run_tests.yml/badge.svg",
+      "fetch_url": "https://github.com/zed-industries/zed/actions/workflows/run_tests.yml/badge.svg",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

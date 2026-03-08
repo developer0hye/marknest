@@ -1,0 +1,101 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/raw/main/transformers-logo-light.svg",
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/raw/main/transformers-logo-light.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/endpoint?url=https://huggingface.co/api/shields/models&color=brightgreen",
+      "fetch_url": "https://img.shields.io/endpoint?url=https://huggingface.co/api/shields/models&color=brightgreen",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/circleci/build/github/huggingface/transformers/main",
+      "fetch_url": "https://img.shields.io/circleci/build/github/huggingface/transformers/main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/license/huggingface/transformers.svg?color=blue",
+      "fetch_url": "https://img.shields.io/github/license/huggingface/transformers.svg?color=blue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online",
+      "fetch_url": "https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/release/huggingface/transformers.svg",
+      "fetch_url": "https://img.shields.io/github/release/huggingface/transformers.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg",
+      "fetch_url": "https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://zenodo.org/badge/155220641.svg",
+      "fetch_url": "https://zenodo.org/badge/155220641.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers_as_a_model_definition.png",
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers_as_a_model_definition.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png",
+      "fetch_url": "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/tasks/idefics-few-shot.jpg",
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/tasks/idefics-few-shot.jpg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/247fb16d-d251-4583-96c4-d3d76dda4925",
+      "fetch_url": "https://github.com/user-attachments/assets/247fb16d-d251-4583-96c4-d3d76dda4925",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

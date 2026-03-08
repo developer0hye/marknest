@@ -1,0 +1,141 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/status-stable-blue.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/status-stable-blue.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/License-MIT%20or%20Apache%202-green.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/License-MIT%20or%20Apache%202-green.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/tauri-apps/tauri/test-core.yml?label=test%20core&logo=github",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/tauri-apps/tauri/test-core.yml?label=test%20core&logo=github",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=shield",
+      "resolved_path": null,
+      "fetch_url": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=shield",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/chat-discord-7289da.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/chat-discord-7289da.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/website-tauri.app-purple.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/website-tauri.app-purple.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/sponsor-Open%20Collective-blue.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/sponsor-Open%20Collective-blue.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=large",
+      "resolved_path": null,
+      "fetch_url": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=large",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": ".github/splash.png",
+      "resolved_path": ".github/splash.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": ".github/sponsors/crabnebula.svg",
+      "resolved_path": ".github/sponsors/crabnebula.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/badge/status-stable-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/status-stable-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/License-MIT%20or%20Apache%202-green.svg",
+      "fetch_url": "https://img.shields.io/badge/License-MIT%20or%20Apache%202-green.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/tauri-apps/tauri/test-core.yml?label=test%20core&logo=github",
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/tauri-apps/tauri/test-core.yml?label=test%20core&logo=github",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=shield",
+      "fetch_url": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=shield",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/chat-discord-7289da.svg",
+      "fetch_url": "https://img.shields.io/badge/chat-discord-7289da.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/website-tauri.app-purple.svg",
+      "fetch_url": "https://img.shields.io/badge/website-tauri.app-purple.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg",
+      "fetch_url": "https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/sponsor-Open%20Collective-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/sponsor-Open%20Collective-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=large",
+      "fetch_url": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=large",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

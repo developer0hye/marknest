@@ -1,0 +1,335 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/:license-Apache%202-blue.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/:license-Apache%202-blue.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://badge.fury.io/py/apache-airflow.svg",
+      "resolved_path": null,
+      "fetch_url": "https://badge.fury.io/py/apache-airflow.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/pyversions/apache-airflow.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/pyversions/apache-airflow.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/dm/apache-airflow",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/dm/apache-airflow",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/docker/pulls/apache/airflow.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/docker/pulls/apache/airflow.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/docker/stars/apache/airflow.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/docker/stars/apache/airflow.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/apache-airflow",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/apache-airflow",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/contributors/apache/airflow",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/contributors/apache/airflow",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/commit-activity/m/apache/airflow",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/commit-activity/m/apache/airflow",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://insights.linuxfoundation.org/api/badge/health-score?project=apache-airflow",
+      "resolved_path": null,
+      "fetch_url": "https://insights.linuxfoundation.org/api/badge/health-score?project=apache-airflow",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/apache/airflow/actions/workflows/ci-amd-arm.yml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/apache/airflow/actions/workflows/ci-amd-arm.yml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/apache/airflow/actions/workflows/ci-amd-arm.yml/badge.svg?branch=v3-1-test",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/apache/airflow/actions/workflows/ci-amd-arm.yml/badge.svg?branch=v3-1-test",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/apache/airflow/actions/workflows/ci.yml/badge.svg?branch=v2-11-test",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/apache/airflow/actions/workflows/ci.yml/badge.svg?branch=v2-11-test",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/dags.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/dags.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/assets_graph.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/assets_graph.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/grid.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/grid.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/graph.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/graph.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/home.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/home.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/backfill.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/backfill.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/code.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/code.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/apache/airflow/blob/19ebcac2395ef9a6b6ded3a2faa29dc960c1e635/docs/apache-airflow/img/logos/wordmark_1.png?raw=true",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/apache/airflow/raw/19ebcac2395ef9a6b6ded3a2faa29dc960c1e635/docs/apache-airflow/img/logos/wordmark_1.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://assets2.astronomer.io/logos/logoForLIGHTbackground.png",
+      "resolved_path": null,
+      "fetch_url": "https://assets2.astronomer.io/logos/logoForLIGHTbackground.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/apache/airflow/blob/main/providers/amazon/docs/integration-logos/AWS-Cloud-alt_light-bg@4x.png?raw=true",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/apache/airflow/raw/main/providers/amazon/docs/integration-logos/AWS-Cloud-alt_light-bg@4x.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/:license-Apache%202-blue.svg",
+      "fetch_url": "https://img.shields.io/:license-Apache%202-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://badge.fury.io/py/apache-airflow.svg",
+      "fetch_url": "https://badge.fury.io/py/apache-airflow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/pyversions/apache-airflow.svg",
+      "fetch_url": "https://img.shields.io/pypi/pyversions/apache-airflow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/dm/apache-airflow",
+      "fetch_url": "https://img.shields.io/pypi/dm/apache-airflow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/docker/pulls/apache/airflow.svg",
+      "fetch_url": "https://img.shields.io/docker/pulls/apache/airflow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/docker/stars/apache/airflow.svg",
+      "fetch_url": "https://img.shields.io/docker/stars/apache/airflow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/apache-airflow",
+      "fetch_url": "https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/apache-airflow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/contributors/apache/airflow",
+      "fetch_url": "https://img.shields.io/github/contributors/apache/airflow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social",
+      "fetch_url": "https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/commit-activity/m/apache/airflow",
+      "fetch_url": "https://img.shields.io/github/commit-activity/m/apache/airflow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://insights.linuxfoundation.org/api/badge/health-score?project=apache-airflow",
+      "fetch_url": "https://insights.linuxfoundation.org/api/badge/health-score?project=apache-airflow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json",
+      "fetch_url": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/apache/airflow/actions/workflows/ci-amd-arm.yml/badge.svg",
+      "fetch_url": "https://github.com/apache/airflow/actions/workflows/ci-amd-arm.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/apache/airflow/actions/workflows/ci-amd-arm.yml/badge.svg?branch=v3-1-test",
+      "fetch_url": "https://github.com/apache/airflow/actions/workflows/ci-amd-arm.yml/badge.svg?branch=v3-1-test",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/apache/airflow/actions/workflows/ci.yml/badge.svg?branch=v2-11-test",
+      "fetch_url": "https://github.com/apache/airflow/actions/workflows/ci.yml/badge.svg?branch=v2-11-test",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/dags.png",
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/dags.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/assets_graph.png",
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/assets_graph.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/grid.png",
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/grid.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/graph.png",
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/graph.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/home.png",
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/home.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/backfill.png",
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/backfill.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/code.png",
+      "fetch_url": "https://raw.githubusercontent.com/apache/airflow/main/airflow-core/docs/img/ui-dark/code.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/apache/airflow/blob/19ebcac2395ef9a6b6ded3a2faa29dc960c1e635/docs/apache-airflow/img/logos/wordmark_1.png?raw=true",
+      "fetch_url": "https://github.com/apache/airflow/raw/19ebcac2395ef9a6b6ded3a2faa29dc960c1e635/docs/apache-airflow/img/logos/wordmark_1.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://assets2.astronomer.io/logos/logoForLIGHTbackground.png",
+      "fetch_url": "https://assets2.astronomer.io/logos/logoForLIGHTbackground.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/apache/airflow/blob/main/providers/amazon/docs/integration-logos/AWS-Cloud-alt_light-bg@4x.png?raw=true",
+      "fetch_url": "https://github.com/apache/airflow/raw/main/providers/amazon/docs/integration-logos/AWS-Cloud-alt_light-bg@4x.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

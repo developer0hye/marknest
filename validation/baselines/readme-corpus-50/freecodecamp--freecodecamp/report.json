@@ -1,0 +1,66 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://cdn.freecodecamp.org/platform/universal/fcc_banner_new.png",
+      "fetch_url": "https://cdn.freecodecamp.org/platform/universal/fcc_banner_new.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/first--timers--only-friendly-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/first--timers--only-friendly-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/discord/692816967895220344?logo=discord&label=Discord&color=5865F2",
+      "fetch_url": "https://img.shields.io/discord/692816967895220344?logo=discord&label=Discord&color=5865F2",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://insights.linuxfoundation.org/api/badge/active-contributors?project=freecodecamp&repos=https://github.com/freeCodeCamp/freeCodeCamp",
+      "fetch_url": "https://insights.linuxfoundation.org/api/badge/active-contributors?project=freecodecamp&repos=https://github.com/freeCodeCamp/freeCodeCamp",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://repobeats.axiom.co/api/embed/89be0a1a1c8f641c54f9234a7423e7755352c746.svg",
+      "fetch_url": "https://repobeats.axiom.co/api/embed/89be0a1a1c8f641c54f9234a7423e7755352c746.svg",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

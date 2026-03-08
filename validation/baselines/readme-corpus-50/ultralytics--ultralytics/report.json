@@ -1,0 +1,306 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/pypi/v/ultralytics?logo=pypi&logoColor=white",
+      "fetch_url": "https://img.shields.io/pypi/v/ultralytics?logo=pypi&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://static.pepy.tech/badge/ultralytics",
+      "fetch_url": "https://static.pepy.tech/badge/ultralytics",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/pyversions/ultralytics?logo=python&logoColor=gold",
+      "fetch_url": "https://img.shields.io/pypi/pyversions/ultralytics?logo=python&logoColor=gold",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/conda/vn/conda-forge/ultralytics?logo=condaforge",
+      "fetch_url": "https://img.shields.io/conda/vn/conda-forge/ultralytics?logo=condaforge",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/docker/v/ultralytics/ultralytics?sort=semver&logo=docker",
+      "fetch_url": "https://img.shields.io/docker/v/ultralytics/ultralytics?sort=semver&logo=docker",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/docker/pulls/ultralytics/ultralytics?logo=docker",
+      "fetch_url": "https://img.shields.io/docker/pulls/ultralytics/ultralytics?logo=docker",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/ultralytics/assets/main/im/image-contributors.png",
+      "fetch_url": "https://raw.githubusercontent.com/ultralytics/assets/main/im/image-contributors.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/ultralytics/assets/main/yolov8/banner-yolov8.png",
+      "fetch_url": "https://raw.githubusercontent.com/ultralytics/assets/main/yolov8/banner-yolov8.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/ultralytics/actions/workflows/ci.yml/badge.svg",
+      "fetch_url": "https://github.com/ultralytics/ultralytics/actions/workflows/ci.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://static.pepy.tech/badge/ultralytics",
+      "fetch_url": "https://static.pepy.tech/badge/ultralytics",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue",
+      "fetch_url": "https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue",
+      "fetch_url": "https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/reddit/subreddit-subscribers/ultralytics?style=flat&logo=reddit&logoColor=white&label=Reddit&color=blue",
+      "fetch_url": "https://img.shields.io/reddit/subreddit-subscribers/ultralytics?style=flat&logo=reddit&logoColor=white&label=Reddit&color=blue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://assets.paperspace.io/img/gradient-badge.svg",
+      "fetch_url": "https://assets.paperspace.io/img/gradient-badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://colab.research.google.com/assets/colab-badge.svg",
+      "fetch_url": "https://colab.research.google.com/assets/colab-badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://kaggle.com/static/images/open-in-kaggle.svg",
+      "fetch_url": "https://kaggle.com/static/images/open-in-kaggle.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://mybinder.org/badge_logo.svg",
+      "fetch_url": "https://mybinder.org/badge_logo.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png",
+      "fetch_url": "https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-github.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-github.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-linkedin.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-linkedin.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-twitter.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-twitter.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-youtube.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-youtube.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-tiktok.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-tiktok.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-bilibili.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-bilibili.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-discord.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-discord.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/docs/releases/download/0/ultralytics-yolov8-tasks-banner.avif",
+      "fetch_url": "https://github.com/ultralytics/docs/releases/download/0/ultralytics-yolov8-tasks-banner.avif",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/yolov8/banner-integrations.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/yolov8/banner-integrations.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/partners/logo-ultralytics-hub.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/partners/logo-ultralytics-hub.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/partners/logo-wb.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/partners/logo-wb.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/partners/logo-comet.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/partners/logo-comet.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/partners/logo-neuralmagic.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/partners/logo-neuralmagic.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-github.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-github.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-linkedin.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-linkedin.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-twitter.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-twitter.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-youtube.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-youtube.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-tiktok.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-tiktok.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-bilibili.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-bilibili.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/ultralytics/assets/raw/main/social/logo-social-discord.png",
+      "fetch_url": "https://github.com/ultralytics/assets/raw/main/social/logo-social-discord.png",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

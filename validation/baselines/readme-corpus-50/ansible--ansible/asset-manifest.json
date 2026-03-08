@@ -1,0 +1,114 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/v/ansible-core.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/v/ansible-core.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/docs-latest-brightgreen.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/docs-latest-brightgreen.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/chat-IRC-brightgreen.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/chat-IRC-brightgreen.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://dev.azure.com/ansible/ansible/_apis/build/status/CI?branchName=devel",
+      "resolved_path": null,
+      "fetch_url": "https://dev.azure.com/ansible/ansible/_apis/build/status/CI?branchName=devel",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/code%20of%20conduct-Ansible-silver.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/code%20of%20conduct-Ansible-silver.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/mailing%20lists-Ansible-orange.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/mailing%20lists-Ansible-orange.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/license-GPL%20v3.0-brightgreen.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/license-GPL%20v3.0-brightgreen.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://bestpractices.coreinfrastructure.org/projects/2372/badge",
+      "resolved_path": null,
+      "fetch_url": "https://bestpractices.coreinfrastructure.org/projects/2372/badge",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/pypi/v/ansible-core.svg",
+      "fetch_url": "https://img.shields.io/pypi/v/ansible-core.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/docs-latest-brightgreen.svg",
+      "fetch_url": "https://img.shields.io/badge/docs-latest-brightgreen.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/chat-IRC-brightgreen.svg",
+      "fetch_url": "https://img.shields.io/badge/chat-IRC-brightgreen.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://dev.azure.com/ansible/ansible/_apis/build/status/CI?branchName=devel",
+      "fetch_url": "https://dev.azure.com/ansible/ansible/_apis/build/status/CI?branchName=devel",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/code%20of%20conduct-Ansible-silver.svg",
+      "fetch_url": "https://img.shields.io/badge/code%20of%20conduct-Ansible-silver.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/mailing%20lists-Ansible-orange.svg",
+      "fetch_url": "https://img.shields.io/badge/mailing%20lists-Ansible-orange.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/license-GPL%20v3.0-brightgreen.svg",
+      "fetch_url": "https://img.shields.io/badge/license-GPL%20v3.0-brightgreen.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://bestpractices.coreinfrastructure.org/projects/2372/badge",
+      "fetch_url": "https://bestpractices.coreinfrastructure.org/projects/2372/badge",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

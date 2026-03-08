@@ -1,0 +1,166 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/raw/main/transformers-logo-light.svg",
+      "resolved_path": null,
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/raw/main/transformers-logo-light.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/endpoint?url=https://huggingface.co/api/shields/models&color=brightgreen",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/endpoint?url=https://huggingface.co/api/shields/models&color=brightgreen",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/circleci/build/github/huggingface/transformers/main",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/circleci/build/github/huggingface/transformers/main",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/license/huggingface/transformers.svg?color=blue",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/license/huggingface/transformers.svg?color=blue",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/release/huggingface/transformers.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/release/huggingface/transformers.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://zenodo.org/badge/155220641.svg",
+      "resolved_path": null,
+      "fetch_url": "https://zenodo.org/badge/155220641.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers_as_a_model_definition.png",
+      "resolved_path": null,
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers_as_a_model_definition.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png",
+      "resolved_path": null,
+      "fetch_url": "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/tasks/idefics-few-shot.jpg",
+      "resolved_path": null,
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/tasks/idefics-few-shot.jpg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/user-attachments/assets/247fb16d-d251-4583-96c4-d3d76dda4925",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/user-attachments/assets/247fb16d-d251-4583-96c4-d3d76dda4925",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/raw/main/transformers-logo-light.svg",
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/raw/main/transformers-logo-light.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/endpoint?url=https://huggingface.co/api/shields/models&color=brightgreen",
+      "fetch_url": "https://img.shields.io/endpoint?url=https://huggingface.co/api/shields/models&color=brightgreen",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/circleci/build/github/huggingface/transformers/main",
+      "fetch_url": "https://img.shields.io/circleci/build/github/huggingface/transformers/main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/license/huggingface/transformers.svg?color=blue",
+      "fetch_url": "https://img.shields.io/github/license/huggingface/transformers.svg?color=blue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online",
+      "fetch_url": "https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/release/huggingface/transformers.svg",
+      "fetch_url": "https://img.shields.io/github/release/huggingface/transformers.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg",
+      "fetch_url": "https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://zenodo.org/badge/155220641.svg",
+      "fetch_url": "https://zenodo.org/badge/155220641.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers_as_a_model_definition.png",
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers_as_a_model_definition.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png",
+      "fetch_url": "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/tasks/idefics-few-shot.jpg",
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/tasks/idefics-few-shot.jpg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/user-attachments/assets/247fb16d-d251-4583-96c4-d3d76dda4925",
+      "fetch_url": "https://github.com/user-attachments/assets/247fb16d-d251-4583-96c4-d3d76dda4925",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

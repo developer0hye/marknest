@@ -4,8 +4,8 @@
 
 ## 1. 문서 정보
 - 문서명: `PRD.md`
-- 버전: `v1.7`
-- 작성일: `2026-03-05`
+- 버전: `v1.8`
+- 작성일: `2026-03-08`
 - 제품명: `MarkNest`
 - CLI 바이너리명: `marknest`
 - 기본 설정 파일: `.marknest.toml`, `marknest.toml`
@@ -34,6 +34,7 @@
 
 ### 4.1 목표 (Goals)
 - 웹에서 `.zip` 업로드만으로 Markdown+이미지 PDF 생성 성공률을 높인다.
+- 웹 기본 경로는 사용자가 업로드한 ZIP/Markdown 내용을 MarkNest backend로 전송하지 않는다.
 - Rust 코어를 단일 소스로 두고 `Library / WASM / CLI / Web`에서 재사용한다.
 - 경로 해석 및 보안(Zip Slip, 확장자 제한, 용량 제한)을 기본 제공한다.
 - MVP에서 실사용 가능한 품질(텍스트/이미지/표/코드블록)을 제공한다.
@@ -68,11 +69,17 @@
 5. Mermaid/Math 블록 감지 및 렌더 옵션 적용
 6. HTML 미리보기 렌더
 7. PDF 생성
-   - 기본: 브라우저 변환
-   - fallback: 서버 Chromium `printToPDF`
+   - 기본: 브라우저 변환 (`Browser Fast`, backend 업로드 없음)
+   - fallback: 사용자가 선택하거나 브라우저 경로 실패 시에만 로컬/서버 Chromium `printToPDF`
 8. 결과 다운로드
    - 단일 변환: PDF 1개
    - 일괄 변환: PDF 묶음 ZIP 1개
+
+### 6.5 오프라인/프라이버시 의미 정의
+- 이 PRD에서 기본 경로의 `offline` 또는 `local-first` 의미는 "`업로드한 Markdown/ZIP 본문이 MarkNest backend로 기본 전송되지 않는다`"를 우선 의미로 한다.
+- 이는 "`문서가 참조하는 외부 HTTP(S) 이미지/에셋으로의 직접 네트워크 요청까지 모두 금지한다`"와는 동일한 의미가 아니다.
+- 즉, 브라우저 또는 네이티브 런타임이 문서 품질을 위해 외부 이미지 URL을 직접 fetch하는 것은 허용 범위에 포함될 수 있다.
+- 완전한 air-gapped/no-network 모드는 별도 정책 또는 옵션으로 다루며, MVP의 기본 의미로 간주하지 않는다.
 
 ### 6.2 CLI 시나리오 (현재 경로 md 변환)
 1. 사용자가 문서 폴더에서 `marknest convert` 또는 `marknest convert README.md` 실행
@@ -225,13 +232,15 @@
   - 일괄 변환 결과 ZIP 다운로드 제공
 - 렌더링 전략:
   - 1차: 클라이언트(WASM) 기반 렌더/미리보기
-  - 2차: 품질 요구 또는 실패 시 서버 PDF fallback
+  - 기본 모드는 `Browser Fast`이며, 업로드된 ZIP/Markdown 본문을 MarkNest backend로 전송하지 않는다
+  - 2차: 품질 요구 또는 실패 시에만 fallback 서버 PDF 렌더를 사용한다
+  - 문서가 참조한 외부 HTTP(S) 이미지/에셋은 브라우저 또는 네이티브 런타임이 직접 fetch할 수 있다
   - 단일 `.md` 직접 업로드는 비MVP
 
 ### 7.5 Mermaid 지원 정책
 - 렌더 포맷: SVG 우선 (PDF 품질/확대 대응)
 - 보안 기본값: Mermaid `securityLevel: strict`
-- 외부 네트워크 의존 리소스는 기본 차단
+- MarkNest가 제공하는 Mermaid 런타임 자산은 외부 CDN에 의존하지 않고 로컬 번들 자산을 사용한다
 - 실패 fallback:
   - `auto`: 원본 code block 유지 + warning
   - `on`: 변환 실패(error)
@@ -250,6 +259,7 @@
   - `on`: 렌더 실패 시 변환 실패(error)
 - raw HTML `<img>` 처리:
   - 상대/절대 경로 resolve 및 존재 여부 검증
+  - `http://`, `https://` 원격 이미지 링크는 품질 향상을 위해 직접 fetch 및 inlining을 시도할 수 있다
   - 미지원 스킴(`javascript:` 등) 차단
 
 ### 7.7 스타일 및 인쇄 레이아웃 정책
@@ -282,7 +292,8 @@
 - 실행 환경:
   - CLI와 서버 fallback용 공식 Docker 이미지를 제공한다
   - Chromium, Mermaid, MathJax, 기본 폰트 버전을 고정하거나 명시적으로 관리한다
-  - 공식 실행 환경에서는 오프라인 렌더가 가능해야 한다
+  - 공식 실행 환경의 MarkNest 자체 런타임 자산(Mermaid, MathJax, html2pdf 등)은 외부 CDN 없이 동작해야 한다
+  - 다만 문서가 참조하는 외부 HTTP(S) 이미지/에셋 fetch는 허용 범위이며, 이 경우 완전한 no-network 동작은 보장 범위가 아니다
   - 진단 리포트에 실행 엔진/버전 정보를 포함한다
 
 ## 8. 비기능 요구사항
@@ -306,7 +317,7 @@
   - 파일 개수 상한
 - 악성 스크립트 삽입 대응:
   - HTML sanitize 옵션
-  - PDF 렌더 단계에서 외부 리소스 차단 옵션
+  - PDF 렌더 단계에서 외부 리소스 차단 옵션(선택 기능)
 
 ### 8.4 호환성
 - 데스크톱 최신 Chrome/Edge/Safari/Firefox
@@ -316,7 +327,8 @@
 - 공식 Docker 이미지 기준으로 로컬/CI/서버 fallback 실행이 가능해야 한다
 - 동일 입력/옵션/공식 런타임에서는 페이지 수와 주요 레이아웃이 재현 가능해야 한다
 - 서버 fallback 런타임은 Chromium, Mermaid, MathJax, 폰트 버전을 릴리즈 노트에 명시해야 한다
-- 외부 네트워크 없이도 기본 렌더 경로가 동작해야 한다
+- MarkNest 자체 런타임 자산은 외부 네트워크 없이도 기본 렌더 경로가 동작해야 한다
+- 단, 문서가 참조하는 외부 HTTP(S) 이미지/에셋 fetch는 fidelity 향상을 위해 허용될 수 있으며, 이는 backend 무업로드 정책과 별개로 취급한다
 
 ## 9. 시스템 아키텍처
 - `core` (Rust crate): 파서/리졸버/진단/옵션
@@ -330,8 +342,8 @@
 1. Web: 클라이언트가 ZIP 업로드
 2. Web: WASM에서 해제/엔트리 인덱싱/검증/HTML 생성
 3. Web: 단일 또는 일괄 렌더 요청
-4. Web: 브라우저 PDF 생성 시도
-5. Web: 실패 또는 고품질 모드 선택 시 서버 렌더 요청
+4. Web: 브라우저 PDF 생성 시도 (기본 경로, backend 업로드 없음)
+5. Web: 실패 또는 고품질 모드 선택 시에만 서버 렌더 요청
 6. CLI: 현재 경로/지정 md/ZIP/폴더를 읽고 단일 또는 일괄 PDF 생성
 
 ## 10. API/인터페이스 초안

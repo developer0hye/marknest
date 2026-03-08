@@ -1,0 +1,30 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "./docs/public/logo.svg",
+      "resolved_path": "docs/public/logo.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://observablehq.observablehq.cloud/oss-analytics/d3/downloads.svg",
+      "resolved_path": null,
+      "fetch_url": "https://observablehq.observablehq.cloud/oss-analytics/d3/downloads.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://observablehq.observablehq.cloud/oss-analytics/d3/downloads.svg",
+      "fetch_url": "https://observablehq.observablehq.cloud/oss-analytics/d3/downloads.svg",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

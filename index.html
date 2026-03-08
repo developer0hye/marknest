@@ -14,6 +14,7 @@
     <link data-trunk rel="copy-file" href="web/app.js" />
     <link data-trunk rel="copy-file" href="web/export_policy.mjs" />
     <link data-trunk rel="copy-file" href="web/output_options.mjs" />
+    <link data-trunk rel="copy-file" href="web/remote_assets.mjs" />
     <link data-trunk rel="copy-file" href="web/runtime_sync.mjs" />
     <link data-trunk rel="copy-dir" href="runtime-assets" />
     <script src="./runtime-assets/html2pdf/html2pdf.bundle.min.js"></script>
@@ -166,6 +167,20 @@
                   <span>Landscape PDF</span>
                 </span>
               </label>
+              <label class="control-field toggle-field" for="toc-input">
+                <span class="control-label">Outline</span>
+                <span class="toggle-row">
+                  <input id="toc-input" type="checkbox" />
+                  <span>Insert TOC</span>
+                </span>
+              </label>
+              <label class="control-field toggle-field" for="sanitize-html-input">
+                <span class="control-label">HTML Safety</span>
+                <span class="toggle-row">
+                  <input id="sanitize-html-input" type="checkbox" checked />
+                  <span>Sanitize raw HTML</span>
+                </span>
+              </label>
               <label class="control-field" for="mermaid-mode-input">
                 <span class="control-label">Mermaid</span>
                 <select id="mermaid-mode-input" class="control-input">
@@ -238,8 +253,8 @@
             ></iframe>
             <p class="panel-note">
               Template previews use sample token values in a sandboxed frame. Browser Fast export applies theme,
-              CSS, metadata, page size, per-side margins, and orientation locally, while header and footer templates require
-              High Quality Fallback to affect the PDF.
+              CSS, metadata, page size, per-side margins, orientation, generated TOC, and document HTML sanitization
+              locally, while header and footer templates require High Quality Fallback to affect the PDF.
             </p>
           </section>
 

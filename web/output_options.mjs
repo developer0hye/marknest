@@ -1,6 +1,8 @@
 export const DEFAULT_OUTPUT_OPTIONS = Object.freeze({
   theme: "github",
   custom_css: null,
+  enable_toc: false,
+  sanitize_html: true,
   header_template: null,
   footer_template: null,
   title: null,
@@ -14,6 +16,8 @@ export const DEFAULT_OUTPUT_OPTIONS = Object.freeze({
   landscape: false,
   mermaid_mode: "off",
   math_mode: "off",
+  mermaid_timeout_ms: 5000,
+  math_timeout_ms: 3000,
 });
 
 function normalizeOptionalText(value) {
@@ -35,11 +39,28 @@ function normalizeMarginMm(value) {
   return parsed < 0 ? 0 : parsed;
 }
 
+function normalizeTimeoutMs(value, fallback) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    return fallback;
+  }
+
+  return Math.round(parsed);
+}
+
 export function buildOutputOptions(source = {}) {
   const uniformMarginMm = normalizeMarginMm(source.marginMm);
   return {
     theme: normalizeOptionalText(source.theme) ?? DEFAULT_OUTPUT_OPTIONS.theme,
     custom_css: normalizeOptionalBlock(source.customCss),
+    enable_toc:
+      source.enableToc === undefined
+        ? DEFAULT_OUTPUT_OPTIONS.enable_toc
+        : Boolean(source.enableToc),
+    sanitize_html:
+      source.sanitizeHtml === undefined
+        ? DEFAULT_OUTPUT_OPTIONS.sanitize_html
+        : Boolean(source.sanitizeHtml),
     header_template: normalizeOptionalBlock(source.headerTemplate),
     footer_template: normalizeOptionalBlock(source.footerTemplate),
     title: normalizeOptionalText(source.title),
@@ -53,6 +74,14 @@ export function buildOutputOptions(source = {}) {
     landscape: Boolean(source.landscape),
     mermaid_mode: normalizeOptionalText(source.mermaidMode) ?? DEFAULT_OUTPUT_OPTIONS.mermaid_mode,
     math_mode: normalizeOptionalText(source.mathMode) ?? DEFAULT_OUTPUT_OPTIONS.math_mode,
+    mermaid_timeout_ms: normalizeTimeoutMs(
+      source.mermaidTimeoutMs,
+      DEFAULT_OUTPUT_OPTIONS.mermaid_timeout_ms,
+    ),
+    math_timeout_ms: normalizeTimeoutMs(
+      source.mathTimeoutMs,
+      DEFAULT_OUTPUT_OPTIONS.math_timeout_ms,
+    ),
   };
 }
 

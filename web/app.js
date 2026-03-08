@@ -66,6 +66,8 @@ const elements = {
   marginBottomMm: document.getElementById("margin-bottom-input"),
   marginLeftMm: document.getElementById("margin-left-input"),
   landscape: document.getElementById("landscape-input"),
+  enableToc: document.getElementById("toc-input"),
+  sanitizeHtml: document.getElementById("sanitize-html-input"),
   mermaidMode: document.getElementById("mermaid-mode-input"),
   mathMode: document.getElementById("math-mode-input"),
   title: document.getElementById("title-input"),
@@ -225,6 +227,8 @@ function currentOutputOptions() {
       elements.marginBottomMm?.value ?? String(DEFAULT_OUTPUT_OPTIONS.margin_bottom_mm),
     marginLeftMm: elements.marginLeftMm?.value ?? String(DEFAULT_OUTPUT_OPTIONS.margin_left_mm),
     landscape: elements.landscape?.checked ?? false,
+    enableToc: elements.enableToc?.checked ?? DEFAULT_OUTPUT_OPTIONS.enable_toc,
+    sanitizeHtml: elements.sanitizeHtml?.checked ?? DEFAULT_OUTPUT_OPTIONS.sanitize_html,
     mermaidMode: elements.mermaidMode?.value ?? DEFAULT_OUTPUT_OPTIONS.mermaid_mode,
     mathMode: elements.mathMode?.value ?? DEFAULT_OUTPUT_OPTIONS.math_mode,
   });
@@ -1062,6 +1066,8 @@ bindRenderOptionControl(elements.marginRightMm);
 bindRenderOptionControl(elements.marginBottomMm);
 bindRenderOptionControl(elements.marginLeftMm);
 bindRenderOptionControl(elements.landscape);
+bindRenderOptionControl(elements.enableToc, { refreshPreview: true });
+bindRenderOptionControl(elements.sanitizeHtml, { refreshPreview: true });
 bindRenderOptionControl(elements.mermaidMode, { refreshPreview: true });
 bindRenderOptionControl(elements.mathMode, { refreshPreview: true });
 bindRenderOptionTextControl(elements.customCss, { refreshPreview: true });

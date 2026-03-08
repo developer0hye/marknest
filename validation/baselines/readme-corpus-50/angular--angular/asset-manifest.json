@@ -1,0 +1,50 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/angular-love-blue?logo=angular&angular=love",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/angular-love-blue?logo=angular&angular=love",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "adev/src/assets/images/press-kit/angular_icon_gradient.gif",
+      "resolved_path": "adev/src/assets/images/press-kit/angular_icon_gradient.gif",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/v/@angular/core.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/v/@angular/core.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "/contributing-docs/images/angular-ecosystem-logos.png",
+      "resolved_path": "contributing-docs/images/angular-ecosystem-logos.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/badge/angular-love-blue?logo=angular&angular=love",
+      "fetch_url": "https://img.shields.io/badge/angular-love-blue?logo=angular&angular=love",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@angular/core.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen",
+      "fetch_url": "https://img.shields.io/npm/v/@angular/core.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

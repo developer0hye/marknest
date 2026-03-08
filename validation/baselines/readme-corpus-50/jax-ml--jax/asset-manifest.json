@@ -1,0 +1,49 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/jax-ml/jax/actions/workflows/ci-build.yaml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/jax-ml/jax/actions/workflows/ci-build.yaml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/v/jax",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/v/jax",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/jax-ml/jax/main/images/jax_logo_250px.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/jax-ml/jax/main/images/jax_logo_250px.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://github.com/jax-ml/jax/actions/workflows/ci-build.yaml/badge.svg",
+      "fetch_url": "https://github.com/jax-ml/jax/actions/workflows/ci-build.yaml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/v/jax",
+      "fetch_url": "https://img.shields.io/pypi/v/jax",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/jax-ml/jax/main/images/jax_logo_250px.png",
+      "fetch_url": "https://raw.githubusercontent.com/jax-ml/jax/main/images/jax_logo_250px.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

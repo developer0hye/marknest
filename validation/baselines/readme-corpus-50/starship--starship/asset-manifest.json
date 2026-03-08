@@ -1,0 +1,296 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/logo.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/logo.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/starship/starship/workflow.yml?branch=master&label=workflow&style=flat-square",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/starship/starship/workflow.yml?branch=master&label=workflow&style=flat-square",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/crates/v/starship?style=flat-square",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/crates/v/starship?style=flat-square",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/repology/repositories/starship?label=in%20repositories&style=flat-square",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/repology/repositories/starship?label=in%20repositories&style=flat-square",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/discord/567163873606500352?label=discord&logoColor=white&style=flat-square",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/discord/567163873606500352?label=discord&logoColor=white&style=flat-square",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/twitter-@StarshipPrompt-1DA1F3?style=flat-square",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/twitter-@StarshipPrompt-1DA1F3?style=flat-square",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraineFlat.svg",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraineFlat.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-us.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-us.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-de.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-de.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-es.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-es.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-fr.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-fr.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-id.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-id.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-it.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-it.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-jp.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-jp.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-br.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-br.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ru.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ru.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ua.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ua.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-vn.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-vn.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-cn.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-cn.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-tw.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-tw.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/demo.gif",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/demo.gif",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/icon.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/icon.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/logo.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/logo.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/starship/starship/workflow.yml?branch=master&label=workflow&style=flat-square",
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/starship/starship/workflow.yml?branch=master&label=workflow&style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/crates/v/starship?style=flat-square",
+      "fetch_url": "https://img.shields.io/crates/v/starship?style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/repology/repositories/starship?label=in%20repositories&style=flat-square",
+      "fetch_url": "https://img.shields.io/repology/repositories/starship?label=in%20repositories&style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/discord/567163873606500352?label=discord&logoColor=white&style=flat-square",
+      "fetch_url": "https://img.shields.io/discord/567163873606500352?label=discord&logoColor=white&style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/twitter-@StarshipPrompt-1DA1F3?style=flat-square",
+      "fetch_url": "https://img.shields.io/badge/twitter-@StarshipPrompt-1DA1F3?style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraineFlat.svg",
+      "fetch_url": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraineFlat.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-us.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-us.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-de.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-de.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-es.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-es.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-fr.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-fr.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-id.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-id.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-it.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-it.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-jp.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-jp.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-br.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-br.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ru.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ru.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ua.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ua.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-vn.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-vn.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-cn.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-cn.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-tw.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-tw.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/demo.gif",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/demo.gif",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/icon.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/icon.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

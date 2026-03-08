@@ -1,0 +1,23 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://www.datocms-assets.com/2885/1731373310-terraform_white.svg",
+      "resolved_path": null,
+      "fetch_url": "https://www.datocms-assets.com/2885/1731373310-terraform_white.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://www.datocms-assets.com/2885/1731373310-terraform_white.svg",
+      "fetch_url": "https://www.datocms-assets.com/2885/1731373310-terraform_white.svg",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

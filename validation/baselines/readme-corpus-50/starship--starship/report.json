@@ -1,0 +1,151 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/logo.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/logo.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/starship/starship/workflow.yml?branch=master&label=workflow&style=flat-square",
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/starship/starship/workflow.yml?branch=master&label=workflow&style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/crates/v/starship?style=flat-square",
+      "fetch_url": "https://img.shields.io/crates/v/starship?style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/repology/repositories/starship?label=in%20repositories&style=flat-square",
+      "fetch_url": "https://img.shields.io/repology/repositories/starship?label=in%20repositories&style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/discord/567163873606500352?label=discord&logoColor=white&style=flat-square",
+      "fetch_url": "https://img.shields.io/discord/567163873606500352?label=discord&logoColor=white&style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/twitter-@StarshipPrompt-1DA1F3?style=flat-square",
+      "fetch_url": "https://img.shields.io/badge/twitter-@StarshipPrompt-1DA1F3?style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraineFlat.svg",
+      "fetch_url": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraineFlat.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-us.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-us.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-de.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-de.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-es.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-es.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-fr.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-fr.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-id.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-id.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-it.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-it.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-jp.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-jp.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-br.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-br.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ru.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ru.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ua.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-ua.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-vn.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-vn.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-cn.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-cn.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/flag-tw.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/flag-tw.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/demo.gif",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/demo.gif",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/starship/starship/master/media/icon.png",
+      "fetch_url": "https://raw.githubusercontent.com/starship/starship/master/media/icon.png",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

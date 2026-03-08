@@ -1,0 +1,26 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://serde.rs",
+      "resolved_path": null,
+      "fetch_url": "https://serde.rs",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://serde.rs",
+      "fetch_url": "https://serde.rs",
+      "status": "failed",
+      "message": "response content type text/html is not a supported image"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://serde.rs (response content type text/html is not a supported image)"
+  ]
+}

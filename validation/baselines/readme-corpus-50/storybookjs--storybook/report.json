@@ -1,0 +1,376 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/react/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/react/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/react?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/react?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/angular/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/angular/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/angular?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/angular?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/vue3/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/vue3/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/vue3?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/vue3?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/web-components/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/web-components/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/web-components?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/web-components?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/react-native/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/react-native/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/react-native?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/react-native?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/html/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/html/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/html?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/html?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/ember/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/ember/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/ember?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/ember?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/svelte/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/svelte/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/svelte?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/svelte?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/preact/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/preact/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/preact?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/preact?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/storybook-framework-qwik/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/storybook-framework-qwik/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/storybook-framework-qwik?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/storybook-framework-qwik?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/storybook-solidjs-vite/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/storybook-solidjs-vite/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/storybook-solidjs-vite?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/storybook-solidjs-vite?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/native/latest?style=flat-square&color=blue&label",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/native/latest?style=flat-square&color=blue&label",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/@storybook/native?style=flat-square&color=eee",
+      "fetch_url": "https://img.shields.io/npm/dm/@storybook/native?style=flat-square&color=eee",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg",
+      "fetch_url": "https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg",
+      "fetch_url": "https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/issues/storybookjs/storybook/good%20first%20issue.svg",
+      "fetch_url": "https://img.shields.io/github/issues/storybookjs/storybook/good%20first%20issue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png",
+      "fetch_url": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://circleci.com/gh/storybookjs/storybook.svg?style=shield",
+      "fetch_url": "https://circleci.com/gh/storybookjs/storybook.svg?style=shield",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/gh/storybookjs/storybook/branch/main/graph/badge.svg",
+      "fetch_url": "https://codecov.io/gh/storybookjs/storybook/branch/main/graph/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/license/storybookjs/storybook.svg",
+      "fetch_url": "https://img.shields.io/github/license/storybookjs/storybook.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/discord-join-7289DA.svg?logo=discord&longCache=true&style=flat",
+      "fetch_url": "https://img.shields.io/badge/discord-join-7289DA.svg?logo=discord&longCache=true&style=flat",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/community-join-4BC424.svg",
+      "fetch_url": "https://img.shields.io/badge/community-join-4BC424.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/backers/badge.svg",
+      "fetch_url": "https://opencollective.com/storybook/backers/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/badge.svg",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/twitter/follow/storybookjs?color=blue&logo=twitter",
+      "fetch_url": "https://img.shields.io/twitter/follow/storybookjs?color=blue&logo=twitter",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/storybookjs/storybook/badge",
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/storybookjs/storybook/badge",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/storybookjs/storybook/refs/heads/release-6-5/media/storybook-intro.gif",
+      "fetch_url": "https://raw.githubusercontent.com/storybookjs/storybook/refs/heads/release-6-5/media/storybook-intro.gif",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/react/latest?style=for-the-badge&logo=storybook&logoColor=ffffff&color=66BF3C",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/react/latest?style=for-the-badge&logo=storybook&logoColor=ffffff&color=66BF3C",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@storybook/react/next?style=for-the-badge&logo=storybook&logoColor=ffffff&color=1EA7FD",
+      "fetch_url": "https://img.shields.io/npm/v/@storybook/react/next?style=for-the-badge&logo=storybook&logoColor=ffffff&color=1EA7FD",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/0/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/0/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/1/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/1/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/2/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/2/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/3/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/3/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/4/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/4/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/5/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/5/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/6/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/6/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/7/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/7/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/8/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/8/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/9/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/9/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/10/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/10/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/11/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/11/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/12/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/12/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/13/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/13/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/14/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/14/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/15/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/15/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/16/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/16/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/17/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/17/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/18/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/18/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/19/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/19/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/20/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/20/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/21/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/21/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/22/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/22/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/23/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/23/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/24/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/24/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/sponsors/25/avatar.svg?requireActive=true",
+      "fetch_url": "https://opencollective.com/storybook/tiers/sponsors/25/avatar.svg?requireActive=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/storybook/tiers/backers.svg?limit=80&button=false&avatarHeight=46&width=750",
+      "fetch_url": "https://opencollective.com/storybook/tiers/backers.svg?limit=80&button=false&avatarHeight=46&width=750",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

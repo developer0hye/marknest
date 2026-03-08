@@ -1,0 +1,86 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/badge/status-stable-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/status-stable-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/License-MIT%20or%20Apache%202-green.svg",
+      "fetch_url": "https://img.shields.io/badge/License-MIT%20or%20Apache%202-green.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/tauri-apps/tauri/test-core.yml?label=test%20core&logo=github",
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/tauri-apps/tauri/test-core.yml?label=test%20core&logo=github",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=shield",
+      "fetch_url": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=shield",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/chat-discord-7289da.svg",
+      "fetch_url": "https://img.shields.io/badge/chat-discord-7289da.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/website-tauri.app-purple.svg",
+      "fetch_url": "https://img.shields.io/badge/website-tauri.app-purple.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg",
+      "fetch_url": "https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/sponsor-Open%20Collective-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/sponsor-Open%20Collective-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=large",
+      "fetch_url": "https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftauri-apps%2Ftauri.svg?type=large",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

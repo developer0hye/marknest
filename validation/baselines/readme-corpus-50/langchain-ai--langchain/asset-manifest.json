@@ -1,0 +1,108 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": ".github/images/logo-dark.svg",
+      "resolved_path": ".github/images/logo-dark.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/l/langchain",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/l/langchain",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pepy/dt/langchain",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pepy/dt/langchain",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/v/langchain?label=%20",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/v/langchain?label=%20",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/codespaces/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/codespaces/badge.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/endpoint?url=https://codspeed.io/badge.json",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/endpoint?url=https://codspeed.io/badge.json",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/twitter/url/https/twitter.com/langchain.svg?style=social&label=Follow%20%40LangChain",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/twitter/url/https/twitter.com/langchain.svg?style=social&label=Follow%20%40LangChain",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/pypi/l/langchain",
+      "fetch_url": "https://img.shields.io/pypi/l/langchain",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pepy/dt/langchain",
+      "fetch_url": "https://img.shields.io/pepy/dt/langchain",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/v/langchain?label=%20",
+      "fetch_url": "https://img.shields.io/pypi/v/langchain?label=%20",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode",
+      "fetch_url": "https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/codespaces/badge.svg",
+      "fetch_url": "https://github.com/codespaces/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/endpoint?url=https://codspeed.io/badge.json",
+      "fetch_url": "https://img.shields.io/endpoint?url=https://codspeed.io/badge.json",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/twitter/url/https/twitter.com/langchain.svg?style=social&label=Follow%20%40LangChain",
+      "fetch_url": "https://img.shields.io/twitter/url/https/twitter.com/langchain.svg?style=social&label=Follow%20%40LangChain",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

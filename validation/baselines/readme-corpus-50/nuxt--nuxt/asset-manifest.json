@@ -1,0 +1,149 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "./.github/assets/banner.svg",
+      "resolved_path": ".github/assets/banner.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://npmx.dev/api/registry/badge/version/nuxt",
+      "resolved_path": null,
+      "fetch_url": "https://npmx.dev/api/registry/badge/version/nuxt",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://npmx.dev/api/registry/badge/downloads/nuxt",
+      "resolved_path": null,
+      "fetch_url": "https://npmx.dev/api/registry/badge/downloads/nuxt",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/license/nuxt/nuxt.svg?style=flat&colorA=18181B&colorB=28CF8D",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/license/nuxt/nuxt.svg?style=flat&colorA=18181B&colorB=28CF8D",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/dynamic/json?url=https://nuxt.com/api/v1/modules&query=$.stats.modules&label=Modules&style=flat&colorA=18181B&colorB=28CF8D",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/dynamic/json?url=https://nuxt.com/api/v1/modules&query=$.stats.modules&label=Modules&style=flat&colorA=18181B&colorB=28CF8D",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Nuxt%20Docs-18181B?logo=nuxt",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Nuxt%20Docs-18181B?logo=nuxt",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Nuxt%20Discord-18181B?logo=discord",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Nuxt%20Discord-18181B?logo=discord",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/nuxt/nuxt/badge",
+      "resolved_path": null,
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/nuxt/nuxt/badge",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://deepwiki.com/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://deepwiki.com/badge.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "./.github/assets/discord.svg",
+      "resolved_path": ".github/assets/discord.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "./.github/assets/twitter.svg",
+      "resolved_path": ".github/assets/twitter.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "./.github/assets/github.svg",
+      "resolved_path": ".github/assets/github.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "./.github/assets/bluesky.svg",
+      "resolved_path": ".github/assets/bluesky.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://npmx.dev/api/registry/badge/version/nuxt",
+      "fetch_url": "https://npmx.dev/api/registry/badge/version/nuxt",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://npmx.dev/api/registry/badge/downloads/nuxt",
+      "fetch_url": "https://npmx.dev/api/registry/badge/downloads/nuxt",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/license/nuxt/nuxt.svg?style=flat&colorA=18181B&colorB=28CF8D",
+      "fetch_url": "https://img.shields.io/github/license/nuxt/nuxt.svg?style=flat&colorA=18181B&colorB=28CF8D",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/dynamic/json?url=https://nuxt.com/api/v1/modules&query=$.stats.modules&label=Modules&style=flat&colorA=18181B&colorB=28CF8D",
+      "fetch_url": "https://img.shields.io/badge/dynamic/json?url=https://nuxt.com/api/v1/modules&query=$.stats.modules&label=Modules&style=flat&colorA=18181B&colorB=28CF8D",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Nuxt%20Docs-18181B?logo=nuxt",
+      "fetch_url": "https://img.shields.io/badge/Nuxt%20Docs-18181B?logo=nuxt",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Nuxt%20Discord-18181B?logo=discord",
+      "fetch_url": "https://img.shields.io/badge/Nuxt%20Discord-18181B?logo=discord",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/nuxt/nuxt/badge",
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/nuxt/nuxt/badge",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://deepwiki.com/badge.svg",
+      "fetch_url": "https://deepwiki.com/badge.svg",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}
