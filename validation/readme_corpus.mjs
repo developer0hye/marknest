@@ -6,6 +6,10 @@ import fsPromises from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import {
+  sanitizeBaselineMetrics,
+  sanitizeBaselineReport,
+} from "./lib/baseline_artifacts.mjs";
 import { classifyValidationResult } from "./lib/diff_policy.mjs";
 import { parseCorpusManifest, sanitizeCorpusId } from "./lib/manifest.mjs";
 import { buildPageMetrics, comparePngBuffers } from "./lib/png_metrics.mjs";
@@ -590,13 +594,19 @@ async function blessResults(results) {
     await removeDirectory(baselineDirectory);
     await ensureDirectory(baselineDirectory);
     await fsPromises.copyFile(result.pdfPath, path.join(baselineDirectory, "output.pdf"));
-    await fsPromises.copyFile(result.reportPath, path.join(baselineDirectory, "report.json"));
     await fsPromises.copyFile(
       result.assetManifestPath,
       path.join(baselineDirectory, "asset-manifest.json"),
     );
     await fsPromises.copyFile(result.sourcePath, path.join(baselineDirectory, "source.json"));
-    await fsPromises.copyFile(result.metricsPath, path.join(baselineDirectory, "metrics.json"));
+    await writeJsonFile(
+      path.join(baselineDirectory, "report.json"),
+      sanitizeBaselineReport(result.report, result.entry),
+    );
+    await writeJsonFile(
+      path.join(baselineDirectory, "metrics.json"),
+      sanitizeBaselineMetrics(result.metrics),
+    );
     await copyDirectory(path.join(result.runDirectory, "pages"), path.join(baselineDirectory, "pages"));
   }
 }

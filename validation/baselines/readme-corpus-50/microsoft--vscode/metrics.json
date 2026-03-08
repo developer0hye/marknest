@@ -18,32 +18,7 @@
   "edge_contact_pages": [],
   "baseline_exists": true,
   "baseline_page_count_delta": 0,
-  "diff_summary": [
-    {
-      "page": "page-0001.png",
-      "diffPixels": 0,
-      "diffRatio": 0,
-      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/microsoft--vscode/diffs/page-0001.png"
-    },
-    {
-      "page": "page-0002.png",
-      "diffPixels": 0,
-      "diffRatio": 0,
-      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/microsoft--vscode/diffs/page-0002.png"
-    },
-    {
-      "page": "page-0003.png",
-      "diffPixels": 0,
-      "diffRatio": 0,
-      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/microsoft--vscode/diffs/page-0003.png"
-    },
-    {
-      "page": "page-0004.png",
-      "diffPixels": 0,
-      "diffRatio": 0,
-      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/microsoft--vscode/diffs/page-0004.png"
-    }
-  ],
+  "diff_summary": [],
   "hard_failures": [],
   "advisories": [],
   "thresholds": {

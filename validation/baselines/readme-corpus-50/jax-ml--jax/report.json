@@ -2,7 +2,7 @@
   "status": "success",
   "exit_code": 0,
   "input_kind": "markdown_file",
-  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/jax-ml--jax-fc393ecafcb6/source/jax-fc393ecafcb602ac06ee6ee387415c679163e330/README.md",
+  "input_path": "README.md",
   "source_kind": "workspace",
   "selection_mode": "explicit_markdown_file",
   "requested_entry": "README.md",
@@ -14,7 +14,7 @@
   "outputs": [
     {
       "entry_path": "README.md",
-      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/jax-ml--jax/output.pdf",
+      "output_path": "output.pdf",
       "warnings": []
     }
   ],

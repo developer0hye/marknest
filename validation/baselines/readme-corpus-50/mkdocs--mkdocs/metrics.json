@@ -18,7 +18,7 @@
   ],
   "near_blank_pages": [],
   "edge_contact_pages": [],
-  "baseline_exists": false,
+  "baseline_exists": true,
   "baseline_page_count_delta": 0,
   "diff_summary": [],
   "hard_failures": [],

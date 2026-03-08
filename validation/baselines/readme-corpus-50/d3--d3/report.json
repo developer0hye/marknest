@@ -2,7 +2,7 @@
   "status": "success",
   "exit_code": 0,
   "input_kind": "markdown_file",
-  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/d3--d3-42ccb63d8f4a/source/d3-42ccb63d8f4a4262f78b48aa1431e1f645bcc844/README.md",
+  "input_path": "README.md",
   "source_kind": "workspace",
   "selection_mode": "explicit_markdown_file",
   "requested_entry": "README.md",
@@ -14,7 +14,7 @@
   "outputs": [
     {
       "entry_path": "README.md",
-      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/d3--d3/output.pdf",
+      "output_path": "output.pdf",
       "warnings": []
     }
   ],

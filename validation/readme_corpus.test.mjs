@@ -3,6 +3,10 @@ import assert from "node:assert/strict";
 
 import { PNG } from "pngjs";
 
+import {
+  sanitizeBaselineMetrics,
+  sanitizeBaselineReport,
+} from "./lib/baseline_artifacts.mjs";
 import { classifyValidationResult } from "./lib/diff_policy.mjs";
 import { parseCorpusManifest, sanitizeCorpusId } from "./lib/manifest.mjs";
 import {
@@ -301,4 +305,48 @@ test("classifyValidationResult does not block on warning exit codes alone", () =
 
   assert.deepEqual(warningOnly.hardFailures, []);
   assert.deepEqual(warningOnly.advisories, ["convert_warning_exit"]);
+});
+
+test("sanitizeBaselineReport replaces ephemeral absolute paths with portable paths", () => {
+  const sanitized = sanitizeBaselineReport(
+    {
+      input_path: "/Users/yhkwon/tmp/source/README.md",
+      outputs: [
+        {
+          entry_path: "README.md",
+          output_path: "/Users/yhkwon/tmp/run/output.pdf",
+          warnings: [],
+        },
+      ],
+      remote_assets: [{ original_reference: "https://example.com/logo.png", status: "inlined" }],
+    },
+    { readmePath: "README.md" },
+  );
+
+  assert.equal(sanitized.input_path, "README.md");
+  assert.equal(sanitized.outputs[0].output_path, "output.pdf");
+  assert.deepEqual(sanitized.remote_assets, [
+    { original_reference: "https://example.com/logo.png", status: "inlined" },
+  ]);
+});
+
+test("sanitizeBaselineMetrics removes baseline-diff noise from committed metrics", () => {
+  const sanitized = sanitizeBaselineMetrics({
+    baseline_exists: false,
+    baseline_page_count_delta: 3,
+    diff_summary: [
+      {
+        page: "page-0001.png",
+        diffPixels: 25,
+        diffRatio: 0.02,
+        diffPath: "/Users/yhkwon/tmp/run/diffs/page-0001.png",
+      },
+    ],
+    advisories: ["baseline_page_count_changed", "remote_asset_failures"],
+  });
+
+  assert.equal(sanitized.baseline_exists, true);
+  assert.equal(sanitized.baseline_page_count_delta, 0);
+  assert.deepEqual(sanitized.diff_summary, []);
+  assert.deepEqual(sanitized.advisories, ["remote_asset_failures"]);
 });
