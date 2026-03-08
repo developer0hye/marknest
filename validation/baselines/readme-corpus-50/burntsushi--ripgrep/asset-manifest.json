@@ -1,0 +1,62 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/BurntSushi/ripgrep/workflows/ci/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/BurntSushi/ripgrep/workflows/ci/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/crates/v/ripgrep.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/crates/v/ripgrep.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://repology.org/badge/tiny-repos/ripgrep.svg",
+      "resolved_path": null,
+      "fetch_url": "https://repology.org/badge/tiny-repos/ripgrep.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://burntsushi.net/stuff/ripgrep1.png",
+      "resolved_path": null,
+      "fetch_url": "https://burntsushi.net/stuff/ripgrep1.png",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://github.com/BurntSushi/ripgrep/workflows/ci/badge.svg",
+      "fetch_url": "https://github.com/BurntSushi/ripgrep/workflows/ci/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/crates/v/ripgrep.svg",
+      "fetch_url": "https://img.shields.io/crates/v/ripgrep.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://repology.org/badge/tiny-repos/ripgrep.svg",
+      "fetch_url": "https://repology.org/badge/tiny-repos/ripgrep.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://burntsushi.net/stuff/ripgrep1.png",
+      "fetch_url": "https://burntsushi.net/stuff/ripgrep1.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

@@ -1,0 +1,71 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/docker--compose-d7ec1eca9aab/source/compose-d7ec1eca9aab1857737c103d5a7416fd971505e8/README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/docker--compose/output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/github/v/release/docker/compose.svg?style=flat-square",
+      "fetch_url": "https://img.shields.io/github/v/release/docker/compose.svg?style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/go.dev-docs-007d9c?style=flat-square&logo=go&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/go.dev-docs-007d9c?style=flat-square&logo=go&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/docker/compose/ci.yml?label=ci&logo=github&style=flat-square",
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/docker/compose/ci.yml?label=ci&logo=github&style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://goreportcard.com/badge/github.com/docker/compose/v5?style=flat-square",
+      "fetch_url": "https://goreportcard.com/badge/github.com/docker/compose/v5?style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/gh/docker/compose/branch/main/graph/badge.svg?token=HP3K4Y4ctu",
+      "fetch_url": "https://codecov.io/gh/docker/compose/branch/main/graph/badge.svg?token=HP3K4Y4ctu",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/docker/compose/badge",
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/docker/compose/badge",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

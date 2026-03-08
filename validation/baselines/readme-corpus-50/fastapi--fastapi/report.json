@@ -1,0 +1,211 @@
+{
+  "status": "warning",
+  "exit_code": 1,
+  "input_kind": "markdown_file",
+  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/fastapi--fastapi-11614be9021a/source/fastapi-11614be9021aa4ac078d4d0693a8b5250a1010d8/README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/fastapi--fastapi/output.pdf",
+      "warnings": [
+        "Remote asset could not be materialized: README.md -> https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg (HTTP 502 from https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg)"
+      ]
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/index/index-01-swagger-ui-simple.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/index/index-01-swagger-ui-simple.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/index/index-02-redoc-simple.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/index/index-02-redoc-simple.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/index/index-03-swagger-02.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/index/index-03-swagger-02.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/index/index-04-swagger-03.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/index/index-04-swagger-03.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/index/index-05-swagger-04.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/index/index-05-swagger-04.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/index/index-06-redoc-02.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/index/index-06-redoc-02.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/vscode-completion.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/vscode-completion.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/fastapi/fastapi/actions/workflows/test.yml/badge.svg?event=push&branch=master",
+      "fetch_url": "https://github.com/fastapi/fastapi/actions/workflows/test.yml/badge.svg?event=push&branch=master",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg",
+      "fetch_url": "https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg",
+      "status": "failed",
+      "message": "HTTP 502 from https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/v/fastapi?color=%2334D058&label=pypi%20package",
+      "fetch_url": "https://img.shields.io/pypi/v/fastapi?color=%2334D058&label=pypi%20package",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/pyversions/fastapi.svg?color=%2334D058",
+      "fetch_url": "https://img.shields.io/pypi/pyversions/fastapi.svg?color=%2334D058",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/fastapicloud.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/fastapicloud.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/blockbee.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/blockbee.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/scalar.svg",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/scalar.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/propelauth.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/propelauth.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/zuplo.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/zuplo.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/liblab.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/liblab.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/render.svg",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/render.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/coderabbit.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/coderabbit.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/subtotal.svg",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/subtotal.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/railway.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/railway.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/serpapi.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/serpapi.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/greptile.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/greptile.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/databento.svg",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/databento.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/speakeasy.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/speakeasy.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/svix.svg",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/svix.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/stainless.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/stainless.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/permit.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/permit.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/interviewpal.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/interviewpal.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/sponsors/dribia.png",
+      "fetch_url": "https://fastapi.tiangolo.com/img/sponsors/dribia.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://fastapi.tiangolo.com/img/fastapi-documentary.jpg",
+      "fetch_url": "https://fastapi.tiangolo.com/img/fastapi-documentary.jpg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://typer.tiangolo.com/img/logo-margin/logo-margin-vector.svg",
+      "fetch_url": "https://typer.tiangolo.com/img/logo-margin/logo-margin-vector.svg",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg (HTTP 502 from https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg)"
+  ],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

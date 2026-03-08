@@ -1,0 +1,71 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/vuejs--core-cea3cf758645/source/core-cea3cf758645c9683db51822590b073ce3069dda/README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/vuejs--core/output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/npm/v/vue.svg",
+      "fetch_url": "https://img.shields.io/npm/v/vue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/vuejs/core/actions/workflows/ci.yml/badge.svg?branch=main",
+      "fetch_url": "https://github.com/vuejs/core/actions/workflows/ci.yml/badge.svg?branch=main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/dm/vue",
+      "fetch_url": "https://img.shields.io/npm/dm/vue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://automation.vuejs.org/images/better_stack.png",
+      "fetch_url": "https://automation.vuejs.org/images/better_stack.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://sponsors.vuejs.org/sponsors.svg?v3",
+      "fetch_url": "https://sponsors.vuejs.org/sponsors.svg?v3",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/vuejs/contributors.svg?width=890&limit=500",
+      "fetch_url": "https://opencollective.com/vuejs/contributors.svg?width=890&limit=500",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/pandas-dev--pandas-0039f168fe05/source/pandas-0039f168fe057b945e8ec2a65c9d1e973c7c1fe9/README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/pandas-dev--pandas/output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://github.com/pandas-dev/pandas/actions/workflows/unit-tests.yml/badge.svg",
+      "fetch_url": "https://github.com/pandas-dev/pandas/actions/workflows/unit-tests.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/github/pandas-dev/pandas/coverage.svg?branch=main",
+      "fetch_url": "https://codecov.io/github/pandas-dev/pandas/coverage.svg?branch=main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/v/pandas.svg",
+      "fetch_url": "https://img.shields.io/pypi/v/pandas.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/dm/pandas.svg?label=PyPI%20downloads",
+      "fetch_url": "https://img.shields.io/pypi/dm/pandas.svg?label=PyPI%20downloads",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://anaconda.org/conda-forge/pandas/badges/version.svg",
+      "fetch_url": "https://anaconda.org/conda-forge/pandas/badges/version.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/conda/dn/conda-forge/pandas.svg?label=Conda%20downloads",
+      "fetch_url": "https://img.shields.io/conda/dn/conda-forge/pandas.svg?label=Conda%20downloads",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A",
+      "fetch_url": "https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://zenodo.org/badge/DOI/10.5281/zenodo.3509134.svg",
+      "fetch_url": "https://zenodo.org/badge/DOI/10.5281/zenodo.3509134.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/l/pandas.svg",
+      "fetch_url": "https://img.shields.io/pypi/l/pandas.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/join_Slack-information-brightgreen.svg?logo=slack",
+      "fetch_url": "https://img.shields.io/badge/join_Slack-information-brightgreen.svg?logo=slack",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://insights.linuxfoundation.org/api/badge/health-score?project=pandas-dev-pandas",
+      "fetch_url": "https://insights.linuxfoundation.org/api/badge/health-score?project=pandas-dev-pandas",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://www.codetriage.com/pandas-dev/pandas/badges/users.svg",
+      "fetch_url": "https://www.codetriage.com/pandas-dev/pandas/badges/users.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pandas.pydata.org/static/img/pandas.svg",
+      "fetch_url": "https://pandas.pydata.org/static/img/pandas.svg",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

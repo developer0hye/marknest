@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="48" viewBox="0 0 120 48">
+  <rect width="120" height="48" rx="8" fill="#0f172a" />
+  <text x="60" y="29" fill="#f8fafc" font-family="Arial" font-size="16" text-anchor="middle">
+    Root Relative
+  </text>
+</svg>

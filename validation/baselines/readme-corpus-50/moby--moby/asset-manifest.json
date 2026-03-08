@@ -1,0 +1,82 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pkg.go.dev/badge/github.com/moby/moby/v2",
+      "resolved_path": null,
+      "fetch_url": "https://pkg.go.dev/badge/github.com/moby/moby/v2",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/license/moby/moby",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/license/moby/moby",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://goreportcard.com/badge/github.com/moby/moby/v2",
+      "resolved_path": null,
+      "fetch_url": "https://goreportcard.com/badge/github.com/moby/moby/v2",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://api.scorecard.dev/projects/github.com/moby/moby/badge",
+      "resolved_path": null,
+      "fetch_url": "https://api.scorecard.dev/projects/github.com/moby/moby/badge",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://www.bestpractices.dev/projects/10989/badge",
+      "resolved_path": null,
+      "fetch_url": "https://www.bestpractices.dev/projects/10989/badge",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "docs/static_files/moby-project-logo.png",
+      "resolved_path": "docs/static_files/moby-project-logo.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://pkg.go.dev/badge/github.com/moby/moby/v2",
+      "fetch_url": "https://pkg.go.dev/badge/github.com/moby/moby/v2",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/license/moby/moby",
+      "fetch_url": "https://img.shields.io/github/license/moby/moby",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://goreportcard.com/badge/github.com/moby/moby/v2",
+      "fetch_url": "https://goreportcard.com/badge/github.com/moby/moby/v2",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.scorecard.dev/projects/github.com/moby/moby/badge",
+      "fetch_url": "https://api.scorecard.dev/projects/github.com/moby/moby/badge",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://www.bestpractices.dev/projects/10989/badge",
+      "fetch_url": "https://www.bestpractices.dev/projects/10989/badge",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

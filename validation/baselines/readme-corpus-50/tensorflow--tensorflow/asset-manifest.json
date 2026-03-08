@@ -1,0 +1,289 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/pyversions/tensorflow.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/pyversions/tensorflow.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://badge.fury.io/py/tensorflow.svg",
+      "resolved_path": null,
+      "fetch_url": "https://badge.fury.io/py/tensorflow.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://zenodo.org/badge/DOI/10.5281/zenodo.4724125.svg",
+      "resolved_path": null,
+      "fetch_url": "https://zenodo.org/badge/DOI/10.5281/zenodo.4724125.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://bestpractices.coreinfrastructure.org/projects/1486/badge",
+      "resolved_path": null,
+      "fetch_url": "https://bestpractices.coreinfrastructure.org/projects/1486/badge",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/tensorflow/tensorflow/badge",
+      "resolved_path": null,
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/tensorflow/tensorflow/badge",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow.svg",
+      "resolved_path": null,
+      "fetch_url": "https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow-py.svg",
+      "resolved_path": null,
+      "fetch_url": "https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow-py.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://shields.io/endpoint?url=https://ossrank.com/shield/44",
+      "resolved_path": null,
+      "fetch_url": "https://shields.io/endpoint?url=https://ossrank.com/shield/44",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/api-reference-blue.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/api-reference-blue.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/macos-py2-cc.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/macos-py2-cc.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/android.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/android.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi01-py3.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi01-py3.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi23-py3.svg",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi23-py3.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://www.tensorflow.org/images/tf_logo_horizontal.png",
+      "resolved_path": null,
+      "fetch_url": "https://www.tensorflow.org/images/tf_logo_horizontal.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/pypi/pyversions/tensorflow.svg",
+      "fetch_url": "https://img.shields.io/pypi/pyversions/tensorflow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://badge.fury.io/py/tensorflow.svg",
+      "fetch_url": "https://badge.fury.io/py/tensorflow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://zenodo.org/badge/DOI/10.5281/zenodo.4724125.svg",
+      "fetch_url": "https://zenodo.org/badge/DOI/10.5281/zenodo.4724125.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://bestpractices.coreinfrastructure.org/projects/1486/badge",
+      "fetch_url": "https://bestpractices.coreinfrastructure.org/projects/1486/badge",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/tensorflow/tensorflow/badge",
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/tensorflow/tensorflow/badge",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow.svg",
+      "fetch_url": "https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow-py.svg",
+      "fetch_url": "https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow-py.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://shields.io/endpoint?url=https://ossrank.com/shield/44",
+      "fetch_url": "https://shields.io/endpoint?url=https://ossrank.com/shield/44",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg",
+      "fetch_url": "https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/api-reference-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/api-reference-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.svg"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/macos-py2-cc.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/macos-py2-cc.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/macos-py2-cc.svg"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.svg"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.svg"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/android.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/android.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/android.svg"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi01-py3.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi01-py3.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi01-py3.svg"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi23-py3.svg",
+      "fetch_url": "https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi23-py3.svg",
+      "status": "failed",
+      "message": "HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi23-py3.svg"
+    },
+    {
+      "original_reference": "https://www.tensorflow.org/images/tf_logo_horizontal.png",
+      "fetch_url": "https://www.tensorflow.org/images/tf_logo_horizontal.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg)",
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg)",
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.svg)",
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/macos-py2-cc.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/macos-py2-cc.svg)",
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.svg)",
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.svg)",
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/android.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/android.svg)",
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi01-py3.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi01-py3.svg)",
+    "Remote asset could not be materialized: README.md -> https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi23-py3.svg (HTTP 403 from https://storage.googleapis.com/tensorflow-kokoro-build-badges/rpi23-py3.svg)"
+  ]
+}

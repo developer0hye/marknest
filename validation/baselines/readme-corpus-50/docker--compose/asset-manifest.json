@@ -1,0 +1,95 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/v/release/docker/compose.svg?style=flat-square",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/v/release/docker/compose.svg?style=flat-square",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/go.dev-docs-007d9c?style=flat-square&logo=go&logoColor=white",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/go.dev-docs-007d9c?style=flat-square&logo=go&logoColor=white",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/docker/compose/ci.yml?label=ci&logo=github&style=flat-square",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/docker/compose/ci.yml?label=ci&logo=github&style=flat-square",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://goreportcard.com/badge/github.com/docker/compose/v5?style=flat-square",
+      "resolved_path": null,
+      "fetch_url": "https://goreportcard.com/badge/github.com/docker/compose/v5?style=flat-square",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://codecov.io/gh/docker/compose/branch/main/graph/badge.svg?token=HP3K4Y4ctu",
+      "resolved_path": null,
+      "fetch_url": "https://codecov.io/gh/docker/compose/branch/main/graph/badge.svg?token=HP3K4Y4ctu",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/docker/compose/badge",
+      "resolved_path": null,
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/docker/compose/badge",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "logo.png?raw=true",
+      "resolved_path": "logo.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/github/v/release/docker/compose.svg?style=flat-square",
+      "fetch_url": "https://img.shields.io/github/v/release/docker/compose.svg?style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/go.dev-docs-007d9c?style=flat-square&logo=go&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/go.dev-docs-007d9c?style=flat-square&logo=go&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/actions/workflow/status/docker/compose/ci.yml?label=ci&logo=github&style=flat-square",
+      "fetch_url": "https://img.shields.io/github/actions/workflow/status/docker/compose/ci.yml?label=ci&logo=github&style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://goreportcard.com/badge/github.com/docker/compose/v5?style=flat-square",
+      "fetch_url": "https://goreportcard.com/badge/github.com/docker/compose/v5?style=flat-square",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/gh/docker/compose/branch/main/graph/badge.svg?token=HP3K4Y4ctu",
+      "fetch_url": "https://codecov.io/gh/docker/compose/branch/main/graph/badge.svg?token=HP3K4Y4ctu",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.securityscorecards.dev/projects/github.com/docker/compose/badge",
+      "fetch_url": "https://api.securityscorecards.dev/projects/github.com/docker/compose/badge",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

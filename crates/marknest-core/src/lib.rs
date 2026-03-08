@@ -1,13 +1,19 @@
+use std::collections::HashSet;
 use std::fs;
 use std::io::{Cursor, Read};
 use std::path::{Component, Path, PathBuf};
 
-use pulldown_cmark::{Event, Options as MarkdownOptions, Parser, Tag, TagEnd, html};
+use ammonia::{Builder as HtmlSanitizerBuilder, UrlRelative};
+use pulldown_cmark::{
+    CowStr, Event, HeadingLevel, Options as MarkdownOptions, Parser, Tag, TagEnd, html,
+};
 use serde::{Deserialize, Serialize};
 
 const MAX_ZIP_FILE_COUNT: usize = 4_096;
 const MAX_ZIP_UNCOMPRESSED_BYTES: u64 = 256 * 1024 * 1024;
 pub const RUNTIME_ASSET_MODE: &str = "bundled_local";
+pub const DEFAULT_MERMAID_TIMEOUT_MS: u32 = 5_000;
+pub const DEFAULT_MATH_TIMEOUT_MS: u32 = 3_000;
 pub const MERMAID_VERSION: &str = "11.11.0";
 pub const MATHJAX_VERSION: &str = "3.2.2";
 pub const MERMAID_SCRIPT_URL: &str = "./runtime-assets/mermaid/mermaid.min.js";
@@ -120,8 +126,12 @@ pub struct RenderOptions {
     pub theme: ThemePreset,
     pub metadata: PdfMetadata,
     pub custom_css: Option<String>,
+    pub enable_toc: bool,
+    pub sanitize_html: bool,
     pub mermaid_mode: MermaidMode,
     pub math_mode: MathMode,
+    pub mermaid_timeout_ms: u32,
+    pub math_timeout_ms: u32,
 }
 
 impl Default for RenderOptions {
@@ -130,8 +140,12 @@ impl Default for RenderOptions {
             theme: ThemePreset::Default,
             metadata: PdfMetadata::default(),
             custom_css: None,
+            enable_toc: false,
+            sanitize_html: true,
             mermaid_mode: MermaidMode::Off,
             math_mode: MathMode::Off,
+            mermaid_timeout_ms: DEFAULT_MERMAID_TIMEOUT_MS,
+            math_timeout_ms: DEFAULT_MATH_TIMEOUT_MS,
         }
     }
 }
@@ -222,6 +236,29 @@ pub fn render_zip_entry_with_options(
 ) -> Result<RenderedHtmlDocument, RenderHtmlError> {
     let zip_file_system = ZipMemoryFileSystem::new(bytes).map_err(RenderHtmlError::Analyze)?;
     render_entry_with_options(&zip_file_system, entry_path, options)
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct RenderedHeading {
+    level: HeadingLevel,
+    id: String,
+    title: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct RenderedMarkdownBody {
+    html: String,
+    headings: Vec<RenderedHeading>,
+}
+
+#[derive(Debug)]
+struct PendingHeading<'a> {
+    level: HeadingLevel,
+    id: Option<CowStr<'a>>,
+    classes: Vec<CowStr<'a>>,
+    attrs: Vec<(CowStr<'a>, Option<CowStr<'a>>)>,
+    events: Vec<Event<'a>>,
+    title: String,
 }
 
 pub fn analyze_workspace(root: &Path) -> Result<ProjectIndex, AnalyzeError> {
@@ -647,8 +684,7 @@ fn resolve_asset_reference(
     }
 
     let local_reference: &str = strip_reference_query_and_fragment(trimmed_reference);
-    let combined_reference: String = join_with_entry_directory(entry_path, local_reference);
-    let normalized_path: String = match normalize_relative_string(&combined_reference) {
+    let normalized_path: String = match resolve_local_asset_path(entry_path, local_reference) {
         Ok(path) => path,
         Err(()) => {
             diagnostic
@@ -688,6 +724,16 @@ fn resolve_asset_reference(
         kind,
         status: AssetStatus::Missing,
     }
+}
+
+fn resolve_local_asset_path(entry_path: &str, reference: &str) -> Result<String, ()> {
+    if reference.starts_with('/') || reference.starts_with('\\') {
+        let root_relative_reference: &str = reference.trim_start_matches(['/', '\\']);
+        return normalize_relative_string(root_relative_reference);
+    }
+
+    let combined_reference: String = join_with_entry_directory(entry_path, reference);
+    normalize_relative_string(&combined_reference)
 }
 
 fn normalize_path(path: &Path) -> Result<String, ()> {
@@ -957,41 +1003,141 @@ fn has_windows_drive_prefix(path: &str) -> bool {
     bytes.len() >= 2 && bytes[0].is_ascii_alphabetic() && bytes[1] == b':'
 }
 
-fn render_markdown_to_html(markdown: &str, math_mode: MathMode) -> String {
-    let mut options: MarkdownOptions = MarkdownOptions::empty();
-    options.insert(MarkdownOptions::ENABLE_STRIKETHROUGH);
-    options.insert(MarkdownOptions::ENABLE_TABLES);
-    options.insert(MarkdownOptions::ENABLE_TASKLISTS);
-    options.insert(MarkdownOptions::ENABLE_FOOTNOTES);
-    options.insert(MarkdownOptions::ENABLE_HEADING_ATTRIBUTES);
-    if !matches!(math_mode, MathMode::Off) {
-        options.insert(MarkdownOptions::ENABLE_MATH);
+fn render_markdown_to_html(markdown: &str, render_options: &RenderOptions) -> RenderedMarkdownBody {
+    let mut markdown_options: MarkdownOptions = MarkdownOptions::empty();
+    markdown_options.insert(MarkdownOptions::ENABLE_STRIKETHROUGH);
+    markdown_options.insert(MarkdownOptions::ENABLE_TABLES);
+    markdown_options.insert(MarkdownOptions::ENABLE_TASKLISTS);
+    markdown_options.insert(MarkdownOptions::ENABLE_FOOTNOTES);
+    markdown_options.insert(MarkdownOptions::ENABLE_HEADING_ATTRIBUTES);
+    if !matches!(render_options.math_mode, MathMode::Off) {
+        markdown_options.insert(MarkdownOptions::ENABLE_MATH);
     }
 
-    let parser: Parser<'_> = Parser::new_ext(markdown, options);
+    let parser: Parser<'_> = Parser::new_ext(markdown, markdown_options);
     let mut events: Vec<Event<'_>> = Vec::new();
+    let mut headings: Vec<RenderedHeading> = Vec::new();
+    let mut pending_heading: Option<PendingHeading<'_>> = None;
+    let mut used_heading_ids: HashSet<String> = HashSet::new();
     let mut in_code_block: bool = false;
+
     for event in parser {
-        match &event {
-            Event::Start(Tag::CodeBlock(_)) => {
+        match event {
+            Event::Start(Tag::Heading {
+                level,
+                id,
+                classes,
+                attrs,
+            }) => {
+                pending_heading = Some(PendingHeading {
+                    level,
+                    id,
+                    classes,
+                    attrs,
+                    events: Vec::new(),
+                    title: String::new(),
+                });
+            }
+            Event::End(TagEnd::Heading(_)) => {
+                let Some(mut heading) = pending_heading.take() else {
+                    continue;
+                };
+                let heading_title: String = normalize_heading_title(&heading.title, headings.len());
+                let heading_id: String = unique_heading_id(
+                    heading
+                        .id
+                        .as_deref()
+                        .map(normalize_heading_id)
+                        .unwrap_or_else(|| slugify_heading_text(&heading_title)),
+                    &mut used_heading_ids,
+                );
+                headings.push(RenderedHeading {
+                    level: heading.level,
+                    id: heading_id.clone(),
+                    title: heading_title,
+                });
+                events.push(Event::Start(Tag::Heading {
+                    level: heading.level,
+                    id: Some(heading_id.into()),
+                    classes: std::mem::take(&mut heading.classes),
+                    attrs: std::mem::take(&mut heading.attrs),
+                }));
+                events.extend(std::mem::take(&mut heading.events));
+                events.push(Event::End(TagEnd::Heading(heading.level)));
+            }
+            Event::Start(Tag::CodeBlock(kind)) => {
                 in_code_block = true;
-                events.push(event);
+                push_heading_or_document_event(
+                    &mut pending_heading,
+                    &mut events,
+                    Event::Start(Tag::CodeBlock(kind)),
+                );
             }
             Event::End(TagEnd::CodeBlock) => {
                 in_code_block = false;
-                events.push(event);
+                push_heading_or_document_event(
+                    &mut pending_heading,
+                    &mut events,
+                    Event::End(TagEnd::CodeBlock),
+                );
             }
             Event::Text(text) if !in_code_block => {
                 let replaced_text: String = replace_github_emoji_shortcodes(text.as_ref());
-                events.push(Event::Text(replaced_text.into()));
+                if let Some(heading) = pending_heading.as_mut() {
+                    heading.title.push_str(&replaced_text);
+                    heading.events.push(Event::Text(replaced_text.into()));
+                } else {
+                    events.push(Event::Text(replaced_text.into()));
+                }
             }
-            _ => events.push(event),
+            Event::Text(text) => {
+                if let Some(heading) = pending_heading.as_mut() {
+                    heading.title.push_str(text.as_ref());
+                    heading.events.push(Event::Text(text));
+                } else {
+                    events.push(Event::Text(text));
+                }
+            }
+            Event::Code(text) => {
+                if let Some(heading) = pending_heading.as_mut() {
+                    heading.title.push_str(text.as_ref());
+                    heading.events.push(Event::Code(text));
+                } else {
+                    events.push(Event::Code(text));
+                }
+            }
+            Event::SoftBreak => {
+                if let Some(heading) = pending_heading.as_mut() {
+                    heading.title.push(' ');
+                    heading.events.push(Event::SoftBreak);
+                } else {
+                    events.push(Event::SoftBreak);
+                }
+            }
+            Event::HardBreak => {
+                if let Some(heading) = pending_heading.as_mut() {
+                    heading.title.push(' ');
+                    heading.events.push(Event::HardBreak);
+                } else {
+                    events.push(Event::HardBreak);
+                }
+            }
+            other_event => {
+                push_heading_or_document_event(&mut pending_heading, &mut events, other_event);
+            }
         }
     }
 
     let mut html_output: String = String::new();
     html::push_html(&mut html_output, events.into_iter());
-    html_output
+    if render_options.enable_toc && headings.len() > 1 {
+        html_output = format!("{}{}", build_toc_html(&headings), html_output);
+    }
+
+    RenderedMarkdownBody {
+        html: html_output,
+        headings,
+    }
 }
 
 fn replace_github_emoji_shortcodes(mut text: &str) -> String {
@@ -1026,6 +1172,105 @@ fn replace_github_emoji_shortcodes(mut text: &str) -> String {
     replaced
 }
 
+fn push_heading_or_document_event<'a>(
+    pending_heading: &mut Option<PendingHeading<'a>>,
+    events: &mut Vec<Event<'a>>,
+    event: Event<'a>,
+) {
+    if let Some(heading) = pending_heading.as_mut() {
+        heading.events.push(event);
+    } else {
+        events.push(event);
+    }
+}
+
+fn normalize_heading_title(title: &str, heading_index: usize) -> String {
+    let trimmed = title.trim();
+    if trimmed.is_empty() {
+        format!("Section {}", heading_index + 1)
+    } else {
+        trimmed.to_string()
+    }
+}
+
+fn normalize_heading_id(id: &str) -> String {
+    let trimmed = id.trim().trim_start_matches('#');
+    if trimmed.is_empty() {
+        "section".to_string()
+    } else {
+        trimmed.to_string()
+    }
+}
+
+fn slugify_heading_text(text: &str) -> String {
+    let mut slug = String::new();
+    let mut previous_was_separator = false;
+
+    for character in text.chars().flat_map(char::to_lowercase) {
+        if character.is_alphanumeric() {
+            slug.push(character);
+            previous_was_separator = false;
+        } else if (character.is_whitespace() || matches!(character, '-' | '_'))
+            && !previous_was_separator
+        {
+            slug.push('-');
+            previous_was_separator = true;
+        }
+    }
+
+    let trimmed = slug.trim_matches('-');
+    if trimmed.is_empty() {
+        "section".to_string()
+    } else {
+        trimmed.to_string()
+    }
+}
+
+fn unique_heading_id(base_id: String, used_heading_ids: &mut HashSet<String>) -> String {
+    if used_heading_ids.insert(base_id.clone()) {
+        return base_id;
+    }
+
+    let mut index: usize = 2;
+    loop {
+        let candidate = format!("{base_id}-{index}");
+        if used_heading_ids.insert(candidate.clone()) {
+            return candidate;
+        }
+        index += 1;
+    }
+}
+
+fn build_toc_html(headings: &[RenderedHeading]) -> String {
+    let mut toc_html = String::from(
+        "<nav class=\"marknest-toc\" aria-label=\"Table of contents\"><p class=\"marknest-toc-title\">Contents</p><ol class=\"marknest-toc-list\">",
+    );
+
+    for heading in headings {
+        toc_html.push_str("<li class=\"marknest-toc-level-");
+        toc_html.push_str(&heading_level_number(heading.level).to_string());
+        toc_html.push_str("\"><a href=\"#");
+        toc_html.push_str(&escape_html_attribute(&heading.id));
+        toc_html.push_str("\">");
+        toc_html.push_str(&escape_html_text(&heading.title));
+        toc_html.push_str("</a></li>");
+    }
+
+    toc_html.push_str("</ol></nav>");
+    toc_html
+}
+
+fn heading_level_number(level: HeadingLevel) -> u8 {
+    match level {
+        HeadingLevel::H1 => 1,
+        HeadingLevel::H2 => 2,
+        HeadingLevel::H3 => 3,
+        HeadingLevel::H4 => 4,
+        HeadingLevel::H5 => 5,
+        HeadingLevel::H6 => 6,
+    }
+}
+
 fn render_entry_with_options(
     file_system: &dyn IndexedFileSystem,
     entry_path: &str,
@@ -1058,7 +1303,13 @@ fn render_entry_with_options(
             entry_path: normalized_entry_path.clone(),
         })?;
 
-    let body_html: String = render_markdown_to_html(&markdown, options.math_mode);
+    let rendered_markdown: RenderedMarkdownBody = render_markdown_to_html(&markdown, options);
+    let body_html: String = if options.sanitize_html {
+        sanitize_html_fragment(&rendered_markdown.html)
+    } else {
+        rendered_markdown.html
+    };
+    let body_html: String = expand_collapsed_details(&body_html);
     let body_html: String = inline_entry_assets(
         file_system,
         &body_html,
@@ -1127,6 +1378,53 @@ pub fn rewrite_html_img_sources(html_document: &str, replacements: &[(String, St
 
     rewritten_html.push_str(&html_document[cursor..]);
     rewritten_html
+}
+
+fn expand_collapsed_details(html_document: &str) -> String {
+    let lower_html_document: String = html_document.to_ascii_lowercase();
+    let mut rewritten_html: String = String::new();
+    let mut cursor: usize = 0;
+
+    while let Some(relative_tag_index) = lower_html_document[cursor..].find("<details") {
+        let tag_start: usize = cursor + relative_tag_index;
+        let Some(relative_tag_end) = lower_html_document[tag_start..].find('>') else {
+            break;
+        };
+        let tag_end: usize = tag_start + relative_tag_end + 1;
+
+        rewritten_html.push_str(&html_document[cursor..tag_start]);
+        rewritten_html.push_str(&expand_details_tag(&html_document[tag_start..tag_end]));
+        cursor = tag_end;
+    }
+
+    rewritten_html.push_str(&html_document[cursor..]);
+    rewritten_html
+}
+
+fn expand_details_tag(tag: &str) -> String {
+    if tag_has_boolean_attribute(tag, "details", "open") {
+        return tag.to_string();
+    }
+
+    let Some(tag_end) = tag.rfind('>') else {
+        return tag.to_string();
+    };
+    let insertion_prefix: &str = if tag[..tag_end]
+        .chars()
+        .last()
+        .is_some_and(|character| character.is_ascii_whitespace())
+    {
+        ""
+    } else {
+        " "
+    };
+
+    let mut expanded_tag: String = String::new();
+    expanded_tag.push_str(&tag[..tag_end]);
+    expanded_tag.push_str(insertion_prefix);
+    expanded_tag.push_str("open");
+    expanded_tag.push_str(&tag[tag_end..]);
+    expanded_tag
 }
 
 fn rewrite_img_tag(tag: &str, replacements: &[(String, String)]) -> String {
@@ -1210,6 +1508,71 @@ fn find_src_attribute_span(tag: &str) -> Option<SrcAttributeSpan> {
     None
 }
 
+fn tag_has_boolean_attribute(tag: &str, expected_tag_name: &str, attribute_name: &str) -> bool {
+    let lower_tag: String = tag.to_ascii_lowercase();
+    if !lower_tag.starts_with(&format!("<{expected_tag_name}")) {
+        return false;
+    }
+
+    let mut cursor: usize = expected_tag_name.len() + 1;
+    while cursor < tag.len() {
+        cursor = skip_ascii_whitespace(tag, cursor);
+        if cursor >= tag.len() {
+            break;
+        }
+
+        let Some(character) = tag[cursor..].chars().next() else {
+            break;
+        };
+        if matches!(character, '>' | '/') {
+            break;
+        }
+
+        let attribute_start: usize = cursor;
+        while let Some(attribute_character) = tag[cursor..].chars().next() {
+            if attribute_character.is_ascii_whitespace()
+                || matches!(attribute_character, '=' | '>' | '/')
+            {
+                break;
+            }
+            cursor += attribute_character.len_utf8();
+        }
+
+        if tag[attribute_start..cursor].eq_ignore_ascii_case(attribute_name) {
+            return true;
+        }
+
+        cursor = skip_ascii_whitespace(tag, cursor);
+        if !tag[cursor..].starts_with('=') {
+            continue;
+        }
+        cursor += 1;
+        cursor = skip_ascii_whitespace(tag, cursor);
+
+        let Some(value_start_character) = tag[cursor..].chars().next() else {
+            break;
+        };
+        if matches!(value_start_character, '"' | '\'') {
+            let quote_character: char = value_start_character;
+            cursor += quote_character.len_utf8();
+            let Some(value_end_offset) = tag[cursor..].find(quote_character) else {
+                break;
+            };
+            cursor += value_end_offset + quote_character.len_utf8();
+            continue;
+        }
+
+        while let Some(value_character) = tag[cursor..].chars().next() {
+            if value_character.is_ascii_whitespace() || matches!(value_character, '>' | '/') {
+                break;
+            }
+            cursor += value_character.len_utf8();
+        }
+    }
+
+    false
+}
+
 fn build_html_document(title: &str, body_html: &str, options: &RenderOptions) -> String {
     let metadata_tags: String = build_metadata_tags(&options.metadata);
     let runtime_script: String = build_runtime_script(options);
@@ -1233,8 +1596,19 @@ fn build_html_document(title: &str, body_html: &str, options: &RenderOptions) ->
     )
 }
 
+fn sanitize_html_fragment(html_fragment: &str) -> String {
+    let mut sanitizer = HtmlSanitizerBuilder::default();
+    sanitizer.url_relative(UrlRelative::PassThrough);
+    sanitizer.add_generic_attributes(["aria-label", "class", "id", "title"]);
+    sanitizer.add_tags(["details", "figure", "figcaption", "input", "nav", "summary"]);
+    sanitizer.add_tag_attributes("img", ["width", "height", "align", "loading"]);
+    sanitizer.add_tag_attributes("input", ["type", "checked", "disabled"]);
+    sanitizer.add_tag_attributes("details", ["open"]);
+    sanitizer.clean(html_fragment).to_string()
+}
+
 fn base_stylesheet() -> &'static str {
-    "body { background: #ffffff; color: #111827; font-family: \"Segoe UI\", Arial, sans-serif; font-size: 12pt; line-height: 1.6; margin: 0; } h1, h2, h3, h4, h5, h6 { line-height: 1.25; margin: 1.2em 0 0.5em; } p, ul, ol, pre, table, blockquote, figure { margin: 0 0 1em; } img { max-width: 100%; vertical-align: middle; } p > img:only-child, p > a:only-child > img, body > img, body > a > img { display: block; margin: 0 0 1em; } pre { background: #f3f4f6; border-radius: 8px; padding: 12px; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; } pre code { white-space: inherit; overflow-wrap: inherit; word-break: inherit; } code { font-family: Consolas, \"Cascadia Code\", monospace; } table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #d1d5db; padding: 6px 10px; text-align: left; } blockquote { border-left: 4px solid #d1d5db; color: #4b5563; padding-left: 12px; }"
+    "body { background: #ffffff; color: #111827; font-family: \"Segoe UI\", Arial, sans-serif; font-size: 12pt; line-height: 1.6; margin: 0; } h1, h2, h3, h4, h5, h6 { line-height: 1.25; margin: 1.2em 0 0.5em; } p, ul, ol, pre, table, blockquote, figure, details { margin: 0 0 1em; } details > summary { cursor: default; } details:not([open]) > :not(summary) { display: block; } img { max-width: 100%; vertical-align: middle; } p > img:only-child, p > a:only-child > img, body > img, body > a > img { display: block; margin: 0 0 1em; } pre { background: #f3f4f6; border-radius: 8px; padding: 12px; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; } pre code { white-space: inherit; overflow-wrap: inherit; word-break: inherit; } code { font-family: Consolas, \"Cascadia Code\", monospace; } table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #d1d5db; padding: 6px 10px; text-align: left; } blockquote { border-left: 4px solid #d1d5db; color: #4b5563; padding-left: 12px; } .marknest-toc { border: 1px solid #d1d5db; border-radius: 10px; background: #f8fafc; padding: 16px 18px; margin: 0 0 1.5em; } .marknest-toc-title { font-weight: 700; letter-spacing: 0.01em; margin: 0 0 0.75em; } .marknest-toc-list { margin: 0; padding-left: 1.25em; } .marknest-toc-list li { margin: 0.2em 0; } .marknest-toc-level-2 { margin-left: 1rem; } .marknest-toc-level-3 { margin-left: 2rem; } .marknest-toc-level-4 { margin-left: 3rem; } .marknest-toc-level-5 { margin-left: 4rem; } .marknest-toc-level-6 { margin-left: 5rem; } @media print { h1 { break-before: page; page-break-before: always; } h1:first-of-type { break-before: auto; page-break-before: auto; } pre, table, blockquote, figure, img, tr, .marknest-toc { break-inside: avoid; page-break-inside: avoid; } thead { display: table-header-group; } }"
 }
 
 fn theme_stylesheet(theme: ThemePreset) -> &'static str {
@@ -1292,7 +1666,7 @@ fn build_runtime_script(options: &RenderOptions) -> String {
 
     format!(
         r#"<script>(function () {{
-const config = {{"mermaidMode":"{}","mathMode":"{}","mermaidTheme":"{}","mermaidScript":"{}","mathScript":"{}"}};
+const config = {{"mermaidMode":"{}","mathMode":"{}","mermaidTheme":"{}","mermaidTimeoutMs":{},"mathTimeoutMs":{},"mermaidScript":"{}","mathScript":"{}"}};
 const status = {{ready:false,warnings:[],errors:[]}};
 window.__MARKNEST_RENDER_CONFIG__ = config;
 window.__MARKNEST_RENDER_STATUS__ = status;
@@ -1304,6 +1678,22 @@ const addMessage = (kind, message) => {{
   }}
 }};
 const handleFailure = (mode, message) => addMessage(mode === "on" ? "error" : "warning", message);
+const withTimeout = async (promiseFactory, timeoutMs, message) => {{
+  const normalizedTimeoutMs = Math.max(1, Number(timeoutMs) || 0);
+  let timerId = null;
+  try {{
+    return await Promise.race([
+      promiseFactory(),
+      new Promise((_, reject) => {{
+        timerId = window.setTimeout(() => reject(new Error(message)), normalizedTimeoutMs);
+      }}),
+    ]);
+  }} finally {{
+    if (timerId !== null) {{
+      window.clearTimeout(timerId);
+    }}
+  }}
+}};
 const loadScript = (src) => new Promise((resolve, reject) => {{
   const existing = document.querySelector(`script[data-marknest-src="${{src}}"]`);
   if (existing) {{
@@ -1348,7 +1738,11 @@ const renderMermaid = async () => {{
         continue;
       }}
       try {{
-        const rendered = await window.mermaid.render(`marknest-mermaid-${{index}}`, source);
+        const rendered = await withTimeout(
+          () => window.mermaid.render(`marknest-mermaid-${{index}}`, source),
+          config.mermaidTimeoutMs,
+          `Mermaid rendering timed out: diagram ${{index + 1}}.`,
+        );
         const wrapper = document.createElement("figure");
         wrapper.className = "marknest-mermaid";
         wrapper.innerHTML = rendered.svg;
@@ -1357,7 +1751,12 @@ const renderMermaid = async () => {{
           pre.replaceWith(wrapper);
         }}
       }} catch (error) {{
-        handleFailure(config.mermaidMode, `Mermaid rendering failed: diagram ${{index + 1}}.`);
+        handleFailure(
+          config.mermaidMode,
+          error instanceof Error && error.message
+            ? error.message
+            : `Mermaid rendering failed: diagram ${{index + 1}}.`,
+        );
       }}
     }}
   }} catch (error) {{
@@ -1386,11 +1785,20 @@ const renderMath = async () => {{
       }}
       try {{
         const display = node.classList.contains("math-display");
-        const rendered = await window.MathJax.tex2svgPromise(tex, {{ display }});
+        const rendered = await withTimeout(
+          () => window.MathJax.tex2svgPromise(tex, {{ display }}),
+          config.mathTimeoutMs,
+          `Math rendering timed out: expression ${{index + 1}}.`,
+        );
         node.replaceChildren(rendered);
         node.classList.add("math-rendered");
       }} catch (error) {{
-        handleFailure(config.mathMode, `Math rendering failed: expression ${{index + 1}}.`);
+        handleFailure(
+          config.mathMode,
+          error instanceof Error && error.message
+            ? error.message
+            : `Math rendering failed: expression ${{index + 1}}.`,
+        );
       }}
     }}
   }} catch (error) {{
@@ -1409,6 +1817,8 @@ window.addEventListener("load", async () => {{
         mermaid_mode_name(options.mermaid_mode),
         math_mode_name(options.math_mode),
         mermaid_theme_name(options.theme),
+        options.mermaid_timeout_ms,
+        options.math_timeout_ms,
         MERMAID_SCRIPT_URL,
         MATHJAX_SCRIPT_URL
     )

@@ -1,0 +1,154 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/stars/open-webui/open-webui?style=social",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/stars/open-webui/open-webui?style=social",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/forks/open-webui/open-webui?style=social",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/forks/open-webui/open-webui?style=social",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/watchers/open-webui/open-webui?style=social",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/watchers/open-webui/open-webui?style=social",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/repo-size/open-webui/open-webui",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/repo-size/open-webui/open-webui",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/languages/count/open-webui/open-webui",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/languages/count/open-webui/open-webui",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/languages/top/open-webui/open-webui",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/languages/top/open-webui/open-webui",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/last-commit/open-webui/open-webui?color=red",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/last-commit/open-webui/open-webui?color=red",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "./banner.png",
+      "resolved_path": "banner.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "./demo.png",
+      "resolved_path": "demo.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://api.star-history.com/svg?repos=open-webui/open-webui&type=Date",
+      "resolved_path": null,
+      "fetch_url": "https://api.star-history.com/svg?repos=open-webui/open-webui&type=Date",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/github/stars/open-webui/open-webui?style=social",
+      "fetch_url": "https://img.shields.io/github/stars/open-webui/open-webui?style=social",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/forks/open-webui/open-webui?style=social",
+      "fetch_url": "https://img.shields.io/github/forks/open-webui/open-webui?style=social",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/watchers/open-webui/open-webui?style=social",
+      "fetch_url": "https://img.shields.io/github/watchers/open-webui/open-webui?style=social",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/repo-size/open-webui/open-webui",
+      "fetch_url": "https://img.shields.io/github/repo-size/open-webui/open-webui",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/languages/count/open-webui/open-webui",
+      "fetch_url": "https://img.shields.io/github/languages/count/open-webui/open-webui",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/languages/top/open-webui/open-webui",
+      "fetch_url": "https://img.shields.io/github/languages/top/open-webui/open-webui",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/last-commit/open-webui/open-webui?color=red",
+      "fetch_url": "https://img.shields.io/github/last-commit/open-webui/open-webui?color=red",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86",
+      "fetch_url": "https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.star-history.com/svg?repos=open-webui/open-webui&type=Date",
+      "fetch_url": "https://api.star-history.com/svg?repos=open-webui/open-webui&type=Date",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

@@ -1,0 +1,49 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://electronjs.org/images/electron-logo.svg",
+      "resolved_path": null,
+      "fetch_url": "https://electronjs.org/images/electron-logo.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/electron/electron/actions/workflows/build.yml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/electron/electron/actions/workflows/build.yml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/discord/745037351163527189?color=%237289DA&label=chat&logo=discord&logoColor=white",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/discord/745037351163527189?color=%237289DA&label=chat&logo=discord&logoColor=white",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://electronjs.org/images/electron-logo.svg",
+      "fetch_url": "https://electronjs.org/images/electron-logo.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/electron/electron/actions/workflows/build.yml/badge.svg",
+      "fetch_url": "https://github.com/electron/electron/actions/workflows/build.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/discord/745037351163527189?color=%237289DA&label=chat&logo=discord&logoColor=white",
+      "fetch_url": "https://img.shields.io/discord/745037351163527189?color=%237289DA&label=chat&logo=discord&logoColor=white",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

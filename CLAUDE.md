@@ -21,6 +21,15 @@
 - If full test suite exceeds 30 seconds, investigate: split slow integration tests from fast unit tests, run unit tests first for quick feedback.
 - **Skip tests when no runtime impact.** In CI/CD, use path filters to trigger tests only when source code, test files, or runtime config files (YAML, JSON, etc. read by code) are modified. Non-runtime changes (docs, README, `.md`, CI pipeline config) should not trigger test runs. Locally, verify whether a change affects runtime behavior before running tests.
 
+## PDF Fidelity
+
+- For Markdown/HTML/PDF rendering work, do not rely on manual inspection alone. Add or run automated fidelity checks.
+- Maintain a real-world validation corpus of about 50 popular public GitHub repos with diverse README patterns.
+- Prefer automated visual and structural checks that catch clipping, truncation, missing images, missing text, broken tables, and page-loss regressions.
+- Fidelity target is content preservation, not pixel-perfect browser parity. If an interactive browser pattern does not map to PDF, transform it into a print-safe layout that still shows all content, such as wrapping, stacking, expanding, or paginating.
+- Do not assume a behavior is impossible and choose an easier degraded output without first testing whether a print-safe implementation is feasible.
+- When a corpus document reveals a fidelity bug, add a regression fixture or test for that pattern before fixing it.
+
 ## Logging
 
 - Add structured logs at key decision points, state transitions, and external calls — not every line. Logs alone should reveal the execution flow and root cause.

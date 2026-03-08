@@ -1,0 +1,296 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/v/pnpm.svg?label=latest",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/v/pnpm.svg?label=latest",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://opencollective.com/pnpm/backers/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://opencollective.com/pnpm/backers/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://opencollective.com/pnpm/sponsors/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://opencollective.com/pnpm/sponsors/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/twitter/follow/pnpmjs.svg?style=social&label=Follow",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/twitter/follow/pnpmjs.svg?style=social&label=Follow",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/benchmarks/alotta-files.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/benchmarks/alotta-files.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://i.imgur.com/qlW1eEG.png",
+      "resolved_path": null,
+      "fetch_url": "https://i.imgur.com/qlW1eEG.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/bit.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/bit.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/sanity.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/sanity.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/discord.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/discord.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/vitejs.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/vitejs.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/serpapi_dark.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/serpapi_dark.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/coderabbit.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/coderabbit.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/stackblitz.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/stackblitz.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/workleap.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/workleap.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/nx.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/nx.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/replit.png",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/replit.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/devowlio.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/devowlio.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/uscreen.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/uscreen.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/leniolabs.jpg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/leniolabs.jpg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/depot.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/depot.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pnpm.io/img/users/cerbos.svg",
+      "resolved_path": null,
+      "fetch_url": "https://pnpm.io/img/users/cerbos.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/npm/v/pnpm.svg?label=latest",
+      "fetch_url": "https://img.shields.io/npm/v/pnpm.svg?label=latest",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/pnpm/backers/badge.svg",
+      "fetch_url": "https://opencollective.com/pnpm/backers/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/pnpm/sponsors/badge.svg",
+      "fetch_url": "https://opencollective.com/pnpm/sponsors/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/twitter/follow/pnpmjs.svg?style=social&label=Follow",
+      "fetch_url": "https://img.shields.io/twitter/follow/pnpmjs.svg?style=social&label=Follow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg",
+      "fetch_url": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/benchmarks/alotta-files.svg",
+      "fetch_url": "https://pnpm.io/img/benchmarks/alotta-files.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://i.imgur.com/qlW1eEG.png",
+      "fetch_url": "https://i.imgur.com/qlW1eEG.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/bit.svg",
+      "fetch_url": "https://pnpm.io/img/users/bit.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/sanity.svg",
+      "fetch_url": "https://pnpm.io/img/users/sanity.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/discord.svg",
+      "fetch_url": "https://pnpm.io/img/users/discord.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/vitejs.svg",
+      "fetch_url": "https://pnpm.io/img/users/vitejs.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/serpapi_dark.svg",
+      "fetch_url": "https://pnpm.io/img/users/serpapi_dark.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/coderabbit.svg",
+      "fetch_url": "https://pnpm.io/img/users/coderabbit.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/stackblitz.svg",
+      "fetch_url": "https://pnpm.io/img/users/stackblitz.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/workleap.svg",
+      "fetch_url": "https://pnpm.io/img/users/workleap.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/nx.svg",
+      "fetch_url": "https://pnpm.io/img/users/nx.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/replit.png",
+      "fetch_url": "https://pnpm.io/img/users/replit.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/devowlio.svg",
+      "fetch_url": "https://pnpm.io/img/users/devowlio.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/uscreen.svg",
+      "fetch_url": "https://pnpm.io/img/users/uscreen.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/leniolabs.jpg",
+      "fetch_url": "https://pnpm.io/img/users/leniolabs.jpg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/depot.svg",
+      "fetch_url": "https://pnpm.io/img/users/depot.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/cerbos.svg",
+      "fetch_url": "https://pnpm.io/img/users/cerbos.svg",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

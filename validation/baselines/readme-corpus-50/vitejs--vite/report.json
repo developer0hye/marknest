@@ -1,0 +1,86 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/vitejs--vite-6803be6f0b0b/source/vite-6803be6f0b0b02ffe992cb1097f6706f69fea90c/README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/vitejs--vite/output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/npm/v/vite.svg?label=%20",
+      "fetch_url": "https://img.shields.io/npm/v/vite.svg?label=%20",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/@vitejs/plugin-legacy.svg?label=%20",
+      "fetch_url": "https://img.shields.io/npm/v/@vitejs/plugin-legacy.svg?label=%20",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/create-vite.svg?label=%20",
+      "fetch_url": "https://img.shields.io/npm/v/create-vite.svg?label=%20",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://vite.dev/vite-dark.svg",
+      "fetch_url": "https://vite.dev/vite-dark.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/vite.svg",
+      "fetch_url": "https://img.shields.io/npm/v/vite.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/node/v/vite.svg",
+      "fetch_url": "https://img.shields.io/node/v/vite.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/vitejs/vite/actions/workflows/ci.yml/badge.svg?branch=main",
+      "fetch_url": "https://github.com/vitejs/vite/actions/workflows/ci.yml/badge.svg?branch=main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/chat-discord-blue?style=flat&logo=discord",
+      "fetch_url": "https://img.shields.io/badge/chat-discord-blue?style=flat&logo=discord",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://sponsors.vuejs.org/vite.svg?v2",
+      "fetch_url": "https://sponsors.vuejs.org/vite.svg?v2",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

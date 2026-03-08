@@ -1,0 +1,88 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://badge.fury.io/py/plotly.svg",
+      "resolved_path": null,
+      "fetch_url": "https://badge.fury.io/py/plotly.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/help_forum-discourse-blue.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/help_forum-discourse-blue.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://pepy.tech/badge/plotly/month",
+      "resolved_path": null,
+      "fetch_url": "https://pepy.tech/badge/plotly/month",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/License-MIT-yellow.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/License-MIT-yellow.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://dash.plotly.com/assets/images/maintained-by-plotly.png",
+      "resolved_path": null,
+      "fetch_url": "https://dash.plotly.com/assets/images/maintained-by-plotly.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://badge.fury.io/py/plotly.svg",
+      "fetch_url": "https://badge.fury.io/py/plotly.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/help_forum-discourse-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/help_forum-discourse-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pepy.tech/badge/plotly/month",
+      "fetch_url": "https://pepy.tech/badge/plotly/month",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/License-MIT-yellow.svg",
+      "fetch_url": "https://img.shields.io/badge/License-MIT-yellow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://dash.plotly.com/assets/images/maintained-by-plotly.png",
+      "fetch_url": "https://dash.plotly.com/assets/images/maintained-by-plotly.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png",
+      "fetch_url": "https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

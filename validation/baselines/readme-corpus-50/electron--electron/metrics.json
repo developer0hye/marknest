@@ -1,0 +1,29 @@
+{
+  "id": "electron--electron",
+  "repo": "electron/electron",
+  "url": "https://github.com/electron/electron",
+  "pinned_sha": "9f80b6461775c711135bc2be6cc034db315fca87",
+  "elapsed_sec": 9,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 172006,
+  "page_count": 3,
+  "token_coverage": 0.9949748743718593,
+  "missing_tokens": [
+    "memo"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": false,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

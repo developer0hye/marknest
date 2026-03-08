@@ -1,0 +1,86 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/gradio-app--gradio-7fb33fc3b80b/source/gradio-7fb33fc3b80b421817c1d1ddea19c8858a9f2924/README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/gradio-app--gradio/output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://github.com/gradio-app/gradio/actions/workflows/test-python.yml/badge.svg",
+      "fetch_url": "https://github.com/gradio-app/gradio/actions/workflows/test-python.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/gradio-app/gradio/actions/workflows/tests-js.yml/badge.svg",
+      "fetch_url": "https://github.com/gradio-app/gradio/actions/workflows/tests-js.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/v/gradio",
+      "fetch_url": "https://img.shields.io/pypi/v/gradio",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/dm/gradio",
+      "fetch_url": "https://img.shields.io/pypi/dm/gradio",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/python-3.10+-important",
+      "fetch_url": "https://img.shields.io/badge/python-3.10+-important",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/twitter/follow/gradio?style=social&label=follow",
+      "fetch_url": "https://img.shields.io/twitter/follow/gradio?style=social&label=follow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=501906&theme=light",
+      "fetch_url": "https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=501906&theme=light",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://trendshift.io/api/badge/repositories/2145",
+      "fetch_url": "https://trendshift.io/api/badge/repositories/2145",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/gif-version.gif",
+      "fetch_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/gif-version.gif",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

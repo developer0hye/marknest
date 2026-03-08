@@ -1,0 +1,151 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/pnpm--pnpm-60d3a328bc04/source/pnpm-60d3a328bc047c211f75936d54003323ee7ee245/README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/pnpm--pnpm/output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/npm/v/pnpm.svg?label=latest",
+      "fetch_url": "https://img.shields.io/npm/v/pnpm.svg?label=latest",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/pnpm/backers/badge.svg",
+      "fetch_url": "https://opencollective.com/pnpm/backers/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://opencollective.com/pnpm/sponsors/badge.svg",
+      "fetch_url": "https://opencollective.com/pnpm/sponsors/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/twitter/follow/pnpmjs.svg?style=social&label=Follow",
+      "fetch_url": "https://img.shields.io/twitter/follow/pnpmjs.svg?style=social&label=Follow",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg",
+      "fetch_url": "https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/benchmarks/alotta-files.svg",
+      "fetch_url": "https://pnpm.io/img/benchmarks/alotta-files.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://i.imgur.com/qlW1eEG.png",
+      "fetch_url": "https://i.imgur.com/qlW1eEG.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/bit.svg",
+      "fetch_url": "https://pnpm.io/img/users/bit.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/sanity.svg",
+      "fetch_url": "https://pnpm.io/img/users/sanity.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/discord.svg",
+      "fetch_url": "https://pnpm.io/img/users/discord.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/vitejs.svg",
+      "fetch_url": "https://pnpm.io/img/users/vitejs.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/serpapi_dark.svg",
+      "fetch_url": "https://pnpm.io/img/users/serpapi_dark.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/coderabbit.svg",
+      "fetch_url": "https://pnpm.io/img/users/coderabbit.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/stackblitz.svg",
+      "fetch_url": "https://pnpm.io/img/users/stackblitz.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/workleap.svg",
+      "fetch_url": "https://pnpm.io/img/users/workleap.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/nx.svg",
+      "fetch_url": "https://pnpm.io/img/users/nx.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/replit.png",
+      "fetch_url": "https://pnpm.io/img/users/replit.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/devowlio.svg",
+      "fetch_url": "https://pnpm.io/img/users/devowlio.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/uscreen.svg",
+      "fetch_url": "https://pnpm.io/img/users/uscreen.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/leniolabs.jpg",
+      "fetch_url": "https://pnpm.io/img/users/leniolabs.jpg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/depot.svg",
+      "fetch_url": "https://pnpm.io/img/users/depot.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pnpm.io/img/users/cerbos.svg",
+      "fetch_url": "https://pnpm.io/img/users/cerbos.svg",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

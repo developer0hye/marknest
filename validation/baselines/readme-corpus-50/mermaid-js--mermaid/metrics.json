@@ -1,0 +1,120 @@
+{
+  "id": "mermaid-js--mermaid",
+  "repo": "mermaid-js/mermaid",
+  "url": "https://github.com/mermaid-js/mermaid",
+  "pinned_sha": "adcf722dba57a8c9ff4ff1164d6c3d8812cc8810",
+  "elapsed_sec": 16,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 789529,
+  "page_count": 15,
+  "token_coverage": 0.9970760233918129,
+  "missing_tokens": [
+    "trophy"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [
+    {
+      "page": "page-0001.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0001.png"
+    },
+    {
+      "page": "page-0002.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0002.png"
+    },
+    {
+      "page": "page-0003.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0003.png"
+    },
+    {
+      "page": "page-0004.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0004.png"
+    },
+    {
+      "page": "page-0005.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0005.png"
+    },
+    {
+      "page": "page-0006.png",
+      "diffPixels": 1,
+      "diffRatio": 0.0000011190939815125675,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0006.png"
+    },
+    {
+      "page": "page-0007.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0007.png"
+    },
+    {
+      "page": "page-0008.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0008.png"
+    },
+    {
+      "page": "page-0009.png",
+      "diffPixels": 4180,
+      "diffRatio": 0.0046778128427225315,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0009.png"
+    },
+    {
+      "page": "page-0010.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0010.png"
+    },
+    {
+      "page": "page-0011.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0011.png"
+    },
+    {
+      "page": "page-0012.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0012.png"
+    },
+    {
+      "page": "page-0013.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0013.png"
+    },
+    {
+      "page": "page-0014.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0014.png"
+    },
+    {
+      "page": "page-0015.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/mermaid-js--mermaid/diffs/page-0015.png"
+    }
+  ],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

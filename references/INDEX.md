@@ -10,8 +10,14 @@
 - `phase8-offline-runtime-assets.md`: Vendored Mermaid, MathJax, and html2pdf assets for offline browser, CLI, and fallback rendering.
 - `phase8-playwright-renderer.md`: Replace the custom Chrome DevTools PDF launcher with a Playwright-backed Chromium print path.
 - `realworld-readme-corpus.md`: Real-world GitHub README corpus selection for post-PRD conversion validation.
+- `realworld-readme-corpus-50.md`: Expanded 50-repo README corpus strategy for automated fidelity validation.
+- `readme-corpus-validator.md`: Pinned GitHub archive fetch plus hybrid PDF text and page-image validation for the 50-repo corpus.
 - `phase8-remote-http-images.md`: Best-effort remote HTTP image materialization across CLI, browser, and fallback flows.
 - `phase8-code-block-wrapping.md`: Long code-line wrapping policy for shared HTML and PDF rendering.
 - `phase8-image-layout-parity.md`: Preserve inline badge rows and explicit image sizing in shared HTML output.
 - `phase8-github-emoji-shortcodes.md`: Render GitHub-style `:emoji:` shortcodes in prose without touching code spans or code blocks.
 - `phase8-mermaid-theme-parity.md`: Use Mermaid's colored default theme instead of the print-oriented neutral theme.
+- `phase8-print-layout-guards.md`: Add print-safe page-break rules for headings, tables, and code blocks.
+- `phase8-render-timeouts.md`: Configurable per-item Mermaid and Math runtime timeouts with shared defaults.
+- `phase8-html-sanitization.md`: HTML fragment sanitization with an allowlist that preserves Markdown rendering features while blocking scripts and unsafe embeds.
+- `phase8-table-of-contents.md`: Use pulldown-cmark heading events to assign stable heading IDs and build an optional in-document TOC.

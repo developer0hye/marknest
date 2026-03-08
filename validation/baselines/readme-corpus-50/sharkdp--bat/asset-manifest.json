@@ -1,0 +1,122 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://imgur.com/rGsdnDe.png",
+      "resolved_path": null,
+      "fetch_url": "https://imgur.com/rGsdnDe.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://i.imgur.com/2lSW4RE.png",
+      "resolved_path": null,
+      "fetch_url": "https://i.imgur.com/2lSW4RE.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://i.imgur.com/WndGp9H.png",
+      "resolved_path": null,
+      "fetch_url": "https://i.imgur.com/WndGp9H.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://repology.org/badge/vertical-allrepos/bat-cat.svg?columns=3&exclude_unsupported=1",
+      "resolved_path": null,
+      "fetch_url": "https://repology.org/badge/vertical-allrepos/bat-cat.svg?columns=3&exclude_unsupported=1",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/logo-header.svg",
+      "resolved_path": "doc/logo-header.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/sharkdp/bat/workflows/CICD/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/sharkdp/bat/workflows/CICD/badge.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/crates/l/bat.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/crates/l/bat.svg",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/crates/v/bat.svg?colorB=319e8c",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/crates/v/bat.svg?colorB=319e8c",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/sponsors/warp-logo.png",
+      "resolved_path": "doc/sponsors/warp-logo.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/sponsors/warp-pack-header.png",
+      "resolved_path": "doc/sponsors/warp-pack-header.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://imgur.com/rGsdnDe.png",
+      "fetch_url": "https://imgur.com/rGsdnDe.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://i.imgur.com/2lSW4RE.png",
+      "fetch_url": "https://i.imgur.com/2lSW4RE.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://i.imgur.com/WndGp9H.png",
+      "fetch_url": "https://i.imgur.com/WndGp9H.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://repology.org/badge/vertical-allrepos/bat-cat.svg?columns=3&exclude_unsupported=1",
+      "fetch_url": "https://repology.org/badge/vertical-allrepos/bat-cat.svg?columns=3&exclude_unsupported=1",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/sharkdp/bat/workflows/CICD/badge.svg",
+      "fetch_url": "https://github.com/sharkdp/bat/workflows/CICD/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/crates/l/bat.svg",
+      "fetch_url": "https://img.shields.io/crates/l/bat.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/crates/v/bat.svg?colorB=319e8c",
+      "fetch_url": "https://img.shields.io/crates/v/bat.svg?colorB=319e8c",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

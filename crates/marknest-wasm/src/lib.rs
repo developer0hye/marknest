@@ -2,9 +2,10 @@ use std::io::{Cursor, Write};
 use std::path::{Component, Path};
 
 use marknest_core::{
-    AssetRef, MATHJAX_SCRIPT_URL, MATHJAX_VERSION, MERMAID_SCRIPT_URL, MERMAID_VERSION, MathMode,
-    MermaidMode, PdfMetadata, ProjectIndex, ProjectSourceKind, RUNTIME_ASSET_MODE, RenderOptions,
-    RenderedHtmlDocument, ThemePreset, analyze_zip, render_zip_entry_with_options,
+    AssetRef, DEFAULT_MATH_TIMEOUT_MS, DEFAULT_MERMAID_TIMEOUT_MS, MATHJAX_SCRIPT_URL,
+    MATHJAX_VERSION, MERMAID_SCRIPT_URL, MERMAID_VERSION, MathMode, MermaidMode, PdfMetadata,
+    ProjectIndex, ProjectSourceKind, RUNTIME_ASSET_MODE, RenderOptions, RenderedHtmlDocument,
+    ThemePreset, analyze_zip, render_zip_entry_with_options,
 };
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
@@ -53,6 +54,8 @@ enum BrowserPageSize {
 struct BrowserOutputOptions {
     theme: ThemePreset,
     custom_css: Option<String>,
+    enable_toc: bool,
+    sanitize_html: bool,
     title: Option<String>,
     author: Option<String>,
     subject: Option<String>,
@@ -66,6 +69,8 @@ struct BrowserOutputOptions {
     footer_template: Option<String>,
     mermaid_mode: MermaidMode,
     math_mode: MathMode,
+    mermaid_timeout_ms: u32,
+    math_timeout_ms: u32,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
@@ -108,6 +113,8 @@ impl Default for BrowserOutputOptions {
         Self {
             theme: ThemePreset::Github,
             custom_css: None,
+            enable_toc: false,
+            sanitize_html: true,
             title: None,
             author: None,
             subject: None,
@@ -121,6 +128,8 @@ impl Default for BrowserOutputOptions {
             footer_template: None,
             mermaid_mode: MermaidMode::Off,
             math_mode: MathMode::Off,
+            mermaid_timeout_ms: DEFAULT_MERMAID_TIMEOUT_MS,
+            math_timeout_ms: DEFAULT_MATH_TIMEOUT_MS,
         }
     }
 }
@@ -130,6 +139,8 @@ impl BrowserOutputOptions {
         Self {
             theme: self.theme,
             custom_css: normalize_optional_block(&self.custom_css),
+            enable_toc: self.enable_toc,
+            sanitize_html: self.sanitize_html,
             title: normalize_optional_text(&self.title),
             author: normalize_optional_text(&self.author),
             subject: normalize_optional_text(&self.subject),
@@ -143,6 +154,8 @@ impl BrowserOutputOptions {
             footer_template: normalize_optional_block(&self.footer_template),
             mermaid_mode: self.mermaid_mode,
             math_mode: self.math_mode,
+            mermaid_timeout_ms: self.mermaid_timeout_ms.max(1),
+            math_timeout_ms: self.math_timeout_ms.max(1),
         }
     }
 
@@ -156,8 +169,12 @@ impl BrowserOutputOptions {
                 subject: normalized.subject,
             },
             custom_css: normalized.custom_css,
+            enable_toc: normalized.enable_toc,
+            sanitize_html: normalized.sanitize_html,
             mermaid_mode: normalized.mermaid_mode,
             math_mode: normalized.math_mode,
+            mermaid_timeout_ms: normalized.mermaid_timeout_ms,
+            math_timeout_ms: normalized.math_timeout_ms,
         }
     }
 }
@@ -533,7 +550,7 @@ mod tests {
     fn renders_zip_preview_html_with_browser_output_options() {
         let zip_bytes = build_zip(&[(
             "docs/README.md",
-            "# Guide\n\n```mermaid\ngraph TD\n  A --> B\n```\n\n$$x + y$$\n",
+            "# Guide\n\n<div onclick=\"alert('x')\">Preview</div>\n\n<script>alert(\"preview\")</script>\n\n```mermaid\ngraph TD\n  A --> B\n```\n\n$$x + y$$\n",
         )]);
 
         let preview = render_preview_model(
@@ -542,10 +559,14 @@ mod tests {
             &BrowserOutputOptions {
                 theme: ThemePreset::Docs,
                 custom_css: Some("body { color: rgb(5, 4, 3); }".to_string()),
+                enable_toc: true,
                 author: Some("Docs Team".to_string()),
                 subject: Some("Architecture".to_string()),
+                sanitize_html: false,
                 mermaid_mode: MermaidMode::Auto,
                 math_mode: MathMode::Auto,
+                mermaid_timeout_ms: 4200,
+                math_timeout_ms: 2400,
                 ..BrowserOutputOptions::default()
             },
         )
@@ -565,6 +586,11 @@ mod tests {
         );
         assert!(preview.html.contains("mermaid.min.js"));
         assert!(preview.html.contains("tex-svg.js"));
+        assert!(preview.html.contains("marknest-toc"));
+        assert!(preview.html.contains("<script>alert(\"preview\")</script>"));
+        assert!(preview.html.contains("onclick=\"alert('x')\""));
+        assert!(preview.html.contains("\"mermaidTimeoutMs\":4200"));
+        assert!(preview.html.contains("\"mathTimeoutMs\":2400"));
     }
 
     #[test]
@@ -583,7 +609,11 @@ mod tests {
 
         assert_eq!(previews.len(), 2);
         assert_eq!(previews[0].entry_path, "docs/README.md");
-        assert!(previews[1].html.contains("<h1>Tutorial</h1>"));
+        assert!(
+            previews[1]
+                .html
+                .contains("<h1 id=\"tutorial\">Tutorial</h1>")
+        );
     }
 
     #[test]
@@ -692,6 +722,10 @@ mod tests {
         assert_eq!(report["options"]["margin_right_mm"], 12);
         assert_eq!(report["options"]["margin_bottom_mm"], 24);
         assert_eq!(report["options"]["margin_left_mm"], 10);
+        assert_eq!(report["options"]["enable_toc"], false);
+        assert_eq!(report["options"]["sanitize_html"], true);
+        assert_eq!(report["options"]["mermaid_timeout_ms"], 5000);
+        assert_eq!(report["options"]["math_timeout_ms"], 3000);
     }
 
     #[test]

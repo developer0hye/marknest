@@ -8,11 +8,11 @@ use std::process::Command;
 use std::time::Duration;
 
 use marknest_core::{
-    AnalyzeError, AssetRef, EntryCandidate, EntrySelectionReason, MATHJAX_SCRIPT_URL,
-    MATHJAX_VERSION, MERMAID_SCRIPT_URL, MERMAID_VERSION, MathMode, MermaidMode, PdfMetadata,
-    ProjectIndex, ProjectSourceKind, RUNTIME_ASSET_MODE, RenderHtmlError, RenderOptions,
-    ThemePreset, analyze_workspace, analyze_zip, render_workspace_entry_with_options,
-    rewrite_html_img_sources,
+    AnalyzeError, AssetRef, DEFAULT_MATH_TIMEOUT_MS, DEFAULT_MERMAID_TIMEOUT_MS, EntryCandidate,
+    EntrySelectionReason, MATHJAX_SCRIPT_URL, MATHJAX_VERSION, MERMAID_SCRIPT_URL, MERMAID_VERSION,
+    MathMode, MermaidMode, PdfMetadata, ProjectIndex, ProjectSourceKind, RUNTIME_ASSET_MODE,
+    RenderHtmlError, RenderOptions, ThemePreset, analyze_workspace, analyze_zip,
+    render_workspace_entry_with_options, rewrite_html_img_sources,
 };
 use serde::{Deserialize, Serialize};
 use tempfile::TempDir;
@@ -501,8 +501,12 @@ fn convert_entry_to_pdf(
         theme: args.theme,
         metadata: args.metadata.clone(),
         custom_css: render_support_files.custom_css.clone(),
+        enable_toc: args.enable_toc,
+        sanitize_html: args.sanitize_html,
         mermaid_mode: args.mermaid_mode,
         math_mode: args.math_mode,
+        mermaid_timeout_ms: args.mermaid_timeout_ms,
+        math_timeout_ms: args.math_timeout_ms,
     };
     let rendered_document =
         render_workspace_entry_with_options(workspace_root, entry_path, &render_options)
@@ -1057,7 +1061,7 @@ fn filter_diagnostics(
 fn message_belongs_to_selected_entry(message: &str, selected_entries: &[String]) -> bool {
     selected_entries
         .iter()
-        .any(|entry| message.contains(&format!("{entry} -> ")))
+        .any(|entry| message.starts_with(&format!("{entry} -> ")))
 }
 
 fn build_validation_report(
@@ -2114,6 +2118,18 @@ fn parse_convert_args(binary_name: &str, args: &[String]) -> Result<ParseResult,
             "--landscape" => {
                 convert_args.landscape = Some(true);
             }
+            "--toc" => {
+                convert_args.enable_toc = Some(true);
+            }
+            "--no-toc" => {
+                convert_args.enable_toc = Some(false);
+            }
+            "--sanitize-html" => {
+                convert_args.sanitize_html = Some(true);
+            }
+            "--no-sanitize-html" => {
+                convert_args.sanitize_html = Some(false);
+            }
             "--title" => {
                 index += 1;
                 let value = args
@@ -2149,6 +2165,20 @@ fn parse_convert_args(binary_name: &str, args: &[String]) -> Result<ParseResult,
                     .ok_or_else(|| ParseFailure::new("Missing value for --math.".to_string()))?;
                 convert_args.math_mode = Some(parse_math_mode(value)?);
             }
+            "--mermaid-timeout-ms" => {
+                index += 1;
+                let value = args.get(index).ok_or_else(|| {
+                    ParseFailure::new("Missing value for --mermaid-timeout-ms.".to_string())
+                })?;
+                convert_args.mermaid_timeout_ms = Some(parse_timeout_ms(value, "Mermaid timeout")?);
+            }
+            "--math-timeout-ms" => {
+                index += 1;
+                let value = args.get(index).ok_or_else(|| {
+                    ParseFailure::new("Missing value for --math-timeout-ms.".to_string())
+                })?;
+                convert_args.math_timeout_ms = Some(parse_timeout_ms(value, "Math timeout")?);
+            }
             _ if argument.starts_with('-') => {
                 return Err(ParseFailure::new(format!("Unknown option: {argument}")));
             }
@@ -2176,7 +2206,7 @@ fn parse_convert_args(binary_name: &str, args: &[String]) -> Result<ParseResult,
 
 fn root_help(binary_name: &str) -> String {
     format!(
-        "Convert and validate Markdown workspaces.\n\nUsage:\n  {binary_name} convert [INPUT] [--entry <PATH> | --all] [-o <PATH> | --out-dir <PATH>] [--config <PATH>] [--render-report <PATH>] [--debug-html <PATH>] [--asset-manifest <PATH>] [--css <PATH>] [--header-template <PATH>] [--footer-template <PATH>] [--page-size <a4|letter>] [--margin <MM>] [--margin-top <MM>] [--margin-right <MM>] [--margin-bottom <MM>] [--margin-left <MM>] [--theme <default|github|docs|plain>] [--landscape] [--title <TEXT>] [--author <TEXT>] [--subject <TEXT>] [--mermaid <off|auto|on>] [--math <off|auto|on>]\n  {binary_name} validate [INPUT] [--entry <PATH> | --all] [--strict] [--report <PATH>]\n  {binary_name} --help\n"
+        "Convert and validate Markdown workspaces.\n\nUsage:\n  {binary_name} convert [INPUT] [--entry <PATH> | --all] [-o <PATH> | --out-dir <PATH>] [--config <PATH>] [--render-report <PATH>] [--debug-html <PATH>] [--asset-manifest <PATH>] [--css <PATH>] [--header-template <PATH>] [--footer-template <PATH>] [--page-size <a4|letter>] [--margin <MM>] [--margin-top <MM>] [--margin-right <MM>] [--margin-bottom <MM>] [--margin-left <MM>] [--theme <default|github|docs|plain>] [--landscape] [--toc | --no-toc] [--sanitize-html | --no-sanitize-html] [--title <TEXT>] [--author <TEXT>] [--subject <TEXT>] [--mermaid <off|auto|on>] [--math <off|auto|on>] [--mermaid-timeout-ms <MS>] [--math-timeout-ms <MS>]\n  {binary_name} validate [INPUT] [--entry <PATH> | --all] [--strict] [--report <PATH>]\n  {binary_name} --help\n"
     )
 }
 
@@ -2188,7 +2218,7 @@ fn validate_help(binary_name: &str) -> String {
 
 fn convert_help(binary_name: &str) -> String {
     format!(
-        "Convert Markdown entries into PDF files.\n\nUsage:\n  {binary_name} convert [INPUT] [OPTIONS]\n\nOptions:\n  --entry <PATH>               Convert one Markdown entry inside a folder or ZIP input.\n  --all                        Convert all Markdown entries.\n  -o, --output <PATH>          Write a single PDF to a specific path.\n  --out-dir <PATH>             Write batch PDF output under a directory.\n  --config <PATH>              Load conversion defaults from a TOML config file.\n  --render-report <PATH>       Write a JSON conversion report.\n  --debug-html <PATH>          Write the rendered HTML used for PDF generation.\n  --asset-manifest <PATH>      Write the selected entry asset manifest as JSON.\n  --css <PATH>                 Append a custom CSS file after the theme stylesheet.\n  --header-template <PATH>     Load an HTML header template for Chromium print output.\n  --footer-template <PATH>     Load an HTML footer template for Chromium print output.\n  --page-size <a4|letter>      Set the output page size.\n  --margin <MM>                Set the same margin on all sides in millimeters.\n  --margin-top <MM>            Override the top page margin in millimeters.\n  --margin-right <MM>          Override the right page margin in millimeters.\n  --margin-bottom <MM>         Override the bottom page margin in millimeters.\n  --margin-left <MM>           Override the left page margin in millimeters.\n  --theme <default|github|docs|plain>\n                               Apply a built-in document theme.\n  --landscape                  Render the PDF in landscape orientation.\n  --title <TEXT>               Override the document title.\n  --author <TEXT>              Set the PDF author metadata.\n  --subject <TEXT>             Set the PDF subject metadata.\n  --mermaid <off|auto|on>      Control Mermaid rendering.\n  --math <off|auto|on>         Control Math rendering.\n  -h, --help                   Show this help message.\n"
+        "Convert Markdown entries into PDF files.\n\nUsage:\n  {binary_name} convert [INPUT] [OPTIONS]\n\nOptions:\n  --entry <PATH>               Convert one Markdown entry inside a folder or ZIP input.\n  --all                        Convert all Markdown entries.\n  -o, --output <PATH>          Write a single PDF to a specific path.\n  --out-dir <PATH>             Write batch PDF output under a directory.\n  --config <PATH>              Load conversion defaults from a TOML config file.\n  --render-report <PATH>       Write a JSON conversion report.\n  --debug-html <PATH>          Write the rendered HTML used for PDF generation.\n  --asset-manifest <PATH>      Write the selected entry asset manifest as JSON.\n  --css <PATH>                 Append a custom CSS file after the theme stylesheet.\n  --header-template <PATH>     Load an HTML header template for Chromium print output.\n  --footer-template <PATH>     Load an HTML footer template for Chromium print output.\n  --page-size <a4|letter>      Set the output page size.\n  --margin <MM>                Set the same margin on all sides in millimeters.\n  --margin-top <MM>            Override the top page margin in millimeters.\n  --margin-right <MM>          Override the right page margin in millimeters.\n  --margin-bottom <MM>         Override the bottom page margin in millimeters.\n  --margin-left <MM>           Override the left page margin in millimeters.\n  --theme <default|github|docs|plain>\n                               Apply a built-in document theme.\n  --landscape                  Render the PDF in landscape orientation.\n  --toc                        Insert a generated table of contents near the top of the document.\n  --no-toc                     Skip the generated table of contents.\n  --sanitize-html              Sanitize rendered document HTML before PDF generation.\n  --no-sanitize-html           Trust document HTML and skip sanitization.\n  --title <TEXT>               Override the document title.\n  --author <TEXT>              Set the PDF author metadata.\n  --subject <TEXT>             Set the PDF subject metadata.\n  --mermaid <off|auto|on>      Control Mermaid rendering.\n  --math <off|auto|on>         Control Math rendering.\n  --mermaid-timeout-ms <MS>    Set the per-diagram Mermaid render timeout.\n  --math-timeout-ms <MS>       Set the per-expression Math render timeout.\n  -h, --help                   Show this help message.\n"
     )
 }
 
@@ -2223,11 +2253,15 @@ struct ConvertCliArgs {
     margin_left_mm: Option<f64>,
     theme: Option<ThemePreset>,
     landscape: Option<bool>,
+    enable_toc: Option<bool>,
+    sanitize_html: Option<bool>,
     metadata_title: Option<String>,
     metadata_author: Option<String>,
     metadata_subject: Option<String>,
     mermaid_mode: Option<MermaidMode>,
     math_mode: Option<MathMode>,
+    mermaid_timeout_ms: Option<u32>,
+    math_timeout_ms: Option<u32>,
 }
 
 #[derive(Debug, Clone)]
@@ -2247,9 +2281,13 @@ struct ConvertArgs {
     margins_mm: PdfMarginsMm,
     theme: ThemePreset,
     landscape: bool,
+    enable_toc: bool,
+    sanitize_html: bool,
     metadata: PdfMetadata,
     mermaid_mode: MermaidMode,
     math_mode: MathMode,
+    mermaid_timeout_ms: u32,
+    math_timeout_ms: u32,
 }
 
 #[derive(Debug, Clone, Default, Deserialize)]
@@ -2267,11 +2305,15 @@ struct ConvertConfigFile {
     margin_left: Option<f64>,
     theme: Option<String>,
     landscape: Option<bool>,
+    toc: Option<bool>,
+    sanitize_html: Option<bool>,
     title: Option<String>,
     author: Option<String>,
     subject: Option<String>,
     mermaid: Option<String>,
     math: Option<String>,
+    mermaid_timeout_ms: Option<u32>,
+    math_timeout_ms: Option<u32>,
     css: Option<String>,
     header_template: Option<String>,
     footer_template: Option<String>,
@@ -2285,6 +2327,10 @@ struct ConvertEnvironment {
     config_path: Option<PathBuf>,
     theme: Option<String>,
     css_path: Option<PathBuf>,
+    enable_toc: Option<String>,
+    sanitize_html: Option<String>,
+    mermaid_timeout_ms: Option<String>,
+    math_timeout_ms: Option<String>,
 }
 
 #[derive(Debug, Clone, Default)]
@@ -3006,6 +3052,10 @@ fn collect_convert_environment(current_dir: &Path) -> ConvertEnvironment {
         css_path: env::var_os("MARKNEST_CSS")
             .map(PathBuf::from)
             .map(|path| resolve_path_against(current_dir, path)),
+        enable_toc: env::var("MARKNEST_TOC").ok(),
+        sanitize_html: env::var("MARKNEST_SANITIZE_HTML").ok(),
+        mermaid_timeout_ms: env::var("MARKNEST_MERMAID_TIMEOUT_MS").ok(),
+        math_timeout_ms: env::var("MARKNEST_MATH_TIMEOUT_MS").ok(),
     }
 }
 
@@ -3032,6 +3082,23 @@ fn resolve_convert_args_with_environment(
     let config_mermaid_mode =
         parse_optional_mermaid_mode(config.mermaid.as_deref(), "config file")?;
     let config_math_mode = parse_optional_math_mode(config.math.as_deref(), "config file")?;
+    let environment_enable_toc =
+        parse_optional_bool_text(environment.enable_toc.as_deref(), "environment", "toc")?;
+    let environment_sanitize_html = parse_optional_bool_text(
+        environment.sanitize_html.as_deref(),
+        "environment",
+        "sanitize_html",
+    )?;
+    let environment_mermaid_timeout = parse_optional_timeout_ms_text(
+        environment.mermaid_timeout_ms.as_deref(),
+        "environment",
+        "mermaid timeout",
+    )?;
+    let environment_math_timeout = parse_optional_timeout_ms_text(
+        environment.math_timeout_ms.as_deref(),
+        "environment",
+        "math timeout",
+    )?;
     let margins_mm = resolve_pdf_margins(&cli_args, &config)?;
 
     Ok(ConvertArgs {
@@ -3070,6 +3137,16 @@ fn resolve_convert_args_with_environment(
             .or(environment_theme)
             .unwrap_or(ThemePreset::Default),
         landscape: cli_args.landscape.or(config.landscape).unwrap_or(false),
+        enable_toc: cli_args
+            .enable_toc
+            .or(config.toc)
+            .or(environment_enable_toc)
+            .unwrap_or(false),
+        sanitize_html: cli_args
+            .sanitize_html
+            .or(config.sanitize_html)
+            .or(environment_sanitize_html)
+            .unwrap_or(true),
         metadata: PdfMetadata {
             title: cli_args.metadata_title.or(config.title),
             author: cli_args.metadata_author.or(config.author),
@@ -3083,6 +3160,16 @@ fn resolve_convert_args_with_environment(
             .math_mode
             .or(config_math_mode)
             .unwrap_or(MathMode::Auto),
+        mermaid_timeout_ms: cli_args
+            .mermaid_timeout_ms
+            .or(config.mermaid_timeout_ms)
+            .or(environment_mermaid_timeout)
+            .unwrap_or(DEFAULT_MERMAID_TIMEOUT_MS),
+        math_timeout_ms: cli_args
+            .math_timeout_ms
+            .or(config.math_timeout_ms)
+            .or(environment_math_timeout)
+            .unwrap_or(DEFAULT_MATH_TIMEOUT_MS),
     })
 }
 
@@ -3217,6 +3304,73 @@ fn parse_optional_math_mode(
                 error.message
             ))
         }),
+        None => Ok(None),
+    }
+}
+
+fn parse_bool(value: &str, label: &str) -> Result<bool, ParseFailure> {
+    if value.eq_ignore_ascii_case("true")
+        || value.eq_ignore_ascii_case("1")
+        || value.eq_ignore_ascii_case("yes")
+        || value.eq_ignore_ascii_case("on")
+    {
+        Ok(true)
+    } else if value.eq_ignore_ascii_case("false")
+        || value.eq_ignore_ascii_case("0")
+        || value.eq_ignore_ascii_case("no")
+        || value.eq_ignore_ascii_case("off")
+    {
+        Ok(false)
+    } else {
+        Err(ParseFailure::new(format!(
+            "Invalid {label} value: {value}. Use true or false."
+        )))
+    }
+}
+
+fn parse_timeout_ms(value: &str, label: &str) -> Result<u32, ParseFailure> {
+    let timeout_ms: u32 = value
+        .parse()
+        .map_err(|_| ParseFailure::new(format!("Invalid {label} value: {value}")))?;
+    if timeout_ms == 0 {
+        return Err(ParseFailure::new(format!(
+            "{label} must be greater than zero."
+        )));
+    }
+
+    Ok(timeout_ms)
+}
+
+fn parse_optional_bool_text(
+    value: Option<&str>,
+    source_label: &str,
+    option_label: &str,
+) -> Result<Option<bool>, AppFailure> {
+    match value {
+        Some(value) => parse_bool(value, option_label).map(Some).map_err(|error| {
+            AppFailure::validation(format!(
+                "Invalid {source_label} {option_label}: {}",
+                error.message
+            ))
+        }),
+        None => Ok(None),
+    }
+}
+
+fn parse_optional_timeout_ms_text(
+    value: Option<&str>,
+    source_label: &str,
+    option_label: &str,
+) -> Result<Option<u32>, AppFailure> {
+    match value {
+        Some(value) => parse_timeout_ms(value, option_label)
+            .map(Some)
+            .map_err(|error| {
+                AppFailure::validation(format!(
+                    "Invalid {source_label} {option_label}: {}",
+                    error.message
+                ))
+            }),
         None => Ok(None),
     }
 }
@@ -3804,7 +3958,7 @@ mod tests {
         let request = requests
             .first()
             .expect("zip convert should invoke the renderer once");
-        assert!(request.html.contains("<h1>Zip Guide</h1>"));
+        assert!(request.html.contains("<h1 id=\"zip-guide\">Zip Guide</h1>"));
         assert!(request.html.contains("data:image/svg+xml;base64,"));
     }
 
@@ -4037,7 +4191,7 @@ mod tests {
         assert_eq!(request.margins_mm.right, 24.0);
         assert_eq!(request.margins_mm.bottom, 24.0);
         assert_eq!(request.margins_mm.left, 24.0);
-        assert!(request.html.contains("<h1>MarkNest</h1>"));
+        assert!(request.html.contains("<h1 id=\"marknest\">MarkNest</h1>"));
         assert!(request.html.contains("data:image/svg+xml;base64,"));
     }
 
@@ -4116,6 +4270,36 @@ mod tests {
                 .len(),
             1
         );
+    }
+
+    #[test]
+    fn convert_ignores_missing_assets_from_unselected_nested_readmes() {
+        let temp_dir = TempDir::new().expect("temp dir should be created");
+        let workspace_path = temp_dir.path().join("workspace");
+        write_text_file(&workspace_path.join("README.md"), "# Root Guide\n");
+        write_text_file(
+            &workspace_path.join("nested/README.md"),
+            "# Nested Guide\n\n![Missing](./missing.png)\n",
+        );
+        let output_path = temp_dir.path().join("root.pdf");
+        let renderer = MockPdfRenderer::default();
+
+        let exit_code = run_with_pdf_renderer(
+            [
+                "marknest",
+                "convert",
+                workspace_path
+                    .join("README.md")
+                    .to_str()
+                    .expect("path should be utf-8"),
+                "-o",
+                output_path.to_str().expect("path should be utf-8"),
+            ],
+            &renderer,
+        );
+
+        assert_eq!(exit_code, 0);
+        assert!(output_path.exists());
     }
 
     #[test]
@@ -4382,11 +4566,14 @@ mod tests {
             .expect("environment mutex should lock");
         let temp_dir = TempDir::new().expect("temp dir should be created");
         let workspace_path = temp_dir.path().join("workspace");
-        copy_directory(&fixtures_root().join("workspace_valid"), &workspace_path);
+        copy_directory(
+            &fixtures_root().join("workspace_raw_html_sanitize"),
+            &workspace_path,
+        );
 
         write_text_file(
             &workspace_path.join(".marknest.toml"),
-            "[convert]\ntheme = \"docs\"\ncss = \"./config.css\"\n",
+            "[convert]\ntheme = \"docs\"\ncss = \"./config.css\"\nsanitize_html = false\nmermaid_timeout_ms = 4200\nmath_timeout_ms = 2400\n",
         );
         write_text_file(
             &workspace_path.join("config.css"),
@@ -4403,6 +4590,9 @@ mod tests {
 
         let original_theme = env::var_os("MARKNEST_THEME");
         let original_css = env::var_os("MARKNEST_CSS");
+        let original_sanitize_html = env::var_os("MARKNEST_SANITIZE_HTML");
+        let original_mermaid_timeout = env::var_os("MARKNEST_MERMAID_TIMEOUT_MS");
+        let original_math_timeout = env::var_os("MARKNEST_MATH_TIMEOUT_MS");
         let original_directory = env::current_dir().expect("cwd should be readable");
         let renderer = MockPdfRenderer::default();
 
@@ -4415,6 +4605,9 @@ mod tests {
                     .to_str()
                     .expect("path should be utf-8"),
             );
+            env::set_var("MARKNEST_SANITIZE_HTML", "true");
+            env::set_var("MARKNEST_MERMAID_TIMEOUT_MS", "6100");
+            env::set_var("MARKNEST_MATH_TIMEOUT_MS", "4100");
         }
         env::set_current_dir(&workspace_path).expect("cwd should change");
 
@@ -4431,6 +4624,11 @@ mod tests {
                 "github",
                 "--css",
                 "cli.css",
+                "--sanitize-html",
+                "--mermaid-timeout-ms",
+                "7300",
+                "--math-timeout-ms",
+                "5100",
             ],
             &renderer,
         );
@@ -4438,6 +4636,9 @@ mod tests {
         env::set_current_dir(&original_directory).expect("cwd should be restored");
         restore_env_var("MARKNEST_THEME", original_theme);
         restore_env_var("MARKNEST_CSS", original_css);
+        restore_env_var("MARKNEST_SANITIZE_HTML", original_sanitize_html);
+        restore_env_var("MARKNEST_MERMAID_TIMEOUT_MS", original_mermaid_timeout);
+        restore_env_var("MARKNEST_MATH_TIMEOUT_MS", original_math_timeout);
 
         assert_eq!(cli_exit_code, 0);
 
@@ -4448,12 +4649,54 @@ mod tests {
         let config_request = &requests[0];
         assert!(config_request.html.contains("theme-docs"));
         assert!(config_request.html.contains("rgb(12, 34, 56)"));
+        assert!(
+            config_request
+                .html
+                .contains("<script>alert(\"x\")</script>")
+        );
         assert!(!config_request.html.contains("rgb(77, 88, 99)"));
+        assert!(config_request.html.contains("\"mermaidTimeoutMs\":4200"));
+        assert!(config_request.html.contains("\"mathTimeoutMs\":2400"));
 
         let cli_request = &requests[1];
         assert!(cli_request.html.contains("theme-github"));
         assert!(cli_request.html.contains("rgb(7, 8, 9)"));
+        assert!(!cli_request.html.contains("<script>alert(\"x\")</script>"));
         assert!(!cli_request.html.contains("rgb(12, 34, 56)"));
+        assert!(cli_request.html.contains("\"mermaidTimeoutMs\":7300"));
+        assert!(cli_request.html.contains("\"mathTimeoutMs\":5100"));
+    }
+
+    #[test]
+    fn convert_inserts_a_generated_table_of_contents_when_requested() {
+        let temp_dir = TempDir::new().expect("temp dir should be created");
+        let workspace_path = temp_dir.path().join("workspace");
+        copy_directory(&fixtures_root().join("workspace_toc"), &workspace_path);
+        let markdown_path = workspace_path.join("README.md");
+        let renderer = MockPdfRenderer::default();
+
+        let exit_code = run_with_pdf_renderer(
+            [
+                "marknest",
+                "convert",
+                markdown_path.to_str().expect("path should be utf-8"),
+                "--toc",
+            ],
+            &renderer,
+        );
+
+        assert_eq!(exit_code, 0);
+
+        let requests = renderer
+            .requests
+            .lock()
+            .expect("requests mutex should lock");
+        let request = requests
+            .first()
+            .expect("convert should invoke the renderer once");
+        assert!(request.html.contains("marknest-toc"));
+        assert!(request.html.contains("href=\"#guide\""));
+        assert!(request.html.contains("href=\"#overview-2\""));
     }
 
     #[test]

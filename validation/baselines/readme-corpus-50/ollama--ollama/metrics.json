@@ -1,0 +1,27 @@
+{
+  "id": "ollama--ollama",
+  "repo": "ollama/ollama",
+  "url": "https://github.com/ollama/ollama",
+  "pinned_sha": "d126467d5d2060261b21415e315f2cd8ce8f1e5c",
+  "elapsed_sec": 2,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 294365,
+  "page_count": 9,
+  "token_coverage": 1,
+  "missing_tokens": [],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": false,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "serde-rs--serde",
+  "repo": "serde-rs/serde",
+  "url": "https://github.com/serde-rs/serde",
+  "pinned_sha": "fa7da4a93567ed347ad0735c28e439fca688ef26",
+  "elapsed_sec": 2,
+  "convert_exit_code": 1,
+  "report_status": "warning",
+  "pdf_bytes": 139385,
+  "page_count": 3,
+  "token_coverage": 1,
+  "missing_tokens": [],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [
+    "https://serde.rs"
+  ],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [
+    {
+      "page": "page-0001.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/serde-rs--serde/diffs/page-0001.png"
+    },
+    {
+      "page": "page-0002.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/serde-rs--serde/diffs/page-0002.png"
+    },
+    {
+      "page": "page-0003.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/serde-rs--serde/diffs/page-0003.png"
+    }
+  ],
+  "hard_failures": [],
+  "advisories": [
+    "convert_warning_exit",
+    "remote_asset_failures"
+  ],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

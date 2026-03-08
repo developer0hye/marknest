@@ -5,6 +5,7 @@ license.workspace = true
 version.workspace = true
 
 [dependencies]
+ammonia.workspace = true
 emojis.workspace = true
 pulldown-cmark.workspace = true
 serde.workspace = true

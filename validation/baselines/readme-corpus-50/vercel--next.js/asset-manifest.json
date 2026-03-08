@@ -1,0 +1,75 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png",
+      "resolved_path": null,
+      "fetch_url": "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/MADE%20BY%20Vercel-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/MADE%20BY%20Vercel-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/v/next.svg?style=for-the-badge&labelColor=000000",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/v/next.svg?style=for-the-badge&labelColor=000000",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png",
+      "fetch_url": "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/MADE%20BY%20Vercel-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000",
+      "fetch_url": "https://img.shields.io/badge/MADE%20BY%20Vercel-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/next.svg?style=for-the-badge&labelColor=000000",
+      "fetch_url": "https://img.shields.io/npm/v/next.svg?style=for-the-badge&labelColor=000000",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000",
+      "fetch_url": "https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20",
+      "fetch_url": "https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

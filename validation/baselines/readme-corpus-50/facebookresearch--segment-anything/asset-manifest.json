@@ -1,0 +1,58 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/facebookresearch/segment-anything-2/blob/main/assets/model_diagram.png?raw=true",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/facebookresearch/segment-anything-2/raw/main/assets/model_diagram.png",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "assets/model_diagram.png?raw=true",
+      "resolved_path": "assets/model_diagram.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "assets/masks1.png?raw=true",
+      "resolved_path": "assets/masks1.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "assets/masks2.jpg?raw=true",
+      "resolved_path": "assets/masks2.jpg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "assets/notebook1.png?raw=true",
+      "resolved_path": "assets/notebook1.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "assets/notebook2.png?raw=true",
+      "resolved_path": "assets/notebook2.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://github.com/facebookresearch/segment-anything-2/blob/main/assets/model_diagram.png?raw=true",
+      "fetch_url": "https://github.com/facebookresearch/segment-anything-2/raw/main/assets/model_diagram.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

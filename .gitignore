@@ -5,3 +5,5 @@ dist/
 .DS_Store
 .codex-browser-probe
 .claude/
+validation/.cache/
+validation/.runs/

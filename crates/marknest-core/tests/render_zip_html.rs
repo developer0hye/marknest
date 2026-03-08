@@ -40,7 +40,11 @@ fn renders_a_zip_entry_as_self_contained_html() {
     let rendered = render_zip_entry(&zip_bytes, "docs/README.md").expect("zip entry should render");
 
     assert_eq!(rendered.title, "README");
-    assert!(rendered.html.contains("<h1>Zip Guide</h1>"));
+    assert!(
+        rendered
+            .html
+            .contains("<h1 id=\"zip-guide\">Zip Guide</h1>")
+    );
     assert!(rendered.html.contains("data:image/svg+xml;base64,"));
     assert!(!rendered.html.contains("../images/architecture.svg"));
 }

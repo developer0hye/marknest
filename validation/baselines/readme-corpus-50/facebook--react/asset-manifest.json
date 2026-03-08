@@ -1,0 +1,75 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/license-MIT-blue.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/license-MIT-blue.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/npm/v/react.svg?style=flat",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/npm/v/react.svg?style=flat",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/PRs-welcome-brightgreen.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/PRs-welcome-brightgreen.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/badge/license-MIT-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/license-MIT-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/npm/v/react.svg?style=flat",
+      "fetch_url": "https://img.shields.io/npm/v/react.svg?style=flat",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg",
+      "fetch_url": "https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main",
+      "fetch_url": "https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/PRs-welcome-brightgreen.svg",
+      "fetch_url": "https://img.shields.io/badge/PRs-welcome-brightgreen.svg",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

@@ -1,0 +1,70 @@
+{
+  "id": "facebookresearch--segment-anything",
+  "repo": "facebookresearch/segment-anything",
+  "url": "https://github.com/facebookresearch/segment-anything",
+  "pinned_sha": "dca509fe793f601edb92606367a655c15ac00fdf",
+  "elapsed_sec": 2,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 7320751,
+  "page_count": 6,
+  "token_coverage": 0.984472049689441,
+  "missing_tokens": [
+    "zero-shot",
+    "vith",
+    "vitl",
+    "vitb",
+    "saimages_ids"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [
+    {
+      "page": "page-0001.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/facebookresearch--segment-anything/diffs/page-0001.png"
+    },
+    {
+      "page": "page-0002.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/facebookresearch--segment-anything/diffs/page-0002.png"
+    },
+    {
+      "page": "page-0003.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/facebookresearch--segment-anything/diffs/page-0003.png"
+    },
+    {
+      "page": "page-0004.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/facebookresearch--segment-anything/diffs/page-0004.png"
+    },
+    {
+      "page": "page-0005.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/facebookresearch--segment-anything/diffs/page-0005.png"
+    },
+    {
+      "page": "page-0006.png",
+      "diffPixels": 0,
+      "diffRatio": 0,
+      "diffPath": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/facebookresearch--segment-anything/diffs/page-0006.png"
+    }
+  ],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

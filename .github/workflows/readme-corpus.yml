@@ -1,0 +1,65 @@
+name: README Corpus
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate-readme-corpus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: |
+            crates/marknest/playwright-runtime/package-lock.json
+            validation/package-lock.json
+
+      - name: Cache Rust build outputs
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install PDF rasterization tools
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Pull Git LFS baselines
+        run: git lfs pull
+
+      - name: Install native renderer runtime
+        run: npm ci --prefix crates/marknest/playwright-runtime
+
+      - name: Install validation dependencies
+        run: npm ci --prefix validation
+
+      - name: Install Playwright Chromium for CI
+        run: npx --prefix crates/marknest/playwright-runtime playwright install --with-deps chromium
+
+      - name: Resolve Playwright browser path
+        id: playwright-browser
+        run: |
+          path=$(node -e 'const { chromium } = require("./crates/marknest/playwright-runtime/node_modules/playwright"); process.stdout.write(chromium.executablePath());')
+          echo "path=$path" >> "$GITHUB_OUTPUT"
+
+      - name: Run full README corpus validation
+        run: node validation/readme_corpus.mjs run --tier all --force
+        env:
+          MARKNEST_BROWSER_PATH: ${{ steps.playwright-browser.outputs.path }}
+
+      - name: Upload corpus artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: readme-corpus-artifacts
+          path: validation/.runs
+          retention-days: 14

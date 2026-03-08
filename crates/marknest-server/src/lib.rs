@@ -13,8 +13,8 @@ use marknest::{
     materialize_remote_assets_for_html, prepare_print_template_html, render_html_to_pdf_bytes,
 };
 use marknest_core::{
-    MathMode, MermaidMode, PdfMetadata, RenderOptions, ThemePreset, analyze_zip,
-    render_zip_entry_with_options,
+    DEFAULT_MATH_TIMEOUT_MS, DEFAULT_MERMAID_TIMEOUT_MS, MathMode, MermaidMode, PdfMetadata,
+    RenderOptions, ThemePreset, analyze_zip, render_zip_entry_with_options,
 };
 use serde::Deserialize;
 use tower_http::{cors::CorsLayer, trace::TraceLayer};
@@ -93,6 +93,8 @@ struct AppState {
 pub struct FallbackRenderOptions {
     pub theme: ThemePreset,
     pub custom_css: Option<String>,
+    pub enable_toc: bool,
+    pub sanitize_html: bool,
     pub title: Option<String>,
     pub author: Option<String>,
     pub subject: Option<String>,
@@ -109,6 +111,8 @@ pub struct FallbackRenderOptions {
     pub footer_template: Option<String>,
     pub mermaid_mode: MermaidMode,
     pub math_mode: MathMode,
+    pub mermaid_timeout_ms: u32,
+    pub math_timeout_ms: u32,
 }
 
 impl Default for FallbackRenderOptions {
@@ -116,6 +120,8 @@ impl Default for FallbackRenderOptions {
         Self {
             theme: ThemePreset::Github,
             custom_css: None,
+            enable_toc: false,
+            sanitize_html: true,
             title: None,
             author: None,
             subject: None,
@@ -131,6 +137,8 @@ impl Default for FallbackRenderOptions {
             footer_template: None,
             mermaid_mode: MermaidMode::Off,
             math_mode: MathMode::Off,
+            mermaid_timeout_ms: DEFAULT_MERMAID_TIMEOUT_MS,
+            math_timeout_ms: DEFAULT_MATH_TIMEOUT_MS,
         }
     }
 }
@@ -146,6 +154,8 @@ impl FallbackRenderOptions {
         Self {
             theme: self.theme,
             custom_css: normalize_optional_block(self.custom_css),
+            enable_toc: self.enable_toc,
+            sanitize_html: self.sanitize_html,
             title: normalize_optional_text(self.title),
             author: normalize_optional_text(self.author),
             subject: normalize_optional_text(self.subject),
@@ -167,6 +177,8 @@ impl FallbackRenderOptions {
             footer_template: normalize_optional_block(self.footer_template),
             mermaid_mode: self.mermaid_mode,
             math_mode: self.math_mode,
+            mermaid_timeout_ms: self.mermaid_timeout_ms.max(1),
+            math_timeout_ms: self.math_timeout_ms.max(1),
         }
     }
 
@@ -175,8 +187,12 @@ impl FallbackRenderOptions {
             theme: self.theme,
             metadata: self.metadata(),
             custom_css: self.custom_css.clone(),
+            enable_toc: self.enable_toc,
+            sanitize_html: self.sanitize_html,
             mermaid_mode: self.mermaid_mode,
             math_mode: self.math_mode,
+            mermaid_timeout_ms: self.mermaid_timeout_ms,
+            math_timeout_ms: self.math_timeout_ms,
         }
     }
 
@@ -689,7 +705,7 @@ mod tests {
         let exporter = Arc::new(MockExporter::default());
         let router = app(exporter.clone());
         let boundary = "marknest-boundary";
-        let options_json = r#"{"theme":"docs","custom_css":"body { color: rgb(5, 4, 3); }","page_size":"letter","margin_top_mm":18.0,"margin_right_mm":12.0,"margin_bottom_mm":24.0,"margin_left_mm":10.0,"landscape":true,"title":"Guide Pack","author":"Docs Team","subject":"Architecture","header_template":"<div>Header {{title}}</div>","footer_template":"<div>{{pageNumber}}</div>"}"#;
+        let options_json = r#"{"theme":"docs","custom_css":"body { color: rgb(5, 4, 3); }","page_size":"letter","margin_top_mm":18.0,"margin_right_mm":12.0,"margin_bottom_mm":24.0,"margin_left_mm":10.0,"landscape":true,"enable_toc":true,"sanitize_html":false,"title":"Guide Pack","author":"Docs Team","subject":"Architecture","header_template":"<div>Header {{title}}</div>","footer_template":"<div>{{pageNumber}}</div>","mermaid_timeout_ms":4200,"math_timeout_ms":2400}"#;
         let body = build_multipart_body(
             boundary,
             &[("entry", "docs/README.md"), ("options", options_json)],
@@ -726,6 +742,10 @@ mod tests {
         assert_eq!(requests[0].options.margins_mm.right, 12.0);
         assert_eq!(requests[0].options.margins_mm.bottom, 24.0);
         assert_eq!(requests[0].options.margins_mm.left, 10.0);
+        assert_eq!(requests[0].options.mermaid_timeout_ms, 4200);
+        assert_eq!(requests[0].options.math_timeout_ms, 2400);
+        assert!(requests[0].options.enable_toc);
+        assert!(!requests[0].options.sanitize_html);
         assert!(requests[0].options.landscape);
         assert_eq!(requests[0].options.title.as_deref(), Some("Guide Pack"));
         assert_eq!(requests[0].options.author.as_deref(), Some("Docs Team"));

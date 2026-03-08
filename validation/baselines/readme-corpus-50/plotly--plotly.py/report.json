@@ -1,0 +1,71 @@
+{
+  "status": "success",
+  "exit_code": 0,
+  "input_kind": "markdown_file",
+  "input_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.cache/readme-corpus-50/plotly--plotly.py-c7bffb935e1f/source/plotly.py-c7bffb935e1fdc5cd2a852e47838d4f1dc4a7ff0/README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "/Users/yhkwon/Documents/Projects/marknest-phase4-done/validation/.runs/bless-20260308134654/plotly--plotly.py/output.pdf",
+      "warnings": []
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://badge.fury.io/py/plotly.svg",
+      "fetch_url": "https://badge.fury.io/py/plotly.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/help_forum-discourse-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/help_forum-discourse-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://pepy.tech/badge/plotly/month",
+      "fetch_url": "https://pepy.tech/badge/plotly/month",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/License-MIT-yellow.svg",
+      "fetch_url": "https://img.shields.io/badge/License-MIT-yellow.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://dash.plotly.com/assets/images/maintained-by-plotly.png",
+      "fetch_url": "https://dash.plotly.com/assets/images/maintained-by-plotly.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png",
+      "fetch_url": "https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}
