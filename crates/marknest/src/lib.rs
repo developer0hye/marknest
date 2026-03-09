@@ -35,6 +35,9 @@ const REMOTE_ASSET_TIMEOUT_SECONDS: u64 = 15;
 const REMOTE_ASSET_MAX_REDIRECTS: u32 = 5;
 const REMOTE_ASSET_MAX_BYTES: usize = 16 * 1024 * 1024;
 const REMOTE_ASSET_MAX_TOTAL_BYTES: usize = 64 * 1024 * 1024;
+const GITHUB_ARCHIVE_MAX_BYTES: usize = 256 * 1024 * 1024;
+const GITHUB_API_TIMEOUT_SECONDS: u64 = 30;
+const GITHUB_API_MAX_REDIRECTS: u32 = 5;
 
 pub fn run<I, T>(args: I) -> i32
 where
@@ -3732,6 +3735,141 @@ fn parse_github_url(input: &str) -> Option<ParsedGitHubUrl> {
     })
 }
 
+/// Resolve GitHub auth token from environment variables.
+/// Checks GITHUB_TOKEN first, then falls back to GH_TOKEN.
+fn resolve_github_auth_token() -> Option<String> {
+    env::var("GITHUB_TOKEN")
+        .ok()
+        .or_else(|| env::var("GH_TOKEN").ok())
+        .filter(|token| !token.is_empty())
+}
+
+fn build_github_api_agent() -> ureq::Agent {
+    ureq::AgentBuilder::new()
+        .timeout_connect(Duration::from_secs(GITHUB_API_TIMEOUT_SECONDS))
+        .timeout_read(Duration::from_secs(GITHUB_API_TIMEOUT_SECONDS))
+        .timeout_write(Duration::from_secs(GITHUB_API_TIMEOUT_SECONDS))
+        .redirects(GITHUB_API_MAX_REDIRECTS)
+        .build()
+}
+
+/// Query the GitHub API for the default branch of a repository.
+fn resolve_github_default_branch(
+    owner: &str,
+    repo: &str,
+    token: Option<&str>,
+) -> Result<String, AppFailure> {
+    let url: String = format!("https://api.github.com/repos/{owner}/{repo}");
+    let agent: ureq::Agent = build_github_api_agent();
+    let mut request = agent
+        .get(&url)
+        .set("Accept", "application/vnd.github+json")
+        .set("User-Agent", "marknest");
+
+    if let Some(token) = token {
+        request = request.set("Authorization", &format!("Bearer {token}"));
+    }
+
+    let response = request.call().map_err(|error| match &error {
+        ureq::Error::Status(404, _) => AppFailure::validation(
+            "GitHub repository not found or access denied. Use GITHUB_TOKEN or GH_TOKEN for private repositories.".to_string(),
+        ),
+        ureq::Error::Status(403, response) => {
+            if response
+                .header("X-RateLimit-Remaining")
+                .map(|value| value == "0")
+                .unwrap_or(false)
+            {
+                AppFailure::validation(
+                    "GitHub API rate limit exceeded. Set GITHUB_TOKEN or GH_TOKEN to increase the limit.".to_string(),
+                )
+            } else {
+                AppFailure::system(format!("Failed to query the GitHub API: {error}"))
+            }
+        }
+        _ => AppFailure::system(format!("Failed to query the GitHub API: {error}")),
+    })?;
+
+    let body: String = response.into_string().map_err(|error| {
+        AppFailure::system(format!("Failed to read the GitHub API response: {error}"))
+    })?;
+
+    let json: serde_json::Value = serde_json::from_str(&body).map_err(|error| {
+        AppFailure::system(format!("Failed to parse the GitHub API response: {error}"))
+    })?;
+
+    json["default_branch"]
+        .as_str()
+        .map(|value| value.to_string())
+        .ok_or_else(|| {
+            AppFailure::system(
+                "GitHub API response did not include a default_branch field.".to_string(),
+            )
+        })
+}
+
+/// Download a GitHub repository archive as a ZIP file.
+fn download_github_archive(
+    owner: &str,
+    repo: &str,
+    git_ref: &str,
+    token: Option<&str>,
+) -> Result<Vec<u8>, AppFailure> {
+    let url: String = format!("https://api.github.com/repos/{owner}/{repo}/zipball/{git_ref}");
+    let agent: ureq::Agent = build_github_api_agent();
+    let mut request = agent
+        .get(&url)
+        .set("Accept", "application/vnd.github+json")
+        .set("User-Agent", "marknest");
+
+    if let Some(token) = token {
+        request = request.set("Authorization", &format!("Bearer {token}"));
+    }
+
+    let response = request.call().map_err(|error| match &error {
+        ureq::Error::Status(404, _) => AppFailure::validation(
+            "GitHub repository not found or access denied. Use GITHUB_TOKEN or GH_TOKEN for private repositories.".to_string(),
+        ),
+        ureq::Error::Status(403, response) => {
+            if response
+                .header("X-RateLimit-Remaining")
+                .map(|value| value == "0")
+                .unwrap_or(false)
+            {
+                AppFailure::validation(
+                    "GitHub API rate limit exceeded. Set GITHUB_TOKEN or GH_TOKEN to increase the limit.".to_string(),
+                )
+            } else {
+                AppFailure::system(format!("Failed to download the GitHub archive: {error}"))
+            }
+        }
+        _ => AppFailure::system(format!("Failed to download the GitHub archive: {error}")),
+    })?;
+
+    let mut reader = response.into_reader();
+    let mut bytes: Vec<u8> = Vec::new();
+    let mut buffer = [0_u8; 8192];
+
+    loop {
+        let bytes_read: usize = reader.read(&mut buffer).map_err(|error| {
+            AppFailure::system(format!("Failed to download the GitHub archive: {error}"))
+        })?;
+        if bytes_read == 0 {
+            break;
+        }
+
+        if bytes.len() + bytes_read > GITHUB_ARCHIVE_MAX_BYTES {
+            return Err(AppFailure::validation(
+                "GitHub archive download exceeded the 256 MB limit.".to_string(),
+            ));
+        }
+
+        bytes.extend_from_slice(&buffer[..bytes_read]);
+    }
+
+    Ok(bytes)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -5119,6 +5257,52 @@ mod tests {
             Some(value) => unsafe { env::set_var(key, value) },
             None => unsafe { env::remove_var(key) },
         }
+    }
+
+    // --- GitHub auth token resolution tests ---
+    // Combined into one test to avoid env var race conditions in parallel test execution
+
+    #[test]
+    fn resolves_github_auth_token_from_environment() {
+        let original_github = env::var_os("GITHUB_TOKEN");
+        let original_gh = env::var_os("GH_TOKEN");
+
+        // GITHUB_TOKEN takes priority
+        unsafe {
+            env::set_var("GITHUB_TOKEN", "token-from-github");
+            env::remove_var("GH_TOKEN");
+        }
+        assert_eq!(
+            resolve_github_auth_token(),
+            Some("token-from-github".to_string())
+        );
+
+        // Falls back to GH_TOKEN
+        unsafe {
+            env::remove_var("GITHUB_TOKEN");
+            env::set_var("GH_TOKEN", "token-from-gh");
+        }
+        assert_eq!(
+            resolve_github_auth_token(),
+            Some("token-from-gh".to_string())
+        );
+
+        // Returns None when neither is set
+        unsafe {
+            env::remove_var("GITHUB_TOKEN");
+            env::remove_var("GH_TOKEN");
+        }
+        assert_eq!(resolve_github_auth_token(), None);
+
+        // Ignores empty values
+        unsafe {
+            env::set_var("GITHUB_TOKEN", "");
+            env::set_var("GH_TOKEN", "");
+        }
+        assert_eq!(resolve_github_auth_token(), None);
+
+        restore_env_var("GITHUB_TOKEN", original_github);
+        restore_env_var("GH_TOKEN", original_gh);
     }
 
     // --- GitHub URL parsing tests ---
