@@ -431,8 +431,39 @@ impl ZipMemoryFileSystem {
             });
         }
 
+        strip_common_prefix(&mut files);
         files.sort_by(|left, right| left.normalized_path.cmp(&right.normalized_path));
         Ok(Self { files })
+    }
+}
+
+/// If every file shares the same first path segment (e.g. `repo-main/`),
+/// strip that segment from all paths. This handles GitHub-style archives
+/// that nest everything under `{repo}-{ref}/`.
+fn strip_common_prefix(files: &mut [IndexedFile]) {
+    if files.is_empty() {
+        return;
+    }
+
+    let common: String = match files[0].normalized_path.split('/').next() {
+        Some(segment) => segment.to_string(),
+        None => return,
+    };
+
+    // All files must share the same first segment AND have content after it
+    let all_share_prefix = files.iter().all(|file| {
+        file.normalized_path.starts_with(&common)
+            && file.normalized_path.len() > common.len()
+            && file.normalized_path.as_bytes()[common.len()] == b'/'
+    });
+
+    if !all_share_prefix {
+        return;
+    }
+
+    let strip_len: usize = common.len() + 1; // include the '/'
+    for file in files.iter_mut() {
+        file.normalized_path = file.normalized_path[strip_len..].to_string();
     }
 }
 

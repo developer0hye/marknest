@@ -293,6 +293,8 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
         ))
     })?;
 
+    // Collect all entries with normalized paths first to detect a common prefix
+    let mut collected_entries: Vec<(String, Vec<u8>)> = Vec::new();
     for index in 0..archive.len() {
         let mut entry = archive.by_index(index).map_err(|error| {
             AppFailure::validation(format!("Failed to read ZIP entry {index}: {error}"))
@@ -306,7 +308,21 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
         let normalized_path = normalize_relative_string(&raw_path).map_err(|_| {
             AppFailure::validation(format!("Unsafe ZIP entry path detected: {raw_path}"))
         })?;
-        let output_path = normalized_path_to_filesystem_path(temp_dir.path(), &normalized_path);
+
+        let mut contents: Vec<u8> = Vec::new();
+        entry.read_to_end(&mut contents).map_err(|error| {
+            AppFailure::validation(format!("Failed to extract ZIP entry {raw_path}: {error}"))
+        })?;
+
+        collected_entries.push((normalized_path, contents));
+    }
+
+    // Strip common prefix (e.g. GitHub archive `repo-main/` wrapper)
+    let prefix_len = detect_common_prefix_len(&collected_entries);
+
+    for (normalized_path, contents) in &collected_entries {
+        let stripped_path = &normalized_path[prefix_len..];
+        let output_path = normalized_path_to_filesystem_path(temp_dir.path(), stripped_path);
 
         if let Some(parent) = output_path.parent() {
             fs::create_dir_all(parent).map_err(|error| {
@@ -317,10 +333,6 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
             })?;
         }
 
-        let mut contents: Vec<u8> = Vec::new();
-        entry.read_to_end(&mut contents).map_err(|error| {
-            AppFailure::validation(format!("Failed to extract ZIP entry {raw_path}: {error}"))
-        })?;
         fs::write(&output_path, contents).map_err(|error| {
             AppFailure::system(format!(
                 "Failed to write the extracted ZIP entry {}: {error}",
@@ -330,6 +342,31 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
     }
 
     Ok(temp_dir)
+}
+
+/// Returns the length (including trailing `/`) of the common first path segment
+/// shared by all entries, or 0 if no common prefix exists.
+fn detect_common_prefix_len(entries: &[(String, Vec<u8>)]) -> usize {
+    if entries.is_empty() {
+        return 0;
+    }
+
+    let common = match entries[0].0.split('/').next() {
+        Some(segment) => segment,
+        None => return 0,
+    };
+
+    let all_share_prefix = entries.iter().all(|(path, _)| {
+        path.starts_with(common)
+            && path.len() > common.len()
+            && path.as_bytes()[common.len()] == b'/'
+    });
+
+    if all_share_prefix {
+        common.len() + 1
+    } else {
+        0
+    }
 }
 
 fn run_single_convert(
