@@ -12,7 +12,7 @@ use marknest_core::{
     EntrySelectionReason, MATHJAX_SCRIPT_URL, MATHJAX_VERSION, MERMAID_SCRIPT_URL, MERMAID_VERSION,
     MathMode, MermaidMode, PdfMetadata, ProjectIndex, ProjectSourceKind, RUNTIME_ASSET_MODE,
     RenderHtmlError, RenderOptions, ThemePreset, analyze_workspace, analyze_zip,
-    render_workspace_entry_with_options, rewrite_html_img_sources,
+    analyze_zip_strip_prefix, render_workspace_entry_with_options, rewrite_html_img_sources,
 };
 use serde::{Deserialize, Serialize};
 use tempfile::TempDir;
@@ -35,6 +35,9 @@ const REMOTE_ASSET_TIMEOUT_SECONDS: u64 = 15;
 const REMOTE_ASSET_MAX_REDIRECTS: u32 = 5;
 const REMOTE_ASSET_MAX_BYTES: usize = 16 * 1024 * 1024;
 const REMOTE_ASSET_MAX_TOTAL_BYTES: usize = 64 * 1024 * 1024;
+const GITHUB_ARCHIVE_MAX_BYTES: usize = 256 * 1024 * 1024;
+const GITHUB_API_TIMEOUT_SECONDS: u64 = 30;
+const GITHUB_API_MAX_REDIRECTS: u32 = 5;
 
 pub fn run<I, T>(args: I) -> i32
 where
@@ -265,7 +268,10 @@ fn prepare_render_workspace(
     }
 
     if matches!(analyzed_input.input_kind, ValidationInputKind::Zip) {
-        let temp_dir = materialize_zip_workspace(&analyzed_input.resolved_input_path)?;
+        let temp_dir = materialize_zip_workspace(
+            &analyzed_input.resolved_input_path,
+            analyzed_input.strip_zip_prefix,
+        )?;
         let root = temp_dir.path().to_path_buf();
         return Ok(PreparedWorkspace {
             root,
@@ -278,7 +284,7 @@ fn prepare_render_workspace(
     ))
 }
 
-fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
+fn materialize_zip_workspace(zip_path: &Path, strip_prefix: bool) -> Result<TempDir, AppFailure> {
     let file = fs::File::open(zip_path).map_err(|error| {
         AppFailure::system(format!(
             "Failed to open ZIP input {}: {error}",
@@ -293,6 +299,8 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
         ))
     })?;
 
+    // Collect all entries with normalized paths first (needed for prefix detection)
+    let mut collected_entries: Vec<(String, Vec<u8>)> = Vec::new();
     for index in 0..archive.len() {
         let mut entry = archive.by_index(index).map_err(|error| {
             AppFailure::validation(format!("Failed to read ZIP entry {index}: {error}"))
@@ -306,7 +314,25 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
         let normalized_path = normalize_relative_string(&raw_path).map_err(|_| {
             AppFailure::validation(format!("Unsafe ZIP entry path detected: {raw_path}"))
         })?;
-        let output_path = normalized_path_to_filesystem_path(temp_dir.path(), &normalized_path);
+
+        let mut contents: Vec<u8> = Vec::new();
+        entry.read_to_end(&mut contents).map_err(|error| {
+            AppFailure::validation(format!("Failed to extract ZIP entry {raw_path}: {error}"))
+        })?;
+
+        collected_entries.push((normalized_path, contents));
+    }
+
+    // Only strip the common prefix for GitHub-style archives
+    let prefix_len: usize = if strip_prefix {
+        detect_common_prefix_len(&collected_entries)
+    } else {
+        0
+    };
+
+    for (normalized_path, contents) in &collected_entries {
+        let stripped_path = &normalized_path[prefix_len..];
+        let output_path = normalized_path_to_filesystem_path(temp_dir.path(), stripped_path);
 
         if let Some(parent) = output_path.parent() {
             fs::create_dir_all(parent).map_err(|error| {
@@ -317,10 +343,6 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
             })?;
         }
 
-        let mut contents: Vec<u8> = Vec::new();
-        entry.read_to_end(&mut contents).map_err(|error| {
-            AppFailure::validation(format!("Failed to extract ZIP entry {raw_path}: {error}"))
-        })?;
         fs::write(&output_path, contents).map_err(|error| {
             AppFailure::system(format!(
                 "Failed to write the extracted ZIP entry {}: {error}",
@@ -330,6 +352,31 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
     }
 
     Ok(temp_dir)
+}
+
+/// Returns the length (including trailing `/`) of the common first path segment
+/// shared by all entries, or 0 if no common prefix exists.
+fn detect_common_prefix_len(entries: &[(String, Vec<u8>)]) -> usize {
+    if entries.is_empty() {
+        return 0;
+    }
+
+    let common = match entries[0].0.split('/').next() {
+        Some(segment) => segment,
+        None => return 0,
+    };
+
+    let all_share_prefix = entries.iter().all(|(path, _)| {
+        path.starts_with(common)
+            && path.len() > common.len()
+            && path.as_bytes()[common.len()] == b'/'
+    });
+
+    if all_share_prefix {
+        common.len() + 1
+    } else {
+        0
+    }
 }
 
 fn run_single_convert(
@@ -771,6 +818,8 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: Some(workspace_root.clone()),
                 default_output_directory: Some(workspace_root),
                 project_index,
+                strip_zip_prefix: false,
+                _temp_dir: None,
             })
         }
         ResolvedInput::Zip { path, display_path } => {
@@ -802,6 +851,8 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: None,
                 default_output_directory,
                 project_index,
+                strip_zip_prefix: false,
+                _temp_dir: None,
             })
         }
         ResolvedInput::Folder {
@@ -827,6 +878,62 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: Some(canonical_root.clone()),
                 default_output_directory: Some(canonical_root),
                 project_index,
+                strip_zip_prefix: false,
+                _temp_dir: None,
+            })
+        }
+        ResolvedInput::GitHubUrl {
+            display_path,
+            parsed,
+        } => {
+            let token: Option<String> = resolve_github_auth_token();
+
+            let git_ref: String = match &parsed.git_ref {
+                Some(r) => r.clone(),
+                None => {
+                    resolve_github_default_branch(&parsed.owner, &parsed.repo, token.as_deref())?
+                }
+            };
+
+            eprintln!(
+                "Downloading GitHub archive: {}/{} @ {} ...",
+                parsed.owner, parsed.repo, git_ref
+            );
+            let zip_bytes: Vec<u8> =
+                download_github_archive(&parsed.owner, &parsed.repo, &git_ref, token.as_deref())?;
+
+            // Save to temp file so the existing ZIP pipeline can process it
+            let temp_dir: TempDir = TempDir::new().map_err(|error| {
+                AppFailure::system(format!("Failed to create temp directory: {error}"))
+            })?;
+            let temp_zip_path: PathBuf = temp_dir.path().join("github-archive.zip");
+            fs::write(&temp_zip_path, &zip_bytes).map_err(|error| {
+                AppFailure::system(format!("Failed to write temp archive: {error}"))
+            })?;
+
+            // GitHub archives nest files under {repo}-{ref}/, strip that prefix
+            let project_index: ProjectIndex =
+                analyze_zip_strip_prefix(&zip_bytes).map_err(map_analyze_error)?;
+
+            // If URL pointed to a specific file (/blob/), use it as implicit entry
+            let explicit_entry: Option<String> = if parsed.is_file_reference {
+                parsed.subpath.clone()
+            } else {
+                None
+            };
+
+            Ok(AnalyzedInput {
+                resolved_input_path: temp_zip_path,
+                input_kind: ValidationInputKind::Zip,
+                input_path: display_path,
+                is_default_input: false,
+                uses_implicit_all: false,
+                explicit_entry,
+                workspace_root: None,
+                default_output_directory: Some(env::current_dir().unwrap_or_default()),
+                project_index,
+                strip_zip_prefix: true,
+                _temp_dir: Some(temp_dir),
             })
         }
     }
@@ -840,6 +947,17 @@ fn resolve_input(input: Option<&Path>) -> Result<ResolvedInput, AppFailure> {
             AppFailure::system(format!("Failed to read the current directory: {error}"))
         })?,
     };
+
+    // Check for GitHub URL before filesystem access
+    if let Some(path_str) = path.to_str() {
+        if let Some(parsed) = parse_github_url(path_str) {
+            return Ok(ResolvedInput::GitHubUrl {
+                display_path: path_str.to_string(),
+                parsed,
+            });
+        }
+    }
+
     let display_path = path.display().to_string();
     let metadata = fs::metadata(&path).map_err(|error| {
         AppFailure::validation(format!(
@@ -2206,19 +2324,19 @@ fn parse_convert_args(binary_name: &str, args: &[String]) -> Result<ParseResult,
 
 fn root_help(binary_name: &str) -> String {
     format!(
-        "Convert and validate Markdown workspaces.\n\nUsage:\n  {binary_name} convert [INPUT] [--entry <PATH> | --all] [-o <PATH> | --out-dir <PATH>] [--config <PATH>] [--render-report <PATH>] [--debug-html <PATH>] [--asset-manifest <PATH>] [--css <PATH>] [--header-template <PATH>] [--footer-template <PATH>] [--page-size <a4|letter>] [--margin <MM>] [--margin-top <MM>] [--margin-right <MM>] [--margin-bottom <MM>] [--margin-left <MM>] [--theme <default|github|docs|plain>] [--landscape] [--toc | --no-toc] [--sanitize-html | --no-sanitize-html] [--title <TEXT>] [--author <TEXT>] [--subject <TEXT>] [--mermaid <off|auto|on>] [--math <off|auto|on>] [--mermaid-timeout-ms <MS>] [--math-timeout-ms <MS>]\n  {binary_name} validate [INPUT] [--entry <PATH> | --all] [--strict] [--report <PATH>]\n  {binary_name} --help\n"
+        "Convert and validate Markdown workspaces.\n\nUsage:\n  {binary_name} convert [INPUT] [--entry <PATH> | --all] [-o <PATH> | --out-dir <PATH>] [--config <PATH>] [--render-report <PATH>] [--debug-html <PATH>] [--asset-manifest <PATH>] [--css <PATH>] [--header-template <PATH>] [--footer-template <PATH>] [--page-size <a4|letter>] [--margin <MM>] [--margin-top <MM>] [--margin-right <MM>] [--margin-bottom <MM>] [--margin-left <MM>] [--theme <default|github|docs|plain>] [--landscape] [--toc | --no-toc] [--sanitize-html | --no-sanitize-html] [--title <TEXT>] [--author <TEXT>] [--subject <TEXT>] [--mermaid <off|auto|on>] [--math <off|auto|on>] [--mermaid-timeout-ms <MS>] [--math-timeout-ms <MS>]\n  {binary_name} validate [INPUT] [--entry <PATH> | --all] [--strict] [--report <PATH>]\n  {binary_name} --help\n\nINPUT can be a Markdown file, ZIP archive, folder, or GitHub URL.\n\nGitHub URL examples:\n  {binary_name} convert https://github.com/user/repo -o output.pdf\n  {binary_name} convert https://github.com/user/repo/blob/main/guide.md -o guide.pdf\n  {binary_name} convert https://github.com/user/repo --all --out-dir ./pdf\n\nEnvironment:\n  GITHUB_TOKEN / GH_TOKEN    GitHub auth token for private repos and higher rate limits\n"
     )
 }
 
 fn validate_help(binary_name: &str) -> String {
     format!(
-        "Validate Markdown workspaces and ZIP inputs.\n\nUsage:\n  {binary_name} validate [INPUT] [OPTIONS]\n\nOptions:\n  --entry <PATH>   Validate a single Markdown entry inside a folder or ZIP input.\n  --all            Validate all Markdown entries.\n  --strict         Treat warnings as validation failures.\n  --report <PATH>  Write a JSON validation report.\n  -h, --help       Show this help message.\n"
+        "Validate Markdown workspaces and ZIP inputs.\n\nUsage:\n  {binary_name} validate [INPUT] [OPTIONS]\n\nINPUT can be a Markdown file, ZIP archive, folder, or GitHub URL.\n\nOptions:\n  --entry <PATH>   Validate a single Markdown entry inside a folder or ZIP input.\n  --all            Validate all Markdown entries.\n  --strict         Treat warnings as validation failures.\n  --report <PATH>  Write a JSON validation report.\n  -h, --help       Show this help message.\n\nEnvironment:\n  GITHUB_TOKEN / GH_TOKEN    GitHub auth token for private repos and higher rate limits\n"
     )
 }
 
 fn convert_help(binary_name: &str) -> String {
     format!(
-        "Convert Markdown entries into PDF files.\n\nUsage:\n  {binary_name} convert [INPUT] [OPTIONS]\n\nOptions:\n  --entry <PATH>               Convert one Markdown entry inside a folder or ZIP input.\n  --all                        Convert all Markdown entries.\n  -o, --output <PATH>          Write a single PDF to a specific path.\n  --out-dir <PATH>             Write batch PDF output under a directory.\n  --config <PATH>              Load conversion defaults from a TOML config file.\n  --render-report <PATH>       Write a JSON conversion report.\n  --debug-html <PATH>          Write the rendered HTML used for PDF generation.\n  --asset-manifest <PATH>      Write the selected entry asset manifest as JSON.\n  --css <PATH>                 Append a custom CSS file after the theme stylesheet.\n  --header-template <PATH>     Load an HTML header template for Chromium print output.\n  --footer-template <PATH>     Load an HTML footer template for Chromium print output.\n  --page-size <a4|letter>      Set the output page size.\n  --margin <MM>                Set the same margin on all sides in millimeters.\n  --margin-top <MM>            Override the top page margin in millimeters.\n  --margin-right <MM>          Override the right page margin in millimeters.\n  --margin-bottom <MM>         Override the bottom page margin in millimeters.\n  --margin-left <MM>           Override the left page margin in millimeters.\n  --theme <default|github|docs|plain>\n                               Apply a built-in document theme.\n  --landscape                  Render the PDF in landscape orientation.\n  --toc                        Insert a generated table of contents near the top of the document.\n  --no-toc                     Skip the generated table of contents.\n  --sanitize-html              Sanitize rendered document HTML before PDF generation.\n  --no-sanitize-html           Trust document HTML and skip sanitization.\n  --title <TEXT>               Override the document title.\n  --author <TEXT>              Set the PDF author metadata.\n  --subject <TEXT>             Set the PDF subject metadata.\n  --mermaid <off|auto|on>      Control Mermaid rendering.\n  --math <off|auto|on>         Control Math rendering.\n  --mermaid-timeout-ms <MS>    Set the per-diagram Mermaid render timeout.\n  --math-timeout-ms <MS>       Set the per-expression Math render timeout.\n  -h, --help                   Show this help message.\n"
+        "Convert Markdown entries into PDF files.\n\nUsage:\n  {binary_name} convert [INPUT] [OPTIONS]\n\nINPUT can be a Markdown file, ZIP archive, folder, or GitHub URL.\n\nGitHub URL examples:\n  {binary_name} convert https://github.com/user/repo -o output.pdf\n  {binary_name} convert https://github.com/user/repo/blob/main/guide.md -o guide.pdf\n  {binary_name} convert https://github.com/user/repo --all --out-dir ./pdf\n\nOptions:\n  --entry <PATH>               Convert one Markdown entry inside a folder or ZIP input.\n  --all                        Convert all Markdown entries.\n  -o, --output <PATH>          Write a single PDF to a specific path.\n  --out-dir <PATH>             Write batch PDF output under a directory.\n  --config <PATH>              Load conversion defaults from a TOML config file.\n  --render-report <PATH>       Write a JSON conversion report.\n  --debug-html <PATH>          Write the rendered HTML used for PDF generation.\n  --asset-manifest <PATH>      Write the selected entry asset manifest as JSON.\n  --css <PATH>                 Append a custom CSS file after the theme stylesheet.\n  --header-template <PATH>     Load an HTML header template for Chromium print output.\n  --footer-template <PATH>     Load an HTML footer template for Chromium print output.\n  --page-size <a4|letter>      Set the output page size.\n  --margin <MM>                Set the same margin on all sides in millimeters.\n  --margin-top <MM>            Override the top page margin in millimeters.\n  --margin-right <MM>          Override the right page margin in millimeters.\n  --margin-bottom <MM>         Override the bottom page margin in millimeters.\n  --margin-left <MM>           Override the left page margin in millimeters.\n  --theme <default|github|docs|plain>\n                               Apply a built-in document theme.\n  --landscape                  Render the PDF in landscape orientation.\n  --toc                        Insert a generated table of contents near the top of the document.\n  --no-toc                     Skip the generated table of contents.\n  --sanitize-html              Sanitize rendered document HTML before PDF generation.\n  --no-sanitize-html           Trust document HTML and skip sanitization.\n  --title <TEXT>               Override the document title.\n  --author <TEXT>              Set the PDF author metadata.\n  --subject <TEXT>             Set the PDF subject metadata.\n  --mermaid <off|auto|on>      Control Mermaid rendering.\n  --math <off|auto|on>         Control Math rendering.\n  --mermaid-timeout-ms <MS>    Set the per-diagram Mermaid render timeout.\n  --math-timeout-ms <MS>       Set the per-expression Math render timeout.\n  -h, --help                   Show this help message.\n\nEnvironment:\n  GITHUB_TOKEN / GH_TOKEN    GitHub auth token for private repos and higher rate limits\n"
     )
 }
 
@@ -2355,6 +2473,10 @@ enum ResolvedInput {
         display_path: String,
         is_default_input: bool,
     },
+    GitHubUrl {
+        display_path: String,
+        parsed: ParsedGitHubUrl,
+    },
 }
 
 #[derive(Debug)]
@@ -2368,6 +2490,12 @@ struct AnalyzedInput {
     workspace_root: Option<PathBuf>,
     default_output_directory: Option<PathBuf>,
     project_index: ProjectIndex,
+    /// Strip common prefix from ZIP paths during materialization.
+    /// Enabled for GitHub archive downloads where files are nested under `{repo}-{ref}/`.
+    strip_zip_prefix: bool,
+    /// Keeps temporary directory alive for the duration of analysis/conversion.
+    /// Used by GitHub URL downloads to hold the temp archive file.
+    _temp_dir: Option<TempDir>,
 }
 
 #[derive(Debug, Clone)]
@@ -3611,6 +3739,223 @@ impl ParseFailure {
     fn new(message: String) -> Self {
         Self { message }
     }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct ParsedGitHubUrl {
+    owner: String,
+    repo: String,
+    git_ref: Option<String>,
+    subpath: Option<String>,
+    is_file_reference: bool,
+}
+
+/// Parse a GitHub URL into its components. Returns `None` for non-GitHub URLs
+/// or malformed input.
+fn parse_github_url(input: &str) -> Option<ParsedGitHubUrl> {
+    let trimmed: &str = input.trim();
+
+    // Must start with http:// or https://
+    let after_scheme: &str = trimmed
+        .strip_prefix("https://")
+        .or_else(|| trimmed.strip_prefix("http://"))?;
+
+    // Must be github.com host (with optional www.)
+    let after_host: &str = after_scheme
+        .strip_prefix("github.com/")
+        .or_else(|| after_scheme.strip_prefix("www.github.com/"))?;
+
+    // Split remaining path segments
+    let segments: Vec<&str> = after_host
+        .trim_end_matches('/')
+        .split('/')
+        .filter(|segment| !segment.is_empty())
+        .collect();
+
+    if segments.len() < 2 {
+        return None;
+    }
+
+    let owner: String = segments[0].to_string();
+    let repo: String = segments[1].trim_end_matches(".git").to_string();
+
+    if owner.is_empty() || repo.is_empty() {
+        return None;
+    }
+
+    // Bare repo URL: https://github.com/owner/repo
+    if segments.len() == 2 {
+        return Some(ParsedGitHubUrl {
+            owner,
+            repo,
+            git_ref: None,
+            subpath: None,
+            is_file_reference: false,
+        });
+    }
+
+    // Must have /tree/ or /blob/ as the third segment
+    let path_type: &str = segments[2];
+    let is_file_reference: bool = match path_type {
+        "blob" => true,
+        "tree" => false,
+        _ => return None,
+    };
+
+    // Must have a ref after /tree/ or /blob/
+    if segments.len() < 4 {
+        return None;
+    }
+
+    let git_ref: String = segments[3].to_string();
+    let subpath: Option<String> = if segments.len() > 4 {
+        Some(segments[4..].join("/"))
+    } else {
+        None
+    };
+
+    Some(ParsedGitHubUrl {
+        owner,
+        repo,
+        git_ref: Some(git_ref),
+        subpath,
+        is_file_reference,
+    })
+}
+
+/// Resolve GitHub auth token from environment variables.
+/// Checks GITHUB_TOKEN first, then falls back to GH_TOKEN.
+fn resolve_github_auth_token() -> Option<String> {
+    env::var("GITHUB_TOKEN")
+        .ok()
+        .or_else(|| env::var("GH_TOKEN").ok())
+        .filter(|token| !token.is_empty())
+}
+
+fn build_github_api_agent() -> ureq::Agent {
+    ureq::AgentBuilder::new()
+        .timeout_connect(Duration::from_secs(GITHUB_API_TIMEOUT_SECONDS))
+        .timeout_read(Duration::from_secs(GITHUB_API_TIMEOUT_SECONDS))
+        .timeout_write(Duration::from_secs(GITHUB_API_TIMEOUT_SECONDS))
+        .redirects(GITHUB_API_MAX_REDIRECTS)
+        .build()
+}
+
+/// Query the GitHub API for the default branch of a repository.
+fn resolve_github_default_branch(
+    owner: &str,
+    repo: &str,
+    token: Option<&str>,
+) -> Result<String, AppFailure> {
+    let url: String = format!("https://api.github.com/repos/{owner}/{repo}");
+    let agent: ureq::Agent = build_github_api_agent();
+    let mut request = agent
+        .get(&url)
+        .set("Accept", "application/vnd.github+json")
+        .set("User-Agent", "marknest");
+
+    if let Some(token) = token {
+        request = request.set("Authorization", &format!("Bearer {token}"));
+    }
+
+    let response = request.call().map_err(|error| match &error {
+        ureq::Error::Status(404, _) => AppFailure::validation(
+            "GitHub repository not found or access denied. Use GITHUB_TOKEN or GH_TOKEN for private repositories.".to_string(),
+        ),
+        ureq::Error::Status(403, response) => {
+            if response
+                .header("X-RateLimit-Remaining")
+                .map(|value| value == "0")
+                .unwrap_or(false)
+            {
+                AppFailure::validation(
+                    "GitHub API rate limit exceeded. Set GITHUB_TOKEN or GH_TOKEN to increase the limit.".to_string(),
+                )
+            } else {
+                AppFailure::system(format!("Failed to query the GitHub API: {error}"))
+            }
+        }
+        _ => AppFailure::system(format!("Failed to query the GitHub API: {error}")),
+    })?;
+
+    let body: String = response.into_string().map_err(|error| {
+        AppFailure::system(format!("Failed to read the GitHub API response: {error}"))
+    })?;
+
+    let json: serde_json::Value = serde_json::from_str(&body).map_err(|error| {
+        AppFailure::system(format!("Failed to parse the GitHub API response: {error}"))
+    })?;
+
+    json["default_branch"]
+        .as_str()
+        .map(|value| value.to_string())
+        .ok_or_else(|| {
+            AppFailure::system(
+                "GitHub API response did not include a default_branch field.".to_string(),
+            )
+        })
+}
+
+/// Download a GitHub repository archive as a ZIP file.
+fn download_github_archive(
+    owner: &str,
+    repo: &str,
+    git_ref: &str,
+    token: Option<&str>,
+) -> Result<Vec<u8>, AppFailure> {
+    let url: String = format!("https://api.github.com/repos/{owner}/{repo}/zipball/{git_ref}");
+    let agent: ureq::Agent = build_github_api_agent();
+    let mut request = agent
+        .get(&url)
+        .set("Accept", "application/vnd.github+json")
+        .set("User-Agent", "marknest");
+
+    if let Some(token) = token {
+        request = request.set("Authorization", &format!("Bearer {token}"));
+    }
+
+    let response = request.call().map_err(|error| match &error {
+        ureq::Error::Status(404, _) => AppFailure::validation(
+            "GitHub repository not found or access denied. Use GITHUB_TOKEN or GH_TOKEN for private repositories.".to_string(),
+        ),
+        ureq::Error::Status(403, response) => {
+            if response
+                .header("X-RateLimit-Remaining")
+                .map(|value| value == "0")
+                .unwrap_or(false)
+            {
+                AppFailure::validation(
+                    "GitHub API rate limit exceeded. Set GITHUB_TOKEN or GH_TOKEN to increase the limit.".to_string(),
+                )
+            } else {
+                AppFailure::system(format!("Failed to download the GitHub archive: {error}"))
+            }
+        }
+        _ => AppFailure::system(format!("Failed to download the GitHub archive: {error}")),
+    })?;
+
+    let mut reader = response.into_reader();
+    let mut bytes: Vec<u8> = Vec::new();
+    let mut buffer = [0_u8; 8192];
+
+    loop {
+        let bytes_read: usize = reader.read(&mut buffer).map_err(|error| {
+            AppFailure::system(format!("Failed to download the GitHub archive: {error}"))
+        })?;
+        if bytes_read == 0 {
+            break;
+        }
+
+        if bytes.len() + bytes_read > GITHUB_ARCHIVE_MAX_BYTES {
+            return Err(AppFailure::validation(
+                "GitHub archive download exceeded the 256 MB limit.".to_string(),
+            ));
+        }
+
+        bytes.extend_from_slice(&buffer[..bytes_read]);
+    }
+
+    Ok(bytes)
 }
 
 #[cfg(test)]
@@ -5000,5 +5345,207 @@ mod tests {
             Some(value) => unsafe { env::set_var(key, value) },
             None => unsafe { env::remove_var(key) },
         }
+    }
+
+    // --- GitHub URL resolve_input tests ---
+
+    #[test]
+    fn resolve_input_returns_github_url_variant_for_github_urls() {
+        let path = Path::new("https://github.com/user/repo");
+        let result = resolve_input(Some(path)).expect("should resolve GitHub URL");
+        match result {
+            ResolvedInput::GitHubUrl {
+                display_path,
+                parsed,
+            } => {
+                assert_eq!(display_path, "https://github.com/user/repo");
+                assert_eq!(parsed.owner, "user");
+                assert_eq!(parsed.repo, "repo");
+            }
+            _ => panic!("expected GitHubUrl variant"),
+        }
+    }
+
+    #[test]
+    fn resolve_input_returns_local_type_for_non_url_paths() {
+        let temp_dir = TempDir::new().expect("temp dir");
+        let md_path = temp_dir.path().join("test.md");
+        fs::write(&md_path, "# Test").expect("write");
+
+        let result = resolve_input(Some(&md_path)).expect("should resolve markdown file");
+        match result {
+            ResolvedInput::MarkdownFile { .. } => {}
+            _ => panic!("expected MarkdownFile variant"),
+        }
+    }
+
+    // --- GitHub auth token resolution tests ---
+    // Combined into one test to avoid env var race conditions in parallel test execution
+
+    #[test]
+    fn resolves_github_auth_token_from_environment() {
+        let original_github = env::var_os("GITHUB_TOKEN");
+        let original_gh = env::var_os("GH_TOKEN");
+
+        // GITHUB_TOKEN takes priority
+        unsafe {
+            env::set_var("GITHUB_TOKEN", "token-from-github");
+            env::remove_var("GH_TOKEN");
+        }
+        assert_eq!(
+            resolve_github_auth_token(),
+            Some("token-from-github".to_string())
+        );
+
+        // Falls back to GH_TOKEN
+        unsafe {
+            env::remove_var("GITHUB_TOKEN");
+            env::set_var("GH_TOKEN", "token-from-gh");
+        }
+        assert_eq!(
+            resolve_github_auth_token(),
+            Some("token-from-gh".to_string())
+        );
+
+        // Returns None when neither is set
+        unsafe {
+            env::remove_var("GITHUB_TOKEN");
+            env::remove_var("GH_TOKEN");
+        }
+        assert_eq!(resolve_github_auth_token(), None);
+
+        // Ignores empty values
+        unsafe {
+            env::set_var("GITHUB_TOKEN", "");
+            env::set_var("GH_TOKEN", "");
+        }
+        assert_eq!(resolve_github_auth_token(), None);
+
+        restore_env_var("GITHUB_TOKEN", original_github);
+        restore_env_var("GH_TOKEN", original_gh);
+    }
+
+    // --- GitHub URL parsing tests ---
+
+    #[test]
+    fn parses_bare_github_repo_url() {
+        let result = parse_github_url("https://github.com/user/repo");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: None,
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_github_tree_url_with_branch() {
+        let result = parse_github_url("https://github.com/user/repo/tree/main");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: Some("main".to_string()),
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_github_blob_url_with_file_path() {
+        let result = parse_github_url("https://github.com/user/repo/blob/main/docs/guide.md");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: Some("main".to_string()),
+                subpath: Some("docs/guide.md".to_string()),
+                is_file_reference: true,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_github_tree_url_with_tag_and_directory() {
+        let result = parse_github_url("https://github.com/user/repo/tree/v2.0/src");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: Some("v2.0".to_string()),
+                subpath: Some("src".to_string()),
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_github_url_with_dot_git_suffix() {
+        let result = parse_github_url("https://github.com/user/repo.git");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: None,
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_http_github_url() {
+        let result = parse_github_url("http://github.com/user/repo");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: None,
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn rejects_non_github_url() {
+        assert_eq!(parse_github_url("https://gitlab.com/user/repo"), None);
+    }
+
+    #[test]
+    fn rejects_malformed_github_url_missing_repo() {
+        assert_eq!(parse_github_url("https://github.com/user"), None);
+    }
+
+    #[test]
+    fn rejects_non_url_input() {
+        assert_eq!(parse_github_url("README.md"), None);
+        assert_eq!(parse_github_url("./docs.zip"), None);
+        assert_eq!(parse_github_url("/some/path"), None);
+    }
+
+    #[test]
+    fn parses_github_url_with_trailing_slash() {
+        let result = parse_github_url("https://github.com/user/repo/");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: None,
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
     }
 }
