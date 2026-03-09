@@ -811,6 +811,7 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: Some(workspace_root.clone()),
                 default_output_directory: Some(workspace_root),
                 project_index,
+                _temp_dir: None,
             })
         }
         ResolvedInput::Zip { path, display_path } => {
@@ -842,6 +843,7 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: None,
                 default_output_directory,
                 project_index,
+                _temp_dir: None,
             })
         }
         ResolvedInput::Folder {
@@ -867,6 +869,58 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: Some(canonical_root.clone()),
                 default_output_directory: Some(canonical_root),
                 project_index,
+                _temp_dir: None,
+            })
+        }
+        ResolvedInput::GitHubUrl {
+            display_path,
+            parsed,
+        } => {
+            let token: Option<String> = resolve_github_auth_token();
+
+            let git_ref: String = match &parsed.git_ref {
+                Some(r) => r.clone(),
+                None => {
+                    resolve_github_default_branch(&parsed.owner, &parsed.repo, token.as_deref())?
+                }
+            };
+
+            eprintln!(
+                "Downloading GitHub archive: {}/{} @ {} ...",
+                parsed.owner, parsed.repo, git_ref
+            );
+            let zip_bytes: Vec<u8> =
+                download_github_archive(&parsed.owner, &parsed.repo, &git_ref, token.as_deref())?;
+
+            // Save to temp file so the existing ZIP pipeline can process it
+            let temp_dir: TempDir = TempDir::new().map_err(|error| {
+                AppFailure::system(format!("Failed to create temp directory: {error}"))
+            })?;
+            let temp_zip_path: PathBuf = temp_dir.path().join("github-archive.zip");
+            fs::write(&temp_zip_path, &zip_bytes).map_err(|error| {
+                AppFailure::system(format!("Failed to write temp archive: {error}"))
+            })?;
+
+            let project_index: ProjectIndex = analyze_zip(&zip_bytes).map_err(map_analyze_error)?;
+
+            // If URL pointed to a specific file (/blob/), use it as implicit entry
+            let explicit_entry: Option<String> = if parsed.is_file_reference {
+                parsed.subpath.clone()
+            } else {
+                None
+            };
+
+            Ok(AnalyzedInput {
+                resolved_input_path: temp_zip_path,
+                input_kind: ValidationInputKind::Zip,
+                input_path: display_path,
+                is_default_input: false,
+                uses_implicit_all: false,
+                explicit_entry,
+                workspace_root: None,
+                default_output_directory: Some(env::current_dir().unwrap_or_default()),
+                project_index,
+                _temp_dir: Some(temp_dir),
             })
         }
     }
@@ -880,6 +934,17 @@ fn resolve_input(input: Option<&Path>) -> Result<ResolvedInput, AppFailure> {
             AppFailure::system(format!("Failed to read the current directory: {error}"))
         })?,
     };
+
+    // Check for GitHub URL before filesystem access
+    if let Some(path_str) = path.to_str() {
+        if let Some(parsed) = parse_github_url(path_str) {
+            return Ok(ResolvedInput::GitHubUrl {
+                display_path: path_str.to_string(),
+                parsed,
+            });
+        }
+    }
+
     let display_path = path.display().to_string();
     let metadata = fs::metadata(&path).map_err(|error| {
         AppFailure::validation(format!(
@@ -2395,6 +2460,10 @@ enum ResolvedInput {
         display_path: String,
         is_default_input: bool,
     },
+    GitHubUrl {
+        display_path: String,
+        parsed: ParsedGitHubUrl,
+    },
 }
 
 #[derive(Debug)]
@@ -2408,6 +2477,9 @@ struct AnalyzedInput {
     workspace_root: Option<PathBuf>,
     default_output_directory: Option<PathBuf>,
     project_index: ProjectIndex,
+    /// Keeps temporary directory alive for the duration of analysis/conversion.
+    /// Used by GitHub URL downloads to hold the temp archive file.
+    _temp_dir: Option<TempDir>,
 }
 
 #[derive(Debug, Clone)]
@@ -5256,6 +5328,38 @@ mod tests {
         match value {
             Some(value) => unsafe { env::set_var(key, value) },
             None => unsafe { env::remove_var(key) },
+        }
+    }
+
+    // --- GitHub URL resolve_input tests ---
+
+    #[test]
+    fn resolve_input_returns_github_url_variant_for_github_urls() {
+        let path = Path::new("https://github.com/user/repo");
+        let result = resolve_input(Some(path)).expect("should resolve GitHub URL");
+        match result {
+            ResolvedInput::GitHubUrl {
+                display_path,
+                parsed,
+            } => {
+                assert_eq!(display_path, "https://github.com/user/repo");
+                assert_eq!(parsed.owner, "user");
+                assert_eq!(parsed.repo, "repo");
+            }
+            _ => panic!("expected GitHubUrl variant"),
+        }
+    }
+
+    #[test]
+    fn resolve_input_returns_local_type_for_non_url_paths() {
+        let temp_dir = TempDir::new().expect("temp dir");
+        let md_path = temp_dir.path().join("test.md");
+        fs::write(&md_path, "# Test").expect("write");
+
+        let result = resolve_input(Some(&md_path)).expect("should resolve markdown file");
+        match result {
+            ResolvedInput::MarkdownFile { .. } => {}
+            _ => panic!("expected MarkdownFile variant"),
         }
     }
 
