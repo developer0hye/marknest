@@ -20,6 +20,11 @@ import {
   runtimeDiagnosticsForEntry,
   waitForFrameRenderStatus,
 } from "./runtime_sync.mjs";
+import {
+  buildZipFromFiles,
+  detectInputKind,
+  readDirectoryEntries,
+} from "./zip_from_files.mjs";
 
 const state = {
   wasm: null,
@@ -39,6 +44,11 @@ const state = {
 
 const elements = {
   zipInput: document.getElementById("zip-input"),
+  folderInput: document.getElementById("folder-input"),
+  browseFile: document.getElementById("browse-file"),
+  browseFolder: document.getElementById("browse-folder"),
+  dropzoneLabel: document.getElementById("dropzone-label"),
+  localImageWarning: document.getElementById("local-image-warning"),
   fileName: document.getElementById("file-name"),
   statusChip: document.getElementById("status-chip"),
   statusMessage: document.getElementById("status-message"),
@@ -456,6 +466,44 @@ function schedulePreviewRefresh() {
   }, 180);
 }
 
+async function processInput(files) {
+  const inputKind = detectInputKind(files);
+
+  if (inputKind === "unsupported") {
+    setStatus("error", "Unsupported", "Please upload a .zip archive, a .md file, or drag a folder.");
+    return;
+  }
+
+  elements.localImageWarning.hidden = true;
+
+  if (inputKind === "zip") {
+    await analyzeZip(files[0]);
+    return;
+  }
+
+  if (!state.wasm) {
+    setStatus("waiting", "Booting", "The WASM runtime is still loading. Try again in a moment.");
+    return;
+  }
+
+  try {
+    setStatus("ready", "Converting", "Building an in-memory archive from the selected input.");
+    const result = await buildZipFromFiles(state.wasm, files);
+
+    if (result.warnings.length > 0) {
+      elements.localImageWarning.hidden = false;
+      elements.localImageWarning.textContent = result.warnings[0];
+    }
+
+    const syntheticFile = new File([result.zipBytes], result.fileName, {
+      type: "application/zip",
+    });
+    await analyzeZip(syntheticFile);
+  } catch (error) {
+    setStatus("error", "Failed", `Input processing failed: ${String(error)}`);
+  }
+}
+
 async function analyzeZip(file) {
   if (!state.wasm) {
     setStatus("waiting", "Booting", "The WASM runtime is still loading. Try again in a moment.");
@@ -489,7 +537,7 @@ async function analyzeZip(file) {
 
     if (projectIndex.entry_candidates.length === 0) {
       elements.previewTitle.textContent = "No preview available";
-      elements.previewCaption.textContent = "The uploaded archive did not expose a Markdown entry candidate.";
+      elements.previewCaption.textContent = "The input did not expose a Markdown entry candidate.";
       setStatus("warning", "No entries", "Analysis completed, but there is no Markdown entry to preview.");
       syncActionButtons();
       return;
@@ -511,9 +559,9 @@ async function analyzeZip(file) {
     setTextList(elements.warningList, [], "Warnings will appear after analysis.");
     setTextList(elements.errorList, [String(error)], "No errors.");
     elements.previewTitle.textContent = "Preview unavailable";
-    elements.previewCaption.textContent = "The ZIP could not be analyzed.";
+    elements.previewCaption.textContent = "The input could not be analyzed.";
     updateTemplatePreviews();
-    setStatus("error", "Failed", `ZIP analysis failed: ${String(error)}`);
+    setStatus("error", "Failed", `Analysis failed: ${String(error)}`);
     syncActionButtons();
   } finally {
     setBusy(false);
@@ -1013,7 +1061,7 @@ function connectWasmBindings() {
   }
 
   state.wasm = window.wasmBindings;
-  setStatus("ready", "Ready", "The WASM runtime is ready. Upload a ZIP archive to inspect it.");
+  setStatus("ready", "Ready", "The WASM runtime is ready. Upload a ZIP, Markdown file, or folder to inspect it.");
   syncActionButtons();
 }
 
@@ -1042,12 +1090,70 @@ updateScaleNote();
 updateTemplatePreviews();
 
 elements.zipInput.addEventListener("change", async (event) => {
-  const file = event.target.files?.[0];
-  if (!file) {
+  const files = event.target.files;
+  if (!files || files.length === 0) {
     return;
   }
 
-  await analyzeZip(file);
+  await processInput(Array.from(files));
+});
+
+elements.folderInput.addEventListener("change", async (event) => {
+  const files = event.target.files;
+  if (!files || files.length === 0) {
+    return;
+  }
+
+  await processInput(Array.from(files));
+});
+
+elements.browseFile.addEventListener("click", () => {
+  elements.zipInput.click();
+});
+
+elements.browseFolder.addEventListener("click", () => {
+  elements.folderInput.click();
+});
+
+// Drag-and-drop on the dropzone.
+elements.dropzoneLabel.addEventListener("dragover", (event) => {
+  event.preventDefault();
+  elements.dropzoneLabel.classList.add("is-drag-over");
+});
+
+elements.dropzoneLabel.addEventListener("dragleave", () => {
+  elements.dropzoneLabel.classList.remove("is-drag-over");
+});
+
+elements.dropzoneLabel.addEventListener("drop", async (event) => {
+  event.preventDefault();
+  elements.dropzoneLabel.classList.remove("is-drag-over");
+
+  const items = event.dataTransfer?.items;
+  if (!items || items.length === 0) {
+    return;
+  }
+
+  // Check if any item is a directory.
+  const entries = [];
+  for (const item of items) {
+    const entry = item.webkitGetAsEntry?.();
+    if (entry) {
+      entries.push(entry);
+    }
+  }
+
+  if (entries.length === 1 && entries[0].isDirectory) {
+    const files = await readDirectoryEntries(entries[0]);
+    await processInput(files);
+    return;
+  }
+
+  // Single file drop (ZIP or .md).
+  const droppedFiles = event.dataTransfer.files;
+  if (droppedFiles.length > 0) {
+    await processInput(Array.from(droppedFiles));
+  }
 });
 
 elements.qualityMode.addEventListener("change", (event) => {

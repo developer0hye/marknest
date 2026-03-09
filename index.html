@@ -7,7 +7,7 @@
     <title>MarkNest Fallback Lab</title>
     <meta
       name="description"
-      content="Upload a Markdown ZIP, inspect entry candidates, tune output controls, download debug bundles, and switch between browser and local server PDF export."
+      content="Upload a Markdown ZIP, folder, or single file, inspect entry candidates, tune output controls, download debug bundles, and switch between browser and local server PDF export."
     />
     <link data-trunk rel="rust" href="crates/marknest-wasm/Cargo.toml" data-bindgen-target="web" />
     <link data-trunk rel="css" href="web/app.css" />
@@ -16,6 +16,7 @@
     <link data-trunk rel="copy-file" href="web/output_options.mjs" />
     <link data-trunk rel="copy-file" href="web/remote_assets.mjs" />
     <link data-trunk rel="copy-file" href="web/runtime_sync.mjs" />
+    <link data-trunk rel="copy-file" href="web/zip_from_files.mjs" />
     <link data-trunk rel="copy-dir" href="runtime-assets" />
     <script src="./runtime-assets/html2pdf/html2pdf.bundle.min.js"></script>
   </head>
@@ -26,9 +27,9 @@
           <p class="eyebrow">Phase 8 · Output Controls</p>
           <h1>Preview in the browser, shape the output, and keep a reproducible debug bundle beside every export.</h1>
           <p class="hero-summary">
-            MarkNest analyzes ZIP structure in WASM, keeps diagnostics visible, lets you adjust themes, CSS,
-            metadata, and print settings, then reuses the same option model for browser export, debug bundles,
-            and the local Chromium fallback service.
+            MarkNest analyzes ZIP archives, folders, and single Markdown files in WASM, keeps diagnostics visible,
+            lets you adjust themes, CSS, metadata, and print settings, then reuses the same option model for browser
+            export, debug bundles, and the local Chromium fallback service.
           </p>
         </div>
         <div class="hero-meta">
@@ -43,14 +44,23 @@
           <section class="panel upload-panel">
             <div class="panel-heading">
               <p class="panel-kicker">Input</p>
-              <h2>ZIP Upload</h2>
+              <h2>Upload</h2>
             </div>
-            <label class="dropzone" for="zip-input">
-              <span class="dropzone-title">Choose a `.zip` workspace</span>
-              <span class="dropzone-body">The browser keeps the archive local, analyzes entries, and builds preview HTML in WASM.</span>
+            <label class="dropzone" id="dropzone-label">
+              <span class="dropzone-title">Choose a `.zip`, `.md` file, or drop a folder</span>
+              <span class="dropzone-body">Drag and drop a ZIP archive, a Markdown file, or a folder. The browser processes everything locally.</span>
             </label>
-            <input id="zip-input" class="visually-hidden" type="file" accept=".zip,application/zip" />
-            <p id="file-name" class="panel-note">No archive loaded yet.</p>
+            <input id="zip-input" class="visually-hidden" type="file" accept=".zip,.md,.markdown,application/zip" />
+            <input id="folder-input" class="visually-hidden" type="file" webkitdirectory />
+            <div class="upload-actions">
+              <button id="browse-file" class="action-button action-button-secondary" type="button">Browse File</button>
+              <button id="browse-folder" class="action-button action-button-secondary" type="button">Browse Folder</button>
+            </div>
+            <p id="file-name" class="panel-note">No file or folder loaded yet.</p>
+            <p id="local-image-warning" class="panel-note is-warning" hidden>
+              This Markdown file references local images that cannot be resolved in the browser.
+              Only external (HTTP) images will be displayed. Upload the parent folder instead.
+            </p>
           </section>
 
           <section class="panel status-panel">
@@ -264,7 +274,7 @@
               <h2>Markdown Candidates</h2>
             </div>
             <div id="entry-list" class="entry-list empty-state">
-              Load a ZIP archive to inspect its Markdown entry candidates.
+              Load a ZIP archive, folder, or Markdown file to inspect entry candidates.
             </div>
           </section>
 
@@ -297,13 +307,13 @@
                 <p class="panel-kicker">Preview</p>
                 <h2 id="preview-title">No entry selected</h2>
               </div>
-              <p id="preview-caption" class="preview-caption">Upload a ZIP to render the selected Markdown entry as HTML.</p>
+              <p id="preview-caption" class="preview-caption">Upload a ZIP, folder, or Markdown file to render the selected entry as HTML.</p>
             </div>
             <iframe
               id="preview-frame"
               class="preview-frame"
               title="Rendered Markdown preview"
-              srcdoc="<!doctype html><html><body style='font-family: Georgia, serif; background: #fbf7ef; color: #47362b; display: grid; place-items: center; min-height: 100vh; margin: 0;'><div style='padding: 2rem; text-align: center; max-width: 32rem;'><h1 style='margin: 0 0 1rem;'>MarkNest Preview Lab</h1><p style='margin: 0;'>Choose a ZIP archive to inspect entry candidates and preview the rendered document here.</p></div></body></html>"
+              srcdoc="<!doctype html><html><body style='font-family: Georgia, serif; background: #fbf7ef; color: #47362b; display: grid; place-items: center; min-height: 100vh; margin: 0;'><div style='padding: 2rem; text-align: center; max-width: 32rem;'><h1 style='margin: 0 0 1rem;'>MarkNest Preview Lab</h1><p style='margin: 0;'>Choose a ZIP archive, drop a folder, or upload a Markdown file to preview the rendered document here.</p></div></body></html>"
             ></iframe>
           </section>
         </main>
