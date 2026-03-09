@@ -24,6 +24,7 @@ pub const MATHJAX_SCRIPT_URL: &str = "./runtime-assets/mathjax/es5/tex-svg.js";
 pub enum ProjectSourceKind {
     Workspace,
     Zip,
+    SingleMarkdown,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
@@ -236,6 +237,23 @@ pub fn render_zip_entry_with_options(
 ) -> Result<RenderedHtmlDocument, RenderHtmlError> {
     let zip_file_system = ZipMemoryFileSystem::new(bytes).map_err(RenderHtmlError::Analyze)?;
     render_entry_with_options(&zip_file_system, entry_path, options)
+}
+
+pub fn render_markdown_entry(
+    bytes: &[u8],
+    filename: &str,
+) -> Result<RenderedHtmlDocument, RenderHtmlError> {
+    render_markdown_entry_with_options(bytes, filename, &RenderOptions::default())
+}
+
+pub fn render_markdown_entry_with_options(
+    bytes: &[u8],
+    filename: &str,
+    options: &RenderOptions,
+) -> Result<RenderedHtmlDocument, RenderHtmlError> {
+    let file_system = SingleMarkdownFileSystem::new(bytes, filename)?;
+    let entry_path: &str = &file_system.files[0].normalized_path;
+    render_entry_with_options(&file_system, entry_path, options)
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -479,6 +497,36 @@ impl ZipMemoryFileSystem {
 impl IndexedFileSystem for ZipMemoryFileSystem {
     fn source_kind(&self) -> ProjectSourceKind {
         ProjectSourceKind::Zip
+    }
+
+    fn files(&self) -> &[IndexedFile] {
+        &self.files
+    }
+}
+
+struct SingleMarkdownFileSystem {
+    files: Vec<IndexedFile>,
+}
+
+impl SingleMarkdownFileSystem {
+    fn new(contents: &[u8], filename: &str) -> Result<Self, RenderHtmlError> {
+        let normalized_path: String =
+            normalize_relative_string(filename).map_err(|_| RenderHtmlError::InvalidEntryPath {
+                entry_path: filename.to_string(),
+            })?;
+
+        Ok(Self {
+            files: vec![IndexedFile {
+                normalized_path,
+                contents: contents.to_vec(),
+            }],
+        })
+    }
+}
+
+impl IndexedFileSystem for SingleMarkdownFileSystem {
+    fn source_kind(&self) -> ProjectSourceKind {
+        ProjectSourceKind::SingleMarkdown
     }
 
     fn files(&self) -> &[IndexedFile] {
