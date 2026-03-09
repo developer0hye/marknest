@@ -1,0 +1,140 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/license/Qiskit/qiskit.svg?",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/license/Qiskit/qiskit.svg?",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/release/Qiskit/qiskit.svg?logo=Qiskit",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/release/Qiskit/qiskit.svg?logo=Qiskit",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/v/release/Qiskit/qiskit?sort=semver&filter=1.*&logo=Qiskit&label=extended%20support",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/v/release/Qiskit/qiskit?sort=semver&filter=1.*&logo=Qiskit&label=extended%20support",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/dm/qiskit.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/dm/qiskit.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://coveralls.io/repos/github/Qiskit/qiskit/badge.svg?branch=main",
+      "resolved_path": null,
+      "fetch_url": "https://coveralls.io/repos/github/Qiskit/qiskit/badge.svg?branch=main",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/pypi/pyversions/qiskit",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/pypi/pyversions/qiskit",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/rustc-1.85+-blue.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/rustc-1.85+-blue.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://static.pepy.tech/badge/qiskit",
+      "resolved_path": null,
+      "fetch_url": "https://static.pepy.tech/badge/qiskit",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://zenodo.org/badge/DOI/10.5281/zenodo.2583252.svg",
+      "resolved_path": null,
+      "fetch_url": "https://zenodo.org/badge/DOI/10.5281/zenodo.2583252.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/release/Qiskit/qiskit.svg?style=flat&label=",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/release/Qiskit/qiskit.svg?style=flat&label=",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/github/license/Qiskit/qiskit.svg?",
+      "fetch_url": "https://img.shields.io/github/license/Qiskit/qiskit.svg?",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/release/Qiskit/qiskit.svg?logo=Qiskit",
+      "fetch_url": "https://img.shields.io/github/release/Qiskit/qiskit.svg?logo=Qiskit",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/v/release/Qiskit/qiskit?sort=semver&filter=1.*&logo=Qiskit&label=extended%20support",
+      "fetch_url": "https://img.shields.io/github/v/release/Qiskit/qiskit?sort=semver&filter=1.*&logo=Qiskit&label=extended%20support",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/dm/qiskit.svg",
+      "fetch_url": "https://img.shields.io/pypi/dm/qiskit.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://coveralls.io/repos/github/Qiskit/qiskit/badge.svg?branch=main",
+      "fetch_url": "https://coveralls.io/repos/github/Qiskit/qiskit/badge.svg?branch=main",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/pypi/pyversions/qiskit",
+      "fetch_url": "https://img.shields.io/pypi/pyversions/qiskit",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/rustc-1.85+-blue.svg",
+      "fetch_url": "https://img.shields.io/badge/rustc-1.85+-blue.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://static.pepy.tech/badge/qiskit",
+      "fetch_url": "https://static.pepy.tech/badge/qiskit",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://zenodo.org/badge/DOI/10.5281/zenodo.2583252.svg",
+      "fetch_url": "https://zenodo.org/badge/DOI/10.5281/zenodo.2583252.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/release/Qiskit/qiskit.svg?style=flat&label=",
+      "fetch_url": "https://img.shields.io/github/release/Qiskit/qiskit.svg?style=flat&label=",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

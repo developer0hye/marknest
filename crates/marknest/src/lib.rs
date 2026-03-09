@@ -554,6 +554,7 @@ fn convert_entry_to_pdf(
         math_mode: args.math_mode,
         mermaid_timeout_ms: args.mermaid_timeout_ms,
         math_timeout_ms: args.math_timeout_ms,
+        runtime_assets_base_url: None,
     };
     let rendered_document =
         render_workspace_entry_with_options(workspace_root, entry_path, &render_options)
@@ -4223,6 +4224,54 @@ mod tests {
                 .all(|asset| asset.status == RemoteAssetStatus::Inlined)
         );
         assert_eq!(server.request_count(), 1);
+    }
+
+    #[test]
+    fn materialize_remote_assets_follows_redirected_image_urls() {
+        let server = TestHttpServer::start(vec![
+            (
+                "/redirect-image.png",
+                TestHttpResponse {
+                    status_line: "HTTP/1.1 302 Found",
+                    content_type: "text/plain; charset=utf-8",
+                    body: Vec::new(),
+                    location: Some("/final-image.png".to_string()),
+                },
+            ),
+            (
+                "/final-image.png",
+                TestHttpResponse::ok_png(b"\x89PNG\r\n\x1a\nredirected"),
+            ),
+        ]);
+        let remote_url = server.url("/redirect-image.png");
+        let assets = vec![AssetRef {
+            entry_path: "README.md".to_string(),
+            original_reference: remote_url.clone(),
+            resolved_path: None,
+            kind: marknest_core::AssetReferenceKind::RawHtmlImage,
+            status: marknest_core::AssetStatus::External,
+            fetch_url: Some(remote_url.clone()),
+        }];
+
+        let outcome = materialize_remote_assets_for_entry(
+            Some(&format!(
+                "<html><body><img src=\"{remote_url}\"></body></html>"
+            )),
+            &assets,
+            RemoteAssetApplyMode::InlineHtml,
+        )
+        .expect("redirected remote assets should materialize");
+
+        assert!(
+            outcome
+                .html
+                .as_deref()
+                .expect("html should be rewritten")
+                .contains("data:image/png;base64,")
+        );
+        assert_eq!(outcome.remote_assets[0].status, RemoteAssetStatus::Inlined);
+        assert_eq!(outcome.warnings, Vec::<String>::new());
+        assert_eq!(server.request_count(), 2);
     }
 
     #[test]

@@ -1,0 +1,150 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/img/price_curves.png",
+      "resolved_path": "doc/img/price_curves.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/img/MarS_logo.png",
+      "resolved_path": "doc/img/MarS_logo.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/build-pass-green",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/build-pass-green",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/license-MIT-blue",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/license-MIT-blue",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/version-1.0.0-blue",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/version-1.0.0-blue",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/python-3.11%20|%203.12-blue",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/python-3.11%20|%203.12-blue",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/platform-linux%20-lightgrey",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/platform-linux%20-lightgrey",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/PRs-welcome-brightgreen",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/PRs-welcome-brightgreen",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/docs-latest-brightgreen",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/docs-latest-brightgreen",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/img/dashboard_forecast.png",
+      "resolved_path": "doc/img/dashboard_forecast.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/img/dashboard_market_impact.png",
+      "resolved_path": "doc/img/dashboard_market_impact.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/img/MarS_homepage.gif",
+      "resolved_path": "doc/img/MarS_homepage.gif",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/img/high-level-overview.png",
+      "resolved_path": "doc/img/high-level-overview.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "doc/img/mlib-flow.png",
+      "resolved_path": "doc/img/mlib-flow.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/badge/build-pass-green",
+      "fetch_url": "https://img.shields.io/badge/build-pass-green",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/license-MIT-blue",
+      "fetch_url": "https://img.shields.io/badge/license-MIT-blue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/version-1.0.0-blue",
+      "fetch_url": "https://img.shields.io/badge/version-1.0.0-blue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/python-3.11%20|%203.12-blue",
+      "fetch_url": "https://img.shields.io/badge/python-3.11%20|%203.12-blue",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/platform-linux%20-lightgrey",
+      "fetch_url": "https://img.shields.io/badge/platform-linux%20-lightgrey",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/PRs-welcome-brightgreen",
+      "fetch_url": "https://img.shields.io/badge/PRs-welcome-brightgreen",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/docs-latest-brightgreen",
+      "fetch_url": "https://img.shields.io/badge/docs-latest-brightgreen",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

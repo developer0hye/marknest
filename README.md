@@ -12,6 +12,7 @@ Key capabilities:
 - `marknest` provides a conversion CLI with config file, debug artifact, and print template support.
 - `marknest` now also exposes a reusable HTML-to-PDF helper for local fallback services.
 - `marknest-wasm` exposes browser bindings for ZIP analysis, output-aware HTML preview rendering, direct single-markdown rendering (bypassing ZIP), batch preview rendering, ZIP packaging of generated PDFs, and browser-side debug bundle generation.
+- WASM preview/debug render options now accept a `runtime_assets_base_url` override for embedded browser hosts, and ZIP analysis/rendering can opt into shared top-level prefix stripping for archive wrappers such as repository snapshots.
 - `marknest-server` provides a local Axum fallback service that accepts multipart ZIP uploads plus shared output options, returns single PDF or batch ZIP downloads through a Playwright-driven Chromium/Chrome path, and emits structured request logs.
 - `index.html` plus `web/app.js`, `web/app.css`, `web/output_options.mjs`, and `web/runtime_sync.mjs` provide a web app for ZIP upload, entry selection, warnings, rendered HTML preview, runtime-aware browser export, debug bundle download, and optional local server fallback.
 - Validation supports `--entry`, `--all`, `--strict`, and `--report`.
@@ -43,7 +44,7 @@ Key capabilities:
 - `crates/marknest-wasm`: WASM bindings for ZIP analysis, output-aware preview HTML rendering, debug bundles, and browser export packaging
 - `index.html` and `web/`: static Trunk app shell for browser preview, output controls, remote-image materialization, quality mode selection, and download
 - `runtime-assets/`: vendored Mermaid, MathJax, html2pdf.js runtime files plus third-party notices
-- `validation/`: pinned 50-repo README corpus manifest, baseline artifacts, and hybrid PDF fidelity validator
+- `validation/`: pinned 60-entry README corpus manifest, baseline artifacts, and hybrid PDF fidelity validator
 - `Dockerfile`: shared CLI and fallback-server runtime image
 
 ## Development
@@ -139,6 +140,8 @@ The Trunk app loads `index.html`, compiles `crates/marknest-wasm`, and serves th
 The web app supports ZIP upload, entry selection, diagnostics, selected-entry PDF download, batch PDF ZIP download, debug bundle download, large-archive guidance, theme/CSS/metadata/per-side margin/print/TOC/sanitization controls, and an optional local fallback service.
 `trunk` is not vendored in this repository, so install it separately before running the preview app.
 The browser export path now loads `html2pdf.js` from the vendored `runtime-assets/` tree served by Trunk, and browser debug bundles include the Mermaid/Math runtime files referenced by `debug.html`.
+External WASM hosts can override the Mermaid/Math/html2pdf runtime asset base with `runtime_assets_base_url`, and `analyzeZipWithOptions({ strip_zip_prefix: true })` plus matching render options make GitHub-style wrapper archives behave like a flat workspace without post-processing ZIP contents first.
+A standalone `wasm-example.html` page boots `marknest_wasm` directly, loads a wrapped sample ZIP in memory, exposes `strip_zip_prefix` plus `runtime_assets_base_url` controls for quick browser-side API checks, and can rebuild a browser-local ZIP from a public GitHub repository URL for README rendering tests.
 Browser preview and browser PDF export now wait for the rendered iframe to report Mermaid/Math completion through `window.__MARKNEST_RENDER_STATUS__`; runtime warnings remain non-blocking, while runtime errors block Browser Fast export and fall back to the local server when configured.
 Browser preview/export also try to materialize remote HTTP images before rendering; if Browser Fast cannot materialize some remote images because of browser fetch restrictions and a fallback URL is configured, export automatically retries through the local fallback server.
 
@@ -161,8 +164,9 @@ The image builds `marknest` and `marknest-server` from the same workspace, insta
 
 ## README corpus validation
 
-The repository includes a pinned 50-repo public GitHub README corpus in `validation/readme-corpus-50.tsv`.
+The repository includes a pinned 60-entry public GitHub README corpus in `validation/readme-corpus-60.tsv`.
 Each entry is locked to a commit SHA and fetched from a GitHub archive snapshot, not a mutable branch checkout.
+The current corpus shape is a 10-repo smoke tier plus 50 extended entries, including 10 math-focused READMEs that stress inline and display LaTeX rendering.
 
 Validation prerequisites:
 
@@ -184,7 +188,7 @@ Verify pinned repo metadata against the GitHub API:
 node validation/readme_corpus.mjs verify-manifest --tier smoke
 ```
 
-Fetch the smoke or full corpus into `validation/.cache/readme-corpus-50/`:
+Fetch the smoke or full corpus into `validation/.cache/readme-corpus-60/`:
 
 ```bash
 node validation/readme_corpus.mjs fetch --tier smoke
@@ -197,9 +201,12 @@ Bless or rerun the corpus against committed baselines:
 node validation/readme_corpus.mjs bless --tier smoke --force
 node validation/readme_corpus.mjs run --tier smoke --force
 node validation/readme_corpus.mjs run --tier all --force
+node validation/readme_corpus_wasm.mjs run --tier all
 ```
 
-The validator builds `target/debug/marknest` once per invocation, converts each pinned README, rasterizes PDF pages, extracts PDF text, and compares the result to `validation/baselines/readme-corpus-50/`.
+The validator builds `target/debug/marknest` once per invocation, converts each pinned README, rasterizes PDF pages, extracts PDF text, and compares the result to `validation/baselines/readme-corpus-60/`.
+The WASM corpus runner builds a `nodejs` `marknest-wasm` package with `wasm-pack`, creates a minimal wrapped ZIP per cached corpus entry, and verifies both bare repo URLs and `/blob/.../README.md` URLs through the browser-oriented `analyzeZipWithOptions` and `renderHtml` bindings.
+The manifest is the source of truth for corpus membership; the blessed baseline directory can temporarily contain fewer entries when newly added cases still fail blocking fidelity checks and have not been blessed yet.
 Run artifacts land under `validation/.runs/<run-id>/` with per-repo PDFs, page PNGs, diff PNGs, `report.json`, `asset-manifest.json`, `source.json`, `metrics.json`, and top-level `summary.tsv` plus `summary.json`.
 
 Blocking failures:

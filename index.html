@@ -16,6 +16,11 @@
     <link data-trunk rel="copy-file" href="web/output_options.mjs" />
     <link data-trunk rel="copy-file" href="web/remote_assets.mjs" />
     <link data-trunk rel="copy-file" href="web/runtime_sync.mjs" />
+    <link data-trunk rel="copy-file" href="web/wasm-example.html" />
+    <link data-trunk rel="copy-file" href="web/wasm-example.js" />
+    <link data-trunk rel="copy-file" href="web/wasm-example-support.mjs" />
+    <link data-trunk rel="copy-file" href="web/github_url_input.mjs" />
+    <link data-trunk rel="copy-file" href="web/github_workspace_loader.mjs" />
     <link data-trunk rel="copy-file" href="web/zip_from_files.mjs" />
     <link data-trunk rel="copy-dir" href="runtime-assets" />
     <script src="./runtime-assets/html2pdf/html2pdf.bundle.min.js"></script>
@@ -30,6 +35,11 @@
             MarkNest analyzes ZIP archives, folders, and single Markdown files in WASM, keeps diagnostics visible,
             lets you adjust themes, CSS, metadata, and print settings, then reuses the same option model for browser
             export, debug bundles, and the local Chromium fallback service.
+          </p>
+          <p class="hero-summary">
+            Need a smaller surface for API checks? Open the
+            <a href="./wasm-example.html">standalone WASM example</a>
+            to exercise `analyzeZipWithOptions`, `strip_zip_prefix`, and `runtime_assets_base_url` without the full app shell.
           </p>
         </div>
         <div class="hero-meta">

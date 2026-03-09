@@ -1,0 +1,114 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://flutter-dashboard.appspot.com/api/public/build-status-badge?repo=flutter",
+      "resolved_path": null,
+      "fetch_url": "https://flutter-dashboard.appspot.com/api/public/build-status-badge?repo=flutter",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://codecov.io/gh/flutter/flutter/branch/master/graph/badge.svg?token=11yDrJU2M2",
+      "resolved_path": null,
+      "fetch_url": "https://codecov.io/gh/flutter/flutter/branch/master/graph/badge.svg?token=11yDrJU2M2",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://insights.linuxfoundation.org/api/badge/health-score?project=flutter",
+      "resolved_path": null,
+      "fetch_url": "https://insights.linuxfoundation.org/api/badge/health-score?project=flutter",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://bestpractices.coreinfrastructure.org/projects/5631/badge",
+      "resolved_path": null,
+      "fetch_url": "https://bestpractices.coreinfrastructure.org/projects/5631/badge",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://slsa.dev/images/gh-badge-level1.svg",
+      "resolved_path": null,
+      "fetch_url": "https://slsa.dev/images/gh-badge-level1.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://storage.googleapis.com/cms-storage-bucket/c823e53b3a1a7b0d36a9.png",
+      "resolved_path": null,
+      "fetch_url": "https://storage.googleapis.com/cms-storage-bucket/c823e53b3a1a7b0d36a9.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/flutter/website/blob/main/site/web/assets/images/docs/homepage/reflectly-hero-600px.png?raw=true",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/flutter/website/main/site/web/assets/images/docs/homepage/reflectly-hero-600px.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/flutter/website/blob/main/site/web/assets/images/docs/homepage/dart-diagram-small.png?raw=true",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/flutter/website/main/site/web/assets/images/docs/homepage/dart-diagram-small.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://flutter-dashboard.appspot.com/api/public/build-status-badge?repo=flutter",
+      "fetch_url": "https://flutter-dashboard.appspot.com/api/public/build-status-badge?repo=flutter",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/gh/flutter/flutter/branch/master/graph/badge.svg?token=11yDrJU2M2",
+      "fetch_url": "https://codecov.io/gh/flutter/flutter/branch/master/graph/badge.svg?token=11yDrJU2M2",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://insights.linuxfoundation.org/api/badge/health-score?project=flutter",
+      "fetch_url": "https://insights.linuxfoundation.org/api/badge/health-score?project=flutter",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://bestpractices.coreinfrastructure.org/projects/5631/badge",
+      "fetch_url": "https://bestpractices.coreinfrastructure.org/projects/5631/badge",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://slsa.dev/images/gh-badge-level1.svg",
+      "fetch_url": "https://slsa.dev/images/gh-badge-level1.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://storage.googleapis.com/cms-storage-bucket/c823e53b3a1a7b0d36a9.png",
+      "fetch_url": "https://storage.googleapis.com/cms-storage-bucket/c823e53b3a1a7b0d36a9.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/flutter/website/blob/main/site/web/assets/images/docs/homepage/reflectly-hero-600px.png?raw=true",
+      "fetch_url": "https://raw.githubusercontent.com/flutter/website/main/site/web/assets/images/docs/homepage/reflectly-hero-600px.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/flutter/website/blob/main/site/web/assets/images/docs/homepage/dart-diagram-small.png?raw=true",
+      "fetch_url": "https://raw.githubusercontent.com/flutter/website/main/site/web/assets/images/docs/homepage/dart-diagram-small.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

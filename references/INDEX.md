@@ -10,8 +10,8 @@
 - `phase8-offline-runtime-assets.md`: Vendored Mermaid, MathJax, and html2pdf assets for offline browser, CLI, and fallback rendering.
 - `phase8-playwright-renderer.md`: Replace the custom Chrome DevTools PDF launcher with a Playwright-backed Chromium print path.
 - `realworld-readme-corpus.md`: Real-world GitHub README corpus selection for post-PRD conversion validation.
-- `realworld-readme-corpus-50.md`: Expanded 50-repo README corpus strategy for automated fidelity validation.
-- `readme-corpus-validator.md`: Pinned GitHub archive fetch plus hybrid PDF text and page-image validation for the 50-repo corpus.
+- `realworld-readme-corpus-60.md`: Expanded 60-entry README corpus strategy for automated fidelity validation.
+- `readme-corpus-validator.md`: Pinned GitHub archive fetch plus hybrid PDF text and page-image validation for the 60-entry corpus.
 - `phase8-remote-http-images.md`: Best-effort remote HTTP image materialization across CLI, browser, and fallback flows.
 - `phase8-code-block-wrapping.md`: Long code-line wrapping policy for shared HTML and PDF rendering.
 - `phase8-image-layout-parity.md`: Preserve inline badge rows and explicit image sizing in shared HTML output.

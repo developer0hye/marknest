@@ -134,7 +134,7 @@ fn normalizes_remote_http_assets_into_fetch_urls() {
             == "https://github.com/facebookresearch/segment-anything-2/blob/main/assets/model_diagram.png?raw=true"
             && asset.fetch_url.as_deref()
                 == Some(
-                    "https://github.com/facebookresearch/segment-anything-2/raw/main/assets/model_diagram.png"
+                    "https://raw.githubusercontent.com/facebookresearch/segment-anything-2/main/assets/model_diagram.png"
                 )
             && asset.resolved_path.is_none()
     }));
@@ -143,7 +143,7 @@ fn normalizes_remote_http_assets_into_fetch_urls() {
             == "https://github.com/pytorch/pytorch/raw/main/docs/source/_static/img/pytorch-logo-dark.png"
             && asset.fetch_url.as_deref()
                 == Some(
-                    "https://github.com/pytorch/pytorch/raw/main/docs/source/_static/img/pytorch-logo-dark.png"
+                    "https://raw.githubusercontent.com/pytorch/pytorch/main/docs/source/_static/img/pytorch-logo-dark.png"
                 )
             && asset.resolved_path.is_none()
     }));

@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MarkNest WASM Example</title>
+    <meta
+      name="description"
+      content="Standalone MarkNest WASM example for testing analyzeZipWithOptions, strip_zip_prefix, and runtime_assets_base_url."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4ede1;
+        --panel: rgba(255, 251, 245, 0.9);
+        --panel-strong: #fff9f1;
+        --text: #2c231c;
+        --muted: #695547;
+        --accent: #b04a2f;
+        --accent-soft: rgba(176, 74, 47, 0.14);
+        --border: rgba(95, 68, 52, 0.18);
+        --shadow: 0 24px 70px rgba(69, 45, 30, 0.12);
+        --mono: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+        --body: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--body);
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(255, 247, 232, 0.92), transparent 38%),
+          linear-gradient(160deg, #efe1cf 0%, #f9f3ea 54%, #efe5d6 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page-shell {
+        width: min(1260px, calc(100vw - 2rem));
+        margin: 0 auto;
+        padding: 1.2rem 0 2rem;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 1.2rem;
+        padding: 1.4rem;
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(255, 248, 238, 0.96), rgba(248, 236, 221, 0.88));
+        box-shadow: var(--shadow);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto -6rem -7rem auto;
+        width: 16rem;
+        height: 16rem;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(176, 74, 47, 0.2), transparent 68%);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        margin: 0 0 0.4rem;
+        font: 700 0.78rem/1.1 var(--mono);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 0.75rem;
+        font-size: clamp(2rem, 3.3vw, 3.6rem);
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+      }
+
+      .hero-copy {
+        max-width: 56rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(20rem, 27rem) minmax(0, 1fr);
+        gap: 1rem;
+      }
+
+      .card {
+        padding: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+      }
+
+      .controls {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+      }
+
+      button,
+      .upload-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        min-height: 2.8rem;
+        padding: 0.8rem 1rem;
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #b04a2f, #8e3419);
+        color: #fffaf5;
+        font: 700 0.94rem/1 var(--mono);
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 12px 24px rgba(128, 48, 28, 0.22);
+      }
+
+      button.secondary,
+      .upload-button.secondary {
+        background: linear-gradient(135deg, #f3e2ca, #ecd4b4);
+        color: #5f412f;
+      }
+
+      .upload-button input {
+        display: none;
+      }
+
+      .status {
+        margin: 0;
+        padding: 0.85rem 1rem;
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.82);
+        font: 600 0.92rem/1.45 var(--mono);
+      }
+
+      .status[data-tone="warning"] {
+        background: rgba(255, 246, 231, 0.88);
+      }
+
+      .status[data-tone="error"] {
+        background: rgba(255, 235, 232, 0.88);
+      }
+
+      .stat-grid,
+      .runtime-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+
+      .stat-grid div,
+      .runtime-grid div {
+        padding: 0.85rem;
+        border-radius: 18px;
+        background: var(--panel-strong);
+        border: 1px solid rgba(108, 83, 66, 0.12);
+      }
+
+      dt {
+        margin-bottom: 0.3rem;
+        font: 700 0.76rem/1.1 var(--mono);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .control-stack {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      label.control {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .control span {
+        font: 700 0.76rem/1.1 var(--mono);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      input[type="text"],
+      select,
+      pre {
+        width: 100%;
+        border: 1px solid rgba(99, 73, 58, 0.16);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--text);
+        font: 0.94rem/1.5 var(--mono);
+      }
+
+      input[type="text"],
+      select {
+        min-height: 2.9rem;
+        padding: 0.75rem 0.9rem;
+      }
+
+      .toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.9rem 1rem;
+        border-radius: 18px;
+        border: 1px solid rgba(99, 73, 58, 0.16);
+        background: var(--panel-strong);
+        font: 600 0.96rem/1.35 var(--body);
+      }
+
+      .toggle input {
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+
+      pre {
+        margin-bottom: 0;
+        padding: 0.9rem 1rem;
+        overflow: auto;
+        min-height: 13rem;
+      }
+
+      .viewer {
+        display: grid;
+        gap: 1rem;
+      }
+
+      iframe {
+        width: 100%;
+        min-height: 66vh;
+        border: 1px solid rgba(99, 73, 58, 0.16);
+        border-radius: 20px;
+        background: #fff;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .footer-note {
+        margin: 1rem 0 0;
+        color: var(--muted);
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .page-shell {
+          width: min(100vw - 1rem, 1260px);
+        }
+
+        .stat-grid,
+        .runtime-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Standalone WASM Harness</p>
+          <h1>Test MarkNest WASM without the full preview lab.</h1>
+          <p>
+            This page boots <code>marknest_wasm</code> directly, creates a wrapped sample repository ZIP in memory,
+            and lets you exercise <code>analyzeZipWithOptions</code> plus <code>renderHtml</code> with
+            <code>strip_zip_prefix</code> and <code>runtime_assets_base_url</code>.
+          </p>
+          <p class="muted">
+            The built-in sample archive uses a <code>marknest-demo-main/</code> wrapper directory so you can verify
+            how entry paths change when shared prefixes are stripped.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="load-sample" type="button">Load Wrapped Sample ZIP</button>
+          <label class="upload-button secondary" for="zip-input">
+            Upload Real ZIP
+            <input id="zip-input" type="file" accept=".zip,application/zip" />
+          </label>
+          <a class="upload-button secondary" href="./">Open Full Preview Lab</a>
+        </div>
+      </header>
+
+      <section class="layout">
+        <aside class="controls">
+          <section class="card">
+            <h2>Runtime</h2>
+            <p id="status" class="status" data-tone="warning">Loading marknest_wasm via Trunk output...</p>
+            <div class="stat-grid" style="margin-top: 0.9rem;">
+              <div>
+                <dt>Archive</dt>
+                <dd id="source-name">No archive loaded</dd>
+              </div>
+              <div>
+                <dt>Entries</dt>
+                <dd id="entry-count">0</dd>
+              </div>
+              <div>
+                <dt>Selected</dt>
+                <dd id="selected-entry">None</dd>
+              </div>
+              <div>
+                <dt>Diagnostics</dt>
+                <dd id="diagnostics">Waiting for analysis.</dd>
+              </div>
+            </div>
+            <p id="source-detail" class="footer-note">Load the built-in sample or upload a ZIP archive.</p>
+          </section>
+
+          <section class="card">
+            <h2>Controls</h2>
+            <div class="control-stack">
+              <label class="toggle" for="strip-zip-prefix">
+                <input id="strip-zip-prefix" type="checkbox" checked />
+                <span>Strip shared ZIP prefix before analysis and render</span>
+              </label>
+              <label class="control" for="runtime-assets-base-url">
+                <span>Runtime Asset Base URL</span>
+                <input
+                  id="runtime-assets-base-url"
+                  type="text"
+                  value="/runtime-assets"
+                  spellcheck="false"
+                  placeholder="/runtime-assets"
+                />
+              </label>
+              <label class="control" for="github-url-input">
+                <span>GitHub URL Input</span>
+                <input
+                  id="github-url-input"
+                  type="text"
+                  value="https://github.com/example/marknest-demo"
+                  spellcheck="false"
+                  placeholder="https://github.com/user/repo/blob/main/README.md"
+                />
+              </label>
+              <p class="muted">
+                Public GitHub URLs fetch the target README plus referenced local images through the GitHub API, then rebuild a local ZIP for the same WASM analysis path.
+              </p>
+              <label class="control" for="mermaid-mode">
+                <span>Mermaid Mode</span>
+                <select id="mermaid-mode">
+                  <option value="auto" selected>auto</option>
+                  <option value="on">on</option>
+                  <option value="off">off</option>
+                </select>
+              </label>
+              <label class="control" for="math-mode">
+                <span>Math Mode</span>
+                <select id="math-mode">
+                  <option value="auto" selected>auto</option>
+                  <option value="on">on</option>
+                  <option value="off">off</option>
+                </select>
+              </label>
+              <label class="control" for="theme">
+                <span>Theme</span>
+                <select id="theme">
+                  <option value="github" selected>github</option>
+                  <option value="default">default</option>
+                  <option value="docs">docs</option>
+                  <option value="plain">plain</option>
+                </select>
+              </label>
+              <label class="control" for="entry-select">
+                <span>Entry Path</span>
+                <select id="entry-select"></select>
+              </label>
+            </div>
+            <div class="button-row" style="margin-top: 1rem;">
+              <button id="analyze-button" class="secondary" type="button">Analyze ZIP</button>
+              <button id="render-from-github-url" class="secondary" type="button">Load from GitHub URL</button>
+              <button id="render-button" type="button">Render Entry</button>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Project Index</h2>
+            <pre id="project-index-json">{
+  "status": "waiting"
+}</pre>
+          </section>
+        </aside>
+
+        <main class="viewer">
+          <section class="card">
+            <h2>WASM Call Snapshot</h2>
+            <p class="muted">
+              This is the exact options payload currently sent to the exported WASM bindings from this page.
+            </p>
+            <pre id="api-call">{
+  "analyzeZipWithOptions": {
+    "strip_zip_prefix": true
+  },
+  "renderHtml": null
+}</pre>
+          </section>
+
+          <section class="card">
+            <h2>Preview</h2>
+            <p id="preview-meta" class="muted">
+              Render an entry to inspect the HTML produced by the WASM bindings.
+            </p>
+            <div class="runtime-grid" style="margin-bottom: 1rem;">
+              <div>
+                <dt>Mermaid Script</dt>
+                <dd id="mermaid-script-url">-</dd>
+              </div>
+              <div>
+                <dt>MathJax Script</dt>
+                <dd id="math-script-url">-</dd>
+              </div>
+            </div>
+            <iframe
+              id="preview-frame"
+              title="Rendered MarkNest preview"
+              srcdoc="<!doctype html><html><body style='margin:0;display:grid;place-items:center;min-height:100vh;font:16px/1.5 Georgia,serif;background:#f6efe5;color:#4f3728;'><div style='padding:2rem;text-align:center;max-width:30rem;'><h1 style='margin:0 0 1rem;'>WASM preview waiting</h1><p style='margin:0;'>Analyze a ZIP archive and render an entry to inspect the iframe output here.</p></div></body></html>"
+            ></iframe>
+          </section>
+        </main>
+      </section>
+    </div>
+
+    <script type="module" src="./wasm-example.js"></script>
+  </body>
+</html>
