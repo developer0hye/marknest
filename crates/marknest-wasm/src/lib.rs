@@ -5,7 +5,7 @@ use marknest_core::{
     AssetRef, DEFAULT_MATH_TIMEOUT_MS, DEFAULT_MERMAID_TIMEOUT_MS, MATHJAX_SCRIPT_URL,
     MATHJAX_VERSION, MERMAID_SCRIPT_URL, MERMAID_VERSION, MathMode, MermaidMode, PdfMetadata,
     ProjectIndex, ProjectSourceKind, RUNTIME_ASSET_MODE, RenderOptions, RenderedHtmlDocument,
-    ThemePreset, analyze_zip, render_zip_entry_with_options,
+    ThemePreset, analyze_zip, render_markdown_entry_with_options, render_zip_entry_with_options,
 };
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
@@ -278,6 +278,20 @@ pub fn build_debug_bundle_binding(
         .map_err(|message| JsValue::from_str(&message))
 }
 
+#[wasm_bindgen(js_name = renderMarkdown)]
+pub fn render_markdown_binding(
+    md_bytes: Vec<u8>,
+    filename: String,
+    options: JsValue,
+) -> Result<JsValue, JsValue> {
+    let parsed_options =
+        parse_browser_output_options(options).map_err(|message| JsValue::from_str(&message))?;
+    let preview = render_markdown_model(&md_bytes, &filename, &parsed_options)
+        .map_err(|message| JsValue::from_str(&message))?;
+    serde_wasm_bindgen::to_value(&preview)
+        .map_err(|error| JsValue::from_str(&format!("Failed to encode rendered HTML: {error}")))
+}
+
 fn analyze_zip_model(zip_bytes: &[u8]) -> Result<ProjectIndex, String> {
     analyze_zip(zip_bytes).map_err(|error| error.to_string())
 }
@@ -299,6 +313,21 @@ fn render_preview_model(
 ) -> Result<RenderPreview, String> {
     let rendered_document: RenderedHtmlDocument =
         render_zip_entry_with_options(zip_bytes, entry_path, &options.render_options())
+            .map_err(|error| error.to_string())?;
+
+    Ok(RenderPreview {
+        title: rendered_document.title,
+        html: rendered_document.html,
+    })
+}
+
+fn render_markdown_model(
+    md_bytes: &[u8],
+    filename: &str,
+    options: &BrowserOutputOptions,
+) -> Result<RenderPreview, String> {
+    let rendered_document: RenderedHtmlDocument =
+        render_markdown_entry_with_options(md_bytes, filename, &options.render_options())
             .map_err(|error| error.to_string())?;
 
     Ok(RenderPreview {
@@ -482,7 +511,8 @@ mod tests {
 
     use super::{
         BrowserOutputOptions, PdfArchiveFile, analyze_zip_model, build_debug_bundle_model,
-        build_pdf_archive_model, render_preview_batch_model, render_preview_model,
+        build_pdf_archive_model, render_markdown_model, render_preview_batch_model,
+        render_preview_model,
     };
     use marknest_core::{MathMode, MermaidMode, ThemePreset};
     use zip::write::SimpleFileOptions;
@@ -758,6 +788,48 @@ mod tests {
             archive
                 .by_name("runtime-assets/mathjax/es5/tex-svg.js")
                 .is_ok()
+        );
+    }
+
+    #[test]
+    fn renders_single_markdown_preview_without_zip() {
+        let md_bytes = b"# Direct Render\n\nNo ZIP wrapping needed.\n";
+
+        let preview =
+            render_markdown_model(md_bytes, "README.md", &BrowserOutputOptions::default())
+                .expect("single markdown should render");
+
+        assert_eq!(preview.title, "README");
+        assert!(preview.html.contains("theme-github"));
+        assert!(
+            preview
+                .html
+                .contains("<h1 id=\"direct-render\">Direct Render</h1>")
+        );
+    }
+
+    #[test]
+    fn renders_single_markdown_preview_with_custom_options() {
+        let md_bytes = b"# Styled\n\nContent here.\n";
+
+        let preview = render_markdown_model(
+            md_bytes,
+            "guide.md",
+            &BrowserOutputOptions {
+                theme: ThemePreset::Docs,
+                title: Some("Custom Guide".to_string()),
+                author: Some("Team".to_string()),
+                ..BrowserOutputOptions::default()
+            },
+        )
+        .expect("single markdown should render with options");
+
+        assert_eq!(preview.title, "Custom Guide");
+        assert!(preview.html.contains("theme-docs"));
+        assert!(
+            preview
+                .html
+                .contains("meta name=\"author\" content=\"Team\"")
         );
     }
 }

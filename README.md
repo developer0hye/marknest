@@ -11,7 +11,7 @@ Key capabilities:
 - `marknest` provides a `validate` CLI for `.md`, `.zip`, and folder inputs.
 - `marknest` provides a conversion CLI with config file, debug artifact, and print template support.
 - `marknest` now also exposes a reusable HTML-to-PDF helper for local fallback services.
-- `marknest-wasm` exposes browser bindings for ZIP analysis, output-aware HTML preview rendering, batch preview rendering, ZIP packaging of generated PDFs, and browser-side debug bundle generation.
+- `marknest-wasm` exposes browser bindings for ZIP analysis, output-aware HTML preview rendering, direct single-markdown rendering (bypassing ZIP), batch preview rendering, ZIP packaging of generated PDFs, and browser-side debug bundle generation.
 - `marknest-server` provides a local Axum fallback service that accepts multipart ZIP uploads plus shared output options, returns single PDF or batch ZIP downloads through a Playwright-driven Chromium/Chrome path, and emits structured request logs.
 - `index.html` plus `web/app.js`, `web/app.css`, `web/output_options.mjs`, and `web/runtime_sync.mjs` provide a web app for ZIP upload, entry selection, warnings, rendered HTML preview, runtime-aware browser export, debug bundle download, and optional local server fallback.
 - Validation supports `--entry`, `--all`, `--strict`, and `--report`.
