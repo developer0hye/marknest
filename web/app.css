@@ -169,6 +169,16 @@ body::before {
   box-shadow: 0 12px 26px rgba(15, 108, 124, 0.15);
 }
 
+.dropzone.is-drag-over {
+  transform: translateY(-2px);
+  border-color: var(--accent-strong);
+  border-style: solid;
+  box-shadow: 0 16px 32px rgba(15, 108, 124, 0.2);
+  background:
+    linear-gradient(135deg, rgba(15, 108, 124, 0.18), transparent),
+    var(--paper-strong);
+}
+
 .dropzone-title {
   font-weight: 700;
   font-size: 1.05rem;
@@ -189,6 +199,13 @@ body::before {
 
 .panel-note.is-warning {
   color: var(--warning);
+}
+
+.upload-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .visually-hidden {
