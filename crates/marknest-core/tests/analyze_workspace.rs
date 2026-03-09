@@ -97,6 +97,33 @@ fn resolves_repo_root_relative_assets_with_leading_slashes() {
 }
 
 #[test]
+fn does_not_extract_reference_style_images_as_remote_assets() {
+    let index = analyze_workspace(&fixture_path("workspace_refstyle_badges"))
+        .expect("workspace with reference-style badges should analyze");
+
+    // Reference-style image syntax like [![Build Status]][actions] should NOT
+    // produce any assets. Regular links like [text](url) must also be ignored.
+    // Only the genuine inline-style image ![architecture](./images/arch.svg)
+    // should be extracted.
+    assert_eq!(
+        index.assets.len(),
+        1,
+        "only the inline-style image should be extracted, but got: {:?}",
+        index
+            .assets
+            .iter()
+            .map(|a| &a.original_reference)
+            .collect::<Vec<_>>()
+    );
+    assert_eq!(index.assets[0].original_reference, "./images/arch.svg");
+    assert_eq!(
+        index.assets[0].resolved_path.as_deref(),
+        Some("images/arch.svg")
+    );
+    assert!(index.diagnostic.missing_assets.is_empty());
+}
+
+#[test]
 fn normalizes_remote_http_assets_into_fetch_urls() {
     let index = analyze_workspace(&fixture_path("workspace_remote_http_assets"))
         .expect("workspace with remote assets should analyze");
