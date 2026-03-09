@@ -23,12 +23,15 @@ import {
 import {
   buildZipFromFiles,
   detectInputKind,
+  hasLocalImageReferences,
   readDirectoryEntries,
 } from "./zip_from_files.mjs";
 
 const state = {
   wasm: null,
   zipBytes: null,
+  markdownBytes: null,
+  markdownFileName: null,
   projectIndex: null,
   selectedEntry: null,
   renderedPreview: null,
@@ -475,6 +478,8 @@ async function processInput(files) {
   }
 
   elements.localImageWarning.hidden = true;
+  state.markdownBytes = null;
+  state.markdownFileName = null;
 
   if (inputKind === "zip") {
     await analyzeZip(files[0]);
@@ -483,6 +488,35 @@ async function processInput(files) {
 
   if (!state.wasm) {
     setStatus("waiting", "Booting", "The WASM runtime is still loading. Try again in a moment.");
+    return;
+  }
+
+  if (inputKind === "markdown") {
+    try {
+      const file = files[0];
+      const text = await file.text();
+
+      if (hasLocalImageReferences(text)) {
+        elements.localImageWarning.hidden = false;
+        elements.localImageWarning.textContent =
+          "This Markdown file references local images that cannot be resolved in the browser. " +
+          "Only external (HTTP) images will be displayed. To include local images, upload the parent folder instead.";
+      }
+
+      const mdBytes = new Uint8Array(await file.arrayBuffer());
+      state.markdownBytes = mdBytes;
+      state.markdownFileName = file.name;
+
+      // Still build ZIP for operations that need it (debug bundle, server fallback)
+      const archiveEntries = [{ path: file.name, bytes: mdBytes }];
+      const zipBytes = state.wasm.buildPdfArchive(archiveEntries);
+      const syntheticFile = new File([zipBytes], file.name.replace(/\.(md|markdown)$/i, ".zip"), {
+        type: "application/zip",
+      });
+      await analyzeZip(syntheticFile);
+    } catch (error) {
+      setStatus("error", "Failed", `Input processing failed: ${String(error)}`);
+    }
     return;
   }
 
@@ -547,6 +581,8 @@ async function analyzeZip(file) {
   } catch (error) {
     state.previewRenderVersion += 1;
     state.zipBytes = null;
+    state.markdownBytes = null;
+    state.markdownFileName = null;
     state.projectIndex = null;
     state.selectedEntry = null;
     state.renderedPreview = null;
@@ -635,7 +671,9 @@ async function renderPreview(entryPath, outputOptions = currentOutputOptions()) 
   const optionsKey = currentOutputOptionsKey(outputOptions);
 
   try {
-    const preview = state.wasm.renderHtml(state.zipBytes, entryPath, outputOptions);
+    const preview = state.markdownBytes
+      ? state.wasm.renderMarkdown(state.markdownBytes, state.markdownFileName, outputOptions)
+      : state.wasm.renderHtml(state.zipBytes, entryPath, outputOptions);
     const materializedPreview = await materializePreview(preview, outputOptions);
     if (previewRenderVersion !== state.previewRenderVersion) {
       return;
