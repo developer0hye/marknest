@@ -112,6 +112,17 @@ cargo run -p marknest -- convert ./docs.zip --all --out-dir ./pdf
 cargo run -p marknest -- convert ./docs --out-dir ./pdf --render-report ./out/render-report.json
 ```
 
+Convert directly from a GitHub URL:
+
+```bash
+cargo run -p marknest -- convert https://github.com/user/repo -o output.pdf
+cargo run -p marknest -- convert https://github.com/user/repo/blob/main/docs/guide.md -o guide.pdf
+cargo run -p marknest -- convert https://github.com/user/repo/tree/v2.0 --all --out-dir ./pdf
+cargo run -p marknest -- validate https://github.com/user/repo
+```
+
+GitHub URL support downloads the repository as a ZIP archive through the GitHub API and processes it through the existing ZIP pipeline. Set `GITHUB_TOKEN` or `GH_TOKEN` for private repositories or to avoid API rate limits.
+
 `convert` requires `node`, `npm ci --prefix crates/marknest/playwright-runtime`, and a local Chrome, Edge, or Chromium installation for Playwright headless PDF generation.
 `--mermaid auto|on` and `--math auto|on` use vendored local Mermaid and MathJax runtime assets; when `--debug-html` is written with those modes enabled, a sibling `runtime-assets/` directory is emitted for offline reproduction.
 Supported defaults can come from `.marknest.toml`, `marknest.toml`, `MARKNEST_CONFIG`, `MARKNEST_THEME`, `MARKNEST_CSS`, `MARKNEST_TOC`, and `MARKNEST_SANITIZE_HTML`.
