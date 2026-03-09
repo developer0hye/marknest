@@ -1,0 +1,29 @@
+{
+  "id": "facebookresearch--segment-anything",
+  "repo": "facebookresearch/segment-anything",
+  "url": "https://github.com/facebookresearch/segment-anything",
+  "pinned_sha": "dca509fe793f601edb92606367a655c15ac00fdf",
+  "elapsed_sec": 2,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 7320751,
+  "page_count": 6,
+  "token_coverage": 0.9968944099378882,
+  "missing_tokens": [
+    "zero-shot"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "http://img.shields.io/badge/AnyConference-year-4b44ce.svg",
+      "resolved_path": null,
+      "fetch_url": "http://img.shields.io/badge/AnyConference-year-4b44ce.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/github/contributors/atong01/conditional-flow-matching.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/github/contributors/atong01/conditional-flow-matching.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "http://img.shields.io/badge/paper-arxiv.2302.00482-B31B1B.svg",
+      "resolved_path": null,
+      "fetch_url": "http://img.shields.io/badge/paper-arxiv.2302.00482-B31B1B.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "http://img.shields.io/badge/paper-arxiv.2307.03672-B31B1B.svg",
+      "resolved_path": null,
+      "fetch_url": "http://img.shields.io/badge/paper-arxiv.2307.03672-B31B1B.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/PyTorch_1.8+-ee4c2c?logo=pytorch&logoColor=white",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/PyTorch_1.8+-ee4c2c?logo=pytorch&logoColor=white",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/-Lightning_1.6+-792ee5?logo=pytorchlightning&logoColor=white",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/-Lightning_1.6+-792ee5?logo=pytorchlightning&logoColor=white",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Config-Hydra_1.2-89b8cd",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Config-Hydra_1.2-89b8cd",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Code%20Style-Black-black.svg?labelColor=gray",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Code%20Style-Black-black.svg?labelColor=gray",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/atong01/conditional-flow-matching/actions/workflows/test.yaml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/atong01/conditional-flow-matching/actions/workflows/test.yaml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://codecov.io/gh/atong01/conditional-flow-matching/branch/main/graph/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://codecov.io/gh/atong01/conditional-flow-matching/branch/main/graph/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://static.pepy.tech/badge/torchcfm",
+      "resolved_path": null,
+      "fetch_url": "https://static.pepy.tech/badge/torchcfm",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://static.pepy.tech/badge/torchcfm/month",
+      "resolved_path": null,
+      "fetch_url": "https://static.pepy.tech/badge/torchcfm/month",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "assets/169_generated_samples_otcfm.png",
+      "resolved_path": "assets/169_generated_samples_otcfm.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "assets/8gaussians-to-moons.gif",
+      "resolved_path": "assets/8gaussians-to-moons.gif",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "http://img.shields.io/badge/AnyConference-year-4b44ce.svg",
+      "fetch_url": "http://img.shields.io/badge/AnyConference-year-4b44ce.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/contributors/atong01/conditional-flow-matching.svg",
+      "fetch_url": "https://img.shields.io/github/contributors/atong01/conditional-flow-matching.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "http://img.shields.io/badge/paper-arxiv.2302.00482-B31B1B.svg",
+      "fetch_url": "http://img.shields.io/badge/paper-arxiv.2302.00482-B31B1B.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "http://img.shields.io/badge/paper-arxiv.2307.03672-B31B1B.svg",
+      "fetch_url": "http://img.shields.io/badge/paper-arxiv.2307.03672-B31B1B.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/PyTorch_1.8+-ee4c2c?logo=pytorch&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/PyTorch_1.8+-ee4c2c?logo=pytorch&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/-Lightning_1.6+-792ee5?logo=pytorchlightning&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/-Lightning_1.6+-792ee5?logo=pytorchlightning&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Config-Hydra_1.2-89b8cd",
+      "fetch_url": "https://img.shields.io/badge/Config-Hydra_1.2-89b8cd",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Code%20Style-Black-black.svg?labelColor=gray",
+      "fetch_url": "https://img.shields.io/badge/Code%20Style-Black-black.svg?labelColor=gray",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/Pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/atong01/conditional-flow-matching/actions/workflows/test.yaml/badge.svg",
+      "fetch_url": "https://github.com/atong01/conditional-flow-matching/actions/workflows/test.yaml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/gh/atong01/conditional-flow-matching/branch/main/graph/badge.svg",
+      "fetch_url": "https://codecov.io/gh/atong01/conditional-flow-matching/branch/main/graph/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg",
+      "fetch_url": "https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg",
+      "status": "failed",
+      "message": "HTTP 404 from https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray",
+      "fetch_url": "https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://static.pepy.tech/badge/torchcfm",
+      "fetch_url": "https://static.pepy.tech/badge/torchcfm",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://static.pepy.tech/badge/torchcfm/month",
+      "fetch_url": "https://static.pepy.tech/badge/torchcfm/month",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray",
+      "fetch_url": "https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg (HTTP 404 from https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg)"
+  ]
+}

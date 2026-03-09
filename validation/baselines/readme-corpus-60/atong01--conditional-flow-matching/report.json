@@ -1,0 +1,141 @@
+{
+  "status": "warning",
+  "exit_code": 1,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": [
+        "Remote asset could not be materialized: README.md -> https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg (HTTP 404 from https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg)"
+      ]
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "http://img.shields.io/badge/AnyConference-year-4b44ce.svg",
+      "fetch_url": "http://img.shields.io/badge/AnyConference-year-4b44ce.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/github/contributors/atong01/conditional-flow-matching.svg",
+      "fetch_url": "https://img.shields.io/github/contributors/atong01/conditional-flow-matching.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "http://img.shields.io/badge/paper-arxiv.2302.00482-B31B1B.svg",
+      "fetch_url": "http://img.shields.io/badge/paper-arxiv.2302.00482-B31B1B.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "http://img.shields.io/badge/paper-arxiv.2307.03672-B31B1B.svg",
+      "fetch_url": "http://img.shields.io/badge/paper-arxiv.2307.03672-B31B1B.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/PyTorch_1.8+-ee4c2c?logo=pytorch&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/PyTorch_1.8+-ee4c2c?logo=pytorch&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/-Lightning_1.6+-792ee5?logo=pytorchlightning&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/-Lightning_1.6+-792ee5?logo=pytorchlightning&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Config-Hydra_1.2-89b8cd",
+      "fetch_url": "https://img.shields.io/badge/Config-Hydra_1.2-89b8cd",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Code%20Style-Black-black.svg?labelColor=gray",
+      "fetch_url": "https://img.shields.io/badge/Code%20Style-Black-black.svg?labelColor=gray",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/Pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white",
+      "fetch_url": "https://img.shields.io/badge/Pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/atong01/conditional-flow-matching/actions/workflows/test.yaml/badge.svg",
+      "fetch_url": "https://github.com/atong01/conditional-flow-matching/actions/workflows/test.yaml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/gh/atong01/conditional-flow-matching/branch/main/graph/badge.svg",
+      "fetch_url": "https://codecov.io/gh/atong01/conditional-flow-matching/branch/main/graph/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg",
+      "fetch_url": "https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg",
+      "status": "failed",
+      "message": "HTTP 404 from https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray",
+      "fetch_url": "https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://static.pepy.tech/badge/torchcfm",
+      "fetch_url": "https://static.pepy.tech/badge/torchcfm",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://static.pepy.tech/badge/torchcfm/month",
+      "fetch_url": "https://static.pepy.tech/badge/torchcfm/month",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "fetch_url": "https://img.shields.io/static/v1?label=Run%20in&message=Google%20Colab&color=orange&logo=Google%20Cloud",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray",
+      "fetch_url": "https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg (HTTP 404 from https://github.com/atong01/conditional-flow-matching/actions/workflows/code-quality-main.yaml/badge.svg)"
+  ],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

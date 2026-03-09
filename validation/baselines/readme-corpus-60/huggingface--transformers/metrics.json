@@ -1,0 +1,33 @@
+{
+  "id": "huggingface--transformers",
+  "repo": "huggingface/transformers",
+  "url": "https://github.com/huggingface/transformers",
+  "pinned_sha": "fefc3fa205aae3fb44127142e0771b0c8762ee46",
+  "elapsed_sec": 13,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 1401453,
+  "page_count": 10,
+  "token_coverage": 0.9871134020618557,
+  "missing_tokens": [
+    "简体中文",
+    "繁體中文",
+    "日本語",
+    "shell",
+    "moonshine-streaming"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

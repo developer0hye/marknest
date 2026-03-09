@@ -1,0 +1,76 @@
+{
+  "status": "warning",
+  "exit_code": 1,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": [
+        "Remote asset could not be materialized: README.md -> https://github.com/datalorax/equatiomatic/raw/master/img/equatiomatic.gif (response size 42176122 bytes exceeds the per-asset limit of 16777216 bytes)"
+      ]
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg",
+      "fetch_url": "https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/datalorax/equatiomatic/workflows/R-CMD-check/badge.svg",
+      "fetch_url": "https://github.com/datalorax/equatiomatic/workflows/R-CMD-check/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/gh/datalorax/equatiomatic/branch/master/graph/badge.svg",
+      "fetch_url": "https://codecov.io/gh/datalorax/equatiomatic/branch/master/graph/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/covrpage-Last_Build_2020_08_24-brightgreen.svg",
+      "fetch_url": "https://img.shields.io/badge/covrpage-Last_Build_2020_08_24-brightgreen.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://cranlogs.r-pkg.org/badges/grand-total/equatiomatic",
+      "fetch_url": "https://cranlogs.r-pkg.org/badges/grand-total/equatiomatic",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/datalorax/equatiomatic/raw/master/img/equatiomatic.gif",
+      "fetch_url": "https://raw.githubusercontent.com/datalorax/equatiomatic/master/img/equatiomatic.gif",
+      "status": "failed",
+      "message": "response size 42176122 bytes exceeds the per-asset limit of 16777216 bytes"
+    }
+  ],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://github.com/datalorax/equatiomatic/raw/master/img/equatiomatic.gif (response size 42176122 bytes exceeds the per-asset limit of 16777216 bytes)"
+  ],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

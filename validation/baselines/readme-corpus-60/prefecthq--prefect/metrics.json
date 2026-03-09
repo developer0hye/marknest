@@ -1,0 +1,27 @@
+{
+  "id": "prefecthq--prefect",
+  "repo": "PrefectHQ/prefect",
+  "url": "https://github.com/PrefectHQ/prefect",
+  "pinned_sha": "79cf6403524091b341f2956c4e6748a4f8146f3e",
+  "elapsed_sec": 8,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 289939,
+  "page_count": 4,
+  "token_coverage": 1,
+  "missing_tokens": [],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

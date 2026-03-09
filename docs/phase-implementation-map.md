@@ -787,14 +787,14 @@ Report 포함 정보:
 
 | 구현 | 파일 | 위치 |
 |------|------|------|
-| 50-repo README corpus manifest | `validation/readme-corpus-50.tsv` | - |
+| 60-entry README corpus manifest | `validation/readme-corpus-60.tsv` | - |
 | `readme_corpus.mjs` (검증 러너) | `validation/readme_corpus.mjs` | - |
 | `baseline_artifacts.mjs` | `validation/lib/baseline_artifacts.mjs` | - |
 | `diff_policy.mjs` | `validation/lib/diff_policy.mjs` | - |
 | `manifest.mjs` | `validation/lib/manifest.mjs` | - |
 | `png_metrics.mjs` (이미지 비교) | `validation/lib/png_metrics.mjs` | - |
 | `text_metrics.mjs` (텍스트 커버리지) | `validation/lib/text_metrics.mjs` | - |
-| 50개 baseline 디렉터리 | `validation/baselines/readme-corpus-50/` | - |
+| README corpus baseline artifacts root | `validation/baselines/readme-corpus-60/` | - |
 
 Blocking 기준:
 - 변환 exit code > 1

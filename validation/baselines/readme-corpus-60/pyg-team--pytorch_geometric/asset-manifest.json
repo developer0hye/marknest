@@ -1,0 +1,49 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/pyg-team/pyg_sphinx_theme/master/pyg_sphinx_theme/static/img/pyg_logo_text.svg?sanitize=true",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/pyg-team/pyg_sphinx_theme/master/pyg_sphinx_theme/static/img/pyg_logo_text.svg?sanitize=true",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://data.pyg.org/img/cs224w_tutorials.png",
+      "resolved_path": null,
+      "fetch_url": "https://data.pyg.org/img/cs224w_tutorials.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/pyg-team/pytorch_geometric/master/docs/source/_figures/architecture.svg?sanitize=true",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/pyg-team/pytorch_geometric/master/docs/source/_figures/architecture.svg?sanitize=true",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://raw.githubusercontent.com/pyg-team/pyg_sphinx_theme/master/pyg_sphinx_theme/static/img/pyg_logo_text.svg?sanitize=true",
+      "fetch_url": "https://raw.githubusercontent.com/pyg-team/pyg_sphinx_theme/master/pyg_sphinx_theme/static/img/pyg_logo_text.svg?sanitize=true",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://data.pyg.org/img/cs224w_tutorials.png",
+      "fetch_url": "https://data.pyg.org/img/cs224w_tutorials.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/pyg-team/pytorch_geometric/master/docs/source/_figures/architecture.svg?sanitize=true",
+      "fetch_url": "https://raw.githubusercontent.com/pyg-team/pytorch_geometric/master/docs/source/_figures/architecture.svg?sanitize=true",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

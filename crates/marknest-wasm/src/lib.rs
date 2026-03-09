@@ -2,17 +2,18 @@ use std::io::{Cursor, Write};
 use std::path::{Component, Path};
 
 use marknest_core::{
-    AssetRef, DEFAULT_MATH_TIMEOUT_MS, DEFAULT_MERMAID_TIMEOUT_MS, MATHJAX_SCRIPT_URL,
-    MATHJAX_VERSION, MERMAID_SCRIPT_URL, MERMAID_VERSION, MathMode, MermaidMode, PdfMetadata,
-    ProjectIndex, ProjectSourceKind, RUNTIME_ASSET_MODE, RenderOptions, RenderedHtmlDocument,
-    ThemePreset, analyze_zip, render_markdown_entry_with_options, render_zip_entry_with_options,
+    AssetRef, DEFAULT_MATH_TIMEOUT_MS, DEFAULT_MERMAID_TIMEOUT_MS, MATHJAX_VERSION,
+    MERMAID_VERSION, MathMode, MermaidMode, PdfMetadata, ProjectIndex, ProjectSourceKind,
+    RUNTIME_ASSET_BASE_PATH, RUNTIME_ASSET_MODE, RenderOptions, RenderedHtmlDocument, ThemePreset,
+    analyze_zip_strip_prefix, render_markdown_entry_with_options,
+    render_zip_entry_with_options_strip_prefix, runtime_asset_script_urls,
 };
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 use zip::write::SimpleFileOptions;
 
-const HTML2PDF_SCRIPT_URL: &str = "./runtime-assets/html2pdf/html2pdf.bundle.min.js";
 const HTML2PDF_VERSION: &str = "0.10.1";
+const HTML2PDF_RUNTIME_ASSET_RELATIVE_PATH: &str = "html2pdf/html2pdf.bundle.min.js";
 const MERMAID_RUNTIME_ASSET_BYTES: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
     "/../../runtime-assets/mermaid/mermaid.min.js"
@@ -71,6 +72,14 @@ struct BrowserOutputOptions {
     math_mode: MathMode,
     mermaid_timeout_ms: u32,
     math_timeout_ms: u32,
+    runtime_assets_base_url: Option<String>,
+    strip_zip_prefix: bool,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(default)]
+struct BrowserZipOptions {
+    strip_zip_prefix: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
@@ -103,9 +112,9 @@ struct BrowserRuntimeInfo {
     mermaid_version: &'static str,
     mathjax_version: &'static str,
     html2pdf_version: &'static str,
-    mermaid_script_url: &'static str,
-    math_script_url: &'static str,
-    html2pdf_script_url: &'static str,
+    mermaid_script_url: String,
+    math_script_url: String,
+    html2pdf_script_url: String,
 }
 
 impl Default for BrowserOutputOptions {
@@ -130,6 +139,8 @@ impl Default for BrowserOutputOptions {
             math_mode: MathMode::Off,
             mermaid_timeout_ms: DEFAULT_MERMAID_TIMEOUT_MS,
             math_timeout_ms: DEFAULT_MATH_TIMEOUT_MS,
+            runtime_assets_base_url: None,
+            strip_zip_prefix: false,
         }
     }
 }
@@ -156,6 +167,8 @@ impl BrowserOutputOptions {
             math_mode: self.math_mode,
             mermaid_timeout_ms: self.mermaid_timeout_ms.max(1),
             math_timeout_ms: self.math_timeout_ms.max(1),
+            runtime_assets_base_url: normalize_optional_text(&self.runtime_assets_base_url),
+            strip_zip_prefix: self.strip_zip_prefix,
         }
     }
 
@@ -175,6 +188,7 @@ impl BrowserOutputOptions {
             math_mode: normalized.math_mode,
             mermaid_timeout_ms: normalized.mermaid_timeout_ms,
             math_timeout_ms: normalized.math_timeout_ms,
+            runtime_assets_base_url: normalized.runtime_assets_base_url,
         }
     }
 }
@@ -200,7 +214,28 @@ fn normalize_optional_block(value: &Option<String>) -> Option<String> {
     })
 }
 
-fn browser_runtime_info() -> BrowserRuntimeInfo {
+fn normalize_runtime_assets_base_url(base_url: &str) -> String {
+    let trimmed = base_url.trim();
+    if trimmed.is_empty() {
+        return RUNTIME_ASSET_BASE_PATH.to_string();
+    }
+
+    if trimmed.ends_with('/') {
+        trimmed.to_string()
+    } else {
+        format!("{trimmed}/")
+    }
+}
+
+fn html2pdf_script_url(base_url: Option<&str>) -> String {
+    let base_url = normalize_runtime_assets_base_url(base_url.unwrap_or(RUNTIME_ASSET_BASE_PATH));
+    format!("{base_url}{HTML2PDF_RUNTIME_ASSET_RELATIVE_PATH}")
+}
+
+fn browser_runtime_info(options: &BrowserOutputOptions) -> BrowserRuntimeInfo {
+    let render_options = options.render_options();
+    let runtime_urls = runtime_asset_script_urls(&render_options);
+
     BrowserRuntimeInfo {
         renderer: "browser-wasm",
         marknest_version: env!("CARGO_PKG_VERSION"),
@@ -209,9 +244,9 @@ fn browser_runtime_info() -> BrowserRuntimeInfo {
         mermaid_version: MERMAID_VERSION,
         mathjax_version: MATHJAX_VERSION,
         html2pdf_version: HTML2PDF_VERSION,
-        mermaid_script_url: MERMAID_SCRIPT_URL,
-        math_script_url: MATHJAX_SCRIPT_URL,
-        html2pdf_script_url: HTML2PDF_SCRIPT_URL,
+        mermaid_script_url: runtime_urls.mermaid_script_url,
+        math_script_url: runtime_urls.mathjax_script_url,
+        html2pdf_script_url: html2pdf_script_url(render_options.runtime_assets_base_url.as_deref()),
     }
 }
 
@@ -223,7 +258,20 @@ pub fn start() {
 #[wasm_bindgen(js_name = analyzeZip)]
 pub fn analyze_zip_binding(zip_bytes: Vec<u8>) -> Result<JsValue, JsValue> {
     let project_index =
-        analyze_zip_model(&zip_bytes).map_err(|message| JsValue::from_str(&message))?;
+        analyze_zip_model(&zip_bytes, false).map_err(|message| JsValue::from_str(&message))?;
+    serde_wasm_bindgen::to_value(&project_index)
+        .map_err(|error| JsValue::from_str(&format!("Failed to encode project index: {error}")))
+}
+
+#[wasm_bindgen(js_name = analyzeZipWithOptions)]
+pub fn analyze_zip_with_options_binding(
+    zip_bytes: Vec<u8>,
+    options: JsValue,
+) -> Result<JsValue, JsValue> {
+    let parsed_options =
+        parse_browser_zip_options(options).map_err(|message| JsValue::from_str(&message))?;
+    let project_index = analyze_zip_model(&zip_bytes, parsed_options.strip_zip_prefix)
+        .map_err(|message| JsValue::from_str(&message))?;
     serde_wasm_bindgen::to_value(&project_index)
         .map_err(|error| JsValue::from_str(&format!("Failed to encode project index: {error}")))
 }
@@ -292,8 +340,21 @@ pub fn render_markdown_binding(
         .map_err(|error| JsValue::from_str(&format!("Failed to encode rendered HTML: {error}")))
 }
 
-fn analyze_zip_model(zip_bytes: &[u8]) -> Result<ProjectIndex, String> {
-    analyze_zip(zip_bytes).map_err(|error| error.to_string())
+fn analyze_zip_model(zip_bytes: &[u8], strip_zip_prefix: bool) -> Result<ProjectIndex, String> {
+    if strip_zip_prefix {
+        analyze_zip_strip_prefix(zip_bytes).map_err(|error| error.to_string())
+    } else {
+        marknest_core::analyze_zip(zip_bytes).map_err(|error| error.to_string())
+    }
+}
+
+fn parse_browser_zip_options(options: JsValue) -> Result<BrowserZipOptions, String> {
+    if options.is_undefined() || options.is_null() {
+        return Ok(BrowserZipOptions::default());
+    }
+
+    serde_wasm_bindgen::from_value(options)
+        .map_err(|error| format!("Invalid browser ZIP options: {error}"))
 }
 
 fn parse_browser_output_options(options: JsValue) -> Result<BrowserOutputOptions, String> {
@@ -311,9 +372,16 @@ fn render_preview_model(
     entry_path: &str,
     options: &BrowserOutputOptions,
 ) -> Result<RenderPreview, String> {
-    let rendered_document: RenderedHtmlDocument =
-        render_zip_entry_with_options(zip_bytes, entry_path, &options.render_options())
-            .map_err(|error| error.to_string())?;
+    let rendered_document: RenderedHtmlDocument = if options.strip_zip_prefix {
+        render_zip_entry_with_options_strip_prefix(zip_bytes, entry_path, &options.render_options())
+    } else {
+        marknest_core::render_zip_entry_with_options(
+            zip_bytes,
+            entry_path,
+            &options.render_options(),
+        )
+    }
+    .map_err(|error| error.to_string())?;
 
     Ok(RenderPreview {
         title: rendered_document.title,
@@ -344,9 +412,20 @@ fn render_preview_batch_model(
     let mut previews: Vec<RenderPreviewEntry> = Vec::with_capacity(entry_paths.len());
 
     for entry_path in entry_paths {
-        let rendered_document: RenderedHtmlDocument =
-            render_zip_entry_with_options(zip_bytes, entry_path, &options.render_options())
-                .map_err(|error| error.to_string())?;
+        let rendered_document: RenderedHtmlDocument = if options.strip_zip_prefix {
+            render_zip_entry_with_options_strip_prefix(
+                zip_bytes,
+                entry_path,
+                &options.render_options(),
+            )
+        } else {
+            marknest_core::render_zip_entry_with_options(
+                zip_bytes,
+                entry_path,
+                &options.render_options(),
+            )
+        }
+        .map_err(|error| error.to_string())?;
 
         previews.push(RenderPreviewEntry {
             entry_path: entry_path.clone(),
@@ -364,9 +443,10 @@ fn build_debug_bundle_model(
     options: &BrowserOutputOptions,
 ) -> Result<Vec<u8>, String> {
     let normalized_options = options.normalized();
-    let project_index = analyze_zip_model(zip_bytes)?;
+    let project_index = analyze_zip_model(zip_bytes, normalized_options.strip_zip_prefix)?;
     let preview = render_preview_model(zip_bytes, entry_path, &normalized_options)?;
     let manifest = build_asset_manifest(&project_index, entry_path);
+    let runtime_info = browser_runtime_info(&normalized_options);
     let report = BrowserRenderReport {
         status: "success",
         source_kind: project_index.source_kind.clone(),
@@ -379,7 +459,7 @@ fn build_debug_bundle_model(
         warnings: manifest.warnings.clone(),
         errors: manifest.path_errors.clone(),
         options: normalized_options,
-        runtime_info: browser_runtime_info(),
+        runtime_info,
     };
 
     let mut files = vec![
@@ -398,23 +478,49 @@ fn build_debug_bundle_model(
                 .map_err(|error| format!("Failed to encode render report: {error}"))?,
         },
     ];
-    files.extend(runtime_asset_files_for_html(&preview.html));
+    files.extend(runtime_asset_files_for_html(&preview.html, options));
 
     build_pdf_archive_model(&files)
 }
 
-fn runtime_asset_files_for_html(html: &str) -> Vec<PdfArchiveFile> {
-    let mut files: Vec<PdfArchiveFile> = Vec::new();
+fn archive_relative_path_from_script_url(script_url: &str) -> Option<String> {
+    let trimmed = script_url.trim();
+    if trimmed.is_empty()
+        || trimmed.starts_with('/')
+        || trimmed.starts_with("//")
+        || trimmed.contains("://")
+    {
+        return None;
+    }
 
-    if html.contains(MERMAID_SCRIPT_URL) {
+    let path = trimmed
+        .split_once('#')
+        .map(|(value, _)| value)
+        .unwrap_or(trimmed)
+        .split_once('?')
+        .map(|(value, _)| value)
+        .unwrap_or(trimmed);
+
+    normalize_archive_relative_path(path).ok()
+}
+
+fn runtime_asset_files_for_html(html: &str, options: &BrowserOutputOptions) -> Vec<PdfArchiveFile> {
+    let mut files: Vec<PdfArchiveFile> = Vec::new();
+    let runtime_urls = runtime_asset_script_urls(&options.render_options());
+
+    if html.contains(&runtime_urls.mermaid_script_url)
+        && let Some(path) = archive_relative_path_from_script_url(&runtime_urls.mermaid_script_url)
+    {
         files.push(PdfArchiveFile {
-            path: "runtime-assets/mermaid/mermaid.min.js".to_string(),
+            path,
             bytes: MERMAID_RUNTIME_ASSET_BYTES.to_vec(),
         });
     }
-    if html.contains(MATHJAX_SCRIPT_URL) {
+    if html.contains(&runtime_urls.mathjax_script_url)
+        && let Some(path) = archive_relative_path_from_script_url(&runtime_urls.mathjax_script_url)
+    {
         files.push(PdfArchiveFile {
-            path: "runtime-assets/mathjax/es5/tex-svg.js".to_string(),
+            path,
             bytes: MATHJAX_RUNTIME_ASSET_BYTES.to_vec(),
         });
     }
@@ -542,7 +648,7 @@ mod tests {
             ("docs/tutorial.md", "# Tutorial\n"),
         ]);
 
-        let project_index = analyze_zip_model(&zip_bytes).expect("zip should analyze");
+        let project_index = analyze_zip_model(&zip_bytes, false).expect("zip should analyze");
 
         assert_eq!(project_index.entry_candidates.len(), 2);
         assert_eq!(
@@ -621,6 +727,57 @@ mod tests {
         assert!(preview.html.contains("onclick=\"alert('x')\""));
         assert!(preview.html.contains("\"mermaidTimeoutMs\":4200"));
         assert!(preview.html.contains("\"mathTimeoutMs\":2400"));
+    }
+
+    #[test]
+    fn renders_zip_preview_html_with_a_custom_runtime_asset_base_url() {
+        let zip_bytes = build_zip(&[(
+            "docs/README.md",
+            "# Guide\n\n```mermaid\ngraph TD\n  A --> B\n```\n\n$$x + y$$\n",
+        )]);
+
+        let preview = render_preview_model(
+            &zip_bytes,
+            "docs/README.md",
+            &BrowserOutputOptions {
+                mermaid_mode: MermaidMode::Auto,
+                math_mode: MathMode::Auto,
+                runtime_assets_base_url: Some("/static/marknest-runtime".to_string()),
+                ..BrowserOutputOptions::default()
+            },
+        )
+        .expect("preview should render with a custom runtime asset base url");
+
+        assert!(
+            preview
+                .html
+                .contains("\"mermaidScript\":\"/static/marknest-runtime/mermaid/mermaid.min.js\"")
+        );
+        assert!(
+            preview
+                .html
+                .contains("\"mathScript\":\"/static/marknest-runtime/mathjax/es5/tex-svg.js\"")
+        );
+        assert!(
+            !preview
+                .html
+                .contains("\"mermaidScript\":\"./runtime-assets/")
+        );
+    }
+
+    #[test]
+    fn analyzes_zip_bytes_for_the_browser_flow_after_stripping_a_shared_top_level_directory() {
+        let zip_bytes = build_zip(&[
+            ("repo-main/README.md", "# Guide\n"),
+            ("repo-main/docs/tutorial.md", "# Tutorial\n"),
+        ]);
+
+        let project_index = analyze_zip_model(&zip_bytes, true).expect("zip should analyze");
+
+        assert_eq!(project_index.selected_entry.as_deref(), Some("README.md"));
+        assert_eq!(project_index.entry_candidates.len(), 2);
+        assert_eq!(project_index.entry_candidates[0].path, "README.md");
+        assert_eq!(project_index.entry_candidates[1].path, "docs/tutorial.md");
     }
 
     #[test]
@@ -756,6 +913,51 @@ mod tests {
         assert_eq!(report["options"]["sanitize_html"], true);
         assert_eq!(report["options"]["mermaid_timeout_ms"], 5000);
         assert_eq!(report["options"]["math_timeout_ms"], 3000);
+    }
+
+    #[test]
+    fn debug_bundle_report_uses_a_custom_runtime_asset_base_url() {
+        let zip_bytes = build_zip(&[(
+            "docs/README.md",
+            "# Runtime\n\n```mermaid\ngraph TD\n  A-->B\n```\n\nInline math $x+y$.\n",
+        )]);
+
+        let archive_bytes = build_debug_bundle_model(
+            &zip_bytes,
+            "docs/README.md",
+            &BrowserOutputOptions {
+                mermaid_mode: MermaidMode::Auto,
+                math_mode: MathMode::Auto,
+                runtime_assets_base_url: Some("assets/runtime".to_string()),
+                ..BrowserOutputOptions::default()
+            },
+        )
+        .expect("debug bundle should be created");
+
+        let mut archive = zip::ZipArchive::new(std::io::Cursor::new(archive_bytes))
+            .expect("debug bundle should be a zip archive");
+
+        let mut report_json = String::new();
+        archive
+            .by_name("render-report.json")
+            .expect("render report should exist")
+            .read_to_string(&mut report_json)
+            .expect("render report should be readable");
+        let report: serde_json::Value =
+            serde_json::from_str(&report_json).expect("render report should be valid json");
+
+        assert_eq!(
+            report["runtime_info"]["mermaid_script_url"],
+            "assets/runtime/mermaid/mermaid.min.js"
+        );
+        assert_eq!(
+            report["runtime_info"]["math_script_url"],
+            "assets/runtime/mathjax/es5/tex-svg.js"
+        );
+        assert_eq!(
+            report["runtime_info"]["html2pdf_script_url"],
+            "assets/runtime/html2pdf/html2pdf.bundle.min.js"
+        );
     }
 
     #[test]

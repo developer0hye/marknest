@@ -1,0 +1,23 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "data/examples/0.png",
+      "resolved_path": "data/examples/0.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "data/images/texify_bench.png",
+      "resolved_path": "data/images/texify_bench.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

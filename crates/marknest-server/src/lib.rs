@@ -193,6 +193,7 @@ impl FallbackRenderOptions {
             math_mode: self.math_mode,
             mermaid_timeout_ms: self.mermaid_timeout_ms,
             math_timeout_ms: self.math_timeout_ms,
+            runtime_assets_base_url: None,
         }
     }
 

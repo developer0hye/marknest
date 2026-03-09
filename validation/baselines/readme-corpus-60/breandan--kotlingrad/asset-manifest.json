@@ -1,0 +1,162 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/Kotlin-1.6.20-blue.svg?style=flat&logo=kotlin",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/Kotlin-1.6.20-blue.svg?style=flat&logo=kotlin",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/maven-central/v/ai.hypergraph/kotlingrad.svg?label=Maven%20Central",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/maven-central/v/ai.hypergraph/kotlingrad.svg?label=Maven%20Central",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/breandan/kotlingrad/workflows/CI/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/breandan/kotlingrad/workflows/CI/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://zenodo.org/badge/DOI/10.5281/zenodo.3549076.svg",
+      "resolved_path": null,
+      "fetch_url": "https://zenodo.org/badge/DOI/10.5281/zenodo.3549076.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/dataflow.svg",
+      "resolved_path": "samples/src/main/resources/dataflow.svg",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/lr_batch_loss_graph.svg",
+      "resolved_path": "samples/src/main/resources/lr_batch_loss_graph.svg",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/ripple.png",
+      "resolved_path": "samples/src/main/resources/ripple.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/pulsar.png",
+      "resolved_path": "samples/src/main/resources/pulsar.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/starquake.png",
+      "resolved_path": "samples/src/main/resources/starquake.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/novaflux.png",
+      "resolved_path": "samples/src/main/resources/novaflux.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/mlp_loss.svg",
+      "resolved_path": "samples/src/main/resources/mlp_loss.svg",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/comparison.svg",
+      "resolved_path": "samples/src/main/resources/comparison.svg",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "latex/figures/kotlingrad_diagram.png",
+      "resolved_path": "latex/figures/kotlingrad_diagram.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/uml_diagram.svg",
+      "resolved_path": "samples/src/main/resources/uml_diagram.svg",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://render.githubusercontent.com/render/math?math=\\nabla_{\\Theta}||\\mathbf{Y} - \\mathbf{X}\\Theta||^2",
+      "resolved_path": null,
+      "fetch_url": "https://render.githubusercontent.com/render/math?math=\\nabla_{\\Theta}||\\mathbf{Y} - \\mathbf{X}\\Theta||^2",
+      "kind": "raw_html_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/plot.svg",
+      "resolved_path": "samples/src/main/resources/plot.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "samples/src/main/resources/hermite.svg",
+      "resolved_path": "samples/src/main/resources/hermite.svg",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://img.shields.io/badge/Kotlin-1.6.20-blue.svg?style=flat&logo=kotlin",
+      "fetch_url": "https://img.shields.io/badge/Kotlin-1.6.20-blue.svg?style=flat&logo=kotlin",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/maven-central/v/ai.hypergraph/kotlingrad.svg?label=Maven%20Central",
+      "fetch_url": "https://img.shields.io/maven-central/v/ai.hypergraph/kotlingrad.svg?label=Maven%20Central",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/breandan/kotlingrad/workflows/CI/badge.svg",
+      "fetch_url": "https://github.com/breandan/kotlingrad/workflows/CI/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://zenodo.org/badge/DOI/10.5281/zenodo.3549076.svg",
+      "fetch_url": "https://zenodo.org/badge/DOI/10.5281/zenodo.3549076.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://render.githubusercontent.com/render/math?math=\\nabla_{\\Theta}||\\mathbf{Y} - \\mathbf{X}\\Theta||^2",
+      "fetch_url": "https://render.githubusercontent.com/render/math?math=\\nabla_{\\Theta}||\\mathbf{Y} - \\mathbf{X}\\Theta||^2",
+      "status": "failed",
+      "message": "HTTP 400 from https://render.githubusercontent.com/render/math?math=\\nabla_{\\Theta}||\\mathbf{Y}%20-%20\\mathbf{X}\\Theta||^2"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://render.githubusercontent.com/render/math?math=\\nabla_{\\Theta}||\\mathbf{Y} - \\mathbf{X}\\Theta||^2 (HTTP 400 from https://render.githubusercontent.com/render/math?math=\\nabla_{\\Theta}||\\mathbf{Y}%20-%20\\mathbf{X}\\Theta||^2)"
+  ]
+}

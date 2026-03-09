@@ -79,9 +79,10 @@ function stripInlineCodeFenceMarkers(markdownText) {
 function stripMarkdownEmphasis(markdownText) {
   return String(markdownText ?? "")
     .replace(/\*\*([^*]+)\*\*/g, "$1")
-    .replace(/__([^_]+)__/g, "$1")
+    // Keep code-like identifiers such as extract_eq or TORCH_DEVICE intact.
+    .replace(/(^|[^\p{L}\p{N}])__([^_]+)__($|[^\p{L}\p{N}])/gu, "$1$2$3")
     .replace(/\*([^*]+)\*/g, "$1")
-    .replace(/_([^_]+)_/g, "$1")
+    .replace(/(^|[^\p{L}\p{N}])_([^_]+)_($|[^\p{L}\p{N}])/gu, "$1$2$3")
     .replace(/~~([^~]+)~~/g, "$1");
 }
 
@@ -91,16 +92,69 @@ function stripRawHtmlTags(markdownText) {
     .replace(/<[^>]+>/g, " ");
 }
 
+function stripLatexMathSpans(markdownText) {
+  let strippedText = String(markdownText ?? "")
+    // Strip same-line display math without letting literal "$$" prose swallow later lines.
+    .replace(/(?<!\$)\$\$(?!\$)[^\n]*?(?<!\$)\$\$(?!\$)/g, " ")
+    .replace(/\\\[[^\n]*?\\\]/g, " ")
+    .replace(/\\\([\s\S]*?\\\)/g, " ")
+    .replace(/\\begin\{[a-zA-Z*]+\}[\s\S]*?\\end\{[a-zA-Z*]+\}/g, " ")
+    // Treat inline $...$ as math for token coverage; heading coverage handles math headings separately.
+    .replace(/(?<!\$)\$(?![\$\s])([^$\n]*?\S)\$(?!\$)/g, " ");
+
+  const strippedLines = [];
+  const lines = strippedText.split("\n");
+  let inDoubleDollarBlock = false;
+  let inBracketBlock = false;
+
+  for (const line of lines) {
+    const trimmedLine = line.trim();
+    if (inDoubleDollarBlock) {
+      if (/^\$\$\s*$/.test(trimmedLine)) {
+        inDoubleDollarBlock = false;
+      }
+      continue;
+    }
+    if (inBracketBlock) {
+      if (/^\\\]\s*$/.test(trimmedLine)) {
+        inBracketBlock = false;
+      }
+      continue;
+    }
+    if (/^\$\$\s*$/.test(trimmedLine)) {
+      inDoubleDollarBlock = true;
+      continue;
+    }
+    if (/^\\\[\s*$/.test(trimmedLine)) {
+      inBracketBlock = true;
+      continue;
+    }
+    strippedLines.push(line);
+  }
+
+  strippedText = strippedLines.join("\n");
+  return strippedText;
+}
+
 function stripUrls(markdownText) {
   return markdownText.replace(/\bhttps?:\/\/\S+/gi, " ");
 }
 
 function normalizeSearchText(text) {
   return String(text ?? "")
+    .normalize("NFKD")
     .toLowerCase()
     .replace(/[\u2000-\u206F]/g, " ")
     .replace(/[^\p{L}\p{N}\s._+-]+/gu, " ")
     .replace(/\s[-+_]+\s/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeHeadingSearchText(text) {
+  return normalizeSearchText(text)
+    .replace(/\b(?:mathbb|mathbf|mathrm|mathcal|mathit|mathsf|mathtt|operatorname|textrm)\b/g, " ")
+    .replace(/\b([a-z])\s+(\d+)\b/g, "$1$2")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -163,7 +217,7 @@ function splitMarkdownIntoVisibleLines(markdownText) {
       const headingMatch = /^(#{1,3})\s+(.+?)\s*$/.exec(trimmedLine);
       if (headingMatch) {
         headingValues.push(
-          normalizeSearchText(
+          normalizeHeadingSearchText(
             stripUrls(stripRawHtmlTags(cleanInlineMarkdown(headingMatch[2]))),
           ),
         );
@@ -209,12 +263,14 @@ export function buildSourceSnapshot(markdownText) {
   const visible = splitMarkdownIntoVisibleLines(markdownText);
   const normalizedVisibleText = stripUrls(
     stripRawHtmlTags(
+      stripLatexMathSpans(
       stripInlineCodeFenceMarkers(
         stripLinkDefinitionLines(
           stripMarkdownEmphasis(
             replaceMarkdownLinksWithText(stripMarkdownImageSyntax(visible.visibleText)),
           ),
         ),
+      ),
       ),
     ),
   );
@@ -249,8 +305,10 @@ export function calculateHeadingCoverage(sourceSnapshot, extractedPdfText) {
     return { coverage: 1, missingHeadings: [] };
   }
 
-  const normalizedOutputText = normalizeSearchText(extractedPdfText);
-  const missingHeadings = sourceHeadings.filter((heading) => !normalizedOutputText.includes(heading));
+  const normalizedOutputText = normalizeHeadingSearchText(extractedPdfText);
+  const missingHeadings = sourceHeadings
+    .map((heading) => normalizeHeadingSearchText(heading))
+    .filter((heading) => !normalizedOutputText.includes(heading));
   return {
     coverage: (sourceHeadings.length - missingHeadings.length) / sourceHeadings.length,
     missingHeadings,

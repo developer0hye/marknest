@@ -1,0 +1,39 @@
+{
+  "id": "breandan--kotlingrad",
+  "repo": "breandan/kotlingrad",
+  "url": "https://github.com/breandan/kotlingrad",
+  "pinned_sha": "7fff271c90d63a683d02889c9732155dc0365d5d",
+  "elapsed_sec": 13,
+  "convert_exit_code": 1,
+  "report_status": "warning",
+  "pdf_bytes": 7025279,
+  "page_count": 37,
+  "token_coverage": 0.9956427015250545,
+  "missing_tokens": [
+    "dagger",
+    "sect",
+    "lowast",
+    "group-specific",
+    "算盘厂",
+    "construction"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [
+    "https://render.githubusercontent.com/render/math?math=\\nabla_{\\Theta}||\\mathbf{Y} - \\mathbf{X}\\Theta||^2"
+  ],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [
+    "convert_warning_exit",
+    "remote_asset_failures"
+  ],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

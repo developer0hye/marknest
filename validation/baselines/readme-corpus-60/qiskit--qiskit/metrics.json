@@ -1,0 +1,29 @@
+{
+  "id": "qiskit--qiskit",
+  "repo": "Qiskit/qiskit",
+  "url": "https://github.com/Qiskit/qiskit",
+  "pinned_sha": "2463cda5e2dbda0654b69204dff9560cbd71a2f4",
+  "elapsed_sec": 10,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 202224,
+  "page_count": 5,
+  "token_coverage": 0.9970588235294118,
+  "missing_tokens": [
+    "well-tested"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

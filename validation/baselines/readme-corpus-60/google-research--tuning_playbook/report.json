@@ -1,0 +1,101 @@
+{
+  "status": "warning",
+  "exit_code": 1,
+  "input_kind": "markdown_file",
+  "input_path": "README.md",
+  "source_kind": "workspace",
+  "selection_mode": "explicit_markdown_file",
+  "requested_entry": "README.md",
+  "selected_entries": [
+    "README.md"
+  ],
+  "entry_selection_reason": "readme",
+  "convert_mode": "single",
+  "outputs": [
+    {
+      "entry_path": "README.md",
+      "output_path": "output.pdf",
+      "warnings": [
+        "Remote asset could not be materialized: README.md -> https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/have_we_sampled_enough.png (HTTP 404 from https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/have_we_sampled_enough.png)"
+      ]
+    }
+  ],
+  "failures": [],
+  "collisions": [],
+  "remote_assets": [
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/bad_search_space.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/bad_search_space.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/good_search_space.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/good_search_space.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/isolation_plot.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/isolation_plot.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/have_we_sampled_enough.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/have_we_sampled_enough.png",
+      "status": "failed",
+      "message": "HTTP 404 from https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/have_we_sampled_enough.png"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/stride_instability.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/stride_instability.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/more_frequent_evals.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/more_frequent_evals.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/instability_during_warmup.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/instability_during_warmup.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/axis_model_with_instability.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/axis_model_with_instability.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/loss_model_with_instability.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/loss_model_with_instability.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/beneficial_effect_warmup.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/beneficial_effect_warmup.png",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/gradient_clipping.png",
+      "fetch_url": "https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/gradient_clipping.png",
+      "status": "inlined"
+    }
+  ],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/have_we_sampled_enough.png (HTTP 404 from https://raw.githubusercontent.com/google-research/tuning_playbook/main/assets/have_we_sampled_enough.png)"
+  ],
+  "errors": [],
+  "runtime_info": {
+    "renderer": "playwright-chromium",
+    "marknest_version": "0.1.0",
+    "asset_mode": "bundled_local",
+    "node_path": "node",
+    "node_version": "v25.5.0",
+    "browser_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_version": "Google Chrome 145.0.7632.160",
+    "playwright_version": "1.58.2",
+    "mermaid_version": "11.11.0",
+    "mathjax_version": "3.2.2",
+    "mermaid_script_url": "./runtime-assets/mermaid/mermaid.min.js",
+    "math_script_url": "./runtime-assets/mathjax/es5/tex-svg.js"
+  }
+}

@@ -24,10 +24,10 @@ import {
 const SCRIPT_PATH = fileURLToPath(import.meta.url);
 const VALIDATION_ROOT = path.dirname(SCRIPT_PATH);
 const REPO_ROOT = path.resolve(VALIDATION_ROOT, "..");
-const MANIFEST_PATH = path.join(VALIDATION_ROOT, "readme-corpus-50.tsv");
-const CACHE_ROOT = path.join(VALIDATION_ROOT, ".cache", "readme-corpus-50");
+const MANIFEST_PATH = path.join(VALIDATION_ROOT, "readme-corpus-60.tsv");
+const CACHE_ROOT = path.join(VALIDATION_ROOT, ".cache", "readme-corpus-60");
 const RUNS_ROOT = path.join(VALIDATION_ROOT, ".runs");
-const BASELINE_ROOT = path.join(VALIDATION_ROOT, "baselines", "readme-corpus-50");
+const BASELINE_ROOT = path.join(VALIDATION_ROOT, "baselines", "readme-corpus-60");
 const MARKNEST_BINARY = path.join(REPO_ROOT, "target", "debug", "marknest");
 const TOKEN_COVERAGE_THRESHOLD = 0.97;
 const FALLBACK_BIN_DIRECTORIES = [

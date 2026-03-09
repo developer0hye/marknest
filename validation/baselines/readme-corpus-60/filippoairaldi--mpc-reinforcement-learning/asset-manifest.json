@@ -1,0 +1,140 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://badge.fury.io/py/mpcrl.svg",
+      "resolved_path": null,
+      "fetch_url": "https://badge.fury.io/py/mpcrl.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/license-MIT-blueviolet",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/license-MIT-blueviolet",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/python->=3.9-green.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/python->=3.9-green.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/FilippoAiraldi/mpc-reinforcement-learning/actions/workflows/tests.yml/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/FilippoAiraldi/mpc-reinforcement-learning/actions/workflows/tests.yml/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://readthedocs.org/projects/mpc-reinforcement-learning/badge/?version=stable",
+      "resolved_path": null,
+      "fetch_url": "https://readthedocs.org/projects/mpc-reinforcement-learning/badge/?version=stable",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://static.pepy.tech/badge/mpcrl",
+      "resolved_path": null,
+      "fetch_url": "https://static.pepy.tech/badge/mpcrl",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://qlty.sh/gh/FilippoAiraldi/projects/mpc-reinforcement-learning/maintainability.svg",
+      "resolved_path": null,
+      "fetch_url": "https://qlty.sh/gh/FilippoAiraldi/projects/mpc-reinforcement-learning/maintainability.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://qlty.sh/gh/FilippoAiraldi/projects/mpc-reinforcement-learning/coverage.svg",
+      "resolved_path": null,
+      "fetch_url": "https://qlty.sh/gh/FilippoAiraldi/projects/mpc-reinforcement-learning/coverage.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://raw.githubusercontent.com/FilippoAiraldi/mpc-reinforcement-learning/main/docs/_static/mpcrl.diagram.light.png",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/FilippoAiraldi/mpc-reinforcement-learning/main/docs/_static/mpcrl.diagram.light.png",
+      "kind": "raw_html_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://badge.fury.io/py/mpcrl.svg",
+      "fetch_url": "https://badge.fury.io/py/mpcrl.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/license-MIT-blueviolet",
+      "fetch_url": "https://img.shields.io/badge/license-MIT-blueviolet",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/python->=3.9-green.svg",
+      "fetch_url": "https://img.shields.io/badge/python->=3.9-green.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/FilippoAiraldi/mpc-reinforcement-learning/actions/workflows/tests.yml/badge.svg",
+      "fetch_url": "https://github.com/FilippoAiraldi/mpc-reinforcement-learning/actions/workflows/tests.yml/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://readthedocs.org/projects/mpc-reinforcement-learning/badge/?version=stable",
+      "fetch_url": "https://readthedocs.org/projects/mpc-reinforcement-learning/badge/?version=stable",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://static.pepy.tech/badge/mpcrl",
+      "fetch_url": "https://static.pepy.tech/badge/mpcrl",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://qlty.sh/gh/FilippoAiraldi/projects/mpc-reinforcement-learning/maintainability.svg",
+      "fetch_url": "https://qlty.sh/gh/FilippoAiraldi/projects/mpc-reinforcement-learning/maintainability.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://qlty.sh/gh/FilippoAiraldi/projects/mpc-reinforcement-learning/coverage.svg",
+      "fetch_url": "https://qlty.sh/gh/FilippoAiraldi/projects/mpc-reinforcement-learning/coverage.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json",
+      "fetch_url": "https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://raw.githubusercontent.com/FilippoAiraldi/mpc-reinforcement-learning/main/docs/_static/mpcrl.diagram.light.png",
+      "fetch_url": "https://raw.githubusercontent.com/FilippoAiraldi/mpc-reinforcement-learning/main/docs/_static/mpcrl.diagram.light.png",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

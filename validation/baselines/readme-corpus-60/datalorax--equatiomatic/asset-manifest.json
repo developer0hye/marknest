@@ -1,0 +1,105 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg",
+      "resolved_path": null,
+      "fetch_url": "https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/datalorax/equatiomatic/workflows/R-CMD-check/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://github.com/datalorax/equatiomatic/workflows/R-CMD-check/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://codecov.io/gh/datalorax/equatiomatic/branch/master/graph/badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://codecov.io/gh/datalorax/equatiomatic/branch/master/graph/badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://img.shields.io/badge/covrpage-Last_Build_2020_08_24-brightgreen.svg",
+      "resolved_path": null,
+      "fetch_url": "https://img.shields.io/badge/covrpage-Last_Build_2020_08_24-brightgreen.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://cranlogs.r-pkg.org/badges/grand-total/equatiomatic",
+      "resolved_path": null,
+      "fetch_url": "https://cranlogs.r-pkg.org/badges/grand-total/equatiomatic",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://github.com/datalorax/equatiomatic/raw/master/img/equatiomatic.gif",
+      "resolved_path": null,
+      "fetch_url": "https://raw.githubusercontent.com/datalorax/equatiomatic/master/img/equatiomatic.gif",
+      "kind": "markdown_image",
+      "status": "external"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "man/figures/preview1.png",
+      "resolved_path": "man/figures/preview1.png",
+      "kind": "markdown_image",
+      "status": "resolved"
+    },
+    {
+      "entry_path": "README.md",
+      "original_reference": "man/figures/logo.png",
+      "resolved_path": "man/figures/logo.png",
+      "kind": "raw_html_image",
+      "status": "resolved"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg",
+      "fetch_url": "https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/datalorax/equatiomatic/workflows/R-CMD-check/badge.svg",
+      "fetch_url": "https://github.com/datalorax/equatiomatic/workflows/R-CMD-check/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://codecov.io/gh/datalorax/equatiomatic/branch/master/graph/badge.svg",
+      "fetch_url": "https://codecov.io/gh/datalorax/equatiomatic/branch/master/graph/badge.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://img.shields.io/badge/covrpage-Last_Build_2020_08_24-brightgreen.svg",
+      "fetch_url": "https://img.shields.io/badge/covrpage-Last_Build_2020_08_24-brightgreen.svg",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://cranlogs.r-pkg.org/badges/grand-total/equatiomatic",
+      "fetch_url": "https://cranlogs.r-pkg.org/badges/grand-total/equatiomatic",
+      "status": "inlined"
+    },
+    {
+      "original_reference": "https://github.com/datalorax/equatiomatic/raw/master/img/equatiomatic.gif",
+      "fetch_url": "https://raw.githubusercontent.com/datalorax/equatiomatic/master/img/equatiomatic.gif",
+      "status": "failed",
+      "message": "response size 42176122 bytes exceeds the per-asset limit of 16777216 bytes"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": [
+    "Remote asset could not be materialized: README.md -> https://github.com/datalorax/equatiomatic/raw/master/img/equatiomatic.gif (response size 42176122 bytes exceeds the per-asset limit of 16777216 bytes)"
+  ]
+}

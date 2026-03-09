@@ -1,0 +1,29 @@
+{
+  "id": "filippoairaldi--mpc-reinforcement-learning",
+  "repo": "FilippoAiraldi/mpc-reinforcement-learning",
+  "url": "https://github.com/FilippoAiraldi/mpc-reinforcement-learning",
+  "pinned_sha": "d60d42fc09d9db9d263628fe626801050e87d717",
+  "elapsed_sec": 8,
+  "convert_exit_code": 0,
+  "report_status": "success",
+  "pdf_bytes": 388910,
+  "page_count": 10,
+  "token_coverage": 0.9974937343358395,
+  "missing_tokens": [
+    "complex-to-model"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

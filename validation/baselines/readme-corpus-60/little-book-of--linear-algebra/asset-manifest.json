@@ -1,0 +1,23 @@
+{
+  "entry_path": "README.md",
+  "assets": [
+    {
+      "entry_path": "README.md",
+      "original_reference": "https://colab.research.google.com/assets/colab-badge.svg",
+      "resolved_path": null,
+      "fetch_url": "https://colab.research.google.com/assets/colab-badge.svg",
+      "kind": "markdown_image",
+      "status": "external"
+    }
+  ],
+  "remote_assets": [
+    {
+      "original_reference": "https://colab.research.google.com/assets/colab-badge.svg",
+      "fetch_url": "https://colab.research.google.com/assets/colab-badge.svg",
+      "status": "inlined"
+    }
+  ],
+  "missing_assets": [],
+  "path_errors": [],
+  "warnings": []
+}

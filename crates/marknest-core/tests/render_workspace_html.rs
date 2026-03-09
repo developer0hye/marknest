@@ -58,6 +58,7 @@ fn renders_phase_3_runtime_markup_for_theme_mermaid_and_math() {
             math_mode: MathMode::Auto,
             mermaid_timeout_ms: 5_000,
             math_timeout_ms: 3_000,
+            runtime_assets_base_url: None,
         },
     )
     .expect("workspace entry should render");
@@ -111,6 +112,37 @@ fn renders_explicit_runtime_timeout_overrides() {
 
     assert!(rendered.html.contains("\"mermaidTimeoutMs\":1200"));
     assert!(rendered.html.contains("\"mathTimeoutMs\":800"));
+}
+
+#[test]
+fn uses_a_custom_runtime_asset_base_url_when_provided() {
+    let rendered = render_workspace_entry_with_options(
+        &fixture_path("workspace_render_features"),
+        "guide.md",
+        &RenderOptions {
+            mermaid_mode: MermaidMode::Auto,
+            math_mode: MathMode::Auto,
+            runtime_assets_base_url: Some(" https://cdn.example.com/marknest-assets ".to_string()),
+            ..RenderOptions::default()
+        },
+    )
+    .expect("workspace entry should render");
+
+    assert!(
+        rendered
+            .html
+            .contains("https://cdn.example.com/marknest-assets/mermaid/mermaid.min.js")
+    );
+    assert!(
+        rendered
+            .html
+            .contains("https://cdn.example.com/marknest-assets/mathjax/es5/tex-svg.js")
+    );
+    assert!(
+        !rendered
+            .html
+            .contains("./runtime-assets/mermaid/mermaid.min.js")
+    );
 }
 
 #[test]

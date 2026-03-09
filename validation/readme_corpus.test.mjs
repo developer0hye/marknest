@@ -1,5 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { PNG } from "pngjs";
 
@@ -21,6 +24,10 @@ import {
   comparePngBuffers,
   isNearBlankPage,
 } from "./lib/png_metrics.mjs";
+
+const TEST_FILE_PATH = fileURLToPath(import.meta.url);
+const VALIDATION_ROOT = path.dirname(TEST_FILE_PATH);
+const MANIFEST_PATH = path.join(VALIDATION_ROOT, "readme-corpus-60.tsv");
 
 test("parseCorpusManifest accepts the pinned corpus schema", () => {
   const manifestText = [
@@ -50,6 +57,14 @@ test("parseCorpusManifest rejects duplicate ids", () => {
 
 test("sanitizeCorpusId lowercases and stabilizes repo names", () => {
   assert.equal(sanitizeCorpusId("PrefectHQ/prefect"), "prefecthq--prefect");
+});
+
+test("committed corpus manifest contains 60 entries including 10 math cases", async () => {
+  const manifestText = await fs.readFile(MANIFEST_PATH, "utf8");
+  const manifest = parseCorpusManifest(manifestText);
+
+  assert.equal(manifest.length, 60);
+  assert.equal(manifest.filter((entry) => entry.category === "math").length, 10);
 });
 
 test("buildSourceSnapshot extracts headings and image references outside fenced code", () => {

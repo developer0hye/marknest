@@ -16,8 +16,12 @@ pub const DEFAULT_MERMAID_TIMEOUT_MS: u32 = 5_000;
 pub const DEFAULT_MATH_TIMEOUT_MS: u32 = 3_000;
 pub const MERMAID_VERSION: &str = "11.11.0";
 pub const MATHJAX_VERSION: &str = "3.2.2";
+pub const RUNTIME_ASSET_BASE_PATH: &str = "./runtime-assets/";
 pub const MERMAID_SCRIPT_URL: &str = "./runtime-assets/mermaid/mermaid.min.js";
 pub const MATHJAX_SCRIPT_URL: &str = "./runtime-assets/mathjax/es5/tex-svg.js";
+
+const MERMAID_RUNTIME_ASSET_RELATIVE_PATH: &str = "mermaid/mermaid.min.js";
+const MATHJAX_RUNTIME_ASSET_RELATIVE_PATH: &str = "mathjax/es5/tex-svg.js";
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -133,6 +137,7 @@ pub struct RenderOptions {
     pub math_mode: MathMode,
     pub mermaid_timeout_ms: u32,
     pub math_timeout_ms: u32,
+    pub runtime_assets_base_url: Option<String>,
 }
 
 impl Default for RenderOptions {
@@ -147,7 +152,41 @@ impl Default for RenderOptions {
             math_mode: MathMode::Off,
             mermaid_timeout_ms: DEFAULT_MERMAID_TIMEOUT_MS,
             math_timeout_ms: DEFAULT_MATH_TIMEOUT_MS,
+            runtime_assets_base_url: None,
         }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct RuntimeAssetScriptUrls {
+    pub mermaid_script_url: String,
+    pub mathjax_script_url: String,
+}
+
+pub fn runtime_asset_script_urls(options: &RenderOptions) -> RuntimeAssetScriptUrls {
+    let base_url = normalized_runtime_assets_base_url(
+        options
+            .runtime_assets_base_url
+            .as_deref()
+            .unwrap_or(RUNTIME_ASSET_BASE_PATH),
+    );
+
+    RuntimeAssetScriptUrls {
+        mermaid_script_url: format!("{base_url}{MERMAID_RUNTIME_ASSET_RELATIVE_PATH}"),
+        mathjax_script_url: format!("{base_url}{MATHJAX_RUNTIME_ASSET_RELATIVE_PATH}"),
+    }
+}
+
+fn normalized_runtime_assets_base_url(base_url: &str) -> String {
+    let trimmed = base_url.trim();
+    if trimmed.is_empty() {
+        return RUNTIME_ASSET_BASE_PATH.to_string();
+    }
+
+    if trimmed.ends_with('/') {
+        trimmed.to_string()
+    } else {
+        format!("{trimmed}/")
     }
 }
 
@@ -236,6 +275,16 @@ pub fn render_zip_entry_with_options(
     options: &RenderOptions,
 ) -> Result<RenderedHtmlDocument, RenderHtmlError> {
     let zip_file_system = ZipMemoryFileSystem::new(bytes).map_err(RenderHtmlError::Analyze)?;
+    render_entry_with_options(&zip_file_system, entry_path, options)
+}
+
+pub fn render_zip_entry_with_options_strip_prefix(
+    bytes: &[u8],
+    entry_path: &str,
+    options: &RenderOptions,
+) -> Result<RenderedHtmlDocument, RenderHtmlError> {
+    let mut zip_file_system = ZipMemoryFileSystem::new(bytes).map_err(RenderHtmlError::Analyze)?;
+    zip_file_system.strip_common_prefix();
     render_entry_with_options(&zip_file_system, entry_path, options)
 }
 
@@ -330,17 +379,13 @@ fn normalize_github_repository_image_url(reference: &str) -> Option<String> {
         return None;
     }
 
-    if segments[2] == "blob" {
+    if segments[2] == "blob" || segments[2] == "raw" {
         return Some(format!(
-            "{scheme}{host}/{}/{}/raw/{}",
+            "{scheme}raw.githubusercontent.com/{}/{}/{}",
             segments[0],
             segments[1],
             segments[3..].join("/")
         ));
-    }
-
-    if segments[2] == "raw" {
-        return Some(format!("{scheme}{host}{path}"));
     }
 
     None
@@ -1796,6 +1841,8 @@ fn build_runtime_script(options: &RenderOptions) -> String {
         return String::new();
     }
 
+    let runtime_urls = runtime_asset_script_urls(options);
+
     format!(
         r#"<script>(function () {{
 const config = {{"mermaidMode":"{}","mathMode":"{}","mermaidTheme":"{}","mermaidTimeoutMs":{},"mathTimeoutMs":{},"mermaidScript":"{}","mathScript":"{}"}};
@@ -1958,8 +2005,8 @@ if (document.readyState === "loading") {{
         mermaid_theme_name(options.theme),
         options.mermaid_timeout_ms,
         options.math_timeout_ms,
-        MERMAID_SCRIPT_URL,
-        MATHJAX_SCRIPT_URL
+        runtime_urls.mermaid_script_url,
+        runtime_urls.mathjax_script_url
     )
 }
 
