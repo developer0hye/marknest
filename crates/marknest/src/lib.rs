@@ -3650,6 +3650,88 @@ impl ParseFailure {
     }
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct ParsedGitHubUrl {
+    owner: String,
+    repo: String,
+    git_ref: Option<String>,
+    subpath: Option<String>,
+    is_file_reference: bool,
+}
+
+/// Parse a GitHub URL into its components. Returns `None` for non-GitHub URLs
+/// or malformed input.
+fn parse_github_url(input: &str) -> Option<ParsedGitHubUrl> {
+    let trimmed: &str = input.trim();
+
+    // Must start with http:// or https://
+    let after_scheme: &str = trimmed
+        .strip_prefix("https://")
+        .or_else(|| trimmed.strip_prefix("http://"))?;
+
+    // Must be github.com host (with optional www.)
+    let after_host: &str = after_scheme
+        .strip_prefix("github.com/")
+        .or_else(|| after_scheme.strip_prefix("www.github.com/"))?;
+
+    // Split remaining path segments
+    let segments: Vec<&str> = after_host
+        .trim_end_matches('/')
+        .split('/')
+        .filter(|segment| !segment.is_empty())
+        .collect();
+
+    if segments.len() < 2 {
+        return None;
+    }
+
+    let owner: String = segments[0].to_string();
+    let repo: String = segments[1].trim_end_matches(".git").to_string();
+
+    if owner.is_empty() || repo.is_empty() {
+        return None;
+    }
+
+    // Bare repo URL: https://github.com/owner/repo
+    if segments.len() == 2 {
+        return Some(ParsedGitHubUrl {
+            owner,
+            repo,
+            git_ref: None,
+            subpath: None,
+            is_file_reference: false,
+        });
+    }
+
+    // Must have /tree/ or /blob/ as the third segment
+    let path_type: &str = segments[2];
+    let is_file_reference: bool = match path_type {
+        "blob" => true,
+        "tree" => false,
+        _ => return None,
+    };
+
+    // Must have a ref after /tree/ or /blob/
+    if segments.len() < 4 {
+        return None;
+    }
+
+    let git_ref: String = segments[3].to_string();
+    let subpath: Option<String> = if segments.len() > 4 {
+        Some(segments[4..].join("/"))
+    } else {
+        None
+    };
+
+    Some(ParsedGitHubUrl {
+        owner,
+        repo,
+        git_ref: Some(git_ref),
+        subpath,
+        is_file_reference,
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -5037,5 +5119,129 @@ mod tests {
             Some(value) => unsafe { env::set_var(key, value) },
             None => unsafe { env::remove_var(key) },
         }
+    }
+
+    // --- GitHub URL parsing tests ---
+
+    #[test]
+    fn parses_bare_github_repo_url() {
+        let result = parse_github_url("https://github.com/user/repo");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: None,
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_github_tree_url_with_branch() {
+        let result = parse_github_url("https://github.com/user/repo/tree/main");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: Some("main".to_string()),
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_github_blob_url_with_file_path() {
+        let result = parse_github_url("https://github.com/user/repo/blob/main/docs/guide.md");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: Some("main".to_string()),
+                subpath: Some("docs/guide.md".to_string()),
+                is_file_reference: true,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_github_tree_url_with_tag_and_directory() {
+        let result = parse_github_url("https://github.com/user/repo/tree/v2.0/src");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: Some("v2.0".to_string()),
+                subpath: Some("src".to_string()),
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_github_url_with_dot_git_suffix() {
+        let result = parse_github_url("https://github.com/user/repo.git");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: None,
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn parses_http_github_url() {
+        let result = parse_github_url("http://github.com/user/repo");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: None,
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
+    }
+
+    #[test]
+    fn rejects_non_github_url() {
+        assert_eq!(parse_github_url("https://gitlab.com/user/repo"), None);
+    }
+
+    #[test]
+    fn rejects_malformed_github_url_missing_repo() {
+        assert_eq!(parse_github_url("https://github.com/user"), None);
+    }
+
+    #[test]
+    fn rejects_non_url_input() {
+        assert_eq!(parse_github_url("README.md"), None);
+        assert_eq!(parse_github_url("./docs.zip"), None);
+        assert_eq!(parse_github_url("/some/path"), None);
+    }
+
+    #[test]
+    fn parses_github_url_with_trailing_slash() {
+        let result = parse_github_url("https://github.com/user/repo/");
+        assert_eq!(
+            result,
+            Some(ParsedGitHubUrl {
+                owner: "user".to_string(),
+                repo: "repo".to_string(),
+                git_ref: None,
+                subpath: None,
+                is_file_reference: false,
+            })
+        );
     }
 }
