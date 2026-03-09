@@ -3,7 +3,7 @@
   "repo": "docker/compose",
   "url": "https://github.com/docker/compose",
   "pinned_sha": "d7ec1eca9aab1857737c103d5a7416fd971505e8",
-  "elapsed_sec": 5,
+  "elapsed_sec": 7,
   "convert_exit_code": 0,
   "report_status": "success",
   "pdf_bytes": 168858,

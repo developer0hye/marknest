@@ -3,7 +3,7 @@
   "repo": "tensorflow/tensorflow",
   "url": "https://github.com/tensorflow/tensorflow",
   "pinned_sha": "d20369f4f226598800e0d406db567d2d1c17fa95",
-  "elapsed_sec": 16,
+  "elapsed_sec": 15,
   "convert_exit_code": 1,
   "report_status": "warning",
   "pdf_bytes": 255395,

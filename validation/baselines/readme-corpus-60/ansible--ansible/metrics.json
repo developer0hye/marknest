@@ -3,7 +3,7 @@
   "repo": "ansible/ansible",
   "url": "https://github.com/ansible/ansible",
   "pinned_sha": "0183e386dff5cd514171b024b379dad080b68616",
-  "elapsed_sec": 5,
+  "elapsed_sec": 7,
   "convert_exit_code": 0,
   "report_status": "success",
   "pdf_bytes": 117433,

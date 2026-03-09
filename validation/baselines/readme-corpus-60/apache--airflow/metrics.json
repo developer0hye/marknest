@@ -3,15 +3,14 @@
   "repo": "apache/airflow",
   "url": "https://github.com/apache/airflow",
   "pinned_sha": "d38400997bcef9570246abae3e3ba80983c9d11a",
-  "elapsed_sec": 14,
+  "elapsed_sec": 16,
   "convert_exit_code": 0,
   "report_status": "success",
-  "pdf_bytes": 1863814,
+  "pdf_bytes": 1863325,
   "page_count": 17,
-  "token_coverage": 0.9975550122249389,
+  "token_coverage": 0.9987775061124694,
   "missing_tokens": [
-    "data-intensive",
-    "installrequires"
+    "data-intensive"
   ],
   "heading_coverage": 1,
   "missing_headings": [],

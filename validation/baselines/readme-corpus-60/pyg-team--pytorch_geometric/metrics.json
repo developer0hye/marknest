@@ -8,15 +8,9 @@
   "report_status": "success",
   "pdf_bytes": 563580,
   "page_count": 17,
-  "token_coverage": 0.9895615866388309,
+  "token_coverage": 0.9957939011566772,
   "missing_tokens": [
     "pytorch-on-the-rocks",
-    "prime",
-    "mathcal",
-    "textrm",
-    "theta",
-    "left",
-    "right",
     "weisfeiler-lehman",
     "non-attribute",
     "no-index"

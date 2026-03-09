@@ -3,7 +3,7 @@
   "repo": "kubernetes/kubernetes",
   "url": "https://github.com/kubernetes/kubernetes",
   "pinned_sha": "dfbe79674a33c47c1f0fd7b75882314f6db5e136",
-  "elapsed_sec": 10,
+  "elapsed_sec": 11,
   "convert_exit_code": 0,
   "report_status": "success",
   "pdf_bytes": 407611,

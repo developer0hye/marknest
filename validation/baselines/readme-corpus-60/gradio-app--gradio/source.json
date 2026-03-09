@@ -385,7 +385,7 @@
     "related",
     "parts",
     "client",
-    "gradioclient",
+    "gradio_client",
     "hugging",
     "face",
     "spaces",

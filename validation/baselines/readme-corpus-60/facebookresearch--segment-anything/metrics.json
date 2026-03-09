@@ -8,13 +8,9 @@
   "report_status": "success",
   "pdf_bytes": 7320751,
   "page_count": 6,
-  "token_coverage": 0.984472049689441,
+  "token_coverage": 0.9968944099378882,
   "missing_tokens": [
-    "zero-shot",
-    "vith",
-    "vitl",
-    "vitb",
-    "saimages_ids"
+    "zero-shot"
   ],
   "heading_coverage": 1,
   "missing_headings": [],

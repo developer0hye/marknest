@@ -1,0 +1,34 @@
+{
+  "id": "datalorax--equatiomatic",
+  "repo": "datalorax/equatiomatic",
+  "url": "https://github.com/datalorax/equatiomatic",
+  "pinned_sha": "572a8e955bbaa236e96189bb4d9cc315e47d3321",
+  "elapsed_sec": 5,
+  "convert_exit_code": 1,
+  "report_status": "warning",
+  "pdf_bytes": 879704,
+  "page_count": 11,
+  "token_coverage": 0.9956331877729258,
+  "missing_tokens": [
+    "beta"
+  ],
+  "heading_coverage": 1,
+  "missing_headings": [],
+  "local_missing_assets": [],
+  "remote_asset_failures": [
+    "https://raw.githubusercontent.com/datalorax/equatiomatic/master/img/equatiomatic.gif"
+  ],
+  "near_blank_pages": [],
+  "edge_contact_pages": [],
+  "baseline_exists": true,
+  "baseline_page_count_delta": 0,
+  "diff_summary": [],
+  "hard_failures": [],
+  "advisories": [
+    "convert_warning_exit",
+    "remote_asset_failures"
+  ],
+  "thresholds": {
+    "token_coverage_minimum": 0.97
+  }
+}

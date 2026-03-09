@@ -3,10 +3,10 @@
   "repo": "tokio-rs/tokio",
   "url": "https://github.com/tokio-rs/tokio",
   "pinned_sha": "e67cd87f71304e6b4cc94ce0c1656797466e56f3",
-  "elapsed_sec": 2,
+  "elapsed_sec": 3,
   "convert_exit_code": 0,
   "report_status": "success",
-  "pdf_bytes": 173379,
+  "pdf_bytes": 173076,
   "page_count": 5,
   "token_coverage": 0.992831541218638,
   "missing_tokens": [

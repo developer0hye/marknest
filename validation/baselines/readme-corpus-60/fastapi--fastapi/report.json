@@ -1,6 +1,6 @@
 {
-  "status": "warning",
-  "exit_code": 1,
+  "status": "success",
+  "exit_code": 0,
   "input_kind": "markdown_file",
   "input_path": "README.md",
   "source_kind": "workspace",
@@ -15,9 +15,7 @@
     {
       "entry_path": "README.md",
       "output_path": "output.pdf",
-      "warnings": [
-        "Remote asset could not be materialized: README.md -> https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg (HTTP 502 from https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg)"
-      ]
+      "warnings": []
     }
   ],
   "failures": [],
@@ -71,8 +69,7 @@
     {
       "original_reference": "https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg",
       "fetch_url": "https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg",
-      "status": "failed",
-      "message": "HTTP 502 from https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg"
+      "status": "inlined"
     },
     {
       "original_reference": "https://img.shields.io/pypi/v/fastapi?color=%2334D058&label=pypi%20package",
@@ -190,9 +187,7 @@
       "status": "inlined"
     }
   ],
-  "warnings": [
-    "Remote asset could not be materialized: README.md -> https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg (HTTP 502 from https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg)"
-  ],
+  "warnings": [],
   "errors": [],
   "runtime_info": {
     "renderer": "playwright-chromium",

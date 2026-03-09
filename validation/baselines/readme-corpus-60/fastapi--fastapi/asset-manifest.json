@@ -315,8 +315,7 @@
     {
       "original_reference": "https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg",
       "fetch_url": "https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg",
-      "status": "failed",
-      "message": "HTTP 502 from https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg"
+      "status": "inlined"
     },
     {
       "original_reference": "https://img.shields.io/pypi/v/fastapi?color=%2334D058&label=pypi%20package",
@@ -436,7 +435,5 @@
   ],
   "missing_assets": [],
   "path_errors": [],
-  "warnings": [
-    "Remote asset could not be materialized: README.md -> https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg (HTTP 502 from https://coverage-badge.samuelcolvin.workers.dev/fastapi/fastapi.svg)"
-  ]
+  "warnings": []
 }

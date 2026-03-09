@@ -3,7 +3,7 @@
   "repo": "moby/moby",
   "url": "https://github.com/moby/moby",
   "pinned_sha": "83bca512aa7ffc1bb4f37ce1107e0d3e3489ad43",
-  "elapsed_sec": 5,
+  "elapsed_sec": 6,
   "convert_exit_code": 0,
   "report_status": "success",
   "pdf_bytes": 116310,

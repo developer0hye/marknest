@@ -8,18 +8,9 @@
   "report_status": "success",
   "pdf_bytes": 1033000,
   "page_count": 22,
-  "token_coverage": 0.9871630295250321,
+  "token_coverage": 0.9987163029525032,
   "missing_tokens": [
-    "numpy-based",
-    "usecuda",
-    "rocmpath",
-    "pytorchrocmarch",
-    "userocm",
-    "usexpu",
-    "cmakeincludepath",
-    "buildpytorch",
-    "pythonversion",
-    "cmakevars"
+    "numpy-based"
   ],
   "heading_coverage": 1,
   "missing_headings": [],

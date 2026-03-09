@@ -3,10 +3,10 @@
   "repo": "typst/typst",
   "url": "https://github.com/typst/typst",
   "pinned_sha": "364ece3cb37975f509a779fc3ddc929285971d73",
-  "elapsed_sec": 5,
+  "elapsed_sec": 6,
   "convert_exit_code": 0,
   "report_status": "success",
-  "pdf_bytes": 734027,
+  "pdf_bytes": 734186,
   "page_count": 7,
   "token_coverage": 0.997979797979798,
   "missing_tokens": [

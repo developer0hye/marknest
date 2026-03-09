@@ -8,9 +8,8 @@
   "report_status": "success",
   "pdf_bytes": 759244,
   "page_count": 4,
-  "token_coverage": 0.9891304347826086,
+  "token_coverage": 0.9945652173913043,
   "missing_tokens": [
-    "streamlitapp",
     "multi-page"
   ],
   "heading_coverage": 1,

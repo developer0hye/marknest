@@ -3,10 +3,10 @@
   "repo": "starship/starship",
   "url": "https://github.com/starship/starship",
   "pinned_sha": "8952f47d908e09a12de9681b404cfebe0cf5b945",
-  "elapsed_sec": 9,
+  "elapsed_sec": 13,
   "convert_exit_code": 0,
   "report_status": "success",
-  "pdf_bytes": 586711,
+  "pdf_bytes": 586923,
   "page_count": 7,
   "token_coverage": 0.9958677685950413,
   "missing_tokens": [

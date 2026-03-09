@@ -8,11 +8,8 @@
   "report_status": "success",
   "pdf_bytes": 242379,
   "page_count": 12,
-  "token_coverage": 0.9968992248062015,
-  "missing_tokens": [
-    "shiftjis",
-    "encodingrs"
-  ],
+  "token_coverage": 1,
+  "missing_tokens": [],
   "heading_coverage": 1,
   "missing_headings": [],
   "local_missing_assets": [],

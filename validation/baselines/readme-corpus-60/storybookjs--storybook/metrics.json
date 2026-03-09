@@ -3,10 +3,10 @@
   "repo": "storybookjs/storybook",
   "url": "https://github.com/storybookjs/storybook",
   "pinned_sha": "533dcc08df7a9f229f2f8824e2a42cadf84bf1fc",
-  "elapsed_sec": 57,
+  "elapsed_sec": 65,
   "convert_exit_code": 0,
   "report_status": "success",
-  "pdf_bytes": 741733,
+  "pdf_bytes": 742131,
   "page_count": 7,
   "token_coverage": 0.9912280701754386,
   "missing_tokens": [
