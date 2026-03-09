@@ -12,7 +12,7 @@ use marknest_core::{
     EntrySelectionReason, MATHJAX_SCRIPT_URL, MATHJAX_VERSION, MERMAID_SCRIPT_URL, MERMAID_VERSION,
     MathMode, MermaidMode, PdfMetadata, ProjectIndex, ProjectSourceKind, RUNTIME_ASSET_MODE,
     RenderHtmlError, RenderOptions, ThemePreset, analyze_workspace, analyze_zip,
-    render_workspace_entry_with_options, rewrite_html_img_sources,
+    analyze_zip_strip_prefix, render_workspace_entry_with_options, rewrite_html_img_sources,
 };
 use serde::{Deserialize, Serialize};
 use tempfile::TempDir;
@@ -268,7 +268,10 @@ fn prepare_render_workspace(
     }
 
     if matches!(analyzed_input.input_kind, ValidationInputKind::Zip) {
-        let temp_dir = materialize_zip_workspace(&analyzed_input.resolved_input_path)?;
+        let temp_dir = materialize_zip_workspace(
+            &analyzed_input.resolved_input_path,
+            analyzed_input.strip_zip_prefix,
+        )?;
         let root = temp_dir.path().to_path_buf();
         return Ok(PreparedWorkspace {
             root,
@@ -281,7 +284,7 @@ fn prepare_render_workspace(
     ))
 }
 
-fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
+fn materialize_zip_workspace(zip_path: &Path, strip_prefix: bool) -> Result<TempDir, AppFailure> {
     let file = fs::File::open(zip_path).map_err(|error| {
         AppFailure::system(format!(
             "Failed to open ZIP input {}: {error}",
@@ -296,7 +299,7 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
         ))
     })?;
 
-    // Collect all entries with normalized paths first to detect a common prefix
+    // Collect all entries with normalized paths first (needed for prefix detection)
     let mut collected_entries: Vec<(String, Vec<u8>)> = Vec::new();
     for index in 0..archive.len() {
         let mut entry = archive.by_index(index).map_err(|error| {
@@ -320,8 +323,12 @@ fn materialize_zip_workspace(zip_path: &Path) -> Result<TempDir, AppFailure> {
         collected_entries.push((normalized_path, contents));
     }
 
-    // Strip common prefix (e.g. GitHub archive `repo-main/` wrapper)
-    let prefix_len = detect_common_prefix_len(&collected_entries);
+    // Only strip the common prefix for GitHub-style archives
+    let prefix_len: usize = if strip_prefix {
+        detect_common_prefix_len(&collected_entries)
+    } else {
+        0
+    };
 
     for (normalized_path, contents) in &collected_entries {
         let stripped_path = &normalized_path[prefix_len..];
@@ -811,6 +818,7 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: Some(workspace_root.clone()),
                 default_output_directory: Some(workspace_root),
                 project_index,
+                strip_zip_prefix: false,
                 _temp_dir: None,
             })
         }
@@ -843,6 +851,7 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: None,
                 default_output_directory,
                 project_index,
+                strip_zip_prefix: false,
                 _temp_dir: None,
             })
         }
@@ -869,6 +878,7 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: Some(canonical_root.clone()),
                 default_output_directory: Some(canonical_root),
                 project_index,
+                strip_zip_prefix: false,
                 _temp_dir: None,
             })
         }
@@ -901,7 +911,9 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 AppFailure::system(format!("Failed to write temp archive: {error}"))
             })?;
 
-            let project_index: ProjectIndex = analyze_zip(&zip_bytes).map_err(map_analyze_error)?;
+            // GitHub archives nest files under {repo}-{ref}/, strip that prefix
+            let project_index: ProjectIndex =
+                analyze_zip_strip_prefix(&zip_bytes).map_err(map_analyze_error)?;
 
             // If URL pointed to a specific file (/blob/), use it as implicit entry
             let explicit_entry: Option<String> = if parsed.is_file_reference {
@@ -920,6 +932,7 @@ fn analyze_input_path(input: Option<&Path>) -> Result<AnalyzedInput, AppFailure>
                 workspace_root: None,
                 default_output_directory: Some(env::current_dir().unwrap_or_default()),
                 project_index,
+                strip_zip_prefix: true,
                 _temp_dir: Some(temp_dir),
             })
         }
@@ -2477,6 +2490,9 @@ struct AnalyzedInput {
     workspace_root: Option<PathBuf>,
     default_output_directory: Option<PathBuf>,
     project_index: ProjectIndex,
+    /// Strip common prefix from ZIP paths during materialization.
+    /// Enabled for GitHub archive downloads where files are nested under `{repo}-{ref}/`.
+    strip_zip_prefix: bool,
     /// Keeps temporary directory alive for the duration of analysis/conversion.
     /// Used by GitHub URL downloads to hold the temp archive file.
     _temp_dir: Option<TempDir>,

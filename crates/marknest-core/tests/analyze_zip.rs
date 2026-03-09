@@ -1,6 +1,8 @@
 use std::io::{Cursor, Write};
 
-use marknest_core::{AnalyzeError, EntrySelectionReason, ProjectSourceKind, analyze_zip};
+use marknest_core::{
+    AnalyzeError, EntrySelectionReason, ProjectSourceKind, analyze_zip, analyze_zip_strip_prefix,
+};
 use zip::write::SimpleFileOptions;
 
 fn build_zip(entries: &[(&str, &str)]) -> Vec<u8> {
@@ -80,7 +82,7 @@ fn strips_common_prefix_from_github_style_zip() {
         ("repo-main/images/logo.png", "fake-png-bytes"),
     ]);
 
-    let index = analyze_zip(&bytes).expect("github-style zip should analyze");
+    let index = analyze_zip_strip_prefix(&bytes).expect("github-style zip should analyze");
 
     assert_eq!(index.selected_entry.as_deref(), Some("README.md"));
     assert_eq!(index.entry_selection_reason, EntrySelectionReason::Readme);
@@ -101,13 +103,13 @@ fn strips_common_prefix_from_github_style_zip() {
 }
 
 #[test]
-fn preserves_paths_when_no_common_prefix() {
+fn strip_prefix_preserves_paths_when_no_common_prefix() {
     let bytes = build_zip(&[
         ("README.md", "# Root readme\n"),
         ("docs/guide.md", "# Guide\n"),
     ]);
 
-    let index = analyze_zip(&bytes).expect("zip without common prefix should analyze");
+    let index = analyze_zip_strip_prefix(&bytes).expect("zip without common prefix should analyze");
 
     let candidate_paths: Vec<&str> = index
         .entry_candidates
@@ -119,10 +121,11 @@ fn preserves_paths_when_no_common_prefix() {
 }
 
 #[test]
-fn preserves_paths_when_multiple_top_level_directories() {
+fn strip_prefix_preserves_paths_when_multiple_top_level_directories() {
     let bytes = build_zip(&[("dir-a/README.md", "# A\n"), ("dir-b/README.md", "# B\n")]);
 
-    let index = analyze_zip(&bytes).expect("zip with multiple top dirs should analyze");
+    let index =
+        analyze_zip_strip_prefix(&bytes).expect("zip with multiple top dirs should analyze");
 
     let candidate_paths: Vec<&str> = index
         .entry_candidates
@@ -134,14 +137,26 @@ fn preserves_paths_when_multiple_top_level_directories() {
 }
 
 #[test]
-fn strips_common_prefix_single_nested_file() {
+fn strip_prefix_strips_single_nested_file() {
     let bytes = build_zip(&[("only-dir/file.md", "# Single\n")]);
 
-    let index = analyze_zip(&bytes).expect("single nested file zip should analyze");
+    let index = analyze_zip_strip_prefix(&bytes).expect("single nested file zip should analyze");
 
     assert_eq!(index.selected_entry.as_deref(), Some("file.md"));
     assert_eq!(
         index.entry_selection_reason,
         EntrySelectionReason::SingleMarkdownFile
     );
+}
+
+#[test]
+fn regular_analyze_zip_does_not_strip_common_prefix() {
+    let bytes = build_zip(&[
+        ("repo-main/README.md", "# Hello\n"),
+        ("repo-main/images/logo.png", "fake-png-bytes"),
+    ]);
+
+    let index = analyze_zip(&bytes).expect("should analyze without stripping");
+
+    assert_eq!(index.selected_entry.as_deref(), Some("repo-main/README.md"));
 }
