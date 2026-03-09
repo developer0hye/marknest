@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# Pre-push hook: run README corpus fidelity validation before pushing.
+# Install: git config core.hooksPath .githooks
+#
+# Skip with: git push --no-verify
+
+set -euo pipefail
+
+# Only run corpus validation when source/test/config files changed
+REMOTE="$1"
+URL="$2"
+
+while read -r LOCAL_REF LOCAL_OID REMOTE_REF REMOTE_OID; do
+  if [ "$LOCAL_OID" = "0000000000000000000000000000000000000000" ]; then
+    # Branch deleted, nothing to validate
+    continue
+  fi
+
+  # Determine diff base
+  if [ "$REMOTE_OID" = "0000000000000000000000000000000000000000" ]; then
+    # New branch — diff against main
+    DIFF_BASE="origin/main"
+  else
+    DIFF_BASE="$REMOTE_OID"
+  fi
+
+  # Check if any runtime-affecting files changed
+  CHANGED=$(git diff --name-only "$DIFF_BASE" "$LOCAL_OID" -- \
+    'crates/**' \
+    'runtime-assets/**' \
+    'web/**' \
+    'index.html' \
+    'Cargo.toml' \
+    'Cargo.lock' \
+    2>/dev/null || true)
+
+  if [ -z "$CHANGED" ]; then
+    echo "[pre-push] No runtime files changed, skipping corpus validation."
+    exit 0
+  fi
+done
+
+echo "========================================"
+echo "[pre-push] Running README corpus validation"
+echo "========================================"
+
+# Prerequisites check
+for cmd in node npm cargo pdftoppm pdftotext; do
+  if ! command -v "$cmd" &>/dev/null; then
+    echo "[pre-push] ERROR: $cmd is required but not found."
+    exit 1
+  fi
+done
+
+# Ensure dependencies are installed
+npm ci --prefix crates/marknest/playwright-runtime --silent 2>/dev/null || true
+npm ci --prefix validation --silent 2>/dev/null || true
+
+# Resolve browser path
+if [ -z "${MARKNEST_BROWSER_PATH:-}" ]; then
+  BROWSER_PATH=$(node -e '
+    try {
+      const { chromium } = require("./crates/marknest/playwright-runtime/node_modules/playwright");
+      process.stdout.write(chromium.executablePath());
+    } catch { process.exit(1); }
+  ' 2>/dev/null || true)
+  if [ -n "$BROWSER_PATH" ] && [ -f "$BROWSER_PATH" ]; then
+    export MARKNEST_BROWSER_PATH="$BROWSER_PATH"
+  fi
+fi
+
+# Run corpus validation (smoke tier for speed, full tier via: CORPUS_TIER=all git push)
+TIER="${CORPUS_TIER:-smoke}"
+echo "[pre-push] Tier: $TIER"
+
+node validation/readme_corpus.mjs run --tier "$TIER" --force
+
+echo "========================================"
+echo "[pre-push] Corpus validation passed"
+echo "========================================"
