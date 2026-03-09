@@ -2,14 +2,14 @@
 
 MarkNest is a Rust-first Markdown workspace analyzer and PDF converter for the product described in [PRD.md](./PRD.md).
 
-The repository currently contains Phase 8 of the engineering MVP:
+Key capabilities:
 
 - `marknest-core` analyzes a workspace directory or ZIP archive.
 - It returns a reproducible `ProjectIndex` with entry candidates, resolved or missing image assets, ignored files, and path diagnostics.
 - `marknest-core` can render a single workspace or ZIP entry into self-contained HTML with local images inlined as data URIs, including GitHub-style repo-root image paths that start with `/`, normalized remote HTTP image metadata, GitHub-style emoji shortcodes in prose, generated heading anchors and optional TOC markup, built-in theme presets, custom CSS overrides, and optional Mermaid/Math runtime hooks backed by vendored local runtime assets.
 - ZIP analysis blocks path traversal, absolute paths, Windows drive paths, and oversized archives.
 - `marknest` provides a `validate` CLI for `.md`, `.zip`, and folder inputs.
-- `marknest` provides a conversion CLI with Phase 8 config, debug artifact, and print template support.
+- `marknest` provides a conversion CLI with config file, debug artifact, and print template support.
 - `marknest` now also exposes a reusable HTML-to-PDF helper for local fallback services.
 - `marknest-wasm` exposes browser bindings for ZIP analysis, output-aware HTML preview rendering, batch preview rendering, ZIP packaging of generated PDFs, and browser-side debug bundle generation.
 - `marknest-server` provides a local Axum fallback service that accepts multipart ZIP uploads plus shared output options, returns single PDF or batch ZIP downloads through a Playwright-driven Chromium/Chrome path, and emits structured request logs.
@@ -40,7 +40,7 @@ The repository currently contains Phase 8 of the engineering MVP:
 - `crates/marknest/playwright-runtime`: pinned Node Playwright package for the native/fallback PDF renderer
 - `crates/marknest-core`: core analysis and HTML rendering library
 - `crates/marknest-server`: local HTTP fallback service plus request tracing
-- `crates/marknest-wasm`: Phase 8 WASM bindings for ZIP analysis, output-aware preview HTML rendering, debug bundles, and browser export packaging
+- `crates/marknest-wasm`: WASM bindings for ZIP analysis, output-aware preview HTML rendering, debug bundles, and browser export packaging
 - `index.html` and `web/`: static Trunk app shell for browser preview, output controls, remote-image materialization, quality mode selection, and download
 - `runtime-assets/`: vendored Mermaid, MathJax, html2pdf.js runtime files plus third-party notices
 - `validation/`: pinned 50-repo README corpus manifest, baseline artifacts, and hybrid PDF fidelity validator
@@ -118,7 +118,7 @@ Supported defaults can come from `.marknest.toml`, `marknest.toml`, `MARKNEST_CO
 Browser discovery checks `MARKNEST_BROWSER_PATH` first, then common Chrome/Edge/Chromium paths on macOS, Linux, and Windows.
 Remote HTTP images are fetched best-effort during `validate` and `convert`; successful fetches are inlined into the rendered HTML, while failures stay as warnings and appear in `remote_assets` sections inside JSON reports and asset manifests.
 
-Run the Phase 8 browser app:
+Run the browser app:
 
 ```bash
 trunk serve
