@@ -804,11 +804,23 @@ fn extract_markdown_image_destinations(markdown: &str) -> Vec<String> {
 
     while let Some(marker_index) = markdown[offset..].find("![") {
         let alt_start: usize = offset + marker_index + 2;
-        let Some(destination_start_marker) = markdown[alt_start..].find("](") else {
-            break;
-        };
-        let destination_start: usize = alt_start + destination_start_marker + 2;
 
+        // Find the closing `]` of the alt text, tracking bracket depth so
+        // nested brackets (e.g. `[![inner]][ref]`) are handled correctly.
+        let Some(alt_close) = find_closing_bracket(&markdown[alt_start..]) else {
+            offset = alt_start;
+            continue;
+        };
+        let after_alt: usize = alt_start + alt_close + 1;
+
+        // Only inline-style images `![alt](url)` have `(` right after the `]`.
+        // Reference-style images like `![alt][ref]` or `![alt]` must be skipped.
+        if after_alt >= markdown.len() || markdown.as_bytes()[after_alt] != b'(' {
+            offset = after_alt;
+            continue;
+        }
+
+        let destination_start: usize = after_alt + 1;
         let Some(destination_end) = find_closing_parenthesis(&markdown[destination_start..]) else {
             break;
         };
@@ -824,6 +836,38 @@ fn extract_markdown_image_destinations(markdown: &str) -> Vec<String> {
     }
 
     destinations
+}
+
+/// Finds the position of the closing `]` that matches the bracket depth,
+/// accounting for nested brackets and backslash escapes.
+fn find_closing_bracket(input: &str) -> Option<usize> {
+    let mut depth: usize = 0;
+    let mut previous_was_escape: bool = false;
+
+    for (index, character) in input.char_indices() {
+        if previous_was_escape {
+            previous_was_escape = false;
+            continue;
+        }
+
+        if character == '\\' {
+            previous_was_escape = true;
+            continue;
+        }
+
+        match character {
+            '[' => depth += 1,
+            ']' => {
+                if depth == 0 {
+                    return Some(index);
+                }
+                depth -= 1;
+            }
+            _ => {}
+        }
+    }
+
+    None
 }
 
 fn find_closing_parenthesis(input: &str) -> Option<usize> {
