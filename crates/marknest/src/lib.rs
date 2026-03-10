@@ -3046,8 +3046,22 @@ fn browser_candidate_paths() -> Vec<PathBuf> {
 }
 
 fn resolve_browser_path() -> Result<PathBuf, String> {
-    if let Some(configured_path) = env::var_os("MARKNEST_BROWSER_PATH") {
-        let configured_path = PathBuf::from(configured_path);
+    let configured_path = env::var_os("MARKNEST_BROWSER_PATH").map(PathBuf::from);
+    let headless_shell_candidates = playwright_headless_shell_candidate_paths();
+
+    resolve_browser_path_from_sources(
+        configured_path,
+        headless_shell_candidates,
+        browser_candidate_paths(),
+    )
+}
+
+fn resolve_browser_path_from_sources(
+    configured_path: Option<PathBuf>,
+    headless_shell_candidates: Vec<PathBuf>,
+    browser_candidates: Vec<PathBuf>,
+) -> Result<PathBuf, String> {
+    if let Some(configured_path) = configured_path {
         if configured_path.exists() {
             return Ok(configured_path);
         }
@@ -3058,16 +3072,117 @@ fn resolve_browser_path() -> Result<PathBuf, String> {
         ));
     }
 
-    for candidate in browser_candidate_paths() {
+    for candidate in headless_shell_candidates {
+        if candidate.exists() {
+            return Ok(candidate);
+        }
+    }
+
+    for candidate in browser_candidates {
         if candidate.exists() {
             return Ok(candidate);
         }
     }
 
     Err(
-        "No supported browser executable was found. Set MARKNEST_BROWSER_PATH to Chrome, Edge, or Chromium."
+        "No supported browser executable was found. Set MARKNEST_BROWSER_PATH or install Chrome, Edge, Chromium, or Playwright headless shell."
             .to_string(),
     )
+}
+
+fn playwright_headless_shell_candidate_paths() -> Vec<PathBuf> {
+    let mut candidates: Vec<PathBuf> = Vec::new();
+    for root in playwright_browser_cache_roots() {
+        candidates.extend(playwright_headless_shell_candidate_paths_from_root(&root));
+    }
+    candidates
+}
+
+fn playwright_browser_cache_roots() -> Vec<PathBuf> {
+    let mut roots: Vec<PathBuf> = Vec::new();
+
+    if let Some(configured_root) = env::var_os("PLAYWRIGHT_BROWSERS_PATH") {
+        let configured_root_text = configured_root.to_string_lossy();
+        if !configured_root_text.is_empty() && configured_root_text != "0" {
+            push_unique_path(&mut roots, PathBuf::from(configured_root));
+        }
+    }
+
+    if cfg!(target_os = "windows") {
+        if let Some(local_app_data) = env::var_os("LOCALAPPDATA") {
+            push_unique_path(
+                &mut roots,
+                PathBuf::from(local_app_data).join("ms-playwright"),
+            );
+        }
+    } else if cfg!(target_os = "macos") {
+        if let Some(home) = env::var_os("HOME") {
+            push_unique_path(
+                &mut roots,
+                PathBuf::from(home)
+                    .join("Library")
+                    .join("Caches")
+                    .join("ms-playwright"),
+            );
+        }
+    } else if let Some(home) = env::var_os("HOME") {
+        push_unique_path(
+            &mut roots,
+            PathBuf::from(home).join(".cache").join("ms-playwright"),
+        );
+    }
+
+    roots
+}
+
+fn push_unique_path(paths: &mut Vec<PathBuf>, candidate: PathBuf) {
+    if !paths.iter().any(|path| path == &candidate) {
+        paths.push(candidate);
+    }
+}
+
+fn playwright_headless_shell_candidate_paths_from_root(root: &Path) -> Vec<PathBuf> {
+    let mut candidates: Vec<(u64, PathBuf)> = Vec::new();
+    let entries = match fs::read_dir(root) {
+        Ok(entries) => entries,
+        Err(_) => return Vec::new(),
+    };
+
+    for entry in entries.flatten() {
+        let entry_path = entry.path();
+        if !entry_path.is_dir() {
+            continue;
+        }
+
+        let file_name = entry.file_name();
+        let file_name = file_name.to_string_lossy();
+        let Some(version) = parse_headless_shell_version(&file_name) else {
+            continue;
+        };
+
+        let executable_path = entry_path.join(playwright_headless_shell_relative_path());
+        if executable_path.exists() {
+            candidates.push((version, executable_path));
+        }
+    }
+
+    candidates.sort_by(|left, right| right.0.cmp(&left.0));
+    candidates.into_iter().map(|(_, path)| path).collect()
+}
+
+fn parse_headless_shell_version(file_name: &str) -> Option<u64> {
+    let version_text = file_name.strip_prefix("chromium_headless_shell-")?;
+    version_text.parse::<u64>().ok()
+}
+
+fn playwright_headless_shell_relative_path() -> &'static str {
+    if cfg!(target_os = "windows") {
+        r"chrome-headless-shell-win64\chrome-headless-shell.exe"
+    } else if cfg!(target_os = "macos") {
+        "chrome-headless-shell-mac/headless_shell"
+    } else {
+        "chrome-headless-shell-linux/headless_shell"
+    }
 }
 
 fn parse_margin_mm(value: &str) -> Result<f64, ParseFailure> {
@@ -5387,6 +5502,78 @@ mod tests {
         )));
         assert!(candidates.contains(&PathBuf::from("/usr/bin/chromium")));
         assert!(candidates.contains(&PathBuf::from("/usr/bin/google-chrome")));
+    }
+
+    #[test]
+    fn playwright_headless_shell_candidates_prefer_the_highest_installed_version() {
+        let temp_dir = TempDir::new().expect("temp dir should be created");
+        let older_path = temp_dir
+            .path()
+            .join("chromium_headless_shell-1207")
+            .join(playwright_headless_shell_relative_path());
+        let newer_path = temp_dir
+            .path()
+            .join("chromium_headless_shell-1208")
+            .join(playwright_headless_shell_relative_path());
+
+        fs::create_dir_all(
+            older_path
+                .parent()
+                .expect("older headless shell parent should exist"),
+        )
+        .expect("older parent should be created");
+        fs::create_dir_all(
+            newer_path
+                .parent()
+                .expect("newer headless shell parent should exist"),
+        )
+        .expect("newer parent should be created");
+        fs::write(&older_path, b"older").expect("older shell should be created");
+        fs::write(&newer_path, b"newer").expect("newer shell should be created");
+
+        let candidates = playwright_headless_shell_candidate_paths_from_root(temp_dir.path());
+
+        assert_eq!(candidates, vec![newer_path, older_path]);
+    }
+
+    #[test]
+    fn resolve_browser_path_prefers_configured_path_over_headless_shell_and_system_candidates() {
+        let temp_dir = TempDir::new().expect("temp dir should be created");
+        let configured_path = temp_dir.path().join("configured-browser.exe");
+        let headless_shell_path = temp_dir.path().join("headless-shell.exe");
+        let browser_path = temp_dir.path().join("browser.exe");
+
+        fs::write(&configured_path, b"configured").expect("configured browser should be created");
+        fs::write(&headless_shell_path, b"headless").expect("headless shell should be created");
+        fs::write(&browser_path, b"browser").expect("browser should be created");
+
+        let resolved_path = resolve_browser_path_from_sources(
+            Some(configured_path.clone()),
+            vec![headless_shell_path],
+            vec![browser_path],
+        )
+        .expect("configured browser should win");
+
+        assert_eq!(resolved_path, configured_path);
+    }
+
+    #[test]
+    fn resolve_browser_path_prefers_headless_shell_over_system_browser_candidates() {
+        let temp_dir = TempDir::new().expect("temp dir should be created");
+        let headless_shell_path = temp_dir.path().join("headless-shell.exe");
+        let browser_path = temp_dir.path().join("browser.exe");
+
+        fs::write(&headless_shell_path, b"headless").expect("headless shell should be created");
+        fs::write(&browser_path, b"browser").expect("browser should be created");
+
+        let resolved_path = resolve_browser_path_from_sources(
+            None,
+            vec![headless_shell_path.clone()],
+            vec![browser_path],
+        )
+        .expect("headless shell should win");
+
+        assert_eq!(resolved_path, headless_shell_path);
     }
 
     fn restore_env_var(key: &str, value: Option<OsString>) {
