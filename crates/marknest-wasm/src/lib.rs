@@ -16,11 +16,11 @@ const HTML2PDF_VERSION: &str = "0.10.1";
 const HTML2PDF_RUNTIME_ASSET_RELATIVE_PATH: &str = "html2pdf/html2pdf.bundle.min.js";
 const MERMAID_RUNTIME_ASSET_BYTES: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/../../runtime-assets/mermaid/mermaid.min.js"
+    "/runtime-assets/mermaid/mermaid.min.js"
 ));
 const MATHJAX_RUNTIME_ASSET_BYTES: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/../../runtime-assets/mathjax/es5/tex-svg.js"
+    "/runtime-assets/mathjax/es5/tex-svg.js"
 ));
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
