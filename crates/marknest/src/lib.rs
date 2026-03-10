@@ -25,11 +25,11 @@ const PLAYWRIGHT_PRINT_SCRIPT: &str = include_str!("playwright_print.js");
 const PLAYWRIGHT_VERSION: &str = "1.58.2";
 const MERMAID_RUNTIME_ASSET_BYTES: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/../../runtime-assets/mermaid/mermaid.min.js"
+    "/runtime-assets/mermaid/mermaid.min.js"
 ));
 const MATHJAX_RUNTIME_ASSET_BYTES: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/../../runtime-assets/mathjax/es5/tex-svg.js"
+    "/runtime-assets/mathjax/es5/tex-svg.js"
 ));
 const REMOTE_ASSET_TIMEOUT_SECONDS: u64 = 15;
 const REMOTE_ASSET_MAX_REDIRECTS: u32 = 5;
