@@ -75,6 +75,59 @@ jobs:
           path: staging/${{ matrix.binary_name }}
           retention-days: 1
 
+  build-wasm:
+    name: Build WASM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      - name: Build WASM package
+        run: wasm-pack build crates/marknest-wasm --release --target web --out-dir pkg --out-name marknest_wasm
+
+      - name: Patch package.json for npm
+        run: |
+          cd crates/marknest-wasm/pkg
+          VERSION="${GITHUB_REF_NAME#v}"
+          cat > package.json << PKGJSON
+          {
+            "name": "marknest-wasm",
+            "version": "${VERSION}",
+            "description": "WASM bindings for MarkNest - Markdown workspace analysis and HTML rendering in the browser",
+            "license": "MIT",
+            "repository": {
+              "type": "git",
+              "url": "https://github.com/developer0hye/marknest"
+            },
+            "homepage": "https://github.com/developer0hye/marknest",
+            "keywords": ["markdown", "pdf", "wasm", "converter", "browser"],
+            "files": [
+              "marknest_wasm_bg.wasm",
+              "marknest_wasm.js",
+              "marknest_wasm.d.ts",
+              "marknest_wasm_bg.wasm.d.ts"
+            ],
+            "module": "marknest_wasm.js",
+            "types": "marknest_wasm.d.ts",
+            "sideEffects": ["./snippets/*"]
+          }
+          PKGJSON
+
+      - name: Upload WASM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wasm-pkg
+          path: crates/marknest-wasm/pkg/
+          retention-days: 1
+
   publish-crates:
     name: Publish to crates.io
     needs: build
@@ -161,9 +214,33 @@ jobs:
           cd npm/marknest
           npm publish --access public || echo "marknest already published, skipping"
 
+  publish-wasm-npm:
+    name: Publish WASM to npm
+    needs: build-wasm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Download WASM artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wasm-pkg
+          path: wasm-pkg
+
+      - name: Publish WASM package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd wasm-pkg
+          npm publish --access public || echo "marknest-wasm already published, skipping"
+
   github-release:
     name: GitHub Release
-    needs: build
+    needs: [build, build-wasm]
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -175,6 +252,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
+
+      - name: Package WASM release asset
+        run: |
+          mkdir -p release
+          if [ -d "artifacts/wasm-pkg" ]; then
+            tar -czf release/marknest-wasm.tar.gz -C artifacts/wasm-pkg .
+          fi
 
       - name: Package release assets
         run: |
