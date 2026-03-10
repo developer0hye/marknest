@@ -124,10 +124,10 @@ cargo run -p marknest -- validate https://github.com/user/repo
 
 GitHub URL support downloads the repository as a ZIP archive through the GitHub API and processes it through the existing ZIP pipeline. Set `GITHUB_TOKEN` or `GH_TOKEN` for private repositories or to avoid API rate limits.
 
-`convert` requires `node`, `npm ci --prefix crates/marknest/playwright-runtime`, and a local Chrome, Edge, or Chromium installation for Playwright headless PDF generation.
+`convert` requires `node`, `npm ci --prefix crates/marknest/playwright-runtime`, and a local Chrome, Edge, Chromium, or Playwright headless shell installation for Playwright headless PDF generation.
 `--mermaid auto|on` and `--math auto|on` use vendored local Mermaid and MathJax runtime assets; when `--debug-html` is written with those modes enabled, a sibling `runtime-assets/` directory is emitted for offline reproduction.
 Supported defaults can come from `.marknest.toml`, `marknest.toml`, `MARKNEST_CONFIG`, `MARKNEST_THEME`, `MARKNEST_CSS`, `MARKNEST_TOC`, and `MARKNEST_SANITIZE_HTML`.
-Browser discovery checks `MARKNEST_BROWSER_PATH` first, then common Chrome/Edge/Chromium paths on macOS, Linux, and Windows.
+Browser discovery checks `MARKNEST_BROWSER_PATH` first, then Playwright headless shell installations, then common Chrome/Edge/Chromium paths on macOS, Linux, and Windows.
 Remote HTTP images are fetched best-effort during `validate` and `convert`; successful fetches are inlined into the rendered HTML, while failures stay as warnings and appear in `remote_assets` sections inside JSON reports and asset manifests.
 
 Run the browser app:
