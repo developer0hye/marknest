@@ -1,8 +1,14 @@
 [package]
 name = "marknest-core"
+description = "Core library for Markdown workspace analysis, ZIP inspection, and self-contained HTML rendering"
 edition.workspace = true
 license.workspace = true
 version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["markdown", "pdf", "html", "converter", "documentation"]
+categories = ["command-line-utilities", "text-processing", "web-programming"]
 
 [dependencies]
 ammonia.workspace = true

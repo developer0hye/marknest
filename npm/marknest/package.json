@@ -1,0 +1,31 @@
+{
+  "name": "marknest",
+  "version": "0.1.0",
+  "description": "Markdown workspace analyzer and PDF converter",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developer0hye/marknest"
+  },
+  "homepage": "https://github.com/developer0hye/marknest",
+  "keywords": [
+    "markdown",
+    "pdf",
+    "converter",
+    "documentation",
+    "cli"
+  ],
+  "bin": {
+    "marknest": "bin/marknest"
+  },
+  "files": [
+    "bin"
+  ],
+  "optionalDependencies": {
+    "marknest-darwin-arm64": "0.1.0",
+    "marknest-darwin-x64": "0.1.0",
+    "marknest-linux-x64": "0.1.0",
+    "marknest-linux-arm64": "0.1.0",
+    "marknest-win32-x64": "0.1.0"
+  }
+}

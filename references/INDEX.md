@@ -21,3 +21,4 @@
 - `phase8-render-timeouts.md`: Configurable per-item Mermaid and Math runtime timeouts with shared defaults.
 - `phase8-html-sanitization.md`: HTML fragment sanitization with an allowlist that preserves Markdown rendering features while blocking scripts and unsafe embeds.
 - `phase8-table-of-contents.md`: Use pulldown-cmark heading events to assign stable heading IDs and build an optional in-document TOC.
+- `release-ci-npm-binary.md`: Cross-platform release CI with crates.io and npm binary distribution via platform-specific packages.

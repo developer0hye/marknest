@@ -1,13 +1,19 @@
 [package]
 name = "marknest-server"
+description = "Local HTTP fallback service for high-quality Markdown-to-PDF conversion via Playwright"
 edition.workspace = true
 license.workspace = true
 version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["markdown", "pdf", "server", "converter"]
+categories = ["command-line-utilities", "web-programming"]
 
 [dependencies]
 axum = { version = "0.8", features = ["multipart"] }
-marknest = { path = "../marknest" }
-marknest-core = { path = "../marknest-core" }
+marknest.workspace = true
+marknest-core.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "net"] }

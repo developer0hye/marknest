@@ -1,0 +1,14 @@
+{
+  "name": "marknest-darwin-x64",
+  "version": "0.1.0",
+  "description": "marknest binary for macOS x64 (Intel)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developer0hye/marknest"
+  },
+  "os": ["darwin"],
+  "cpu": ["x64"],
+  "files": ["bin"],
+  "preferUnpacked": true
+}
