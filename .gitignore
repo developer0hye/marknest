@@ -7,3 +7,6 @@ dist/
 .claude/
 validation/.cache/
 validation/.runs/
+
+# npm platform package binaries (populated during CI release)
+npm/marknest-*/bin/

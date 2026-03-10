@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+const { execFileSync } = require("child_process");
+const { existsSync } = require("fs");
+const path = require("path");
+
+const PLATFORMS = {
+  "darwin-arm64": "marknest-darwin-arm64",
+  "darwin-x64": "marknest-darwin-x64",
+  "linux-x64": "marknest-linux-x64",
+  "linux-arm64": "marknest-linux-arm64",
+  "win32-x64": "marknest-win32-x64",
+};
+
+function getBinaryPath() {
+  const platformKey = `${process.platform}-${process.arch}`;
+  const packageName = PLATFORMS[platformKey];
+
+  if (!packageName) {
+    throw new Error(
+      `Unsupported platform: ${platformKey}. ` +
+        `Supported: ${Object.keys(PLATFORMS).join(", ")}`
+    );
+  }
+
+  const binaryName = process.platform === "win32" ? "marknest.exe" : "marknest";
+
+  // Try to resolve from node_modules (installed as optionalDependency)
+  try {
+    const packageDir = path.dirname(require.resolve(`${packageName}/package.json`));
+    const binaryPath = path.join(packageDir, "bin", binaryName);
+    if (existsSync(binaryPath)) {
+      return binaryPath;
+    }
+  } catch {
+    // Package not installed
+  }
+
+  throw new Error(
+    `Could not find marknest binary for ${platformKey}. ` +
+      `Please make sure ${packageName} is installed.\n` +
+      `Try: npm install ${packageName}`
+  );
+}
+
+try {
+  const binaryPath = getBinaryPath();
+  const result = execFileSync(binaryPath, process.argv.slice(2), {
+    stdio: "inherit",
+    env: process.env,
+  });
+} catch (error) {
+  if (error.status !== undefined) {
+    process.exit(error.status);
+  }
+  console.error(error.message);
+  process.exit(1);
+}

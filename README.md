@@ -47,6 +47,41 @@ Key capabilities:
 - `validation/`: pinned 60-entry README corpus manifest, baseline artifacts, and hybrid PDF fidelity validator
 - `Dockerfile`: shared CLI and fallback-server runtime image
 
+## Installation
+
+### Cargo
+
+```bash
+cargo install marknest
+```
+
+### npm / npx
+
+```bash
+# Run directly
+npx marknest validate README.md
+
+# Or install globally
+npm install -g marknest
+marknest convert README.md -o output.pdf
+```
+
+### From source
+
+```bash
+git clone https://github.com/developer0hye/marknest.git
+cd marknest
+cargo install --path crates/marknest
+```
+
+For PDF rendering, install the Playwright headless shell:
+
+```bash
+npx playwright install chromium
+# or for headless-only environments:
+npx playwright install --with-deps chromium
+```
+
 ## Development
 
 Run the formatter:

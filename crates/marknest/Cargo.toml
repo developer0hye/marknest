@@ -1,11 +1,18 @@
 [package]
 name = "marknest"
+description = "Markdown workspace analyzer and PDF converter CLI"
 edition.workspace = true
 license.workspace = true
 version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["markdown", "pdf", "cli", "converter", "documentation"]
+categories = ["command-line-utilities", "text-processing"]
+exclude = ["playwright-runtime/node_modules/**"]
 
 [dependencies]
-marknest-core = { path = "../marknest-core" }
+marknest-core.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 tempfile.workspace = true

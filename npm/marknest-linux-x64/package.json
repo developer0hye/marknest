@@ -1,0 +1,14 @@
+{
+  "name": "marknest-linux-x64",
+  "version": "0.1.0",
+  "description": "marknest binary for Linux x64",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developer0hye/marknest"
+  },
+  "os": ["linux"],
+  "cpu": ["x64"],
+  "files": ["bin"],
+  "preferUnpacked": true
+}
