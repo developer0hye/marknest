@@ -9,6 +9,8 @@ A Markdown workspace analyzer and PDF converter. Upload a ZIP, point to a folder
 
 **Try it online:** [dontsendfile.com/md2pdf](https://www.dontsendfile.com/md2pdf)
 
+<video src="assets/dontsendfile-demo.mp4" width="100%" autoplay loop muted playsinline></video>
+
 ## Features
 
 - **Workspace-aware** — analyzes folders, ZIP archives, and GitHub URLs; resolves relative image paths automatically
