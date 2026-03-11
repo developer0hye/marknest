@@ -9,7 +9,7 @@ A Markdown workspace analyzer and PDF converter. Upload a ZIP, point to a folder
 
 **Try it online:** [dontsendfile.com/md2pdf](https://www.dontsendfile.com/md2pdf)
 
-![dontsendfile.com/md2pdf demo](assets/dontsendfile-demo.gif)
+https://github.com/user-attachments/assets/489b1b61-a840-4374-8eb5-d90d5fa1f4db
 
 ## Features
 
