@@ -1,6 +1,6 @@
 {
   "name": "marknest-linux-x64",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "marknest binary for Linux x64",
   "license": "MIT",
   "repository": {

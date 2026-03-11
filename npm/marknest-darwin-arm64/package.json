@@ -1,6 +1,6 @@
 {
   "name": "marknest-darwin-arm64",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "marknest binary for macOS ARM64 (Apple Silicon)",
   "license": "MIT",
   "repository": {

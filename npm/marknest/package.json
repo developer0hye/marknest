@@ -1,6 +1,6 @@
 {
   "name": "marknest",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Markdown workspace analyzer and PDF converter",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
     "bin"
   ],
   "optionalDependencies": {
-    "marknest-darwin-arm64": "0.1.0",
-    "marknest-darwin-x64": "0.1.0",
-    "marknest-linux-x64": "0.1.0",
-    "marknest-linux-arm64": "0.1.0",
-    "marknest-win32-x64": "0.1.0"
+    "marknest-darwin-arm64": "0.1.1",
+    "marknest-darwin-x64": "0.1.1",
+    "marknest-linux-x64": "0.1.1",
+    "marknest-linux-arm64": "0.1.1",
+    "marknest-win32-x64": "0.1.1"
   }
 }
