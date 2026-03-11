@@ -7,6 +7,8 @@
 
 A Markdown workspace analyzer and PDF converter. Upload a ZIP, point to a folder, or pass a single `.md` file — MarkNest resolves local images, renders Mermaid diagrams and math, and produces print-ready PDFs.
 
+**Try it online:** [dontsendfile.com/md2pdf](https://www.dontsendfile.com/md2pdf)
+
 ## Features
 
 - **Workspace-aware** — analyzes folders, ZIP archives, and GitHub URLs; resolves relative image paths automatically
