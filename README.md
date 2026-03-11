@@ -1,55 +1,44 @@
 # MarkNest
 
-MarkNest is a Rust-first Markdown workspace analyzer and PDF converter for the product described in [PRD.md](./PRD.md).
+[![CI](https://github.com/developer0hye/marknest/actions/workflows/readme-corpus.yml/badge.svg)](https://github.com/developer0hye/marknest/actions/workflows/readme-corpus.yml)
+[![Crates.io](https://img.shields.io/crates/v/marknest)](https://crates.io/crates/marknest)
+[![npm](https://img.shields.io/npm/v/marknest)](https://www.npmjs.com/package/marknest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Key capabilities:
+A Markdown workspace analyzer and PDF converter. Upload a ZIP, point to a folder, or pass a single `.md` file — MarkNest resolves local images, renders Mermaid diagrams and math, and produces print-ready PDFs.
 
-- `marknest-core` analyzes a workspace directory or ZIP archive.
-- It returns a reproducible `ProjectIndex` with entry candidates, resolved or missing image assets, ignored files, and path diagnostics.
-- `marknest-core` can render a single workspace or ZIP entry into self-contained HTML with local images inlined as data URIs, including GitHub-style repo-root image paths that start with `/`, normalized remote HTTP image metadata, GitHub-style emoji shortcodes in prose, generated heading anchors and optional TOC markup, built-in theme presets, custom CSS overrides, and optional Mermaid/Math runtime hooks backed by vendored local runtime assets.
-- ZIP analysis blocks path traversal, absolute paths, Windows drive paths, and oversized archives.
-- `marknest` provides a `validate` CLI for `.md`, `.zip`, and folder inputs.
-- `marknest` provides a conversion CLI with config file, debug artifact, and print template support.
-- `marknest` now also exposes a reusable HTML-to-PDF helper for local fallback services.
-- `marknest-wasm` exposes browser bindings for ZIP analysis, output-aware HTML preview rendering, direct single-markdown rendering (bypassing ZIP), batch preview rendering, ZIP packaging of generated PDFs, and browser-side debug bundle generation.
-- WASM preview/debug render options now accept a `runtime_assets_base_url` override for embedded browser hosts, and ZIP analysis/rendering can opt into shared top-level prefix stripping for archive wrappers such as repository snapshots.
-- `marknest-server` provides a local Axum fallback service that accepts multipart ZIP uploads plus shared output options, returns single PDF or batch ZIP downloads through a Playwright-driven Chromium/Chrome path, and emits structured request logs.
-- `index.html` plus `web/app.js`, `web/app.css`, `web/output_options.mjs`, and `web/runtime_sync.mjs` provide a web app for ZIP upload, entry selection, warnings, rendered HTML preview, runtime-aware browser export, debug bundle download, and optional local server fallback.
-- Validation supports `--entry`, `--all`, `--strict`, and `--report`.
-- Conversion supports `--entry`, `--all`, `--output`, `--out-dir`, `--config`, `--render-report`, `--debug-html`, `--asset-manifest`, `--css`, `--header-template`, `--footer-template`, `--page-size`, `--margin`, `--margin-top`, `--margin-right`, `--margin-bottom`, `--margin-left`, `--theme`, `--landscape`, `--toc`, `--no-toc`, `--sanitize-html`, `--no-sanitize-html`, `--title`, `--author`, `--subject`, `--mermaid`, `--math`, `--mermaid-timeout-ms`, and `--math-timeout-ms`.
-- ZIP inputs can convert a selected entry or all entries.
-- Explicit folder inputs default to batch conversion and preserve relative paths under `--out-dir`.
-- Batch conversion reports output collisions, failed entries, and warning-producing entries.
-- Conversion precedence is fixed as `CLI args > config file > environment > built-in defaults` for supported settings such as theme and CSS.
-- Conversion reports now include runtime metadata for the renderer, browser path detection, pinned Playwright version, bundled asset mode, exact Mermaid/Math versions, and pinned local runtime asset paths.
-- CLI conversion and validation now best-effort fetch remote HTTP images, inline successful results into debug HTML/PDF input, and record `remote_assets` outcomes in JSON artifacts.
-- Shared rendered HTML now includes print-layout guards so top-level sections can start on fresh pages and tables/code blocks are less likely to split across PDF pages.
-- Shared rendered HTML can now generate a linked in-document table of contents from heading structure when TOC is enabled.
-- Mermaid and Math rendering now use shared per-item timeouts with defaults of 5000 ms and 3000 ms, and the CLI/config/environment precedence applies to those timeout settings too.
-- Rendered document HTML is sanitized by default across CLI, WASM, and fallback flows, with an explicit opt-out for trusted inputs.
-- The web flow still analyzes ZIP bytes and renders preview HTML in-browser, but it now offers a shared output-control model plus a `Browser Fast` or `High Quality Fallback` export mode, with iframe runtime waiting so Mermaid and Math finish consistently before preview/export completes.
-- Browser preview now best-effort materializes remote HTTP images before preview/export, and Browser Fast automatically retries through the local fallback server when remote images cannot be materialized in-browser and a fallback URL is configured.
-- Official browser, CLI, and fallback-server flows no longer depend on external CDN fetches for Mermaid, MathJax, or html2pdf.js runtime assets.
-- Large ZIP uploads trigger guidance that recommends the local fallback server for more reliable export.
-- The repository now includes a first-party `Dockerfile` for building the CLI and fallback server in one runtime image.
-- Exit codes are stable: `0` success, `1` warning, `2` validation failure, `3` system failure.
+**Try it online:** [dontsendfile.com/md2pdf](https://www.dontsendfile.com/md2pdf)
 
-## Current layout
+## Features
 
-- `Cargo.toml`: workspace definition
-- `crates/marknest`: validation, conversion, config resolution, and Playwright PDF glue
-- `crates/marknest/playwright-runtime`: pinned Node Playwright package for the native/fallback PDF renderer
-- `crates/marknest-core`: core analysis and HTML rendering library
-- `crates/marknest-server`: local HTTP fallback service plus request tracing
-- `crates/marknest-wasm`: WASM bindings for ZIP analysis, output-aware preview HTML rendering, debug bundles, and browser export packaging
-- `index.html` and `web/`: static Trunk app shell for browser preview, output controls, remote-image materialization, quality mode selection, and download
-- `runtime-assets/`: vendored Mermaid, MathJax, html2pdf.js runtime files plus third-party notices
-- `validation/`: pinned 60-entry README corpus manifest, baseline artifacts, and hybrid PDF fidelity validator
-- `Dockerfile`: shared CLI and fallback-server runtime image
+- **Workspace-aware** — analyzes folders, ZIP archives, and GitHub URLs; resolves relative image paths automatically
+- **Mermaid & Math** — renders fenced Mermaid diagrams to SVG and LaTeX math via MathJax, with configurable `off`/`auto`/`on` modes
+- **Themes & styling** — built-in presets (`default`, `github`, `docs`, `plain`), custom CSS, header/footer templates, per-side margins
+- **Batch conversion** — convert all Markdown files in a workspace at once, preserving directory structure
+- **Browser & CLI** — WASM-powered browser preview with no server upload, plus a native CLI for local and CI workflows
+- **PDF quality controls** — page size, orientation, table of contents, PDF metadata, print-layout page breaks
+- **Security built in** — Zip Slip prevention, path traversal blocking, HTML sanitization on by default, archive size limits
+- **Offline rendering** — Mermaid, MathJax, and html2pdf.js assets are vendored locally; no external CDN required
+- **Remote images** — best-effort fetch and inline of HTTP images across CLI, browser, and fallback flows
+- **Local fallback server** — Playwright-driven Chromium PDF generation for high-quality output when browser export isn't enough
+- **Docker image** — single image bundles CLI, fallback server, Chromium, and fonts for reproducible builds
+
+## Quick Start
+
+```bash
+# Install
+cargo install marknest
+
+# Install a headless browser for PDF rendering
+npx playwright install chromium
+
+# Convert a Markdown file to PDF
+marknest convert README.md -o README.pdf
+```
 
 ## Installation
 
-### Cargo
+### Cargo (from crates.io)
 
 ```bash
 cargo install marknest
@@ -58,8 +47,8 @@ cargo install marknest
 ### npm / npx
 
 ```bash
-# Run directly
-npx marknest validate README.md
+# Run without installing
+npx marknest convert README.md -o output.pdf
 
 # Or install globally
 npm install -g marknest
@@ -74,7 +63,21 @@ cd marknest
 cargo install --path crates/marknest
 ```
 
-For PDF rendering, install the Playwright headless shell:
+### Docker
+
+```bash
+docker build -t marknest .
+
+# CLI usage
+docker run --rm -v "$PWD":/work -w /work marknest marknest convert README.md -o README.pdf
+
+# Fallback server (default CMD)
+docker run --rm -p 3476:3476 marknest
+```
+
+### Browser prerequisite
+
+PDF rendering requires a local Chromium-based browser. If none is installed:
 
 ```bash
 npx playwright install chromium
@@ -82,189 +85,148 @@ npx playwright install chromium
 npx playwright install --with-deps chromium
 ```
 
-## Development
+Browser discovery order: `MARKNEST_BROWSER_PATH` env var > Playwright headless shell > system Chrome/Edge/Chromium.
 
-Run the formatter:
+## Usage
 
-```bash
-cargo fmt --all
-```
+### Validate
 
-Run the workspace tests:
+Check workspace structure, image links, and Mermaid/Math blocks without generating a PDF.
 
 ```bash
-cargo test
+marknest validate README.md
+marknest validate ./docs.zip --entry docs/README.md
+marknest validate ./docs --all --report report.json
+marknest validate ./docs --all --strict
 ```
 
-Check the WASM crate against the browser target:
+### Convert — single file
 
 ```bash
-cargo check -p marknest-wasm --target wasm32-unknown-unknown
+marknest convert README.md -o README.pdf
+marknest convert README.md --theme github --landscape -o README.pdf
+marknest convert README.md --toc --mermaid auto --math auto -o README.pdf
+marknest convert README.md --css custom.css --header-template header.html -o README.pdf
+marknest convert README.md --page-size letter --margin-top 24 --margin-bottom 24 -o README.pdf
+marknest convert README.md --title "Guide" --author "Team" --subject "Arch" -o README.pdf
 ```
 
-Install the pinned Playwright runtime dependency for native PDF rendering:
+### Convert — ZIP or folder (batch)
 
 ```bash
-npm ci --prefix crates/marknest/playwright-runtime
+marknest convert ./docs --out-dir ./pdf
+marknest convert ./docs.zip --all --out-dir ./pdf
+marknest convert ./docs.zip --entry docs/README.md -o out.pdf
 ```
 
-Install the validation-only Node dependencies for corpus diffing:
+### Convert — GitHub URL
 
 ```bash
-npm ci --prefix validation
+marknest convert https://github.com/user/repo -o output.pdf
+marknest convert https://github.com/user/repo/blob/main/docs/guide.md -o guide.pdf
+marknest convert https://github.com/user/repo/tree/v2.0 --all --out-dir ./pdf
 ```
 
-Validate a single file, ZIP, or folder:
+Set `GITHUB_TOKEN` or `GH_TOKEN` for private repositories or to avoid API rate limits.
+
+### Debug artifacts
 
 ```bash
-cargo run -p marknest -- validate README.md
-cargo run -p marknest -- validate ./docs.zip --entry docs/README.md
-cargo run -p marknest -- validate ./docs --all --report ./out/report.json
+marknest convert README.md \
+  --debug-html ./out/debug.html \
+  --asset-manifest ./out/assets.json \
+  --render-report ./out/report.json \
+  -o README.pdf
 ```
 
-Convert a single entry into a PDF:
+### Configuration
+
+Settings can be provided through CLI flags, a config file, or environment variables.
+
+**Precedence:** CLI args > config file > environment variables > built-in defaults
 
 ```bash
-cargo run -p marknest -- convert
-cargo run -p marknest -- convert README.md -o README.pdf
-cargo run -p marknest -- convert ./docs.zip --entry docs/README.md -o out.pdf
-cargo run -p marknest -- convert README.md --page-size letter --margin 24 -o README.pdf
-cargo run -p marknest -- convert README.md --margin-top 24 --margin-right 12 --margin-bottom 20 --margin-left 8 -o README.pdf
-cargo run -p marknest -- convert README.md --theme github --landscape -o README.pdf
-cargo run -p marknest -- convert README.md --toc -o README.pdf
-cargo run -p marknest -- convert README.md --no-sanitize-html -o README.pdf
-cargo run -p marknest -- convert README.md --title "Guide" --author "Docs Team" --subject "Architecture" -o README.pdf
-cargo run -p marknest -- convert README.md --mermaid auto --math auto -o README.pdf
-cargo run -p marknest -- convert README.md --css ./pdf.css --header-template ./header.html --footer-template ./footer.html -o README.pdf
-cargo run -p marknest -- convert README.md --debug-html ./out/debug.html --asset-manifest ./out/assets.json --render-report ./out/report.json -o README.pdf
-cargo run -p marknest -- convert README.md --config ./.marknest.toml -o README.pdf
+# Use a config file
+marknest convert README.md --config .marknest.toml -o README.pdf
 ```
 
-Convert all entries from a folder or ZIP into a mirrored output tree:
+Config files are auto-discovered from `.marknest.toml` or `marknest.toml` in the working directory.
 
-```bash
-cargo run -p marknest -- convert ./docs --out-dir ./pdf
-cargo run -p marknest -- convert ./docs.zip --all --out-dir ./pdf
-cargo run -p marknest -- convert ./docs --out-dir ./pdf --render-report ./out/render-report.json
-```
+| Environment Variable       | Purpose                        |
+| -------------------------- | ------------------------------ |
+| `MARKNEST_CONFIG`          | Path to config file            |
+| `MARKNEST_THEME`           | Default theme                  |
+| `MARKNEST_CSS`             | Path to custom CSS             |
+| `MARKNEST_TOC`             | Enable/disable TOC             |
+| `MARKNEST_SANITIZE_HTML`   | Enable/disable HTML sanitization |
+| `MARKNEST_BROWSER_PATH`    | Path to Chromium-based browser |
+| `MARKNEST_SERVER_ADDR`     | Fallback server bind address   |
 
-Convert directly from a GitHub URL:
+### Exit codes
 
-```bash
-cargo run -p marknest -- convert https://github.com/user/repo -o output.pdf
-cargo run -p marknest -- convert https://github.com/user/repo/blob/main/docs/guide.md -o guide.pdf
-cargo run -p marknest -- convert https://github.com/user/repo/tree/v2.0 --all --out-dir ./pdf
-cargo run -p marknest -- validate https://github.com/user/repo
-```
+| Code | Meaning            |
+| ---- | ------------------ |
+| `0`  | Success            |
+| `1`  | Success with warnings |
+| `2`  | Validation failure |
+| `3`  | System failure     |
 
-GitHub URL support downloads the repository as a ZIP archive through the GitHub API and processes it through the existing ZIP pipeline. Set `GITHUB_TOKEN` or `GH_TOKEN` for private repositories or to avoid API rate limits.
+## Web App
 
-`convert` requires `node`, `npm ci --prefix crates/marknest/playwright-runtime`, and a local Chrome, Edge, Chromium, or Playwright headless shell installation for Playwright headless PDF generation.
-If no supported browser is installed, install a standalone headless shell:
-
-```bash
-npx playwright install chromium-headless-shell
-```
-
-`--mermaid auto|on` and `--math auto|on` use vendored local Mermaid and MathJax runtime assets; when `--debug-html` is written with those modes enabled, a sibling `runtime-assets/` directory is emitted for offline reproduction.
-Supported defaults can come from `.marknest.toml`, `marknest.toml`, `MARKNEST_CONFIG`, `MARKNEST_THEME`, `MARKNEST_CSS`, `MARKNEST_TOC`, and `MARKNEST_SANITIZE_HTML`.
-Browser discovery checks `MARKNEST_BROWSER_PATH` first, then Playwright headless shell installations, then common Chrome/Edge/Chromium paths on macOS, Linux, and Windows.
-Remote HTTP images are fetched best-effort during `validate` and `convert`; successful fetches are inlined into the rendered HTML, while failures stay as warnings and appear in `remote_assets` sections inside JSON reports and asset manifests.
-
-Run the browser app:
+The browser app provides ZIP upload, entry selection, HTML preview, and PDF download — all client-side via WASM.
 
 ```bash
 trunk serve
 ```
 
-The Trunk app loads `index.html`, compiles `crates/marknest-wasm`, and serves the static browser UI from `web/`.
-The web app supports ZIP upload, entry selection, diagnostics, selected-entry PDF download, batch PDF ZIP download, debug bundle download, large-archive guidance, theme/CSS/metadata/per-side margin/print/TOC/sanitization controls, and an optional local fallback service.
-`trunk` is not vendored in this repository, so install it separately before running the preview app.
-The browser export path now loads `html2pdf.js` from the vendored `runtime-assets/` tree served by Trunk, and browser debug bundles include the Mermaid/Math runtime files referenced by `debug.html`.
-External WASM hosts can override the Mermaid/Math/html2pdf runtime asset base with `runtime_assets_base_url`, and `analyzeZipWithOptions({ strip_zip_prefix: true })` plus matching render options make GitHub-style wrapper archives behave like a flat workspace without post-processing ZIP contents first.
-A standalone `wasm-example.html` page boots `marknest_wasm` directly, loads a wrapped sample ZIP in memory, exposes `strip_zip_prefix` plus `runtime_assets_base_url` controls for quick browser-side API checks, and can rebuild a browser-local ZIP from a public GitHub repository URL for README rendering tests.
-Browser preview and browser PDF export now wait for the rendered iframe to report Mermaid/Math completion through `window.__MARKNEST_RENDER_STATUS__`; runtime warnings remain non-blocking, while runtime errors block Browser Fast export and fall back to the local server when configured.
-Browser preview/export also try to materialize remote HTTP images before rendering; if Browser Fast cannot materialize some remote images because of browser fetch restrictions and a fallback URL is configured, export automatically retries through the local fallback server.
+Export modes:
 
-Run the local fallback server:
+- **Browser Fast** — client-only PDF generation, no data leaves the browser
+- **High Quality Fallback** — sends ZIP to the local fallback server for Playwright/Chromium rendering
+
+The web app also supports theme/CSS/margin/TOC/metadata controls, Mermaid/Math preview, debug bundle download, and batch ZIP export.
+
+## Fallback Server
 
 ```bash
 cargo run -p marknest-server
 ```
 
-The fallback server listens on `http://127.0.0.1:3476` by default and can be changed with `MARKNEST_SERVER_ADDR`.
-When the web app is switched to `High Quality Fallback`, or when browser export fails and the server URL is configured, it sends the ZIP plus the active output controls, including per-side margins, to the local service and downloads the returned PDF or ZIP response.
+Listens on `http://127.0.0.1:3476` by default (override with `MARKNEST_SERVER_ADDR`). Accepts multipart ZIP uploads with output options and returns PDF or batch ZIP.
 
-Build the shared runtime image:
+## Project Structure
 
-```bash
-docker build -t marknest .
-```
+| Path | Description |
+| ---- | ----------- |
+| `Cargo.toml` | Workspace definition |
+| `crates/marknest` | CLI binary: validation, conversion, config resolution, Playwright PDF |
+| `crates/marknest-core` | Core library: workspace analysis, HTML rendering |
+| `crates/marknest-server` | Local HTTP fallback service |
+| `crates/marknest-wasm` | WASM bindings for browser analysis and rendering |
+| `index.html`, `web/` | Browser app (Trunk) |
+| `runtime-assets/` | Vendored Mermaid, MathJax, html2pdf.js |
+| `validation/` | 60-entry README corpus and PDF fidelity validator |
+| `Dockerfile` | Shared CLI + server runtime image |
 
-The image builds `marknest` and `marknest-server` from the same workspace, installs `node`, `chromium`, and base font packages, and copies the pinned Playwright runtime package into the final container.
-
-## README corpus validation
-
-The repository includes a pinned 60-entry public GitHub README corpus in `validation/readme-corpus-60.tsv`.
-Each entry is locked to a commit SHA and fetched from a GitHub archive snapshot, not a mutable branch checkout.
-The current corpus shape is a 10-repo smoke tier plus 50 extended entries, including 10 math-focused READMEs that stress inline and display LaTeX rendering.
-
-Validation prerequisites:
-
-```bash
-git lfs version
-pdftoppm -v
-pdftotext -v
-```
-
-Check the manifest shape and IDs without network access:
+## Development
 
 ```bash
-node validation/readme_corpus.mjs verify-manifest --offline
+# Format
+cargo fmt --all
+
+# Test
+cargo test
+
+# Check WASM target
+cargo check -p marknest-wasm --target wasm32-unknown-unknown
+
+# Install Playwright runtime for native PDF
+npm ci --prefix crates/marknest/playwright-runtime
+
+# Install validation dependencies
+npm ci --prefix validation
 ```
 
-Verify pinned repo metadata against the GitHub API:
+## License
 
-```bash
-node validation/readme_corpus.mjs verify-manifest --tier smoke
-```
-
-Fetch the smoke or full corpus into `validation/.cache/readme-corpus-60/`:
-
-```bash
-node validation/readme_corpus.mjs fetch --tier smoke
-node validation/readme_corpus.mjs fetch --tier all
-```
-
-Bless or rerun the corpus against committed baselines:
-
-```bash
-node validation/readme_corpus.mjs bless --tier smoke --force
-node validation/readme_corpus.mjs run --tier smoke --force
-node validation/readme_corpus.mjs run --tier all --force
-node validation/readme_corpus_wasm.mjs run --tier all
-```
-
-The validator builds `target/debug/marknest` once per invocation, converts each pinned README, rasterizes PDF pages, extracts PDF text, and compares the result to `validation/baselines/readme-corpus-60/`.
-The WASM corpus runner builds a `nodejs` `marknest-wasm` package with `wasm-pack`, creates a minimal wrapped ZIP per cached corpus entry, and verifies both bare repo URLs and `/blob/.../README.md` URLs through the browser-oriented `analyzeZipWithOptions` and `renderHtml` bindings.
-The manifest is the source of truth for corpus membership; the blessed baseline directory can temporarily contain fewer entries when newly added cases still fail blocking fidelity checks and have not been blessed yet.
-Run artifacts land under `validation/.runs/<run-id>/` with per-repo PDFs, page PNGs, diff PNGs, `report.json`, `asset-manifest.json`, `source.json`, `metrics.json`, and top-level `summary.tsv` plus `summary.json`.
-
-Blocking failures:
-
-- conversion exits above `1`
-- render report status is `failure` or contains errors
-- selected-entry local assets are missing
-- any source `H1`/`H2`/`H3` heading is missing from extracted PDF text
-- normalized source-text token coverage falls below `0.97`
-- a page is visually near-blank and also has no meaningful extracted text
-
-Advisories:
-
-- warning exit code `1`
-- baseline page-count deltas
-- remote HTTP asset fetch failures
-- edge-contact signals that may indicate clipping
-
-The fidelity goal is content preservation, not browser pixel parity.
-Print-safe reflow is acceptable when content remains present, such as wrapping long code lines, stacking badge rows, expanding `<details>` content, or paginating wide sections instead of clipping them.
+[MIT](LICENSE)
