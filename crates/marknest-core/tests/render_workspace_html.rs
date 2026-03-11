@@ -366,6 +366,23 @@ fn sanitizes_raw_html_by_default_while_preserving_safe_readme_markup() {
 }
 
 #[test]
+fn preserves_align_attribute_on_block_elements() {
+    let rendered = render_workspace_entry(&fixture_path("workspace_align_center"), "README.md")
+        .expect("workspace entry should render");
+
+    assert!(
+        rendered.html.contains("align=\"center\""),
+        "align attribute on <p> should be preserved; got: {}",
+        rendered.html
+    );
+    assert!(
+        rendered.html.contains("<h1 align=\"center\">"),
+        "align attribute on <h1> should be preserved; got: {}",
+        rendered.html
+    );
+}
+
+#[test]
 fn can_disable_html_sanitization_for_trusted_documents() {
     let rendered = render_workspace_entry_with_options(
         &fixture_path("workspace_raw_html_sanitize"),
