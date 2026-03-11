@@ -10,15 +10,15 @@ resolver = "2"
 [workspace.package]
 edition = "2024"
 license = "MIT"
-version = "0.1.0"
+version = "0.1.1"
 repository = "https://github.com/developer0hye/marknest"
 homepage = "https://github.com/developer0hye/marknest"
 
 [workspace.dependencies]
 ammonia = "4.1.2"
 emojis = "0.6.4"
-marknest-core = { version = "0.1.0", path = "crates/marknest-core" }
-marknest = { version = "0.1.0", path = "crates/marknest" }
+marknest-core = { version = "0.1.1", path = "crates/marknest-core" }
+marknest = { version = "0.1.1", path = "crates/marknest" }
 pulldown-cmark = "0.13"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
