@@ -1776,9 +1776,9 @@ fn build_html_document(title: &str, body_html: &str, options: &RenderOptions) ->
 fn sanitize_html_fragment(html_fragment: &str) -> String {
     let mut sanitizer = HtmlSanitizerBuilder::default();
     sanitizer.url_relative(UrlRelative::PassThrough);
-    sanitizer.add_generic_attributes(["aria-label", "class", "id", "title"]);
+    sanitizer.add_generic_attributes(["align", "aria-label", "class", "id", "title"]);
     sanitizer.add_tags(["details", "figure", "figcaption", "input", "nav", "summary"]);
-    sanitizer.add_tag_attributes("img", ["width", "height", "align", "loading"]);
+    sanitizer.add_tag_attributes("img", ["width", "height", "loading"]);
     sanitizer.add_tag_attributes("input", ["type", "checked", "disabled"]);
     sanitizer.add_tag_attributes("details", ["open"]);
     sanitizer.clean(html_fragment).to_string()
