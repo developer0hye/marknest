@@ -1,0 +1,22 @@
+{
+  "name": "marknest",
+  "owner": {
+    "name": "developer0hye",
+    "email": ""
+  },
+  "metadata": {
+    "description": "Convert Markdown to professional PDFs with themes, Mermaid diagrams, LaTeX math, and table of contents",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "marknest",
+      "description": "Markdown to PDF conversion skill using marknest CLI — supports single files, folders, ZIP archives, GitHub URLs, themes, Mermaid diagrams, LaTeX math, and batch conversion",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/marknest"
+      ]
+    }
+  ]
+}
