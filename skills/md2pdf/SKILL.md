@@ -1,5 +1,5 @@
 ---
-name: marknest
+name: md2pdf
 description: >
   Convert Markdown files to professional PDFs using marknest — a Rust-powered CLI that handles
   single files, entire folders, ZIP archives, and even GitHub repository URLs. Use this skill

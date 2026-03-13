@@ -12,5 +12,5 @@ validation/.runs/
 npm/marknest-*/bin/
 
 # Skill eval workspace (test artifacts)
-skills/marknest-workspace/
-skills/marknest/evals/
+skills/md2pdf-workspace/
+skills/md2pdf/evals/
