@@ -10,3 +10,7 @@ validation/.runs/
 
 # npm platform package binaries (populated during CI release)
 npm/marknest-*/bin/
+
+# Skill eval workspace (test artifacts)
+skills/md2pdf-workspace/
+skills/md2pdf/evals/
