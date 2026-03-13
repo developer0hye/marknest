@@ -20,15 +20,20 @@ You are helping the user convert Markdown files into professional PDFs using **m
 
 marknest handles everything needed for high-quality PDF output from Markdown: embedded images, Mermaid diagrams, LaTeX math, syntax-highlighted code blocks, table of contents, and multiple built-in themes. It works locally with no cloud dependencies — all rendering assets are vendored. It accepts single files, folders, ZIP archives, and GitHub URLs as input.
 
-## Installation
+## Requirements
 
-Before using marknest, check if it's available:
+marknest requires **Chromium** for PDF rendering (Mermaid diagrams, math, and HTML-to-PDF conversion). Before running any conversion, ensure Chromium is installed:
 
 ```bash
-npx marknest --help
+# Check if Chromium/Chrome is available
+npx playwright install chromium
 ```
 
-If not installed, install it. Prefer `npx` (zero-install) or npm global:
+This only needs to be done once. If the user already has Chrome or Chromium installed on their system, marknest will detect and use it automatically.
+
+## Installation
+
+Prefer `npx` (zero-install):
 
 ```bash
 # Option 1: Use npx (no install needed, recommended)
@@ -39,12 +44,6 @@ npm install -g marknest
 
 # Option 3: Install via Cargo (if Rust toolchain is available)
 cargo install marknest
-```
-
-**Browser requirement**: marknest uses Chromium for PDF rendering. If the user hits a browser-related error, run:
-
-```bash
-npx playwright install chromium
 ```
 
 ## Core Commands
