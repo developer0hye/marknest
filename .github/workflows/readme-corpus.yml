@@ -8,6 +8,9 @@ on:
       - "LICENSE"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: self-hosted
@@ -21,9 +24,9 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Run workspace tests
-        run: cargo test
+        run: cargo test --locked
 
       - name: Check WASM target
         run: |
           rustup target add wasm32-unknown-unknown 2>/dev/null || true
-          cargo check -p marknest-wasm --target wasm32-unknown-unknown
+          cargo check --locked -p marknest-wasm --target wasm32-unknown-unknown

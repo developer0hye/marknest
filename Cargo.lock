@@ -684,7 +684,7 @@ checksum = "3e2e65a1a2e43cfcb47a895c4c8b10d1f4a61097f9f254f183aee60cad9c651d"
 
 [[package]]
 name = "marknest"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "marknest-core",
  "serde",
@@ -697,7 +697,7 @@ dependencies = [
 
 [[package]]
 name = "marknest-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "ammonia",
  "emojis",
@@ -710,7 +710,7 @@ dependencies = [
 
 [[package]]
 name = "marknest-server"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "axum",
  "marknest",
@@ -727,7 +727,7 @@ dependencies = [
 
 [[package]]
 name = "marknest-wasm"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "console_error_panic_hook",
  "marknest-core",
@@ -1271,9 +1271,9 @@ dependencies = [
 
 [[package]]
 name = "spin"
-version = "0.9.8"
+version = "0.9.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6980e8d7511241f8acf4aebddbb1ff938df5eebe98691418c4468d0b72a96a67"
+checksum = "3763264f6b73151db08c50ff20d7d8a0b8796e021cdea7ceedad07b80155fa0e"
 
 [[package]]
 name = "stable_deref_trait"
