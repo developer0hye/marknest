@@ -8,22 +8,33 @@ on:
       - "LICENSE"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   check:
-    runs-on: self-hosted
+    # GitHub-hosted, not self-hosted: this is a public repo, and a self-hosted
+    # runner lets any approved fork PR execute code on that machine.
+    runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable
+        with:
+          components: rustfmt
+          targets: wasm32-unknown-unknown
+
       - name: Check formatting
         run: cargo fmt --all -- --check
 
       - name: Run workspace tests
-        run: cargo test
+        run: cargo test --locked
 
       - name: Check WASM target
         run: |
           rustup target add wasm32-unknown-unknown 2>/dev/null || true
-          cargo check -p marknest-wasm --target wasm32-unknown-unknown
+          cargo check --locked -p marknest-wasm --target wasm32-unknown-unknown

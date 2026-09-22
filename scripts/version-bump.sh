@@ -47,7 +47,7 @@ sed -i.bak "s/\"marknest-win32-x64\": \"[^\"]*\"/\"marknest-win32-x64\": \"${NEW
 rm -f "${UMBRELLA}.bak"
 
 echo "Updated Cargo.lock..."
-cd "${REPO_ROOT}" && cargo generate-lockfile 2>/dev/null || true
+cd "${REPO_ROOT}" && cargo update --workspace 2>/dev/null || true  # refresh member versions only; never re-resolve deps
 
 echo "Done. Version bumped to ${NEW_VERSION}"
 echo ""
