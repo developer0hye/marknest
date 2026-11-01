@@ -638,7 +638,7 @@ checksum = "3e2e65a1a2e43cfcb47a895c4c8b10d1f4a61097f9f254f183aee60cad9c651d"
 
 [[package]]
 name = "marknest"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "marknest-core",
  "serde",
@@ -651,7 +651,7 @@ dependencies = [
 
 [[package]]
 name = "marknest-core"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "ammonia",
  "emojis",
@@ -664,7 +664,7 @@ dependencies = [
 
 [[package]]
 name = "marknest-server"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "axum",
  "marknest",
@@ -681,7 +681,7 @@ dependencies = [
 
 [[package]]
 name = "marknest-wasm"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "console_error_panic_hook",
  "marknest-core",
