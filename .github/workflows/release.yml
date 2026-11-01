@@ -140,19 +140,34 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Publish marknest-core
-        run: cargo publish --locked -p marknest-core --token ${{ secrets.CARGO_REGISTRY_TOKEN }} || echo "marknest-core already published, skipping"
+        run: |
+          if curl -fsS -A "marknest-release" "https://crates.io/api/v1/crates/marknest-core/${GITHUB_REF_NAME#v}" > /dev/null; then
+            echo "marknest-core ${GITHUB_REF_NAME#v} already published, skipping"
+          else
+            cargo publish --locked -p marknest-core --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          fi
 
       - name: Wait for crates.io index
         run: sleep 30
 
       - name: Publish marknest
-        run: cargo publish --locked -p marknest --token ${{ secrets.CARGO_REGISTRY_TOKEN }} || echo "marknest already published, skipping"
+        run: |
+          if curl -fsS -A "marknest-release" "https://crates.io/api/v1/crates/marknest/${GITHUB_REF_NAME#v}" > /dev/null; then
+            echo "marknest ${GITHUB_REF_NAME#v} already published, skipping"
+          else
+            cargo publish --locked -p marknest --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          fi
 
       - name: Wait for crates.io index
         run: sleep 30
 
       - name: Publish marknest-server
-        run: cargo publish --locked -p marknest-server --token ${{ secrets.CARGO_REGISTRY_TOKEN }} || echo "marknest-server already published, skipping"
+        run: |
+          if curl -fsS -A "marknest-release" "https://crates.io/api/v1/crates/marknest-server/${GITHUB_REF_NAME#v}" > /dev/null; then
+            echo "marknest-server ${GITHUB_REF_NAME#v} already published, skipping"
+          else
+            cargo publish --locked -p marknest-server --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          fi
 
   publish-npm:
     name: Publish to npm
@@ -200,19 +215,41 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          failed=()
           for pkg_dir in npm/marknest-*/; do
-            echo "Publishing $(basename $pkg_dir)..."
-            cd "$pkg_dir"
-            npm publish --access public || true
-            cd ../..
+            pkg="$(basename "$pkg_dir")"
+            version="$(node -p "require('./${pkg_dir}package.json').version")"
+            if npm view "${pkg}@${version}" version > /dev/null 2>&1; then
+              echo "${pkg} ${version} already published, skipping"
+              continue
+            fi
+            echo "Publishing ${pkg}..."
+            if ! (cd "$pkg_dir" && npm publish --access public); then
+              echo "::error::Failed to publish ${pkg}@${version}"
+              failed+=("$pkg")
+            fi
           done
+          # Keep going so one blocked platform doesn't stop the others; the job
+          # fails in the last step instead.
+          echo "FAILED_PLATFORM_PACKAGES=${failed[*]}" >> "$GITHUB_ENV"
 
       - name: Publish umbrella package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd npm/marknest
-          npm publish --access public || echo "marknest already published, skipping"
+          version="$(node -p "require('./package.json').version")"
+          if npm view "marknest@${version}" version > /dev/null 2>&1; then
+            echo "marknest ${version} already published, skipping"
+          else
+            npm publish --access public
+          fi
+
+      - name: Fail if a platform package was not published
+        if: env.FAILED_PLATFORM_PACKAGES != ''
+        run: |
+          echo "::error::Not published to npm: ${FAILED_PLATFORM_PACKAGES}"
+          exit 1
 
   publish-wasm-npm:
     name: Publish WASM to npm
@@ -236,7 +273,13 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd wasm-pkg
-          npm publish --access public || echo "marknest-wasm already published, skipping"
+          name="$(node -p "require('./package.json').name")"
+          version="$(node -p "require('./package.json').version")"
+          if npm view "${name}@${version}" version > /dev/null 2>&1; then
+            echo "${name} ${version} already published, skipping"
+          else
+            npm publish --access public
+          fi
 
   github-release:
     name: GitHub Release
