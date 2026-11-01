@@ -310,7 +310,12 @@ fn materialize_zip_workspace(zip_path: &Path, strip_prefix: bool) -> Result<Temp
             continue;
         }
 
-        let raw_path = entry.name().to_string();
+        let raw_path = entry
+            .name()
+            .map_err(|error| {
+                AppFailure::validation(format!("Failed to read ZIP entry {index}: {error}"))
+            })?
+            .into_owned();
         let normalized_path = normalize_relative_string(&raw_path).map_err(|_| {
             AppFailure::validation(format!("Unsafe ZIP entry path detected: {raw_path}"))
         })?;
