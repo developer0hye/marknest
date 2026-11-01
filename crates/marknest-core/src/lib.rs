@@ -471,7 +471,10 @@ impl ZipMemoryFileSystem {
                 continue;
             }
 
-            let raw_path: String = entry.name().to_string();
+            let raw_path: String = entry
+                .name()
+                .map_err(|error| AnalyzeError::ZipArchive(error.to_string()))?
+                .into_owned();
             let normalized_path: String =
                 normalize_relative_string(&raw_path).map_err(|_| AnalyzeError::UnsafePath {
                     path: raw_path.clone(),

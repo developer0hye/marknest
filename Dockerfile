@@ -1,4 +1,4 @@
-FROM rust:1.86.0-slim-bookworm AS builder
+FROM rust:1.88.0-slim-bookworm AS builder
 
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
@@ -6,7 +6,7 @@ COPY crates ./crates
 COPY index.html ./index.html
 COPY runtime-assets ./runtime-assets
 COPY web ./web
-RUN cargo build --release -p marknest -p marknest-server
+RUN cargo build --locked --release -p marknest -p marknest-server
 
 FROM node:22-bookworm-slim AS playwright-runtime
 
